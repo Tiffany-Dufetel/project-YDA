@@ -4,6 +4,7 @@
 
 <template>
   <div>
+
     <!-- make name responsive -->
     <Header title="name of company" subtitle="Tous les membres" />
     <div v-for="user in arrayUsers" :key="user.id">{{ user.surname }}</div>
