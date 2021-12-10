@@ -2,7 +2,7 @@ require("./bootstrap");
 
 import { createApp } from "vue";
 import router from "./router";
-import MembersList from "./components/Members/MembersList.vue";
+import MembersList from "./components/pages/Members/MembersList.vue";
 
 createApp({
     components: {
