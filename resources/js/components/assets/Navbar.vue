@@ -1,3 +1,7 @@
+<!--
+-- Navbar asset component
+-->
+
 <template>
   <header>
     <nav>
@@ -20,8 +24,7 @@
         </li>
         <!-- Sign Out -->
         <li>
-          <!-- @click="logOut" -->
-          <a>Log out</a>
+          <a @click="logOut">Log out</a>
         </li>
       </ul>
     </nav>
@@ -31,11 +34,11 @@
 <script>
 export default {
   name: "Nav",
-  /* methods: {
+  methods: {
     logOut() {
       localStorage.removeItem("token");
     },
-  }, */
+  },
 };
 </script>
 

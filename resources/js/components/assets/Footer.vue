@@ -1,3 +1,7 @@
+<!--
+-- Footer asset component
+-->
+
 <template>
   <footer>
     <p><b>&copy; Your Daily Assistant</b></p>
@@ -8,7 +12,7 @@
 
 <script>
 export default {
-  name: "Footer",
+  name: "footer",
 };
 </script>
 

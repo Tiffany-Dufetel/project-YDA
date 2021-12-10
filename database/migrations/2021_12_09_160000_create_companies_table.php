@@ -16,7 +16,6 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->integer('member_count')->nullable();
-            $table->bigInteger('user_id')->notnull();
             $table->integer('siret')->unique()->notnull();
             $table->string('name')->notnull();
             $table->string('adress')->notnull();
