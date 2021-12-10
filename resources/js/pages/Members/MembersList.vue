@@ -14,7 +14,7 @@
 import axios from "axios";
 import Header from "../components/ui/Header.vue";
 export default {
-  name: "memberHome",
+  name: "memberList",
   components: {
     Header,
   },
