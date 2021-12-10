@@ -40,6 +40,7 @@ Route::resource('/order', OrderController::class);
 Route::resource('/product', ProductController::class);
 
 Route::resource('/user', UserController::class);
+
 Route::post('login', [AuthController::class, 'login']);
 
 Route::post('register', [AuthController::class, 'register']);
