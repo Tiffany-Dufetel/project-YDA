@@ -20,10 +20,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0" id="app"></div>
+        <div id="app">
+            <router-view />
+        </div>
 
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>

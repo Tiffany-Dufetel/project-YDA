@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "profileDisplay",
+  name: "ProfileDisplay",
 };
 </script>
 
