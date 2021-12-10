@@ -12,7 +12,7 @@
         </li>
         <!-- Link Home -->
         <li>
-          <a><router-link to="/home">Home</router-link></a>
+          <a><router-link to="/">Home</router-link></a>
         </li>
         <!-- Link Log in -->
         <li>

@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import Header from "../components/ui/Header.vue";
+import Header from "../../components/ui/Header.vue";
 export default {
-  name: "productOrder",
+  name: "ProductOrder",
   components: {
     Header,
   },
