@@ -5,7 +5,7 @@ import Contact from "../pages/Profile.vue";
 
 const routes = [
     {
-        path: "/",
+        path: "",
         name: "Home",
         component: Home,
         /* children: [
@@ -25,7 +25,7 @@ const routes = [
     }, */
     // Contact
     {
-        path: "/contact",
+        path: "contact",
         name: "Contact",
         component: Contact,
     },
