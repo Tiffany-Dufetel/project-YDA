@@ -11,8 +11,8 @@
 
 <script>
 /** Imports */
-import Nav from "./components/Nav.vue";
-import Footer from "./components/Reusable/Footer.vue";
+import Nav from "./components/assets/Navbar.vue";
+import Footer from "./components/assets/Footer.vue";
 export default {
   name: "App",
   components: {

@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../components/pages/Home.vue";
+import Home from "../pages/Home.vue";
+import Contact from "../pages/Profile.vue";
+import Profile from "../pages/Profile.vue";
 
 const routes = [
     {
@@ -14,12 +16,7 @@ const routes = [
             }
         ] */
     },
-    // About page
-    /* {
-        path: "/about",
-        name: "About",
-        component: About,
-    },
+
     // Profile
     {
         path: "/profile/:id",
@@ -32,17 +29,13 @@ const routes = [
         name: "Contact",
         component: Contact,
     },
+    /* 
     // Login, Children: create
     {
         path: "/login",
         name: "Login",
         component: Login
-    },
-    {
-        path: "/join",
-        name: "Join",
-        component: Join,
-    } */
+    },*/
 ];
 
 export default createRouter({
