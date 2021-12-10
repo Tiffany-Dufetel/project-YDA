@@ -1,7 +1,14 @@
+require("./bootstrap");
+
 import { createApp } from "vue";
+import router from "./router";
+import MembersList from "./components/Members/MembersList.vue";
 
-import App from "./App.vue";
+createApp({
+    components: {
+        MembersList,
+    },
+})
+    .use(router)
 
-createApp(App).mount("#app");
-
-require('./bootstrap');
+    .mount("#app");
