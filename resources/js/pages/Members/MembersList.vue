@@ -1,14 +1,23 @@
+<!--
+-- List of members page component
+-->
+
 <template>
   <div>
-    <h1>Members</h1>
+    <!-- make name responsive -->
+    <Header title="name of company" subtitle="Tous les membres" />
     <div v-for="user in arrayUsers" :key="user.id">{{ user.surname }}</div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import Header from "../components/ui/Header.vue";
 export default {
+  name: "memberList",
+  components: {
+    Header,
+  },
   data() {
     return {
       arrayUsers: [],
