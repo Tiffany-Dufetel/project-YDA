@@ -5,14 +5,17 @@
 <template>
   <div>
     <!-- rendre le nom reactive -->
-    <Header title="Your Daily Assistant" subtitle="Bla bla.." />
+    <Header
+      title="Your Daily Assistant"
+      subtitle="Faciliter la vie avec notre conciergerie"
+    />
   </div>
 </template>
 
 <script>
 import Header from "./components/ui/Header.vue";
 export default {
-  name: "home",
+  name: "Home",
   components: {
     Header,
   },

@@ -17,7 +17,7 @@
 <script>
 import Header from "./components/ui/Header.vue";
 export default {
-  name: "contact",
+  name: "Contact",
   components: {
     Header,
   },

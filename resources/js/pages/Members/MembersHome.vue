@@ -14,7 +14,7 @@
 <script>
 import Header from "../components/ui/Header.vue";
 export default {
-  name: "memberHome",
+  name: "MemberHome",
   components: {
     Header,
   },
