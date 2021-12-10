@@ -12,7 +12,7 @@
 
 <script>
 import axios from "axios";
-import Header from "../components/ui/Header.vue";
+import Header from "../../components/ui/Header.vue";
 export default {
   name: "memberList",
   components: {

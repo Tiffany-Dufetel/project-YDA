@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../pages/Home.vue";
 import Contact from "../pages/Profile.vue";
-import Profile from "../pages/Profile.vue";
+/* import Profile from "../pages/Profile.vue"; */
 
 const routes = [
     {
@@ -18,11 +18,11 @@ const routes = [
     },
 
     // Profile
-    {
+    /* {
         path: "/profile/:id",
         name: "Profile",
         component: Profile,
-    },
+    }, */
     // Contact
     {
         path: "/contact",
