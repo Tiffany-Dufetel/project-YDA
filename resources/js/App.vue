@@ -3,7 +3,8 @@
     <!-- Display the nav bar -->
     <Nav />
     <!-- Import the router -->
-    <Home />
+    <!-- A FAIRE -->
+    <router-view></router-view>
     <!-- Display the footer -->
     <Footer />
   </div>
@@ -11,14 +12,12 @@
 
 <script>
 /** Imports */
-import Home from "./pages/Home.vue";
 import Nav from "./components/assets/Navbar.vue";
 import Footer from "./components/assets/Footer.vue";
 export default {
   name: "App",
   components: {
     Nav,
-    Home,
     Footer,
   },
   data() {
