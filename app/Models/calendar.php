@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class calendar extends Model
 {
     use HasFactory;
+
+    protected $guarded = ["id"];
 }
