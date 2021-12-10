@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    
+
     <!-- make name responsive -->
     <Header title="name of company" subtitle="Tous les membres" />
     <div v-for="user in arrayUsers" :key="user.id">{{ user.surname }}</div>
@@ -13,7 +13,7 @@
 
 <script>
 import axios from "axios";
-import Header from "../components/ui/Header.vue";
+import Header from "../../components/ui/Header.vue";
 export default {
   name: "memberList",
   components: {
