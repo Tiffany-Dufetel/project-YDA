@@ -11,12 +11,12 @@
 
 <script>
 /** Imports */
-import Nav from "./components/Nav.vue";
+import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Reusable/Footer.vue";
 export default {
   name: "App",
   components: {
-    Nav,
+    Navbar,
     Footer,
   },
   data() {

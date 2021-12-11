@@ -8,7 +8,7 @@
       <ul>
         <!-- YDA Logo -->
         <li>
-          <img alt="YDA logo" src="../assets/logo.JPG" />
+          <!-- <img alt="YDA logo" src="../assets/logo.JPG" /> -->
         </li>
         <!-- Link Home -->
         <li>

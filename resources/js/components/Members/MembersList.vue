@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Members</h1>
+    <h1>GAME OVER for Rebekah</h1>
     <div v-for="user in arrayUsers" :key="user.id">{{ user.surname }}</div>
   </div>
 </template>
