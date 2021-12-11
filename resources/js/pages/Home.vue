@@ -9,6 +9,8 @@
       title="Your Daily Assistant"
       subtitle="Faciliter la vie avec notre conciergerie"
     />
+
+    <p>suuuùp</p>
   </div>
 </template>
 

@@ -20,7 +20,7 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #3d301b;
+  background-color: #000000;
   color: #dbd8d5;
   text-align: right;
 }

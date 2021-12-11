@@ -1,19 +1,13 @@
+import { createApp } from "vue";
+
 require("./bootstrap");
 
-import { createApp } from "vue";
-import router from "./router";
+require('./bootstrap')
+import App from './App.vue'
+import axios from 'axios'
+import router from './router'
 
-import Home from "./pages/Home.vue";
-import Contact from "./pages/Contact.vue";
-import AdminHome from "./pages/Admin/AdminHome.vue";
-
-createApp({
-    components: {
-        Home,
-        Contact,
-        AdminHome,
-    },
-})
-    .use(router)
-
-    .mount("#app");
+const app = createApp(App)
+app.config.globalProperties.$axios = axios;
+app.use(router)
+app.mount('#app')

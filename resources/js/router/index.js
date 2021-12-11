@@ -1,23 +1,39 @@
 import { createRouter, createWebHistory } from "vue-router";
-import App from "../App.vue";
+
+import Home from "../pages/Home.vue";
+import Login from "../pages/Auth/Login.vue";
 import Contact from "../pages/Contact.vue";
 import AdminHome from "../pages/Admin/AdminHome.vue";
+import CompaniesList from "../pages/Companies/CompaniesList.vue";
+/* import AdminHome from "../pages/Admin/AdminHome.vue"; */
 
 const routes = [
     {
         path: "/",
-        name: "App",
-        component: App,
+        name: "Home",
+        component: Home,
     },
     {
-        path: "/admin",
-        name: "AdminHome",
-        component: AdminHome,
+        path: "/login",
+        name: "Login",
+        component: Login,
     },
     {
         path: "/contact",
         name: "Contact",
         component: Contact,
+    },
+    {
+        path: "/admin",
+        name: "AdminHome",
+        component: AdminHome,
+        children: [
+            {
+                path: "companies",
+                name: "CompaniesList",
+                component: CompaniesList,
+            },
+        ]
     },
 ];
 
