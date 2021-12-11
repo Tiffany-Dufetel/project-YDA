@@ -20411,7 +20411,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nfooter[data-v-0e82460c] {\r\n  position: fixed;\r\n  display: flex;\r\n  justify-content: space-around;\r\n  left: 0;\r\n  bottom: 0;\r\n  width: 100%;\r\n  background-color: #3d301b;\r\n  color: #dbd8d5;\r\n  text-align: right;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nfooter[data-v-0e82460c] {\r\n  position: fixed;\r\n  display: flex;\r\n  justify-content: space-around;\r\n  left: 0;\r\n  bottom: 0;\r\n  width: 100%;\r\n  background-color: #000000;\r\n  color: #dbd8d5;\r\n  text-align: right;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
