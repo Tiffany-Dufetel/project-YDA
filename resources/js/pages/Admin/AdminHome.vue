@@ -4,7 +4,22 @@
 
 <template>
   <div>
-    <Header title="Home" subtitle="Manage companies and your catalogue here" />
+    <Header
+      title="Bienvenue à votre page administration"
+      subtitle="Gérer vos entreprises et catalogue ici"
+    />
+    <router-link to="admin/catalogue"
+      ><button>Voir Catalogue</button></router-link
+    >
+    <router-link to="admin/catalogue/add"
+      ><button>Ajouter dans le catalogue</button></router-link
+    >
+    <router-link to="admin/entreprises"
+      ><button>Voir entreprises</button></router-link
+    >
+    <router-link to="admin/entreprises/add"
+      ><button>Ajouter une entreprise</button></router-link
+    >
   </div>
 </template>
 

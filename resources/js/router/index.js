@@ -5,6 +5,9 @@ import Login from "../pages/Auth/Login.vue";
 import Contact from "../pages/Contact.vue";
 import AdminHome from "../pages/Admin/AdminHome.vue";
 import CompaniesList from "../pages/Companies/CompaniesList.vue";
+import CatalogueList from "../pages/Admin/Products/CatalogueList.vue";
+import AddCompany from "../pages/Companies/AddCompany.vue";
+import AddProduct from "../pages/Admin/Products/AddProduct.vue";
 /* import AdminHome from "../pages/Admin/AdminHome.vue"; */
 
 const routes = [
@@ -29,9 +32,28 @@ const routes = [
         component: AdminHome,
         children: [
             {
-                path: "companies",
+                path: "/entreprises",
                 name: "CompaniesList",
                 component: CompaniesList,
+                children: [
+                    {
+                        path: "/add",
+                        name: "AddCompany",
+                        component: AddCompany,
+                    },
+                ]
+            },
+            {
+                path: "/catalogue",
+                name: "CatalogueList",
+                component: CatalogueList,
+                children: [
+                    {
+                        path: "/add",
+                        name: "AddProduct",
+                        component: AddProduct,
+                    },
+                ]
             },
         ]
     },
