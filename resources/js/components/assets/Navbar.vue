@@ -61,7 +61,7 @@ header {
   height: 70px;
   display: flex;
   align-items: center;
-  box-shadow: 0 5px 25px 0 rgb(73 119 77);
+  box-shadow: 0 5px 25px 0 #00000036;
 }
 header * {
   display: inline;

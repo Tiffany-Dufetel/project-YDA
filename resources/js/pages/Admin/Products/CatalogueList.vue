@@ -6,9 +6,8 @@
   <div>
     <Header title="Catalogue" subtitle="Produits et services" />
     <CatalogueDisplay />
-    <router-link to="admin/catalogue/add"
-      ><button>Add item</button></router-link
-    >
+
+    <button @click="add">Ajouter Produit</button>
   </div>
 </template>
 
@@ -20,6 +19,11 @@ export default {
   components: {
     Header,
     CatalogueDisplay,
+  },
+  methods: {
+    add() {
+      this.$router.push({ name: "adminProductAdd" });
+    },
   },
 };
 </script>

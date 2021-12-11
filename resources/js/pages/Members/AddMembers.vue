@@ -15,7 +15,7 @@
 <script>
 import Header from "../../components/ui/Header.vue";
 export default {
-  name: "AddMember",
+  name: "AddMembers",
   components: {
     Header,
   },

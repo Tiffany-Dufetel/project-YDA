@@ -5,8 +5,8 @@
 <template>
   <footer>
     <p><b>&copy; Your Daily Assistant</b></p>
-    <p><b>&copy; assistantes@your-daily-assistant.fr</b></p>
-    <p><b>&copy; 06 43 88 43 82</b></p>
+    <p><b>assistantes@your-daily-assistant.fr</b></p>
+    <p><b>06 43 88 43 82</b></p>
   </footer>
 </template>
 

@@ -12,7 +12,7 @@
 <script>
 import Header from "../../components/ui/Header.vue";
 export default {
-  name: "companyDisplay",
+  name: "CompanyDisplay",
   components: {
     Header,
   },

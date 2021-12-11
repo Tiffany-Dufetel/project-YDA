@@ -42,14 +42,7 @@
         </tr>
       </tbody>
     </table>
-
-    <button
-      type="button"
-      class="btn btn-info"
-      @click="this.$router.push('admin/entreprises/add')"
-    >
-      Ajouter Entreprise
-    </button>
+    <button @click="add">Ajouter Entreprise</button>
   </div>
 </template>
 
@@ -60,6 +53,11 @@ export default {
   name: "companyList",
   components: {
     Header,
+  },
+  methods: {
+    add() {
+      this.$router.push({ name: "adminAddCompany" });
+    },
   },
   /*   data() {
     return {

@@ -4,8 +4,8 @@
 
 <template>
   <div class="header">
-    <h1>{{ title }}</h1>
-    <h2>{{ subtitle }}</h2>
+    <h3>{{ title }}</h3>
+    <h5>{{ subtitle }}</h5>
   </div>
 </template>
 
