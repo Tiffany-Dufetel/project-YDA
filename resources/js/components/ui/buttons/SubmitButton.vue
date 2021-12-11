@@ -1,18 +1,17 @@
 <!--
--- Submit button UI component
+-- Submit comment UI component
 -->
 
 <template>
-  <div class="header">
-    <button></button>
+  <div>
+    <!-- Submit button -->
+    <button type="submit">submit</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "submitButton",
-  // add props to modify click method + style
-  /* props: ["method", "style"], */
+  name: "SubmitButton",
 };
 </script>
 

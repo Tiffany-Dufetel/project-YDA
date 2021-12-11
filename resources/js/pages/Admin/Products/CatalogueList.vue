@@ -14,7 +14,7 @@
 
 <script>
 import Header from "../../../components/ui/Header.vue";
-import CatalogueDisplay from "../../../components/ui/CatalogueDisplay.vue";
+import CatalogueDisplay from "../../../components/ui/catalogue/CatalogueDisplay.vue";
 export default {
   name: "productList",
   components: {

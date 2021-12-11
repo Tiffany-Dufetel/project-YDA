@@ -46,9 +46,9 @@
     <button
       type="button"
       class="btn btn-info"
-      @click="this.$router.push('/books/add')"
+      @click="this.$router.push('admin/entreprises/add')"
     >
-      Add Book
+      Ajouter Entreprise
     </button>
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
   components: {
     Header,
   },
-  data() {
+  /*   data() {
     return {
       books: [],
     };
@@ -98,6 +98,6 @@ export default {
       window.location.href = "/";
     }
     next();
-  },
+  }, */
 };
 </script>

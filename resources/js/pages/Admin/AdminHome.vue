@@ -8,18 +8,10 @@
       title="Bienvenue à votre page administration"
       subtitle="Gérer vos entreprises et catalogue ici"
     />
-    <router-link to="admin/catalogue"
-      ><button>Voir Catalogue</button></router-link
-    >
-    <router-link to="admin/catalogue/add"
-      ><button>Ajouter dans le catalogue</button></router-link
-    >
-    <router-link to="admin/entreprises"
-      ><button>Voir entreprises</button></router-link
-    >
-    <router-link to="admin/entreprises/add"
-      ><button>Ajouter une entreprise</button></router-link
-    >
+    <button @click="catView">Voir Catalogue</button>
+    <button @click="catAdd">Ajouter dans le catalogue</button>
+    <button @click="companyView">Voir entreprises</button>
+    <button @click="companyAdd">Ajouter une entreprise</button>
   </div>
 </template>
 
@@ -29,6 +21,20 @@ export default {
   name: "AdminHome",
   components: {
     Header,
+  },
+  methods: {
+    catView() {
+      this.$router.push({ name: "adminCatalogue" });
+    },
+    catAdd() {
+      this.$router.push({ name: "adminProductAdd" });
+    },
+    companyView() {
+      this.$router.push({ name: "adminCompanies" });
+    },
+    companyAdd() {
+      this.$router.push({ name: "adminAddCompany" });
+    },
   },
 };
 </script>
