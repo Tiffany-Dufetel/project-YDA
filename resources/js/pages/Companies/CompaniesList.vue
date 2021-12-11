@@ -2,6 +2,8 @@
 -- List of companies page component
 -->
 
+<!-- EXEMPLE DE CODE - A MODIFIER -->
+
 <template>
   <div>
     <Header title="Les entreprises" subtitle="" />
