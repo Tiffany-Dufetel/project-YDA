@@ -1,0 +1,8 @@
+START PROJECT
+To start the project:
+left "php artisan serve", then right "npm run watch
+
+ICONS
+Use any icons from (script is in welcome.blade.php):
+https://ionic.io/ionicons
+
