@@ -8,10 +8,12 @@
       title="Bienvenue à votre page administration"
       subtitle="Gérer vos entreprises et catalogue ici"
     />
-    <button @click="catView">Voir Catalogue</button>
-    <button @click="catAdd">Ajouter dans le catalogue</button>
-    <button @click="companyView">Voir entreprises</button>
-    <button @click="companyAdd">Ajouter une entreprise</button>
+    <div class="mt-5">
+      <button @click="catView">Voir Catalogue</button>
+      <button @click="catAdd">Ajouter dans le catalogue</button>
+      <button @click="companyView">Voir entreprises</button>
+      <button @click="companyAdd">Ajouter une entreprise</button>
+    </div>
   </div>
 </template>
 

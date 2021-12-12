@@ -5,8 +5,8 @@
 <template>
   <footer>
     <p><b>&copy; Your Daily Assistant</b></p>
-    <p><b>assistantes@your-daily-assistant.fr</b></p>
-    <p><b>06 43 88 43 82</b></p>
+    <p class="contact">assistantes@your-daily-assistant.fr</p>
+    <p class="contact">06 43 88 43 82</p>
   </footer>
 </template>
 
@@ -27,5 +27,8 @@ footer {
   background-color: #000000;
   color: #dbd8d5;
   text-align: right;
+}
+.contact {
+  font-size: 12px;
 }
 </style>

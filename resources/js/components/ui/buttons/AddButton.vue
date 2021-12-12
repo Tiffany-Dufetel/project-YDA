@@ -1,17 +1,20 @@
 <!--
--- Add comment UI component
+-- Add button UI component
 -->
 
 <template>
   <div>
     <!-- Add button -->
-    <button type="submit">add</button>
+    <button class="btn text-white bg-dark btn-block">
+      {{ name }}
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "AddButton",
+  props: ["name"],
 };
 </script>
 

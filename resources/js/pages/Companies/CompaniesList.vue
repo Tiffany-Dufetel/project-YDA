@@ -7,7 +7,8 @@
 <template>
   <div>
     <Header title="Les entreprises" subtitle="" />
-
+    <BackButton />
+    <AddButton name="Ajouter Entreprise" @click="add" />
     <br />
     <table class="table table-bordered">
       <thead>
@@ -42,17 +43,20 @@
         </tr>
       </tbody>
     </table>
-    <button @click="add">Ajouter Entreprise</button>
   </div>
 </template>
 
 <script>
 import Header from "../../components/ui/Header.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
+import AddButton from "../../components/ui/buttons/AddButton.vue";
 
 export default {
   name: "companyList",
   components: {
     Header,
+    BackButton,
+    AddButton,
   },
   methods: {
     add() {

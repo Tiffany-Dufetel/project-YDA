@@ -5,6 +5,7 @@
 <template>
   <div>
     <Header title="Ajouter un produit ou service" subtitle="...." />
+    <BackButton />
     <div class="d-flex justify-content-center">
       <form action="post" @submit.prevent="addProduct">
         <!-- item name -->
@@ -60,7 +61,7 @@
           </select>
         </div>
 
-        <input type="submit" class="button is-info" value="Ajouter" />
+        <SubmitButton name="Ajouter" />
       </form>
     </div>
   </div>
@@ -68,10 +69,15 @@
 
 <script>
 import Header from "../../../components/ui/Header.vue";
+import BackButton from "../../../components/ui/buttons/BackButton.vue";
+import SubmitButton from "../../../components/ui/buttons/SubmitButton.vue";
+
 export default {
   name: "AddProduct",
   components: {
     Header,
+    BackButton,
+    SubmitButton,
   },
   data() {
     return {
@@ -83,30 +89,17 @@ export default {
     };
   },
   methods: {
-    async addProduct(event) {
-      event.target.reset();
-      const createProduct = JSON.stringify(
-        this.name,
-        this.description,
-        this.type,
-        this.category
-      );
-      // create post bosy
-      const product = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: createProduct,
-      };
-      console.log(createProduct);
-      // fetch to backend
-      const response = await axios.post("/api/product", product);
-      /// might need rest.JSON?? Look if it arrives on back end
-      const data = await response.json();
-      // data declarations
-      this.name = data.name;
-      this.description = data.description;
-      this.type = data.type;
-      this.category = data.category;
+    addOrder() {
+      this.$axios.get("/sanctum/csrf-cookie").then((response) => {
+        this.$axios
+          .post("/api/product/store", this.product)
+          .then((response) => {
+            this.$router.push({ name: "product" });
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
     },
   },
 };

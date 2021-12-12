@@ -13,7 +13,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = order::all()->toArray();
+        return array_reverse($orders);
     }
 
     /**
@@ -32,9 +33,27 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $user_id = Auth::user()->id;
+
+        $validated = $request->validate([
+            'comment' => 'required|string',
+        ]);
+
+        $order = [
+            'status' => 'en attente',
+            'date_order' => new Date(),
+            'comment' => $request->comment,
+            'products_id' => $request->product,
+            'user_id' => $user_id,
+        ];
+
+        order::create($order);
+
+        return redirect()->route('overviews.show', $id)
+            ->with('success', "Your card has been create!");
+
     }
 
     /**
@@ -56,7 +75,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = order::find($id);
+        return response()->json($order);
     }
 
     /**
@@ -68,7 +88,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = order::find($id);
+        $order->update($request->all());
+        $order->save();
+
+        return redirect()->back()
+            ->with('success', 'Your order has been modified');;
     }
 
     /**
@@ -79,6 +104,10 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = order::find($id);
+        $order->delete();
+
+        return redirect()->back()
+            ->with('success', 'The order was successfully cancelled');
     }
 }
