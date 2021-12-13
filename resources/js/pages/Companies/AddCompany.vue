@@ -45,7 +45,7 @@
       /><br />
 
       <!--<button type="submit">Ajouter</button>-->
-      <SubmitButton name="Ajouter" />
+      <SubmitButton name="Ajouter" @click="addCompany" />
     </form>
   </div>
 </template>
@@ -99,7 +99,7 @@ export default {
             adress: this.adress,
             postcode: this.postcode,
             city: this.city,
-            member_count: this.member_count,
+            member_count: Number(this.member_count),
           })
           .then((response) => {
             console.log(response);
