@@ -18,14 +18,11 @@
             class="form-control"
             required="true"
           >
-            <option
-              v-for="product in products"
-              :key="product"
-              :value="product.id"
-            >
-              {{ product.name }}
+            <option value="2">
+              <div v-for="product in productArray" :key="product.id">
+                {{ product.name }}
+              </div>
             </option>
-            <option value="2">Vin</option>
             <!-- <option value="1">1 - 6 bouteilles de vin</option>
             <option value="2">2 - Pressing</option>
             <option value="3">2 - Pressing</option> -->
@@ -63,22 +60,26 @@ import Header from "../../components/ui/Header.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 
 export default {
-  name: "ProductOrder",
   components: {
     Header,
     SubmitButton,
   },
   data() {
     return {
-      data: {},
       status: "en attente",
       products_id: "",
       comment: "",
-      products: [],
+      productArray: [],
     };
   },
   // fetch the list of products on view creation using sanctum in axios
-  created() {
+  async mounted() {
+    const getProduct = await axios.get("/api/product");
+
+    this.productArray = getProduct.data.data;
+  },
+
+  /* created() {
     axios.get("/sanctum/csrf-cookie").then((response) => {
       axios
         .get("/api/product")
@@ -89,7 +90,7 @@ export default {
           console.error(error);
         });
     });
-  },
+  }, */
   methods: {
     addOrder() {
       axios

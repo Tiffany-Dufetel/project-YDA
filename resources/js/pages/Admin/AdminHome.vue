@@ -21,10 +21,25 @@
 
 <script>
 import Header from "../../components/ui/Header.vue";
+import axios from "axios";
+
 export default {
   name: "AdminHome",
   components: {
     Header,
+  },
+
+  data() {
+    return {
+      productArray: [],
+    };
+  },
+  async mounted() {
+    const getProduct = await axios.get("/api/product");
+
+    // this.productArray = getProduct.data.data;
+
+    console.log(getProduct);
   },
   methods: {
     catView() {
