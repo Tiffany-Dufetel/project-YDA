@@ -37,22 +37,24 @@ class OrderController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $validated = $request->validate([
+        $request->validate([
             'comment' => 'required|string',
         ]);
 
         $order = [
             'status' => 'en attente',
             'date_order' => new Date(),
-            'comment' => $request->comment,
-            'products_id' => $request->product,
+            'date_delivery' => $request->input('date_delivery'),
+            'comment' => $request->input('comment'),
+            'products_id' => $request->input('product'),
+            'pdf' => $request->input('pdf'),
             'user_id' => $user_id,
         ];
 
-        order::create($order);
+        Order::create($order);
 
-        return redirect()->route('overviews.show', $id)
-            ->with('success', "Your card has been create!");
+        return redirect()->route('order.index', $id)
+            ->with('success', "Your card has been created!");
 
     }
 
