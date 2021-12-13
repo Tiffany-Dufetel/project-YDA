@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Http\Resources\CompanyController as ResourcesCompanyController;
+
+use function GuzzleHttp\Promise\all;
 
 class CompanyController extends Controller
 {
@@ -14,7 +17,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        return ResourcesCompanyController::collection(Company::all());
     }
 
     /**

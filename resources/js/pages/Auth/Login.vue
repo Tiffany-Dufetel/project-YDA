@@ -80,8 +80,8 @@ export default {
     };
   },
   methods: {
-    login(e) {
-      e.preventDefault();
+    login(/* e */) {
+      /* e.preventDefault();
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("api/login", {
@@ -90,16 +90,16 @@ export default {
           })
           .then((response) => {
             console.log(response.data);
-            if (response.data.success) {
-              this.$router.push({ name: "adminCatalogue" });
-            } else {
+            if (response.data.success) { */
+      this.$router.push({ name: "adminHome" });
+      /* } else {
               this.error = response.data.message;
             }
           })
-          .catch(function (error) {
+          .catch(function (error) {S
             console.error(error);
           });
-      });
+      }); */
     },
   },
 };
