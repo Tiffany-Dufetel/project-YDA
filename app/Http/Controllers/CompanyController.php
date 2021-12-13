@@ -36,7 +36,7 @@ class CompanyController extends Controller
     public function store(Request $request)//$id
     {
         //public function store(Request $request, $id)
-       // $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
 
         $request->validate([
             'member_count' => 'integer',
@@ -58,6 +58,8 @@ class CompanyController extends Controller
         ];
 
         Company::create($companies);
+
+        //Company::create($request->all());
 
     }
 

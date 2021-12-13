@@ -27,11 +27,11 @@
         <label for="city">Ville</label><br>
         <input type="text" id="city" name="city" v-model="city"><br>
 
-        <label for="employees">Nombre d'employés</label><br>
-        <input type="number" id="employees" name="member_count"><br>
+        <label for="member_count">Nombre d'employés</label><br>
+        <input type="number" id="member_count" name="member_count"><br>
 
 
-        <button type="submit">Ajouter</button>
+        <button type="submit" @click="addCompany">Ajouter</button>
       <!--<SubmitButton name="Ajouter" />-->
     </form>
   </div>
@@ -53,7 +53,7 @@ export default {
           adress:"",
           postCode:"",
           city:"",
-          employees:"",
+          member_count:"",
           data:{}
       }
   },
@@ -71,14 +71,16 @@ export default {
         const urlApi = `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${siret}`;
         const dataSiret = await fetch(urlApi);
         const responseDataSiret = await dataSiret.json();
-        this.name=responseDataSiret.etablissement.denomination_usuelle;
+        console.log(responseDataSiret);
+        this.name=responseDataSiret.etablissement.unite_legale.denomination;
+        console.log(this.name);
         this.adress=responseDataSiret.etablissement.geo_l4;
         this.postCode=responseDataSiret.etablissement.code_postal;
         this.city=responseDataSiret.etablissement.libelle_commune;
     },
 
     addCompany() {
-      axios.get("/sanctum/csrf-cookie")
+      /* axios.get("/sanctum/csrf-cookie")
       .then((response) => {
         axios
           .post("/api/company/store", {
@@ -96,7 +98,17 @@ export default {
           .catch(function (error) {
             console.error(error);
           });
-      });
+      }); */
+        axios.post('http://127.0.0.1:8000/api/company/store', {
+            inputSiret:this.inputSiret,
+            name:this.name,
+            adress:this.adress,
+            postCode:this.postCode,
+            city:this.city,
+            member_count:this.member_count,
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
     },
   },
 };
