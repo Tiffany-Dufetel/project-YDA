@@ -8,11 +8,11 @@
       <ul>
         <!-- YDA Logo -->
         <li>
-          <img alt="YDA logo" src="../assets/logo.JPG" />
+          <!-- <img alt="YDA logo"  src="../../../assets/logo.JPG"/> -->
         </li>
         <!-- Link Home -->
         <li>
-          <a><router-link to="/home">Home</router-link></a>
+          <a><router-link to="/">Home</router-link></a>
         </li>
         <!-- Link Log in -->
         <li>
@@ -61,7 +61,7 @@ header {
   height: 70px;
   display: flex;
   align-items: center;
-  box-shadow: 0 5px 25px 0 rgb(73 119 77);
+  box-shadow: 0 5px 25px 0 #00000036;
 }
 header * {
   display: inline;

@@ -3,33 +3,57 @@
     <!-- Display the nav bar -->
     <Nav />
     <!-- Import the router -->
-    <router-view></router-view>
+    <router-view />
     <!-- Display the footer -->
     <Footer />
   </div>
 </template>
-
+ 
 <script>
 /** Imports */
-import Nav from "./components/Nav.vue";
-import Footer from "./components/Reusable/Footer.vue";
+import Nav from "./components/assets/Navbar.vue";
+import Footer from "./components/assets/Footer.vue";
 export default {
   name: "App",
   components: {
     Nav,
     Footer,
   },
-  data() {
+  /* data() {
     return {
+      isLoggedIn: false,
       image: {
         backgroundImage:
           "url(https://www.sortiraparis.com/images/80/83517/584112-visuel-paris-conciergerie.jpg)",
       },
-    };
   },
+    created() {
+        if (window.Laravel.isLoggedin) {
+            this.isLoggedIn = true
+        }
+    },
+    methods: {
+        logout(e) {
+            console.log('ss')
+            e.preventDefault()
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('/api/logout')
+                    .then(response => {
+                        if (response.data.success) {
+                            window.location.href = "/"
+                        } else {
+                            console.log(response)
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+        }
+    }, */
 };
 </script>
-
+ 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -42,3 +66,4 @@ export default {
   height: 700px;
 }
 </style>
+

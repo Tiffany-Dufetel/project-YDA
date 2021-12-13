@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import Header from "../components/ui/Header.vue";
+import Header from "../../components/ui/Header.vue";
 export default {
-  name: "memberDisplay",
+  name: "MemberDisplay",
   components: {
     Header,
   },
