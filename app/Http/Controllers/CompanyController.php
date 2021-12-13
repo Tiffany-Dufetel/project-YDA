@@ -43,8 +43,9 @@ class CompanyController extends Controller
             'siret'=> 'required|string',
             'name'=> 'required|string',
             'adress'=> 'required|string',
-            'postCode'=> 'required|integer',
+            'postcode'=> 'required|string',
             'city'=> 'required|string',
+
         ]);
 
         $companies = [
@@ -52,7 +53,7 @@ class CompanyController extends Controller
             'name' => $request->input('name'),
             'siret' => $request->input('siret'),
             'adress' => $request->input('adress'),
-            'postCode' => $request->input('postCode'),
+            'postcode' => $request->input('postcode'),
             'city' => $request->input('city'),
 
         ];

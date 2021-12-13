@@ -19917,13 +19917,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: "addCompany",
   data: function data() {
     return {
-      inputSiret: "",
+      siret: "",
       name: "",
       adress: "",
-      postCode: "",
+      postcode: "",
       city: "",
-      member_count: "",
-      data: {}
+      member_count: ""
     };
   },
   components: {
@@ -19941,7 +19940,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                siret = _this.inputSiret;
+                siret = _this.siret;
                 urlApi = "https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/".concat(siret);
                 _context.next = 4;
                 return fetch(urlApi);
@@ -19957,7 +19956,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.name = responseDataSiret.etablissement.unite_legale.denomination;
                 console.log(_this.name);
                 _this.adress = responseDataSiret.etablissement.geo_l4;
-                _this.postCode = responseDataSiret.etablissement.code_postal;
+                _this.postcode = responseDataSiret.etablissement.code_postal;
                 _this.city = responseDataSiret.etablissement.libelle_commune;
 
               case 14:
@@ -19969,36 +19968,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     addCompany: function addCompany() {
-      /* axios.get("/sanctum/csrf-cookie")
-      .then((response) => {
-        axios
-          .post("/api/company/store", {
-            inputSiret:this.inputSiret,
-            name:this.name,
-            adress:this.adress,
-            postCode:this.postCode,
-            city:this.city,
-            employees:this.employees,
-          })
-          .then((response) => {
-            console.log(response)
-            this.$router.push({ name: "company" });
-          })
-          .catch(function (error) {
-            console.error(error);
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_4___default().get("/sanctum/csrf-cookie").then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_4___default().post("/api/company", {
+          siret: _this2.siret,
+          name: _this2.name,
+          adress: _this2.adress,
+          postcode: _this2.postcode,
+          city: _this2.city,
+          member_count: _this2.member_count
+        }).then(function (response) {
+          console.log(response);
+
+          _this2.$router.push({
+            name: "company"
           });
-      }); */
-      axios__WEBPACK_IMPORTED_MODULE_4___default().post('http://127.0.0.1:8000/api/company/store', {
-        inputSiret: this.inputSiret,
-        name: this.name,
-        adress: this.adress,
-        postCode: this.postCode,
-        city: this.city,
-        member_count: this.member_count
-      }).then(function (response) {
-        return console.log(response);
-      })["catch"](function (error) {
-        return console.log(error);
+        })["catch"](function (error) {
+          console.error(error);
+        });
       });
     }
   }
@@ -21005,15 +20993,7 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "number",
-  id: "member_count",
-  name: "member_count"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -21021,6 +21001,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
 
   var _component_BackButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BackButton");
+
+  var _component_SubmitButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SubmitButton");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
     title: "Ajouter une entreprise",
@@ -21035,14 +21017,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "siret",
     name: "siret",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.inputSiret = $event;
+      return $data.siret = $event;
     }),
     onKeypress: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.siretSearch && $options.siretSearch.apply($options, arguments);
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.inputSiret]]), _hoisted_3, _hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.siret]]), _hoisted_3, _hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "name",
     name: "name",
@@ -21065,11 +21047,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "postCode",
     name: "postCode",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.postCode = $event;
+      return $data.postcode = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.postCode]]), _hoisted_12, _hoisted_13, _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.postcode]]), _hoisted_12, _hoisted_13, _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "city",
     name: "city",
@@ -21078,12 +21060,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.city]]), _hoisted_15, _hoisted_16, _hoisted_17, _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    type: "submit",
-    onClick: _cache[6] || (_cache[6] = function () {
-      return $options.addCompany && $options.addCompany.apply($options, arguments);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.city]]), _hoisted_15, _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "number",
+    id: "member_count",
+    name: "member_count",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return $data.member_count = $event;
     })
-  }, "Ajouter"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<SubmitButton name=\"Ajouter\" />")], 32
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.member_count]]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<button type=\"submit\">Ajouter</button>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubmitButton, {
+    name: "Ajouter"
+  })], 32
   /* HYDRATE_EVENTS */
   )]);
 }

@@ -9,11 +9,10 @@
       subtitle="Tapez le SIRET afin de pré remplir"
     />
     <BackButton />
-    <form method="POST" @submit.prevent="addCompany">
-
+    <form method="POST"  @submit.prevent="addCompany">
 
         <label for="siret">Siret</label><br>
-        <input type="text" id="siret" name="siret" v-model="inputSiret" v-on:keypress.enter="siretSearch"><br>
+        <input type="text" id="siret" name="siret" v-model="siret" v-on:keypress.enter="siretSearch"><br>
 
         <label for="name">Dénomination social</label><br>
         <input type="text" id="name" name="name" v-model="name"><br>
@@ -22,17 +21,17 @@
         <input type="text" id="adress" name="adress" v-model="adress"><br>
 
         <label for="postCode">Code postal</label><br>
-        <input type="text" id="postCode" name="postCode" v-model="postCode"><br>
+        <input type="text" id="postCode" name="postCode" v-model="postcode"><br>
 
         <label for="city">Ville</label><br>
         <input type="text" id="city" name="city" v-model="city"><br>
 
         <label for="member_count">Nombre d'employés</label><br>
-        <input type="number" id="member_count" name="member_count"><br>
+        <input type="number" id="member_count" name="member_count" v-model="member_count"><br>
 
 
-        <button type="submit" @click="addCompany">Ajouter</button>
-      <!--<SubmitButton name="Ajouter" />-->
+        <!--<button type="submit">Ajouter</button>-->
+        <SubmitButton name="Ajouter" />
     </form>
   </div>
 </template>
@@ -48,13 +47,12 @@ export default {
 
   data(){
       return {
-          inputSiret: "",
+          siret: "",
           name:"",
           adress:"",
-          postCode:"",
+          postcode:"",
           city:"",
           member_count:"",
-          data:{}
       }
   },
 
@@ -67,7 +65,7 @@ export default {
   methods: {
 
     async siretSearch(){
-        const siret = this.inputSiret;
+        const siret = this.siret;
         const urlApi = `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${siret}`;
         const dataSiret = await fetch(urlApi);
         const responseDataSiret = await dataSiret.json();
@@ -75,21 +73,21 @@ export default {
         this.name=responseDataSiret.etablissement.unite_legale.denomination;
         console.log(this.name);
         this.adress=responseDataSiret.etablissement.geo_l4;
-        this.postCode=responseDataSiret.etablissement.code_postal;
+        this.postcode=responseDataSiret.etablissement.code_postal;
         this.city=responseDataSiret.etablissement.libelle_commune;
     },
 
     addCompany() {
-      /* axios.get("/sanctum/csrf-cookie")
+      axios.get("/sanctum/csrf-cookie")
       .then((response) => {
         axios
-          .post("/api/company/store", {
-            inputSiret:this.inputSiret,
+          .post("/api/company", {
+            siret:this.siret,
             name:this.name,
             adress:this.adress,
-            postCode:this.postCode,
+            postcode:this.postcode,
             city:this.city,
-            employees:this.employees,
+            member_count:this.member_count,
           })
           .then((response) => {
             console.log(response)
@@ -98,17 +96,8 @@ export default {
           .catch(function (error) {
             console.error(error);
           });
-      }); */
-        axios.post('http://127.0.0.1:8000/api/company/store', {
-            inputSiret:this.inputSiret,
-            name:this.name,
-            adress:this.adress,
-            postCode:this.postCode,
-            city:this.city,
-            member_count:this.member_count,
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+      });
+
     },
   },
 };
