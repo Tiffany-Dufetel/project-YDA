@@ -9,7 +9,7 @@
       subtitle="Tapez le SIRET afin de pré remplir"
     />
     <BackButton />
-    <form method="POST"  @submit.prevent="addCompany">
+    <form method="POST"  @submit.prevent>
 
         <label for="siret">Siret</label><br>
         <input type="text" id="siret" name="siret" v-model="siret" v-on:keypress.enter="siretSearch"><br>
@@ -31,7 +31,7 @@
 
 
         <!--<button type="submit">Ajouter</button>-->
-        <SubmitButton name="Ajouter" />
+        <SubmitButton name="Ajouter" @click="addCompany" />
     </form>
   </div>
 </template>
@@ -97,7 +97,6 @@ export default {
             console.error(error);
           });
       });
-
     },
   },
 };
