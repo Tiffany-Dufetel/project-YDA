@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\product;
-use App\Http\Resources\ProductController;
+use App\Http\Resources\ProductController as ResourcesProductController;
+
+use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
 {
@@ -15,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ResourceProductController::collection(product::all());
+
+        return ResourcesProductController::collection(product::all());
     }
 
     /**
