@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Http\Resources\OrderController as ResourcesOrderController;
+
+use function GuzzleHttp\Promise\all;
 
 class OrderController extends Controller
 {
@@ -13,8 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::all()->toArray();
-        return array_reverse($orders);
+        return ResourcesOrderController::collection(Order::all());
     }
 
     /**
