@@ -14,6 +14,8 @@
       <button @click="companyView">Voir entreprises</button>
       <button @click="companyAdd">Ajouter une entreprise</button>
     </div>
+
+    <button @click="order">Commander</button>
   </div>
 </template>
 
@@ -36,6 +38,9 @@ export default {
     },
     companyAdd() {
       this.$router.push({ name: "adminAddCompany" });
+    },
+    order() {
+      this.$router.push({ name: "productOrder" });
     },
   },
 };

@@ -13,6 +13,7 @@ import AddMembers from "../pages/Members/AddMembers.vue";
 import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 import ProductDisplay from "../pages/Admin/Products/ProductDisplay.vue";
+import ProductOrder from "../pages/Orders/OrderProduct.vue";
 
 const routes = [
     {
@@ -106,6 +107,17 @@ const routes = [
         path: "/userId",
         name: "individualMember",
         component: MemberDisplay,
+    },
+
+    /**
+     * MEMBRE CONNEXION
+     */
+    // View a specific member from a company -
+    // NEEDS TO BE ROUTE CHILDREN FROM ENTREPRISES/MEMBRES/userid
+    {
+        path: "/commander",
+        name: "productOrder",
+        component: ProductOrder,
     },
 
 
