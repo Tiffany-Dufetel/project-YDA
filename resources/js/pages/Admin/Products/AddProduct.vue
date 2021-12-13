@@ -77,6 +77,7 @@
 import Header from "../../../components/ui/Header.vue";
 import BackButton from "../../../components/ui/buttons/BackButton.vue";
 import SubmitButton from "../../../components/ui/buttons/SubmitButton.vue";
+import axios from "axios";
 
 export default {
   name: "AddProduct",

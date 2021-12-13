@@ -2,40 +2,38 @@
 -- List of companies page component
 -->
 
-<!-- EXEMPLE DE CODE - A MODIFIER -->
-
 <template>
   <div>
     <Header title="Les entreprises" subtitle="" />
     <BackButton />
     <AddButton name="Ajouter Entreprise" @click="add" />
     <br />
+
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
-          <th>Author</th>
-          <th>Created At</th>
-          <th>Updated At</th>
-          <th>Actions</th>
+          <th>Siret</th>
+          <th>Adresse</th>
+          <th>Total de membres</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="book in books" :key="book.id">
-          <td>{{ book.id }}</td>
-          <td>{{ book.name }}</td>
-          <td>{{ book.author }}</td>
-          <td>{{ book.created_at }}</td>
-          <td>{{ book.updated_at }}</td>
+        <tr v-for="company in companyArray" :key="company.id">
+          <td>{{ company.name }}</td>
+          <td>{{ company.siret }}</td>
+          <td>
+            {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
+          </td>
+          <td>{{ company.member_count }}</td>
           <td>
             <div class="btn-group" role="group">
               <router-link
-                :to="{ name: 'editbook', params: { id: book.id } }"
+                :to="{ name: 'individualCompany', params: { id: company.id } }"
                 class="btn btn-primary"
                 >Edit
               </router-link>
-              <button class="btn btn-danger" @click="deleteBook(book.id)">
+              <button class="btn btn-danger" @click="deleteCompany(company.id)">
                 Delete
               </button>
             </div>
@@ -58,36 +56,27 @@ export default {
     BackButton,
     AddButton,
   },
+  data() {
+    return {
+      companyArray: [],
+    };
+  },
+  async mounted() {
+    const getCompanies = await axios.get("/api/company");
+    this.companyArray = getCompanies.data.data;
+    console.log(this.companyArray);
+  },
   methods: {
     add() {
       this.$router.push({ name: "adminAddCompany" });
     },
-  },
-  /*   data() {
-    return {
-      books: [],
-    };
-  },
-  created() {
-    this.$axios.get("/sanctum/csrf-cookie").then((response) => {
-      this.$axios
-        .get("/api/books")
-        .then((response) => {
-          this.books = response.data;
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    });
-  },
-  methods: {
-    deleteBook(id) {
-      this.$axios.get("/sanctum/csrf-cookie").then((response) => {
-        this.$axios
-          .delete(`/api/books/delete/${id}`)
+    deleteCompany(id) {
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .delete(`/api/company/delete/${id}`)
           .then((response) => {
-            let i = this.books.map((item) => item.id).indexOf(id); // find index of your object
-            this.books.splice(i, 1);
+            let i = this.company.map((item) => item.id).indexOf(id); // find index of your object
+            this.company.splice(i, 1);
           })
           .catch(function (error) {
             console.error(error);
@@ -95,11 +84,5 @@ export default {
       });
     },
   },
-  beforeRouteEnter(to, from, next) {
-    if (!window.Laravel.isLoggedin) {
-      window.location.href = "/";
-    }
-    next();
-  }, */
 };
 </script>
