@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Company;
 
 class CompanyController extends Controller
 {
@@ -32,9 +33,35 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)//$id
     {
-        //
+        //public function store(Request $request, $id)
+        // $user_id = Auth::user()->id;
+
+        $request->validate([
+            'member_count' => 'integer',
+            'siret'=> 'required|string',
+            'name'=> 'required|string',
+            'adress'=> 'required|string',
+            'postcode'=> 'required|string',
+            'city'=> 'required|string',
+
+        ]);
+
+        $companies = [
+            'member_count' => $request->input('member_count'),
+            'name' => $request->input('name'),
+            'siret' => $request->input('siret'),
+            'adress' => $request->input('adress'),
+            'postcode' => $request->input('postcode'),
+            'city' => $request->input('city'),
+
+        ];
+
+        Company::create($companies);
+
+        //Company::create($request->all());
+
     }
 
     /**
