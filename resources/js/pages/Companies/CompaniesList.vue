@@ -63,43 +63,14 @@ export default {
       this.$router.push({ name: "adminAddCompany" });
     },
   },
-  /*   data() {
+  data() {
     return {
       books: [],
     };
   },
-  created() {
-    this.$axios.get("/sanctum/csrf-cookie").then((response) => {
-      this.$axios
-        .get("/api/books")
-        .then((response) => {
-          this.books = response.data;
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    });
+  async mounted() {
+    const getProduct = await axios.get("/api/product");
+    this.productArray = getProduct.data.data;
   },
-  methods: {
-    deleteBook(id) {
-      this.$axios.get("/sanctum/csrf-cookie").then((response) => {
-        this.$axios
-          .delete(`/api/books/delete/${id}`)
-          .then((response) => {
-            let i = this.books.map((item) => item.id).indexOf(id); // find index of your object
-            this.books.splice(i, 1);
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-      });
-    },
-  },
-  beforeRouteEnter(to, from, next) {
-    if (!window.Laravel.isLoggedin) {
-      window.location.href = "/";
-    }
-    next();
-  }, */
 };
 </script>
