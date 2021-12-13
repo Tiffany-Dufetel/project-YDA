@@ -64,6 +64,7 @@
 <script>
 import Header from "../../components/ui/Header.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
+import axios from "axios";
 
 export default {
   name: "Login",
@@ -79,8 +80,26 @@ export default {
     };
   },
   methods: {
-    login() {
-      this.$router.push({ name: "adminHome" });
+    login(e) {
+      e.preventDefault();
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .post("api/login", {
+            email: this.email,
+            password: this.password,
+          })
+          .then((response) => {
+            console.log(response.data);
+            if (response.data.success) {
+              this.$router.push({ name: "adminCatalogue" });
+            } else {
+              this.error = response.data.message;
+            }
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
     },
   },
 };
