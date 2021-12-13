@@ -36,15 +36,16 @@ class CompanyController extends Controller
     public function store(Request $request)//$id
     {
         //public function store(Request $request, $id)
-       // $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
 
         $request->validate([
             'member_count' => 'integer',
             'siret'=> 'required|string',
             'name'=> 'required|string',
             'adress'=> 'required|string',
-            'postCode'=> 'required|integer',
+            'postcode'=> 'required|string',
             'city'=> 'required|string',
+
         ]);
 
         $companies = [
@@ -52,12 +53,14 @@ class CompanyController extends Controller
             'name' => $request->input('name'),
             'siret' => $request->input('siret'),
             'adress' => $request->input('adress'),
-            'postCode' => $request->input('postCode'),
+            'postcode' => $request->input('postcode'),
             'city' => $request->input('city'),
 
         ];
 
         Company::create($companies);
+
+        //Company::create($request->all());
 
     }
 
