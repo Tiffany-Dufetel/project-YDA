@@ -12,7 +12,7 @@
       <button @click="catView">Voir Catalogue</button>
       <button @click="catAdd">Ajouter dans le catalogue</button>
       <button @click="companyView">Voir entreprises</button>
-      <button @click="companiesAddMembers">Ajouter une membre</button>
+      <button @click="memberAdd">Ajouter une membre</button>
 
       <button @click="companyAdd">Ajouter une entreprise</button>
     </div>

@@ -36,7 +36,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'member_count' => 'integer',
+            'siret'=> 'required|string',
+            'name'=> 'required|string',
+            'adress'=> 'required|string',
+            'postcode'=> 'required|string',
+            'city'=> 'required|string',
+
+        ]);
+
+        $companies = [
+            'member_count' => $request->input('member_count'),
+            'name' => $request->input('name'),
+            'siret' => $request->input('siret'),
+            'adress' => $request->input('adress'),
+            'postcode' => $request->input('postcode'),
+            'city' => $request->input('city'),
+
+        ];
+
+        User::create($companies);
+
     }
 
     /**
