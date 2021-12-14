@@ -91,6 +91,7 @@ export default {
             console.error(error);
           });
       });
+      this.form.reset();
     },
   },
 };

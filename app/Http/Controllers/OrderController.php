@@ -70,8 +70,8 @@ class OrderController extends Controller
 
         Order::create($order);
 
-        return redirect()->route('order.index', $id)
-            ->with('success', "Your card has been created!");
+        return redirect()->route('orders', $user_id)
+            ->with('success', "Your order has been processed!");
 
     }
 

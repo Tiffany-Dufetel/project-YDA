@@ -17,6 +17,7 @@
       <button @click="companyAdd">Ajouter une entreprise</button>
     </div>
 
+    <button @click="orderList">Liste de commandes</button>
     <button @click="order">Commander</button>
 
     <!-- Calendar displaying upcoming events -->
@@ -72,6 +73,9 @@ export default {
     },
     order() {
       this.$router.push({ name: "productOrder" });
+    },
+    orderList() {
+      this.$router.push({ name: "orders" });
     },
     memberAdd() {
       this.$router.push({ name: "companiesAddMembers" });

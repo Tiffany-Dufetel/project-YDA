@@ -5,7 +5,10 @@
 <template>
   <div>
     <!-- rendre le nom reactive -->
-    <Header title="name of member or order" subtitle="Commandes" />
+    <Header
+      title="{{user.first_name}} {{user.surname}} - Vos commandes"
+      subtitle="Gérer vos commandes ici"
+    />
     <BackButton />
     <AddButton name="Commandez" @click="add" />
     <br />
@@ -22,17 +25,20 @@
       <tbody>
         <tr v-for="order in orderArray" :key="order.id">
           <td>{{ product.name }}</td>
-          <td>{{ order.date_delivery }}</td>
+          <td>{{ order.date_order }}</td>
           <td>{{ order.date_delivery }}</td>
           <td>{{ order.status }}</td>
           <td>
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualorder', params: { id: order.id } }"
-                class="btn btn-primary"
-                >Edit
+                ><button class="btn btn-primary">Edit</button>
               </router-link>
-              <button class="btn btn-danger" @click="deleteorder(order.id)">
+              <button
+                v-if="status"
+                class="btn btn-danger"
+                @click="deleteorder(order.id)"
+              >
                 Delete
               </button>
             </div>
@@ -67,7 +73,7 @@ export default {
   },
   methods: {
     add() {
-      this.$router.push({ name: "adminAddorder" });
+      this.$router.push({ name: "productOrder" });
     },
     deleteorder(id) {
       axios.get("/sanctum/csrf-cookie").then((response) => {

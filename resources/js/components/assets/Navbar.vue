@@ -10,22 +10,36 @@
         <li>
           <!-- <img alt="YDA logo"  src="../../../assets/logo.JPG"/> -->
         </li>
+
+        <!-- NOT CONNECTED NAVIGATION -->
+        <!-- <div :if="!connected"> -->
         <!-- Link Home -->
         <li>
-          <a><router-link to="/">Home</router-link></a>
+          <a><router-link to="Home">Home</router-link></a>
         </li>
         <!-- Link Log in -->
         <li>
-          <a><router-link to="/login">Log in</router-link></a>
+          <a><router-link to="Login">Log in</router-link></a>
         </li>
+        <!-- </div> -->
+
+        <!-- CONNECTED NAVIGATION -->
+        <!-- <div :if="connected">
+          <div :if="admin"></div>
+          <div :else-if="member"></div>
+          <div :else="company"></div>
+        </div> -->
+
         <!-- Link Contact -->
         <li>
-          <a><router-link to="/contact">Contact</router-link></a>
+          <a><router-link to="Contact">Contact</router-link></a>
         </li>
         <!-- Sign Out -->
-        <li>
-          <a @click="logOut">Log out</a>
-        </li>
+        <!-- <div :if="connected">
+          <li>
+            <a @click="logOut">Log out</a>
+          </li>
+        </div> -->
       </ul>
     </nav>
   </header>
@@ -34,10 +48,16 @@
 <script>
 export default {
   name: "Navbar",
+  /* data() {
+    return { isLogged: this.checkIfIsLogged() };
+  }, */
   methods: {
     logOut() {
       localStorage.removeItem("token");
+      /* this.isLogged = this.checkIfConnected() */
+      this.$router.push("Home");
     },
+    /* checkIfConnected() */
   },
 };
 </script>
