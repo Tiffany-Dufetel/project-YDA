@@ -7,7 +7,7 @@
     <!-- rendre le nom reactive -->
     <Header title="Commandez ici " subtitle="Nous vous contacterons en suite" />
     <div class="d-flex justify-content-center">
-      <form @submit.prevent="addOrder">
+      <form method="POST" @submit.prevent="addOrder">
         <!-- product/service choice -->
         <div class="form-group col-md-4">
           <label for="name">Choisir votre service ou </label>
@@ -20,7 +20,7 @@
           >
             <option value="{{ product.id }}">
               <div v-for="product in productArray" :key="product.id">
-                {{ product.name }}
+                {{ product.id }} - {{ product.name }}
               </div>
             </option>
           </select>
@@ -61,9 +61,7 @@ export default {
   },
   data() {
     return {
-      status: "en attente",
       product_id: "",
-      name: "",
       date_delivery: "",
       productArray: [],
     };
@@ -81,7 +79,6 @@ export default {
             status: this.status,
             product_id: this.product_id,
             date_delivery: this.date_delivery,
-            id: this.id,
           })
           .then((response) => {
             console.log(response);
@@ -91,7 +88,6 @@ export default {
             console.error(error);
           });
       });
-      this.form.reset();
     },
   },
 };

@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Order;
-use App\Http\Resources\OrderController as ResourcesOrderController;
+use App\Models\User;
+use App\Models\Product;
 
-use function GuzzleHttp\Promise\all;
 
 class OrderController extends Controller
 {
-    public function __construct()
+    /* public function __construct()
     {
         $this->middleware('auth');
-    }
+    } */
 
     
     /**
@@ -26,8 +28,8 @@ class OrderController extends Controller
         $user_id = Auth::user()->id; //récupération de l'id de l'utilisateur connecté
         $products_id = Product::user()->id; //récupération du nom de l'utilisateur connecté
 
-        $orders = Order::with('product', 'user') // requete de la table title et user en relation
-            ->where('user_id', $user_id)
+        $orders = Order::with('product') // requete de la table title et user en relation
+            ->where('products_id', $products_id)
             ->orderByDesc('created_at')
             ->get();
 
@@ -50,7 +52,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $user_id = Auth::user()->id;
 
@@ -59,8 +61,6 @@ class OrderController extends Controller
         ]);
 
         $order = [
-            'status' => 'en attente',
-            'date_order' => new Date(),
             'date_delivery' => $request->input('date_delivery'),
             'comment' => $request->input('comment'),
             'products_id' => $request->input('product'),
@@ -68,7 +68,7 @@ class OrderController extends Controller
             'user_id' => $user_id,
         ];
 
-        Order::create($order);
+        Order::create($order, $user_id);
 
         return redirect()->route('orders', $user_id)
             ->with('success', "Your order has been processed!");
