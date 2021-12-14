@@ -71,6 +71,7 @@
 import Header from "../../../components/ui/Header.vue";
 import BackButton from "../../../components/ui/buttons/BackButton.vue";
 import SubmitButton from "../../../components/ui/buttons/SubmitButton.vue";
+import axios from "axios";
 
 export default {
   name: "AddProduct",
@@ -83,6 +84,7 @@ export default {
     return {
       name: "",
       description: "",
+      image: "",
       type: "",
       category: "",
       data: {},
@@ -90,9 +92,15 @@ export default {
   },
   methods: {
     addOrder() {
-      this.$axios.get("/sanctum/csrf-cookie").then((response) => {
-        this.$axios
-          .post("/api/product/store", this.product)
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .post("/api/product", {
+            name: this.name,
+            description: this.description,
+            image: this.image,
+            type: this.type,
+            category: this.category,
+          })
           .then((response) => {
             this.$router.push({ name: "product" });
           })

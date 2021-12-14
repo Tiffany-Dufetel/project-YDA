@@ -2,40 +2,52 @@
 -- List of companies page component
 -->
 
-<!-- EXEMPLE DE CODE - A MODIFIER -->
-
 <template>
   <div>
     <Header title="Les entreprises" subtitle="" />
     <BackButton />
     <AddButton name="Ajouter Entreprise" @click="add" />
     <br />
+
+    <!-- Search box -->
+    <form class="form-inline">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+
+    <!-- Companies list -->
     <table class="table table-bordered">
       <thead>
         <tr>
+          <th>Name</th>
           <th>Siret</th>
-          <th>Raison sociale</th>
           <th>Adresse</th>
-          <th>Code Postal</th>
-          <th>Ville</th>
+          <th>Total de membres</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="company in companyArray" :key="company.id">
-          <td>{{ company.siret }}</td>
           <td>{{ company.name }}</td>
-          <td>{{ company.adress }}</td>
-          <td>{{ company.postcode }}</td>
-          <td>{{ company.city }}</td>
+          <td>{{ company.siret }}</td>
+          <td>
+            {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
+          </td>
           <td>{{ company.member_count }}</td>
           <td>
             <!--<div class="btn-group" role="group">
               <router-link
-                :to="{ name: 'editbook', params: { id: company.id } }"
+                :to="{ name: 'individualCompany', params: { id: company.id } }"
                 class="btn btn-primary"
                 >Edit
               </router-link>
-              <button class="btn btn-danger" @click="deleteBook(book.id)">
+              <button class="btn btn-danger" @click="deleteCompany(company.id)">
                 Delete
               </button>
             </div>-->
@@ -58,20 +70,39 @@ export default {
     BackButton,
     AddButton,
   },
-
-  data(){
-      return{
-          companyArray:[],
-
-      }
+  data() {
+    return {
+      companyArray: [],
+    };
   },
-
-
- async mounted(){
-        const getCompany = await axios.get("/api/company");
-        this.companyArray=getCompany.data.data;
- },
-
-
+  async mounted() {
+    const getCompanies = await axios.get("/api/company");
+    this.companyArray = getCompanies.data.data;
+    console.log(this.companyArray);
+  },
+  methods: {
+    add() {
+      this.$router.push({ name: "adminAddCompany" });
+    },
+    deleteCompany(id) {
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .delete(`/api/company/destroy/${id}`)
+          .then((response) => {
+            let i = this.company.map((item) => item.id).indexOf(id); // find index of your object
+            this.company.splice(i, 1);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
+    },
+  },
 };
 </script>
+
+<style scoped>
+.search {
+  width: 50vw;
+}
+</style>
