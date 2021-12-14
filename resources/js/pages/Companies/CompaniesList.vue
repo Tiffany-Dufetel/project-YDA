@@ -9,6 +9,20 @@
     <AddButton name="Ajouter Entreprise" @click="add" />
     <br />
 
+    <!-- Search box -->
+    <form class="form-inline">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+
+    <!-- Companies list -->
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -73,7 +87,7 @@ export default {
     deleteCompany(id) {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .delete(`/api/company/delete/${id}`)
+          .delete(`/api/company/destroy/${id}`)
           .then((response) => {
             let i = this.company.map((item) => item.id).indexOf(id); // find index of your object
             this.company.splice(i, 1);
@@ -86,3 +100,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.search {
+  width: 50vw;
+}
+</style>

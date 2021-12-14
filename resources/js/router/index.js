@@ -6,6 +6,7 @@ import Contact from "../pages/Contact.vue";
 
 /** Admin */
 import AdminHome from "../pages/Admin/AdminHome.vue";
+
 /** Catalogue */
 import CatalogueList from "../pages/Admin/Products/CatalogueList.vue";
 import AddProduct from "../pages/Admin/Products/AddProduct.vue";
@@ -20,6 +21,7 @@ import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
 import MembersList from "../pages/Members/MembersList.vue";
 import AddMembers from "../pages/Members/AddMembers.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
+
 // Orders - members
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
 import OrdersList from "../pages/Orders/OrdersList.vue";
@@ -66,7 +68,7 @@ const routes = [
     },
     // View a specific catalogue item -
     {
-        path: "/productId",
+        path: "/catalogue/:id",
         name: "individualProduct",
         component: ProductDisplay,
         meta: {requiresAuth: true}

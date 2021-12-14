@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: "Nav",
+  name: "Navbar",
   methods: {
     logOut() {
       localStorage.removeItem("token");
