@@ -8,15 +8,15 @@
     <Footer />
   </div>
 </template>
- 
+
 <script>
 /** Imports */
-import Nav from "./components/assets/Navbar.vue";
+import Navbar from "./components/assets/Navbar.vue";
 import Footer from "./components/assets/Footer.vue";
 export default {
   name: "App",
   components: {
-    Nav,
+    Navbar,
     Footer,
   },
   /* data() {
@@ -53,7 +53,7 @@ export default {
     }, */
 };
 </script>
- 
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -66,4 +66,3 @@ export default {
   height: 700px;
 }
 </style>
-
