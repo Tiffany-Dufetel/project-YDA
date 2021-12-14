@@ -29,16 +29,19 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
+        meta: {guest: true}
     },
     {
         path: "/login",
         name: "Login",
         component: Login,
+        meta: {guest: true}
     },
     {
         path: "/contact",
         name: "Contact",
         component: Contact,
+        meta: {guest: true}
     },
 
     /**
@@ -50,18 +53,24 @@ const routes = [
         path: "/catalogue",
         name: "adminCatalogue",
         component: CatalogueList,
+        meta: {requiresAuth: true}
+
     },
     // Add a product to the catalogue -
     {
         path: "/add-product",
         name: "adminProductAdd",
         component: AddProduct,
+        meta: {requiresAuth: true}
+
     },
     // View a specific catalogue item -
     {
         path: "/productId",
         name: "individualProduct",
         component: ProductDisplay,
+        meta: {requiresAuth: true}
+
     },
 
     /**
@@ -73,18 +82,23 @@ const routes = [
         path: "/entreprises",
         name: "adminCompanies",
         component: CompaniesList,
+        meta: {requiresAuth: true}
+
     },
     // Add a company -
     {
         path: "/add-entreprise",
         name: "adminAddCompany",
         component: AddCompany,
+        meta: {requiresAuth: true}
     },
     // View a specific company -
     {
         path: "/companyId",
         name: "individualCompany",
         component: CompanyDisplay,
+        meta: {requiresAuth: true}
+
     },
 
     /**
@@ -96,18 +110,24 @@ const routes = [
         path: "/membres",
         name: "companiesMembers",
         component: MembersList,
+        meta: {requiresAuth: true}
+
     },
     // Add a member to a company -
     {
         path: "/add-members",
         name: "companiesAddMembers",
         component: AddMembers,
+        meta: {requiresAuth: true}
+
     },
     // View a specific member from a company -
     {
         path: "/userId",
         name: "individualMember",
         component: MemberDisplay,
+        meta: {requiresAuth: true}
+
     },
 
     /**
@@ -119,17 +139,23 @@ const routes = [
         path: "/commander",
         name: "productOrder",
         component: ProductOrder,
+        meta: {requiresAuth: true}
+
     },
     {
         path: "/commandes",
         name: "orders",
         component: OrdersList,
+        meta: {requiresAuth: true}
+
     },
 
     {
         path: "/admin",
         name: "adminHome",
         component: AdminHome,
+        meta: {requiresAuth: true}
+
     },
 
 ];

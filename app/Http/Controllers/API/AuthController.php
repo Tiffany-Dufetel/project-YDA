@@ -47,4 +47,11 @@ class AuthController extends BaseController
 
         return $this->handleResponse($success, 'User successfully registered!');
     }
+
+    // public function logout(Request $request){
+    //     auth()->user()->tokens()->delete();
+    //     return [
+    //         'message' => 'déconnecté'
+    //     ];
+    // }
 }

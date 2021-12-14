@@ -23,24 +23,21 @@ use App\Http\Controllers\API\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::resource('tasks', TaskController::class);
+// Public routes
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+
+
+// Protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::resource('/calendar', CalendarController::class);
+    Route::resource('/company', CompanyController::class);
+    Route::resource('/company/news', NewsController::class);
+    Route::resource('/home', HomeController::class);
+    Route::resource('/order', OrderController::class);
+    Route::resource('/product', ProductController::class);
+    Route::resource('/user', UserController::class);
 });
 
-Route::resource('/calendar', CalendarController::class);
 
-Route::resource('/company', CompanyController::class);
 
-Route::resource('/company/news', NewsController::class);
-
-Route::resource('/home', HomeController::class);
-
-Route::resource('/order', OrderController::class);
-
-Route::resource('/product', ProductController::class);
-
-Route::resource('/user', UserController::class);
-
-Route::post('login', [AuthController::class, 'login']);
-
-Route::post('register', [AuthController::class, 'register']);
