@@ -27,13 +27,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('tasks', TaskController::class);
 });
 
+Route::resource('/home', HomeController::class);
+
 Route::resource('/calendar', CalendarController::class);
 
 Route::resource('/company', CompanyController::class);
 
 Route::resource('/company/news', NewsController::class);
-
-Route::resource('/home', HomeController::class);
 
 Route::resource('/order', OrderController::class);
 
