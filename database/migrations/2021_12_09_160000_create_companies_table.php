@@ -20,8 +20,6 @@ class CreateCompaniesTable extends Migration
             $table->string('name')->notnull();
             $table->string('adress')->notnull();
             $table->integer('postcode')->notnull();
-            $table->string('datetime_1')->notnull();
-            $table->string('datetime_2')->notnull();
             $table->string('city')->notnull();
             $table->string('logo_id')->nullable();
             $table->string('colour_background')->nullable();
