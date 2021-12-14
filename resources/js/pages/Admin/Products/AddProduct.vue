@@ -100,6 +100,29 @@ export default {
         this.image = event.target.files[0]
     },
 
+    addProduct() {
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        const formData = new FormData();
+        formData.append('image', this.image)
+        formData.append('name', this.name)
+        formData.append('description', this.description)
+        formData.append('type', this.type)
+        formData.append('category', this.category)
+
+        axios.post('api/product', formData,{
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        .then((res)=>{
+            console.log(res)
+        })
+
+            alert('yes')
+
+      });
+    },
+
     addProduct(){
         // const config = {
         //     headers: {
@@ -108,23 +131,6 @@ export default {
         //     }
         // }
 
-        const formData = new FormData();
-        formData.append('image', this.image)
-        formData.append('name', this.name)
-        formData.append('description', this.description)
-        formData.append('type', this.type)
-        formData.append('category', this.category)
-
-        axios.post('api/product', formData, config,{
-            // headers: {
-            //     'content-type': 'multipart/form-data'
-            // }
-        })
-            .then((res)=>{
-                console.log(res)
-            })
-
-            alert('yes')
         // axios.post('api/product',{
         //     name: this.name,
         //     description:this.description,

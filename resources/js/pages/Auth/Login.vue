@@ -90,7 +90,7 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            console.log(response);
+            console.log("reponse: ", response);
             this.token = response.data.data.token;
             localStorage.setItem('userToken', this.token)
             this.$router.push('/admin')
@@ -99,6 +99,7 @@ export default {
         //     console.error(error);
         //   });
       });
+
     },
 },
 }
