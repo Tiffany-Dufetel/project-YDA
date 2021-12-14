@@ -6,3 +6,8 @@ ICONS
 Use any icons from (script is in welcome.blade.php):
 https://ionic.io/ionicons
 
+BOOTSTRAP 5
+Imported in app.js
+Remove the following lines if you have problem on clone:
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
