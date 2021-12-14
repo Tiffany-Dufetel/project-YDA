@@ -63,6 +63,7 @@ export default {
     return {
       status: "en attente",
       product_id: "",
+      name: "",
       date_delivery: "",
       productArray: [],
     };
