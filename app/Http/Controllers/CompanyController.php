@@ -75,7 +75,18 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        Company::findOrFail($id);
+        /*
+        //récupération des éléments id, name, email et password directement assignés dans des variables
+        $CompanyId = Auth::id();
+        $CompanyName = Auth::user()->name;
+        $companyAdress = Auth::user()->email;
+        $companyPostcode = Auth::user()->password;
+        $companyPostcode = Auth::user()->password;
+        $companyPostcode = Auth::user()->password;
+
+        //retourne la vue profile via la route profile.show/{{profileIdFront}} = id récupéré
+        return view('trello.profile', compact('profileIdFront', 'profileName', 'profileEmail', 'profilePassword')); */
     }
 
     /**
