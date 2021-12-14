@@ -6,6 +6,7 @@
   <div>
     <!-- rendre le nom reactive -->
     <Header title="Commandez ici " subtitle="Nous vous contacterons en suite" />
+    <BackButton />
     <div class="d-flex justify-content-center">
       <form method="POST" @submit.prevent="addOrder">
         <!-- product/service choice -->
@@ -52,11 +53,13 @@
 import axios from "axios";
 import Header from "../../components/ui/Header.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 
 export default {
   name: "productOrder",
   components: {
     Header,
+    BackButton,
     SubmitButton,
   },
   data() {

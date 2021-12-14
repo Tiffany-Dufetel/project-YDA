@@ -6,8 +6,8 @@
   <div>
     <!-- rendre le nom reactive -->
     <Header
-      title="{{user.first_name}} {{user.surname}} - Vos commandes"
-      subtitle="Gérer vos commandes ici"
+      title="Vos commandes"
+      subtitle="Gérer vos commandes en attente, en cours et terminé"
     />
     <BackButton />
     <AddButton name="Commandez" @click="add" />
@@ -24,7 +24,8 @@
       </thead>
       <tbody>
         <tr v-for="order in orderArray" :key="order.id">
-          <td>{{ product.name }}</td>
+          <td>{{ order.id }}</td>
+          <!-- {{ product.name }} -->
           <td>{{ order.date_order }}</td>
           <td>{{ order.date_delivery }}</td>
           <td>{{ order.status }}</td>
@@ -67,8 +68,8 @@ export default {
     };
   },
   async mounted() {
-    const getCompanies = await axios.get("/api/order");
-    this.orderArray = getCompanies.data.data;
+    const getOrders = await axios.get("/api/order");
+    this.orderArray = getOrders.data.data;
     console.log(this.orderArray);
   },
   methods: {
@@ -78,7 +79,7 @@ export default {
     deleteorder(id) {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .delete(`/api/order/delete/${id}`)
+          .delete(`/api/order/destroy/${id}`)
           .then((response) => {
             let i = this.order.map((item) => item.id).indexOf(id); // find index of your object
             this.order.splice(i, 1);

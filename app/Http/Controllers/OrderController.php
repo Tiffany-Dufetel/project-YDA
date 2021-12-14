@@ -52,9 +52,10 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request/* , $id */)
     {
         $user_id = Auth::user()->id;
+        /* $product_id = Product::user()->products_id;  */
 
         $request->validate([
             'comment' => 'string',
@@ -63,15 +64,12 @@ class OrderController extends Controller
         $order = [
             'date_delivery' => $request->input('date_delivery'),
             'comment' => $request->input('comment'),
-            'products_id' => $request->input('product'),
+            'products_id' => /* $product_id */"1",
             'pdf' => $request->input('pdf'),
             'user_id' => $user_id,
         ];
 
-        Order::create($order, $user_id);
-
-        return redirect()->route('orders', $user_id)
-            ->with('success', "Your order has been processed!");
+        Order::create($order);
 
     }
 
