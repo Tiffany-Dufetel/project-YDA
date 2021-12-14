@@ -6,9 +6,10 @@
   <div>
     <Header
       title="Ajouter un membre"
-      subtitle="Ajouter soit un membres, soit plusieurs"
+      subtitle="Ajouter soit un membre, soit plusieurs"
     />
-    <form @submit.prevent="addUsers">
+    <form method="GET" @submit.prevent>
+
       <label for="surname">Nom</label><br />
       <input type="text" id="surname" name="surname" v-model="surname" /><br />
 
@@ -28,11 +29,16 @@
         type="text"
         id="password"
         name="password"
-        v-model="password"
-      /><br />
+        v-model="password"/>
+        <br />
+
 
       <label for="birthday">Date d'anniversaire</label><br />
       <input type="date" id="birthday" name="birthday" v-model="birthday" />
+         <br />
+
+
+
 
       <label for="comment">Commmentaire</label><br />
       <input
@@ -42,7 +48,7 @@
         v-model="comment"
       /><br />
 
-      <SubmitButton name="Ajouter" />
+    <SubmitButton name="Ajouter"  @click="addUser"/>
     </form>
   </div>
 </template>
@@ -80,7 +86,7 @@ export default {
 
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .post("/api/user/store", {
+          .post("/api/user", {
             surname: this.surname,
             first_name: this.first_name,
             email: this.email,
@@ -92,8 +98,8 @@ export default {
           .then((response) => {
             console.log(response);
             this.$router.push({
-              name: "individualCompany",
-              params: { id },
+              name: "Home",//individualCompany",
+              //params: { id },
             });
           })
           .catch(function (error) {
