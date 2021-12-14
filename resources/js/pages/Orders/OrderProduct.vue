@@ -18,7 +18,7 @@
             class="form-control"
             required="true"
           >
-            <option value="{{ product.name }}">
+            <option value="{{ product.id }}">
               <div v-for="product in productArray" :key="product.id">
                 {{ product.name }}
               </div>
@@ -29,11 +29,9 @@
         <!-- comment - preferred delivery dates -->
         <div class="form-group col-md-4">
           <label for="comment"
-            >Veuillez nous définir les jours que vous préferez</label
+            >Veuillez nous définir le jour que vous préferez</label
           >
-          <p>
-            Nous vous contacterons en suite pour confirmer les disponibilités
-          </p>
+          <p>A priori, nous passons à votre entreprise le jeudi ou vendredi.</p>
 
           <input
             type="date"
@@ -64,36 +62,23 @@ export default {
   data() {
     return {
       status: "en attente",
-      name: "",
+      product_id: "",
       date_delivery: "",
       productArray: [],
     };
   },
-  // fetch the list of products on view creation using sanctum in axios
+  // fetch the list of products on view creation
   async mounted() {
     const getProduct = await axios.get("/api/product");
     this.productArray = getProduct.data.data;
   },
-
-  /* created() {
-    axios.get("/sanctum/csrf-cookie").then((response) => {
-      axios
-        .get("/api/product")
-        .then((response) => {
-          this.product = response.data;
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    });
-  }, */
   methods: {
-    addCompany() {
+    addOrder() {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("/api/order", {
             status: this.status,
-            name: this.name,
+            product_id: this.product_id,
             date_delivery: this.date_delivery,
             id: this.id,
           })
