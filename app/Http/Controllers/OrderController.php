@@ -41,7 +41,7 @@ class OrderController extends Controller
         $user_id = Auth::user()->id;
 
         $request->validate([
-            'comment' => 'required|string',
+            'comment' => 'string',
         ]);
 
         $order = [
@@ -80,7 +80,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
         return response()->json($order);
     }
 
@@ -93,7 +93,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
         $order->update($request->all());
         $order->save();
 
@@ -109,7 +109,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
         $order->delete();
 
         return redirect()->back()
