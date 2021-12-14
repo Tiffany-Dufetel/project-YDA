@@ -1,7 +1,7 @@
 <template>
   <div id="app" :style="image">
     <!-- Display the nav bar -->
-    <Nav />
+    <Navbar />
     <!-- Import the router -->
     <router-view />
     <!-- Display the footer -->
