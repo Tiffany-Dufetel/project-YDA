@@ -10,6 +10,12 @@ use function GuzzleHttp\Promise\all;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return ResourcesOrderController::collection(Order::all());
+        $user_id = Auth::user()->id; //récupération de l'id de l'utilisateur connecté
+        $products_id = Product::user()->id; //récupération du nom de l'utilisateur connecté
+
+        $orders = Order::with('product', 'user') // requete de la table title et user en relation
+            ->where('user_id', $user_id)
+            ->orderByDesc('created_at')
+            ->get();
+
+            return response()->json("Order history displayed");
     }
 
     /**
