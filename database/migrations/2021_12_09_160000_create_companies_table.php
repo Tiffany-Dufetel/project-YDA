@@ -16,7 +16,7 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->integer('member_count')->nullable();
-            $table->integer('siret')->unique()->notnull();
+            $table->char('siret',14)->unique()->notnull();
             $table->string('name')->notnull();
             $table->string('adress')->notnull();
             $table->integer('postcode')->notnull();
