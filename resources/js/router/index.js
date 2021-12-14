@@ -84,9 +84,10 @@ const routes = [
     },
     // View a specific company -
     {
-        path: "/company/{id}",
+        path: "/company/:id",
         name: "individualCompany",
         component: CompanyDisplay,
+        props:true,
     },
 
     /**
@@ -139,4 +140,6 @@ const routes = [
 export default createRouter({
     history: createWebHistory(),
     routes,
+
+
 });

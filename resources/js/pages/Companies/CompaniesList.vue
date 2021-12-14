@@ -42,11 +42,11 @@
           </td>
           <td>{{ company.member_count }}</td>
           <td>
-              <button @click="viewCompany">Détails</button>
+              <!--<button @click="viewCompany">Détails</button>-->
 
             <div class="btn-group" role="group">
               <router-link
-                :to="{ name: 'CompanyDisplay', params: { } }"
+                :to="{ name: 'individualCompany', params: {id:company.id} }"
                 class="btn btn-primary"
                 >Détails
               </router-link>
@@ -78,18 +78,16 @@ export default {
       companyArray: [],
     };
   },
+
   async mounted() {
     const getCompanies = await axios.get("/api/company");
     this.companyArray = getCompanies.data.data;
     console.log(this.companyArray);
   },
+
   methods: {
     add() {
       this.$router.push({ name: "adminAddCompany" });
-    },
-
-    viewCompany(){
-        this.$router.push({ name: "individualCompany", "params":{id}});
     },
 
     deleteCompany(id) {

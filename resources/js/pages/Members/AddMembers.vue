@@ -8,6 +8,7 @@
       title="Ajouter un membre"
       subtitle="Ajouter soit un membres, soit plusieurs"
     />
+    <BackButton />
     <form @submit.prevent="addMembers">
       <SubmitButton name="Ajouter" />
     </form>
@@ -16,6 +17,7 @@
 
 <script>
 import Header from "../../components/ui/Header.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 
 export default {
@@ -23,6 +25,7 @@ export default {
   components: {
     Header,
     SubmitButton,
+    BackButton,
   },
 };
 </script>
