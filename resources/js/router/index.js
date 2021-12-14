@@ -84,9 +84,10 @@ const routes = [
     },
     // View a specific company -
     {
-        path: "/companyId",
+        path: "/company/:id",
         name: "individualCompany",
         component: CompanyDisplay,
+        props: true,
     },
 
     /**
@@ -133,7 +134,6 @@ const routes = [
         name: "adminHome",
         component: AdminHome,
     },
-
 ];
 
 export default createRouter({
