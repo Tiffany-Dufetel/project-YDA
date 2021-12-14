@@ -84,7 +84,7 @@ const routes = [
     },
     // View a specific company -
     {
-        path: "/companyId",
+        path: "/company/{id}",
         name: "individualCompany",
         component: CompanyDisplay,
     },

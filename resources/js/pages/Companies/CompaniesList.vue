@@ -30,6 +30,7 @@
           <th>Siret</th>
           <th>Adresse</th>
           <th>Total de membres</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -41,16 +42,18 @@
           </td>
           <td>{{ company.member_count }}</td>
           <td>
-            <!--<div class="btn-group" role="group">
+              <button @click="viewCompany">Détails</button>
+
+            <div class="btn-group" role="group">
               <router-link
-                :to="{ name: 'individualCompany', params: { id: company.id } }"
+                :to="{ name: 'CompanyDisplay', params: { } }"
                 class="btn btn-primary"
-                >Edit
+                >Détails
               </router-link>
               <button class="btn btn-danger" @click="deleteCompany(company.id)">
                 Delete
               </button>
-            </div>-->
+            </div>
           </td>
         </tr>
       </tbody>
@@ -84,6 +87,11 @@ export default {
     add() {
       this.$router.push({ name: "adminAddCompany" });
     },
+
+    viewCompany(){
+        this.$router.push({ name: "individualCompany", "params":{id}});
+    },
+
     deleteCompany(id) {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
