@@ -25493,7 +25493,10 @@ var routes = [{
   path: "/company/:id",
   name: "individualCompany",
   component: _pages_Companies_CompanyDisplay_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-  props: true
+  props: true,
+  meta: {
+    requiresAuth: true
+  }
 },
 /**
  * MEMBRES

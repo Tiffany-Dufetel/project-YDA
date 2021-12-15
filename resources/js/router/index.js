@@ -96,6 +96,7 @@ const routes = [
         name: "individualCompany",
         component: CompanyDisplay,
         props: true,
+        meta: { requiresAuth: true },
     },
 
     /**
