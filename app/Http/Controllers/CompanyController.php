@@ -36,18 +36,18 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)//$id
+    public function store(Request $request) //$id
     {
         //public function store(Request $request, $id)
         // $user_id = Auth::user()->id;
 
         $request->validate([
             'member_count' => 'integer',
-            'siret'=> 'required|string',
-            'name'=> 'required|string',
-            'adress'=> 'required|string',
-            'postcode'=> 'required|string',
-            'city'=> 'required|string',
+            'siret' => 'required|string',
+            'name' => 'required|string',
+            'adress' => 'required|string',
+            'postcode' => 'required|string',
+            'city' => 'required|string',
 
         ]);
 
@@ -75,7 +75,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        return Company::findOrFail($id);
     }
 
     /**
