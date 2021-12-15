@@ -49,7 +49,7 @@ class ProductController extends Controller
         $file = [
             'name' => $request->name,
             'description' => $request->description,
-            'image' => $request->file('image')->store('images'),
+            'image' => $request->file('image')->store('public'),
             'type' => $request->type,
             'category' => $request->category,
         ];
@@ -70,7 +70,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        Product::where('id', $id)->get();
     }
 
     /**

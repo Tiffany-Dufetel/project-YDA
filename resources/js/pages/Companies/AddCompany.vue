@@ -103,7 +103,7 @@ export default {
           })
           .then((response) => {
             console.log(response);
-            this.$router.push({ name: "company" });
+            this.$router.push({ name: "adminCompanies" });
           })
           .catch(function (error) {
             console.error(error);
