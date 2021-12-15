@@ -75,7 +75,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        Company::findOrFail($id)->where('id', $id);
+        return Company::findOrFail($id);
     }
 
     /**

@@ -6,7 +6,7 @@
   <div>
     <!-- rendre le nom reactive -->
     <Header title="name of company" subtitle="" />
-    <div>Companie n° {{ id }} qui s'appelle {{ name }}</div>
+    <div>Companie n° {{ id }} qui s'appelle {{ company.name }}</div>
 
     <!--  <tr v-for="company in companyArray" :key="company.id">
       <td>{{ company.name }}</td>
@@ -33,21 +33,17 @@ export default {
 
   data() {
     return {
-      id: 1,
-      companyArray: [],
+      company: {},
     };
   },
 
   async mounted() {
-    const getCompanyId = await axios.get("/api/company/");
-    // const getCompanyId = await axios.get("/api/company/" + this.id);
+    //const getCompanyId = await axios.get("/api/company/");
+    const response = await axios.get("/api/company/" + this.id);
 
-    let i = parseInt(this.id);
+    console.log(response.data);
 
-    this.companyArray = getCompanyId;
-    //this.companyArray = getCompanyId.data.data[1];
-
-    console.log(this.companyArray.data.data[i]);
+    this.company = response.data;
   },
 
   /* async mounted() {
