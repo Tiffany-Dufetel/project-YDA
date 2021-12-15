@@ -36,7 +36,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'surname' => 'required|string',
+            'first_name'=> 'required|string',
+            'email'=> 'required|string',
+            'password'=> 'required|string',
+            'birthday'=> 'required|date',
+            'comment'=> 'required|text',
+
+        ]);
+
+        $user = [
+            'surname' => $request->input('surname'),
+            'first_name' => $request->input('first_name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'birthday' => $request->input('birthday'),
+            'comment' => $request->input('comment'),
+
+        ];
+
+        User::create($user);
+
     }
 
     /**

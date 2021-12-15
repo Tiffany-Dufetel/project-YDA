@@ -31,19 +31,19 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
-        meta: {guest: true}
+        meta: { guest: true }
     },
     {
         path: "/login",
         name: "Login",
         component: Login,
-        meta: {guest: true}
+        meta: { guest: true }
     },
     {
         path: "/contact",
         name: "Contact",
         component: Contact,
-        meta: {guest: true}
+        meta: { guest: true }
     },
 
     /**
@@ -55,7 +55,7 @@ const routes = [
         path: "/catalogue",
         name: "adminCatalogue",
         component: CatalogueList,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
     // Add a product to the catalogue -
@@ -63,7 +63,7 @@ const routes = [
         path: "/add-product",
         name: "adminProductAdd",
         component: AddProduct,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
     // View a specific catalogue item -
@@ -71,7 +71,7 @@ const routes = [
         path: "/catalogue/:id",
         name: "individualProduct",
         component: ProductDisplay,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
 
@@ -84,7 +84,7 @@ const routes = [
         path: "/entreprises",
         name: "adminCompanies",
         component: CompaniesList,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
     // Add a company -
@@ -92,14 +92,14 @@ const routes = [
         path: "/add-entreprise",
         name: "adminAddCompany",
         component: AddCompany,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
     },
     // View a specific company -
     {
-        path: "/company",
+        path: "/company/:id",
         name: "individualCompany",
         component: CompanyDisplay,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
 
@@ -112,7 +112,7 @@ const routes = [
         path: "/membres",
         name: "companiesMembers",
         component: MembersList,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
     // Add a member to a company -
@@ -120,15 +120,15 @@ const routes = [
         path: "/add-members",
         name: "companiesAddMembers",
         component: AddMembers,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
     // View a specific member from a company -
     {
-        path: "/userId",
+        path: "/membre/:id",
         name: "individualMember",
         component: MemberDisplay,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
 
@@ -141,14 +141,14 @@ const routes = [
         path: "/commander",
         name: "productOrder",
         component: ProductOrder,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
     {
         path: "/commandes",
         name: "orders",
         component: OrdersList,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
 
@@ -156,7 +156,7 @@ const routes = [
         path: "/admin",
         name: "adminHome",
         component: AdminHome,
-        meta: {requiresAuth: true}
+        meta: { requiresAuth: true }
 
     },
 
