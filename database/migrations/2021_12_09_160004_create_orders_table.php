@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->enum('status', ['en attente', 'en cours', 'terminé'])->default('en attente');
             $table->date('date_order')->nullable();
             $table->date('date_delivery')->nullable();
-            $table->string('comment')->notnull();
+            $table->string('comment')->nullable();
             $table->string('pdf')->nullable();
             $table->timestamps();
         });

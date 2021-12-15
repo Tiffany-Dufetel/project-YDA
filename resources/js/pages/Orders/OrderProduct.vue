@@ -6,8 +6,9 @@
   <div>
     <!-- rendre le nom reactive -->
     <Header title="Commandez ici " subtitle="Nous vous contacterons en suite" />
+    <BackButton />
     <div class="d-flex justify-content-center">
-      <form @submit.prevent="addOrder">
+      <form method="POST" @submit.prevent="addOrder">
         <!-- product/service choice -->
         <div class="form-group col-md-4">
           <label for="name">Choisir votre service ou </label>
@@ -20,7 +21,7 @@
           >
             <option value="{{ product.id }}">
               <div v-for="product in productArray" :key="product.id">
-                {{ product.name }}
+                {{ product.id }} - {{ product.name }}
               </div>
             </option>
           </select>
@@ -52,16 +53,17 @@
 import axios from "axios";
 import Header from "../../components/ui/Header.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 
 export default {
   name: "productOrder",
   components: {
     Header,
+    BackButton,
     SubmitButton,
   },
   data() {
     return {
-      status: "en attente",
       product_id: "",
       date_delivery: "",
       productArray: [],
@@ -80,7 +82,6 @@ export default {
             status: this.status,
             product_id: this.product_id,
             date_delivery: this.date_delivery,
-            id: this.id,
           })
           .then((response) => {
             console.log(response);
