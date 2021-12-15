@@ -3,47 +3,47 @@
 -->
 
 <template>
-    <div v-if="role == 'admin'">
-        <Header
-        title="Bienvenue à votre page administration"
-        subtitle="Gérer vos entreprises et catalogue ici"
-        />
-        <div class="mt-5">
-        <button @click="catView">Voir Catalogue</button>
-        <button @click="catAdd">Ajouter dans le catalogue</button>
-        <button @click="companyView">Voir entreprises</button>
-        <button @click="companiesAddMembers">Ajouter une membre</button>
+  <div v-if="role == 'admin'">
+    <Header
+      title="Bienvenue à votre page administration"
+      subtitle="Gérer vos entreprises et catalogue ici"
+    />
+    <div class="mt-5">
+      <button @click="catView">Voir Catalogue</button>
+      <button @click="catAdd">Ajouter dans le catalogue</button>
+      <button @click="companyView">Voir entreprises</button>
+      <button @click="memberAdd">Ajouter une membre</button>
 
-        <button @click="companyAdd">Ajouter une entreprise</button>
-        </div>
-
-        <button @click="order">Commander</button>
-
-        <!-- Calendar displaying upcoming events -->
-        <div class="d-flex justify-content-center mt-5 mb-1">
-        <vue-cal
-            :time-from="9 * 60"
-            :time-to="19 * 60"
-            :time-step="60"
-            hide-weekends
-            style="height: 350px; width: 80%"
-        />
-        </div>
+      <button @click="companyAdd">Ajouter une entreprise</button>
+      <button @click="orderList">Liste de commandes</button>
+      <button @click="order">Commander</button>
     </div>
 
-    <div v-else-if="role == 'manager'">
-        <br><br><br><br><br>
-        <p>i'm a manager</p>
-    </div>
+    <button @click="order">Commander</button>
 
-    <div v-else-if ="role == 'member'">
-        <br><br><br><br><br>
-        <p>i'm a member</p>
+    <!-- Calendar displaying upcoming events -->
+    <div class="d-flex justify-content-center mt-5 mb-1">
+      <vue-cal
+        :time-from="9 * 60"
+        :time-to="19 * 60"
+        :time-step="60"
+        hide-weekends
+        style="height: 350px; width: 80%"
+      />
     </div>
+  </div>
 
-    <div v-else>
-    </div>
+  <div v-else-if="role == 'manager'">
+    <br /><br /><br /><br /><br />
+    <p>i'm a manager</p>
+  </div>
 
+  <div v-else-if="role == 'member'">
+    <br /><br /><br /><br /><br />
+    <p>i'm a member</p>
+  </div>
+
+  <div v-else></div>
 </template>
 
 <script>
@@ -86,6 +86,9 @@ export default {
     },
     order() {
       this.$router.push({ name: "productOrder" });
+    },
+    orderList() {
+      this.$router.push({ name: "orders" });
     },
     memberAdd() {
       this.$router.push({ name: "companiesAddMembers" });
