@@ -24810,7 +24810,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     subtitle: ""
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Companie n° " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.id) + " qui s'appelle " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  <tr v-for=\"company in companyArray\" :key=\"company.id\">\n      <td>{{ company.name }}</td>\n      <td>{{ company.siret }}</td>\n    </tr> ")]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  <tr v-for=\"company in companyArray\" :key=\"company.id\">\r\n      <td>{{ company.name }}</td>\r\n      <td>{{ company.siret }}</td>\r\n    </tr> ")]);
 }
 
 /***/ }),
