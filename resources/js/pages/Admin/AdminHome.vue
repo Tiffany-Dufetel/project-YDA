@@ -17,9 +17,9 @@
       <button @click="companyAdd">Ajouter une entreprise</button>
       <button @click="orderList">Liste de commandes</button>
       <button @click="order">Commander</button>
+
     </div>
 
-    <button @click="order">Commander</button>
 
     <!-- Calendar displaying upcoming events -->
     <div class="d-flex justify-content-center mt-5 mb-1">
@@ -39,8 +39,13 @@
   </div>
 
   <div v-else-if="role == 'member'">
-    <br /><br /><br /><br /><br />
-    <p>i'm a member</p>
+     <Header
+      title="Bienvenue à votre page de membre"
+      subtitle="Passez vos commandes"
+    />
+    <div class="mt-5">
+        <button @click="order">Commander</button>
+    </div>
   </div>
 
   <div v-else></div>
