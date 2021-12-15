@@ -36,7 +36,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+        $currentURL = url()->previous();
+        
         $request->validate([
             'surname' => 'required|string',
             'first_name' => 'required|string',
@@ -53,8 +54,10 @@ class UserController extends Controller
             'password' => $request->input('password'),
             'birthday' => $request->input('birthday'),
             'role' => $request->input('role'),
-            'company_id' => $request->input('company_id'),
+            'company_id' => intval(basename($currentURL)),
         ];
+
+
 
         return User::create($user);
     }
