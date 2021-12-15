@@ -23431,7 +23431,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       type: String
     }
   },
-  //["id"],
   data: function data() {
     return {
       company: {}
@@ -24918,7 +24917,7 @@ __webpack_require__.r(__webpack_exports__);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" rendre le nom reactive "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Loading of reactive data thanks to the mounted axios"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
     title: "name of company",
     subtitle: ""
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Companie n° " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.id) + " qui s'appelle " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.name), 1

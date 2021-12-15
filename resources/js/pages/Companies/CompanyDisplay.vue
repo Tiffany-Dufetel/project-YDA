@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <!-- rendre le nom reactive -->
+    <!-- Loading of reactive data thanks to the mounted axios-->
     <Header title="name of company" subtitle="" />
     <div>Companie n° {{ id }} qui s'appelle {{ company.name }}</div>
   </div>
@@ -24,7 +24,6 @@ export default {
       type: String,
     },
   },
-  //["id"],
 
   data() {
     return {
@@ -33,7 +32,7 @@ export default {
   },
 
   async mounted() {
-    //const getCompanyId = await axios.get("/api/company/");
+    //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
 
     console.log(response.data);
