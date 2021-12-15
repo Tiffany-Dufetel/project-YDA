@@ -16,12 +16,10 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->integer('member_count')->nullable();
-            $table->integer('siret')->unique()->notnull();
+            $table->char('siret',14)->unique()->notnull();
             $table->string('name')->notnull();
             $table->string('adress')->notnull();
-            $table->integer('postcode')->notnull();
-            $table->string('datetime_1')->notnull();
-            $table->string('datetime_2')->notnull();
+            $table->string('postcode')->notnull();
             $table->string('city')->notnull();
             $table->string('logo_id')->nullable();
             $table->string('colour_background')->nullable();

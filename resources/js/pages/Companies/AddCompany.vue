@@ -90,7 +90,7 @@ export default {
       this.city = responseDataSiret.etablissement.libelle_commune;
     },
 
-    addCompany() {
+    addCompany(e) {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("/api/company", {

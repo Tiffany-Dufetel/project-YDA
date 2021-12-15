@@ -96,7 +96,7 @@ const routes = [
     },
     // View a specific company -
     {
-        path: "/companyId",
+        path: "/company",
         name: "individualCompany",
         component: CompanyDisplay,
         meta: {requiresAuth: true}

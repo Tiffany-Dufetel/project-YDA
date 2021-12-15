@@ -5,7 +5,10 @@
 <template>
   <div>
     <!-- rendre le nom reactive -->
-    <Header title="name of member or order" subtitle="Commandes" />
+    <Header
+      title="Vos commandes"
+      subtitle="Gérer vos commandes en attente, en cours et terminé"
+    />
     <BackButton />
     <AddButton name="Commandez" @click="add" />
     <br />
@@ -21,18 +24,22 @@
       </thead>
       <tbody>
         <tr v-for="order in orderArray" :key="order.id">
-          <td>{{ product.name }}</td>
-          <td>{{ order.date_delivery }}</td>
+          <td>{{ order.id }}</td>
+          <!-- {{ product.name }} -->
+          <td>{{ order.date_order }}</td>
           <td>{{ order.date_delivery }}</td>
           <td>{{ order.status }}</td>
           <td>
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualorder', params: { id: order.id } }"
-                class="btn btn-primary"
-                >Edit
+                ><button class="btn btn-primary">Edit</button>
               </router-link>
-              <button class="btn btn-danger" @click="deleteorder(order.id)">
+              <button
+                v-if="status"
+                class="btn btn-danger"
+                @click="deleteorder(order.id)"
+              >
                 Delete
               </button>
             </div>
@@ -61,18 +68,18 @@ export default {
     };
   },
   async mounted() {
-    const getCompanies = await axios.get("/api/order");
-    this.orderArray = getCompanies.data.data;
+    const getOrders = await axios.get("/api/order");
+    this.orderArray = getOrders.data.data;
     console.log(this.orderArray);
   },
   methods: {
     add() {
-      this.$router.push({ name: "adminAddorder" });
+      this.$router.push({ name: "productOrder" });
     },
     deleteorder(id) {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .delete(`/api/order/delete/${id}`)
+          .delete(`/api/order/destroy/${id}`)
           .then((response) => {
             let i = this.order.map((item) => item.id).indexOf(id); // find index of your object
             this.order.splice(i, 1);
