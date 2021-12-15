@@ -24,9 +24,10 @@ use App\Http\Controllers\API\AuthController;
 */
 
 // Public routes
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'getId']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'getRole']);
+Route::get('/info/{id}', [AuthController::class, 'getUserInfo']);
 
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {

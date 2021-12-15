@@ -16,7 +16,6 @@
 
       <button @click="companyAdd">Ajouter une entreprise</button>
       <button @click="orderList">Liste de commandes</button>
-      <button @click="order">Commander</button>
 
     </div>
 
@@ -34,8 +33,13 @@
   </div>
 
   <div v-else-if="role == 'manager'">
-    <br /><br /><br /><br /><br />
-    <p>i'm a manager</p>
+     <Header
+      title="Bienvenue à votre page de manager"
+      subtitle="Gérer vos membres"
+    />
+    <div class="mt-5">
+        <button @click="showMembers">Liste des membres</button>
+    </div>
   </div>
 
   <div v-else-if="role == 'member'">
@@ -45,6 +49,7 @@
     />
     <div class="mt-5">
         <button @click="order">Commander</button>
+        <button @click="profile">Mon profile</button>
     </div>
   </div>
 
@@ -68,12 +73,15 @@ export default {
     return {
       productArray: [],
       role: "",
+      id: "",
     };
   },
   async mounted() {
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
-    console.log("user", this.role);
+    console.log('role',this.role);
+    this.id = getUser.data.id;
+    // console.log("user", this.id);
   },
 
   methods: {
@@ -92,12 +100,18 @@ export default {
     order() {
       this.$router.push({ name: "productOrder" });
     },
+    profile(){
+        this.$router.push({ name: 'individualMember', params: {id: this.id} })
+    },
     orderList() {
       this.$router.push({ name: "orders" });
     },
     memberAdd() {
       this.$router.push({ name: "companiesAddMembers" });
     },
+    showMembers(){
+        this.$router.push({name: "companiesMembers"})
+    }
   },
 };
 </script>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,4 @@ Route::get('{any}', function () {
 })->where("any", ".*");
 
 
-// Route::get('/welcome', [OrderController::class, "index"]);
+// Route::get('/welcome', [UserController::class, "index"]);

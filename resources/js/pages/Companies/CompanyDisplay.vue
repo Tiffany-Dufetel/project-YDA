@@ -21,7 +21,7 @@
       </p>
 
       <button>Ajouter membre</button>
-      <AddMember title="Ajouter un membre" subtitle="" />
+      <AddMember title="Ajouter un membre" subtitle="" :id="this.id"/>
 
       <!--  Add members -->
     </div>
@@ -60,8 +60,7 @@ export default {
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
     console.log("user", this.role);
-    console.log(response.data);
-    console.log(userResponse.data);
+    console.log("response",response.data);
 
     this.company = response.data;
   },
