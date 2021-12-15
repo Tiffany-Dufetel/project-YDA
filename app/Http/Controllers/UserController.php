@@ -36,13 +36,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'surname' => 'required|string',
-            'first_name'=> 'required|string',
-            'email'=> 'required|string',
-            'password'=> 'required|string',
-            'birthday'=> 'required|date',
-            'role'=> 'required|string',
+            'first_name' => 'required|string',
+            'email' => 'required|string',
+            'password' => 'required|string',
+            'birthday' => 'required|date',
+            'role' => 'required|string',
         ]);
 
         $user = [
@@ -52,11 +53,10 @@ class UserController extends Controller
             'password' => $request->input('password'),
             'birthday' => $request->input('birthday'),
             'role' => $request->input('role'),
-            'company_id' => '1',
+            'company_id' => $request->input('company_id'),
         ];
 
         return User::create($user);
-
     }
 
     /**
