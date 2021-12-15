@@ -36,18 +36,18 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)//$id
+    public function store(Request $request) //$id
     {
         //public function store(Request $request, $id)
         // $user_id = Auth::user()->id;
 
         $request->validate([
             'member_count' => 'integer',
-            'siret'=> 'required|string',
-            'name'=> 'required|string',
-            'adress'=> 'required|string',
-            'postcode'=> 'required|string',
-            'city'=> 'required|string',
+            'siret' => 'required|string',
+            'name' => 'required|string',
+            'adress' => 'required|string',
+            'postcode' => 'required|string',
+            'city' => 'required|string',
 
         ]);
 
@@ -75,6 +75,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
+<<<<<<< HEAD
         Company::findOrFail($id);
         /*
         //récupération des éléments id, name, email et password directement assignés dans des variables
@@ -87,6 +88,9 @@ class CompanyController extends Controller
 
         //retourne la vue profile via la route profile.show/{{profileIdFront}} = id récupéré
         return view('trello.profile', compact('profileIdFront', 'profileName', 'profileEmail', 'profilePassword')); */
+=======
+        return Company::findOrFail($id);
+>>>>>>> origin/master
     }
 
     /**
