@@ -6,7 +6,7 @@
   <div>
     <Header
       title="Ajouter un membre"
-      subtitle="Ajouter soit un membres, soit plusieurs"
+      subtitle="Ajouter soit un membress, soit plusieurs"
     />
     <form @submit.prevent="addMembers">
       <SubmitButton name="Ajouter" />
