@@ -21,6 +21,7 @@
       </p>
 
       <button>Ajouter membre</button>
+
       <AddMember title="Ajouter un membre" subtitle="" />
 
       <!--  Add members -->
