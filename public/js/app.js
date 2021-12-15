@@ -22920,7 +22920,7 @@ __webpack_require__.r(__webpack_exports__);
       password: "",
       birthday: "",
       role: "",
-      company_id: "1",
+      company_id: "",
       data: {}
     };
   },
@@ -22947,7 +22947,7 @@ __webpack_require__.r(__webpack_exports__);
           password: _this.password,
           role: _this.role,
           birthday: _this.birthday,
-          company_id: "1"
+          company_id: _this.id
         }).then(function (response) {
           console.log(response);
 
@@ -24313,6 +24313,7 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
+var _hoisted_22 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_SubmitButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SubmitButton");
 
@@ -24374,7 +24375,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, _hoisted_20, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.role]]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubmitButton, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.role]]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "company_id",
+    value: $data.company_id
+  }, null, 8
+  /* PROPS */
+  , _hoisted_22), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubmitButton, {
     name: "Ajouter"
   })], 32
   /* HYDRATE_EVENTS */
