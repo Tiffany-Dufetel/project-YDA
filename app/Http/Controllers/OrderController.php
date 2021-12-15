@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Order;
-use App\Http\Resources\OrderController as ResourcesOrderController;
+use App\Models\User;
+use App\Models\Product;
 
-use function GuzzleHttp\Promise\all;
 
 class OrderController extends Controller
 {
+    /* public function __construct()
+    {
+        $this->middleware('auth');
+    } */
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return ResourcesOrderController::collection(Order::all());
+        $user_id = Auth::user()->id; //récupération de l'id de l'utilisateur connecté
+        $products_id = Product::user()->id; //récupération du nom de l'utilisateur connecté
+
+        $orders = Order::with('product') // requete de la table title et user en relation
+            ->where('products_id', $products_id)
+            ->orderByDesc('created_at')
+            ->get();
+
+            return response()->json("Order history displayed");
     }
 
     /**
@@ -36,28 +52,24 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request/* , $id */)
     {
         $user_id = Auth::user()->id;
+        /* $product_id = Product::user()->products_id;  */
 
         $request->validate([
             'comment' => 'string',
         ]);
 
         $order = [
-            'status' => 'en attente',
-            'date_order' => new Date(),
             'date_delivery' => $request->input('date_delivery'),
             'comment' => $request->input('comment'),
-            'products_id' => $request->input('product'),
+            'products_id' => /* $product_id */"1",
             'pdf' => $request->input('pdf'),
             'user_id' => $user_id,
         ];
 
-        Order::create($order);
-
-        return redirect()->route('order.index', $id)
-            ->with('success', "Your card has been created!");
+        return Order::create($order);
 
     }
 

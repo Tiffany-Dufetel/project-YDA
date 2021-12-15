@@ -10,21 +10,30 @@
         <li>
           <!-- <img alt="YDA logo"  src="../../../assets/logo.JPG"/> -->
         </li>
+
+        <!-- NOT CONNECTED NAVIGATION -->
+        <!-- <div :if="!connected"> -->
         <!-- Link Home -->
-        <li>
+        <li v-if="userToken == null">
           <a><router-link to="/">Home</router-link></a>
         </li>
-        <!-- Link Log in -->
-        <li>
-          <a><router-link to="/login">Log in</router-link></a>
+
+        <li v-else>
+          <a><router-link to="/admin">Home</router-link></a>
         </li>
+
         <!-- Link Contact -->
         <li>
-          <a><router-link to="/contact">Contact</router-link></a>
+          <a><router-link to="Contact">Contact</router-link></a>
         </li>
         <!-- Sign Out -->
-        <li>
-          <a @click="logOut">Log out</a>
+
+        <!-- Link Log in -->
+        <li v-if="userToken == null">
+          <button class="log" @click="logIn">Log In</button>
+        </li>
+        <li v-else>
+          <button class="log" @click="logOut">Log out</button>
         </li>
       </ul>
     </nav>
@@ -34,9 +43,25 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      userToken: null,
+    };
+  },
+
+  mounted() {
+    this.userToken = localStorage.getItem("userToken");
+    console.log("token", this.userToken);
+  },
+
   methods: {
+    logIn() {
+      this.$router.push("/admin");
+    },
     logOut() {
-      localStorage.removeItem("token");
+      localStorage.removeItem("userToken");
+      this.$router.push("/login");
+      // window.location.reload()
     },
   },
 };
@@ -72,5 +97,19 @@ header li {
 header li a {
   color: rgb(219 144 36);
   text-decoration: none;
+}
+
+.log {
+  background-color: #e78c15;
+  border-radius: 5px;
+  padding: 5px 20px;
+  border: 1px solid #e78c15;
+  color: white;
+}
+
+.log:hover {
+  background-color: black;
+  color: #e78c15;
+  border: 1px solid #e78c15;
 }
 </style>
