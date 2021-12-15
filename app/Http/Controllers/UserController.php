@@ -42,8 +42,7 @@ class UserController extends Controller
             'email'=> 'required|string',
             'password'=> 'required|string',
             'birthday'=> 'required|date',
-            'comment'=> 'required|text',
-
+            'role'=> 'required|string',
         ]);
 
         $user = [
@@ -52,11 +51,11 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password'),
             'birthday' => $request->input('birthday'),
-            'comment' => $request->input('comment'),
-
+            'role' => $request->input('role'),
+            'company_id' => '1',
         ];
 
-        User::create($user);
+        return User::create($user);
 
     }
 

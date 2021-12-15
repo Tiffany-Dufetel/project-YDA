@@ -23484,17 +23484,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/Header.vue */ "./resources/js/components/ui/Header.vue");
-/* harmony import */ var _components_ui_buttons_BackButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/buttons/BackButton.vue */ "./resources/js/components/ui/buttons/BackButton.vue");
-/* harmony import */ var _components_ui_buttons_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ui/buttons/SubmitButton.vue */ "./resources/js/components/ui/buttons/SubmitButton.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/Header.vue */ "./resources/js/components/ui/Header.vue");
+/* harmony import */ var _components_ui_buttons_BackButton_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ui/buttons/BackButton.vue */ "./resources/js/components/ui/buttons/BackButton.vue");
+/* harmony import */ var _components_ui_buttons_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/ui/buttons/SubmitButton.vue */ "./resources/js/components/ui/buttons/SubmitButton.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "addUsers",
+  name: "companiesAddMembers",
   data: function data() {
     return {
       surname: "",
@@ -23502,36 +23510,61 @@ __webpack_require__.r(__webpack_exports__);
       email: "",
       password: "",
       birthday: "",
-      comment: "",
+      role: "",
+      company_id: "1",
       data: {}
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var getUser;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("/api/login");
+
+            case 2:
+              getUser = _context.sent;
+              _this.role = getUser.data.role;
+              console.log("user", _this.role);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
   components: {
-    Header: _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    BackButton: _components_ui_buttons_BackButton_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SubmitButton: _components_ui_buttons_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Header: _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BackButton: _components_ui_buttons_BackButton_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    SubmitButton: _components_ui_buttons_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   methods: {
     addUser: function addUser() {
-      var _this = this;
+      var _this2 = this;
 
-      $company_id = this.$id;
-      axios__WEBPACK_IMPORTED_MODULE_3___default().get("/sanctum/csrf-cookie").then(function (response) {
-        axios__WEBPACK_IMPORTED_MODULE_3___default().post("/api/user", {
-          surname: _this.surname,
-          first_name: _this.first_name,
-          email: _this.email,
-          password: _this.password,
-          role: "member",
-          birthday: _this.birthday,
-          comment: _this.comment
+      /* $company_id = this.$id;
+      console.log($company_id); */
+      axios__WEBPACK_IMPORTED_MODULE_4___default().get("/sanctum/csrf-cookie").then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_4___default().post("/api/user", {
+          surname: _this2.surname,
+          first_name: _this2.first_name,
+          email: _this2.email,
+          password: _this2.password,
+          role: _this2.role,
+          birthday: _this2.birthday,
+          company_id: "1"
         }).then(function (response) {
           console.log(response);
 
-          _this.$router.push({
-            name: "Home" //individualCompany",
-            //params: { id },
-
+          _this2.$router.push({
+            name: "adminHome"
           });
         })["catch"](function (error) {
           console.error(error);
@@ -25093,8 +25126,8 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "comment"
-}, "Commmentaire", -1
+  "for": "role"
+}, "Role", -1
 /* HOISTED */
 );
 
@@ -25102,7 +25135,21 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "manager"
+}, "Gestionnaire", -1
+/* HOISTED */
+);
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "member"
+}, "Membre", -1
+/* HOISTED */
+);
+
+var _hoisted_20 = [_hoisted_18, _hoisted_19];
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -25115,8 +25162,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Ajouter un membre",
     subtitle: "Ajouter soit un membre, soit plusieurs"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    method: "GET",
-    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+    method: "POST",
+    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.addUser && $options.addUser.apply($options, arguments);
+    }, ["prevent"]))
   }, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "surname",
@@ -25162,21 +25211,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.birthday]]), _hoisted_15, _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "textarea",
-    id: "comment",
-    name: "comment",
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.birthday]]), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Admin can add the role of the new member "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"role == 'admin'\"> "), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    id: "role",
+    name: "role",
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.comment = $event;
+      return $data.role = $event;
     })
-  }, null, 512
+  }, _hoisted_20, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.comment]]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubmitButton, {
-    name: "Ajouter",
-    onClick: $options.addUser
-  }, null, 8
-  /* PROPS */
-  , ["onClick"])], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.role]]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubmitButton, {
+    name: "Ajouter"
+  })], 32
   /* HYDRATE_EVENTS */
   )]);
 }
@@ -25706,7 +25751,7 @@ var routes = [{
   }
 }, {
   path: "/admin",
-  name: "adminHome",
+  name: "AdminHome",
   component: _pages_Admin_AdminHome_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   meta: {
     requiresAuth: true
