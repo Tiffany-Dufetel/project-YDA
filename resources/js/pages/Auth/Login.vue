@@ -3,9 +3,9 @@
     <Header title="Connexion" />
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="alert alert-danger" role="alert" v-if="error !== null">
+        <!-- <div class="alert alert-danger" role="alert" v-if="error !== null">
           {{ error }}
-        </div>
+        </div> -->
 
         <div class="card card-default mt-5">
           <div class="card-header">Login</div>
@@ -73,15 +73,34 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
-      error: null,
+        token: "",
+        formData:{
+            email: "",
+            password: "",
+            error: null,
+        }
     };
   },
   methods: {
     login() {
-      this.$router.push({ name: "adminHome" });
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .post("/api/login", {
+            email: this.email,
+            password: this.password,
+          })
+          .then((response) => {
+            console.log("reponse: ", response);
+            this.token = response.data.data.token;
+            localStorage.setItem('userToken', this.token)
+            this.$router.push('/admin')
+          })
+        //   .catch(function (error) {
+        //     console.error(error);
+        //   });
+      });
+
     },
-  },
-};
+},
+}
 </script>

@@ -7,7 +7,7 @@
     <Header title="Ajouter un produit ou service" subtitle="...." />
     <BackButton />
     <div class="d-flex justify-content-center">
-      <form action="post" @submit.prevent="addProduct">
+      <form @submit.prevent="addProduct" enctype="multipart/form-data">
         <!-- item name -->
         <div class="form-group col-md-4">
           <input
@@ -30,6 +30,12 @@
           >
           </textarea>
         </div>
+
+        <div class="form-group col-md-4">
+            <label for="image">Image</label><br>
+            <input type="file" name="image" @change = "uploadImage">
+        </div>
+
         <!-- item type -->
         <div class="form-group col-md-4">
           <label for="type">Type</label>
@@ -71,6 +77,7 @@
 import Header from "../../../components/ui/Header.vue";
 import BackButton from "../../../components/ui/buttons/BackButton.vue";
 import SubmitButton from "../../../components/ui/buttons/SubmitButton.vue";
+import axios from "axios";
 
 export default {
   name: "AddProduct",
@@ -81,26 +88,64 @@ export default {
   },
   data() {
     return {
-      name: "",
-      description: "",
-      type: "",
-      category: "",
-      data: {},
+        name:"",
+        description:"",
+        image:null,
+        type:"",
+        category:"",
     };
   },
   methods: {
-    addOrder() {
-      this.$axios.get("/sanctum/csrf-cookie").then((response) => {
-        this.$axios
-          .post("/api/product/store", this.product)
-          .then((response) => {
-            this.$router.push({ name: "product" });
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
+    uploadImage(event){
+        this.image = event.target.files[0]
+    },
+
+    addProduct() {
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        const formData = new FormData();
+        formData.append('image', this.image)
+        formData.append('name', this.name)
+        formData.append('description', this.description)
+        formData.append('type', this.type)
+        formData.append('category', this.category)
+
+        axios.post('api/product', formData,{
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        .then((res)=>{
+            console.log(res)
+        })
+
+            alert('yes')
+
       });
     },
+
+    addProduct(){
+        // const config = {
+        //     headers: {
+        //         'X-CSRF-TOKEN': token.content,
+        //         'content-type': 'multipart/form-data'
+        //     }
+        // }
+
+        // axios.post('api/product',{
+        //     name: this.name,
+        //     description:this.description,
+        //     image:this.image,
+        //     type:this.type,
+        //     category:this.category,
+        // })
+        // .then((response)=>{
+        //     this.$router.push({name:"product"});
+        // })
+        // .catch(function(error){
+        //     console.error(error);
+        // });
+        // alert("ok")
+    }
   },
 };
 </script>

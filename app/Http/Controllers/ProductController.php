@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Http\Resources\ProductController as ResourcesProductController;
+
+use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
 {
@@ -13,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return ResourcesProductController::collection(Product::all());
     }
 
     /**
@@ -34,7 +38,28 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
+            'type' => 'required',
+            'category' => 'required',
+        ]);
+
+        $file = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $request->file('image')->store('images'),
+            'type' => $request->type,
+            'category' => $request->category,
+        ];
+
+        product::create($file);
+
+        return response()->json([
+            "success" => true,
+            "message" => "yes",
+        ]);
     }
 
     /**

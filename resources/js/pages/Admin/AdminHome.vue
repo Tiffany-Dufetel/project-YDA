@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div>
+  <div v-if="role == 'admin'">
     <Header
       title="Bienvenue à votre page administration"
       subtitle="Gérer vos entreprises et catalogue ici"
@@ -12,18 +12,65 @@
       <button @click="catView">Voir Catalogue</button>
       <button @click="catAdd">Ajouter dans le catalogue</button>
       <button @click="companyView">Voir entreprises</button>
+      <button @click="memberAdd">Ajouter une membre</button>
+
       <button @click="companyAdd">Ajouter une entreprise</button>
+      <button @click="orderList">Liste de commandes</button>
+      <button @click="order">Commander</button>
+    </div>
+
+    <button @click="order">Commander</button>
+
+    <!-- Calendar displaying upcoming events -->
+    <div class="d-flex justify-content-center mt-5 mb-1">
+      <vue-cal
+        :time-from="9 * 60"
+        :time-to="19 * 60"
+        :time-step="60"
+        hide-weekends
+        style="height: 350px; width: 80%"
+      />
     </div>
   </div>
+
+  <div v-else-if="role == 'manager'">
+    <br /><br /><br /><br /><br />
+    <p>i'm a manager</p>
+  </div>
+
+  <div v-else-if="role == 'member'">
+    <br /><br /><br /><br /><br />
+    <p>i'm a member</p>
+  </div>
+
+  <div v-else></div>
 </template>
 
 <script>
 import Header from "../../components/ui/Header.vue";
+import axios from "axios";
+import VueCal from "vue-cal";
+import "vue-cal/dist/vuecal.css";
+
 export default {
   name: "AdminHome",
   components: {
     Header,
+    VueCal,
   },
+
+  data() {
+    return {
+      productArray: [],
+      role: "",
+    };
+  },
+  async mounted() {
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
+    console.log("user", this.role);
+  },
+
   methods: {
     catView() {
       this.$router.push({ name: "adminCatalogue" });
@@ -37,9 +84,35 @@ export default {
     companyAdd() {
       this.$router.push({ name: "adminAddCompany" });
     },
+    order() {
+      this.$router.push({ name: "productOrder" });
+    },
+    orderList() {
+      this.$router.push({ name: "orders" });
+    },
+    memberAdd() {
+      this.$router.push({ name: "companiesAddMembers" });
+    },
   },
 };
 </script>
 
 <style>
+.vuecal__menu,
+.vuecal__cell-events-count {
+  background-color: #e78c15;
+}
+.vuecal__title-bar {
+  background-color: #f3f5e4a8;
+}
+.vuecal__cell--today,
+.vuecal__cell--current {
+  background-color: rgba(240, 240, 255, 0.4);
+}
+.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
+  background-color: rgba(235, 255, 245, 0.4);
+}
+.vuecal__cell--selected:before {
+  border-color: #e78c15;
+}
 </style>

@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Order;
+use App\Models\User;
+use App\Models\Product;
+
 
 class OrderController extends Controller
 {
+    /* public function __construct()
+    {
+        $this->middleware('auth');
+    } */
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +25,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::all()->toArray();
-        return array_reverse($orders);
+        $user_id = Auth::user()->id; //récupération de l'id de l'utilisateur connecté
+        $products_id = Product::user()->id; //récupération du nom de l'utilisateur connecté
+
+        $orders = Order::with('product') // requete de la table title et user en relation
+            ->where('products_id', $products_id)
+            ->orderByDesc('created_at')
+            ->get();
+
+            return response()->json("Order history displayed");
     }
 
     /**
@@ -33,26 +52,24 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request/* , $id */)
     {
         $user_id = Auth::user()->id;
+        /* $product_id = Product::user()->products_id;  */
 
-        $validated = $request->validate([
-            'comment' => 'required|string',
+        $request->validate([
+            'comment' => 'string',
         ]);
 
         $order = [
-            'status' => 'en attente',
-            'date_order' => new Date(),
-            'comment' => $request->comment,
-            'products_id' => $request->product,
+            'date_delivery' => $request->input('date_delivery'),
+            'comment' => $request->input('comment'),
+            'products_id' => /* $product_id */"1",
+            'pdf' => $request->input('pdf'),
             'user_id' => $user_id,
         ];
 
-        order::create($order);
-
-        return redirect()->route('overviews.show', $id)
-            ->with('success', "Your card has been create!");
+        return Order::create($order);
 
     }
 
@@ -75,7 +92,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
         return response()->json($order);
     }
 
@@ -88,7 +105,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
         $order->update($request->all());
         $order->save();
 
@@ -104,7 +121,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $order = order::find($id);
+        $order = Order::find($id);
         $order->delete();
 
         return redirect()->back()
