@@ -95,13 +95,9 @@ const routes = [
         path: "/company/:id",
         name: "individualCompany",
         component: CompanyDisplay,
-<<<<<<< HEAD
         props:true,
-        meta: {requiresAuth: true}
+        meta: {requiresAuth: true},
 
-=======
-        props: true,
->>>>>>> origin/master
     },
 
     /**
