@@ -69,7 +69,7 @@ class OrderController extends Controller
             'user_id' => $user_id,
         ];
 
-        Order::create($order);
+        return Order::create($order);
 
     }
 
