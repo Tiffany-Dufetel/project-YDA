@@ -22,6 +22,29 @@
 
       <!--  Add members -->
       <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
+
+      <!-- Member list display -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <MembersList
+            v-for="(user, index) in filterUsers"
+            :key="index"
+            :id="user.id"
+            :first_name="user.first_name"
+            :surname="user.surname"
+            :birthday="user.birthday"
+            :email="user.email"
+          />
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -29,12 +52,14 @@
 <script>
 import Header from "../../components/ui/Header.vue";
 import AddMember from "../../components/ui/forms/AddMember.vue";
+import MembersList from "../../components/Members/MembersList.vue";
 
 export default {
   name: "CompanyDisplay",
   components: {
     Header,
     AddMember,
+    MembersList: MembersList,
   },
 
   props: {
@@ -50,21 +75,29 @@ export default {
       company: {},
       user: {},
       userArray: [],
+      companyId: "",
+      filterUsers: [],
     };
   },
 
   async mounted() {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
-    const userResponse = await axios.get("api/user/");
+
+    const userResponse = await axios.get("/api/user");
+    const users = userResponse.data;
+
     const getUser = await axios.get("/api/login");
+    this.companyId = getUser.data.company_id;
+
+    this.filterUsers = users.filter(
+      (user) => user.company_id == this.companyId
+    );
+
     this.role = getUser.data.role;
-    console.log("user", this.role);
-    console.log("response", response.data);
+    console.log("user", users);
 
     this.company = response.data;
-    this.userArray = userResponse;
-    console.log(this.userArray);
   },
 };
 </script>

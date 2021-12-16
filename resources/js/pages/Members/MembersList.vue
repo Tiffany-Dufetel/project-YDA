@@ -4,7 +4,7 @@
 <template>
   <div class="catalogue_container">
     <Header title="name of company" subtitle="Tous les membres" />
-        <br />
+    <br />
 
     <!-- Search box -->
     <form class="form-inline">
@@ -27,30 +27,28 @@
           <th>Email</th>
         </tr>
       </thead>
-    <tbody>
-
-    <MembersList
-        v-for="(user, index) in filterUsers"
-        :key="index"
-        :id= "user.id"
-        :first_name = "user.first_name"
-        :surname = "user.surname"
-        :birthday = "user.birthday"
-        :email = "user.email"
+      <tbody>
+        <MembersList
+          v-for="(user, index) in filterUsers"
+          :key="index"
+          :id="user.id"
+          :first_name="user.first_name"
+          :surname="user.surname"
+          :birthday="user.birthday"
+          :email="user.email"
         />
-    </tbody>
+      </tbody>
     </table>
   </div>
-
 </template>
 
 <script>
 import axios from "axios";
 import Header from "../../components/ui/Header.vue";
-import MembersList from "../../components/Members/MembersList.vue"
+import MembersList from "../../components/Members/MembersList.vue";
 
 export default {
-//   name: "MembersList",
+  //   name: "MembersList",
   components: {
     Header,
     MembersList: MembersList,
@@ -64,14 +62,16 @@ export default {
 
   async mounted() {
     const loggedResponse = await axios.get("/api/login");
-    this.companyId = loggedResponse.data.company_id
+    this.companyId = loggedResponse.data.company_id;
 
     const response = await axios.get("/api/user");
-    const users = response.data
+    const users = response.data;
 
-    this.filterUsers = users.filter( user => user.company_id === this.companyId);
+    this.filterUsers = users.filter(
+      (user) => user.company_id === this.companyId
+    );
 
-    console.log('filter',this.filterUsers)
+    console.log("filter", this.filterUsers);
   },
 
   // getMembers();
