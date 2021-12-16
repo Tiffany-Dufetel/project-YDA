@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../pages/Home.vue";
-import Login from "../pages/Auth/Login.vue";
 import Contact from "../pages/Contact.vue";
+
+/** Admin */
+import Login from "../pages/Auth/Login.vue";
+import ResetPassword from "../pages/Auth/ResetPassword.vue";
+import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
 
 /** Admin */
 import AdminHome from "../pages/Admin/AdminHome.vue";
@@ -34,15 +38,32 @@ const routes = [
                 meta: { guest: true },
         },
         {
+                path: "/contact",
+                name: "Contact",
+                component: Contact,
+                meta: { guest: true },
+        },
+
+        /**
+         * AUTH
+         */
+
+        {
                 path: "/login",
                 name: "Login",
                 component: Login,
                 meta: { guest: true },
         },
         {
-                path: "/contact",
-                name: "Contact",
-                component: Contact,
+                path: "/reset-password",
+                name: "ResetPassword",
+                component: ResetPassword,
+                meta: { guest: true },
+        },
+        {
+                path: "/verification",
+                name: "FirstConnection",
+                component: FirstConnection,
                 meta: { guest: true },
         },
 
