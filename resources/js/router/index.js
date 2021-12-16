@@ -23,7 +23,6 @@ import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
 
 /** Members */
 import MembersList from "../pages/Members/MembersList.vue";
-import AddMembers from "../pages/Members/AddMembers.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 
 // Orders - members
@@ -38,32 +37,15 @@ const routes = [
                 meta: { guest: true },
         },
         {
-                path: "/contact",
-                name: "Contact",
-                component: Contact,
-                meta: { guest: true },
-        },
-
-        /**
-         * AUTH
-         */
-
-        {
                 path: "/login",
                 name: "Login",
                 component: Login,
                 meta: { guest: true },
         },
         {
-                path: "/reset-password",
-                name: "ResetPassword",
-                component: ResetPassword,
-                meta: { guest: true },
-        },
-        {
-                path: "/verification",
-                name: "FirstConnection",
-                component: FirstConnection,
+                path: "/contact",
+                name: "Contact",
+                component: Contact,
                 meta: { guest: true },
         },
 
@@ -131,13 +113,7 @@ const routes = [
                 component: MembersList,
                 meta: { requiresAuth: true },
         },
-        // Add a member to a company -
-        {
-                path: "/add-members",
-                name: "companiesAddMembers",
-                component: AddMembers,
-                meta: { requiresAuth: true },
-        },
+
         // View a specific member from a company -
         {
                 path: "/membre/:id",

@@ -1,13 +1,9 @@
-<!--
--- Add members page component
+ <!--
+-- Add member Display form UI component
 -->
 
 <template>
   <div>
-    <Header
-      title="Ajouter un membre"
-      subtitle="Ajouter soit un membre, soit plusieurs"
-    />
     <form method="POST" @submit.prevent="addUser">
       <label for="surname">Nom</label><br />
       <input type="text" id="surname" name="surname" v-model="surname" /><br />
@@ -39,6 +35,8 @@
         <option value="member">Membre</option>
       </select>
       <br />
+
+      <input type="hidden" name="company_id" :value="id" />
       <!-- </div> -->
 
       <SubmitButton name="Ajouter" />
@@ -47,14 +45,13 @@
 </template>
 
 <script>
-import Header from "../../components/ui/Header.vue";
-import BackButton from "../../components/ui/buttons/BackButton.vue";
-import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
-import axios from "axios";
+import SubmitButton from "../buttons/SubmitButton.vue";
 
 export default {
-  name: "companiesAddMembers",
-
+    name: "companiesAddMembers",
+    props: {
+        id: Number,
+    },
   data() {
     return {
       surname: "",
@@ -63,20 +60,18 @@ export default {
       password: "",
       birthday: "",
       role: "",
-      company_id: "1",
+      company_id: "",
       data: {},
     };
   },
 
-  async mounted() {
+  /* async mounted() {
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
     console.log("user", this.role);
-  },
+  }, */
 
   components: {
-    Header,
-    BackButton,
     SubmitButton,
   },
 
@@ -93,10 +88,9 @@ export default {
             password: this.password,
             role: this.role,
             birthday: this.birthday,
-            company_id: "1",
+            company_id: this.id,
           })
           .then((response) => {
-            console.log(response);
             this.$router.push({
               name: "adminHome",
             });

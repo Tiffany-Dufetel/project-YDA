@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\BaseController as BaseController;
+use App\Models\Company;
 use App\Models\User;
 use Validator;
 
@@ -48,16 +49,17 @@ class AuthController extends BaseController
         return $this->handleResponse($success, 'User successfully registered!');
     }
 
-    public function getId(){
+
+    public function getRole()
+    {
         $userId = Auth::user();
 
         return $userId;
     }
 
-    // public function logout(Request $request){
-    //     auth()->user()->tokens()->delete();
-    //     return [
-    //         'message' => 'déconnecté'
-    //     ];
-    // }
+    public function getUserInfo($id)
+    {
+        // dd('id', $id);
+        return User::with('company')->where('id', $id)->get();
+    }
 }

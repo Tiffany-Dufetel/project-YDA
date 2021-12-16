@@ -75,6 +75,7 @@ export default {
     Header,
     SubmitButton,
   },
+  inject: ["setLoginStatus"],
   data() {
     return {
       token: "",
@@ -95,8 +96,8 @@ export default {
           })
           .then((response) => {
             console.log("reponse: ", response);
-            this.token = response.data.data.token;
-            localStorage.setItem("userToken", this.token);
+            localStorage.setItem("userToken", response.data.data.token);
+            this.setLoginStatus();
             this.$router.push("/admin");
           });
         //   .catch(function (error) {
