@@ -22678,7 +22678,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _components_assets_Navbar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/assets/Navbar.vue */ "./resources/js/components/assets/Navbar.vue");
 /* harmony import */ var _components_assets_Footer_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/assets/Footer.vue */ "./resources/js/components/assets/Footer.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /** Imports */
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -22686,40 +22688,52 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Navbar: _components_assets_Navbar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Footer: _components_assets_Footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
-  /* data() {
-    return {
-      isLoggedIn: false,
-      image: {
-        backgroundImage:
-          "url(https://www.sortiraparis.com/images/80/83517/584112-visuel-paris-conciergerie.jpg)",
-      },
   },
-    created() {
-        if (window.Laravel.isLoggedin) {
-            this.isLoggedIn = true
-        }
-    },
-    methods: {
-        logout(e) {
-            console.log('ss')
-            e.preventDefault()
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('/api/logout')
-                    .then(response => {
-                        if (response.data.success) {
-                            window.location.href = "/"
-                        } else {
-                            console.log(response)
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
-        }
-    }, */
+  data: function data() {
+    return {
+      isLoggedIn: false
+    };
+  },
 
+  /* created() {
+      if (window.Laravel.isLoggedin) {
+          this.isLoggedIn = true
+      }
+  },
+  methods: {
+      logout(e) {
+          console.log('ss')
+          e.preventDefault()
+          this.$axios.get('/sanctum/csrf-cookie').then(response => {
+              this.$axios.post('/api/logout')
+                  .then(response => {
+                      if (response.data.success) {
+                          window.location.href = "/"
+                      } else {
+                          console.log(response)
+                      }
+                  })
+                  .catch(function (error) {
+                      console.error(error);
+                  });
+          })
+      }
+  }, */
+  provide: function provide() {
+    var _this = this;
+
+    return {
+      isLoggedIn: (0,vue__WEBPACK_IMPORTED_MODULE_2__.computed)(function () {
+        return _this.isLoggedIn;
+      }),
+      setLoginStatus: function setLoginStatus() {
+        _this.isLoggedIn = true;
+      },
+      removeLoginStatus: function removeLoginStatus() {
+        _this.isLoggedIn = false;
+      }
+    };
+  }
 });
 
 /***/ }),
@@ -22793,9 +22807,13 @@ __webpack_require__.r(__webpack_exports__);
       userToken: null
     };
   },
+  inject: ["isLoggedIn", "removeLoginStatus"],
   mounted: function mounted() {
     this.userToken = localStorage.getItem("userToken");
     console.log("token", this.userToken);
+  },
+  updated: function updated() {
+    console.log(this.isLoggedIn);
   },
   methods: {
     logIn: function logIn() {
@@ -22803,6 +22821,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     logOut: function logOut() {
       localStorage.removeItem("userToken");
+      this.removeLoginStatus();
       this.$router.push("/login"); // window.location.reload()
     }
   }
@@ -23340,6 +23359,7 @@ __webpack_require__.r(__webpack_exports__);
     Header: _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     SubmitButton: _components_ui_buttons_SubmitButton_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  inject: ["setLoginStatus"],
   data: function data() {
     return {
       token: "",
@@ -23360,8 +23380,9 @@ __webpack_require__.r(__webpack_exports__);
           password: _this.password
         }).then(function (response) {
           console.log("reponse: ", response);
-          _this.token = response.data.data.token;
-          localStorage.setItem('userToken', _this.token);
+          localStorage.setItem('userToken', response.data.data.token);
+
+          _this.setLoginStatus();
 
           _this.$router.push('/admin');
         }); //   .catch(function (error) {
@@ -24292,17 +24313,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sign Out "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link Log in "), $data.userToken == null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sign Out "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link Log in "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "log",
     onClick: _cache[0] || (_cache[0] = function () {
-      return $options.logIn && $options.logIn.apply($options, arguments);
-    })
-  }, "Log In")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "log",
-    onClick: _cache[1] || (_cache[1] = function () {
       return $options.logOut && $options.logOut.apply($options, arguments);
     })
-  }, "Log out")]))])])]);
+  }, "Log out")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "log",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.logIn && $options.logIn.apply($options, arguments);
+    })
+  }, "Log In")]))])])]);
 }
 
 /***/ }),
@@ -25154,7 +25175,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
     title: "Connexion"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"alert alert-danger\" role=\"alert\" v-if=\"error !== null\">\r\n          {{ error }}\r\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"alert alert-danger\" role=\"alert\" v-if=\"error !== null\">\n          {{ error }}\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.login && $options.login.apply($options, arguments);
     }, ["prevent"]))
@@ -31412,7 +31433,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#app {\r\n  font-family: Avenir, Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  text-align: center;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\r\n  background-repeat: round;\r\n  height: 700px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#app {\n  font-family: Avenir, Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n  margin-top: 60px;\n  background-repeat: round;\n  height: 700px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31460,7 +31481,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-a5972bfe] {\r\n  height: 125vh;\r\n  margin-top: 80px;\r\n  padding: 30px;\r\n  background-size: cover;\r\n  font-family: sans-serif;\n}\nheader[data-v-a5972bfe] {\r\n  background-color: #fcfcfc;\r\n  color: #0e1d06;\r\n  position: fixed;\r\n  left: 0;\r\n  right: 0;\r\n  top: 5px;\r\n  height: 70px;\r\n  display: flex;\r\n  align-items: center;\r\n  box-shadow: 0 5px 25px 0 #00000036;\n}\nheader *[data-v-a5972bfe] {\r\n  display: inline;\n}\nheader li[data-v-a5972bfe] {\r\n  margin: 20px;\n}\nheader li a[data-v-a5972bfe] {\r\n  color: rgb(219 144 36);\r\n  text-decoration: none;\n}\n.log[data-v-a5972bfe] {\r\n  background-color: #e78c15;\r\n  border-radius: 5px;\r\n  padding: 5px 20px;\r\n  border: 1px solid #e78c15;\r\n  color: white;\n}\n.log[data-v-a5972bfe]:hover {\r\n  background-color: black;\r\n  color: #e78c15;\r\n  border: 1px solid #e78c15;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-a5972bfe] {\n  height: 125vh;\n  margin-top: 80px;\n  padding: 30px;\n  background-size: cover;\n  font-family: sans-serif;\n}\nheader[data-v-a5972bfe] {\n  background-color: #fcfcfc;\n  color: #0e1d06;\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 5px;\n  height: 70px;\n  display: flex;\n  align-items: center;\n  box-shadow: 0 5px 25px 0 #00000036;\n}\nheader *[data-v-a5972bfe] {\n  display: inline;\n}\nheader li[data-v-a5972bfe] {\n  margin: 20px;\n}\nheader li a[data-v-a5972bfe] {\n  color: rgb(219 144 36);\n  text-decoration: none;\n}\n.log[data-v-a5972bfe] {\n  background-color: #e78c15;\n  border-radius: 5px;\n  padding: 5px 20px;\n  border: 1px solid #e78c15;\n  color: white;\n}\n.log[data-v-a5972bfe]:hover {\n  background-color: black;\n  color: #e78c15;\n  border: 1px solid #e78c15;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
