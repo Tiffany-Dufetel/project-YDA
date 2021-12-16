@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $company_id = Auth::user()->company_id;
 
-        return User::all()->where('company_id', $company_id);
+        return User::all();
         // return ResourcesUserController::collection(User::all());
     }
 

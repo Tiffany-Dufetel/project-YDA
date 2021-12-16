@@ -4,10 +4,6 @@
 <template>
   <div class="catalogue_container">
     <Header title="name of company" subtitle="Tous les membres" />
-    <BackButton />
-    <CatalogueDisplay />
-    <AddButton name="Ajouter Produit" @click="add" />
-
         <br />
 
     <!-- Search box -->
@@ -22,8 +18,6 @@
         Search
       </button>
     </form>
-
-    <!-- Companies list -->
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -33,27 +27,19 @@
           <th>Email</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="(user,index) in arrayUsers" :key="index">
-          <td valign="middle"><router-link :to="{ name: 'individualMember', params: { id: user.id } }">{{ user.first_name }}</router-link></td>
-          <td valign="middle">{{ user.surname }}</td>
-          <td valign="middle">{{ user.birthday }}</td>
-          <td valign="middle">{{ user.email }}</td>
+    <tbody>
 
-          <td>
-            <div class="btn-group" role="group">
-              <button class="btn btn-primary">
-                Edit
-              </button>
-              <button class="btn btn-danger">
-                Delete
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
+    <MembersList
+        v-for="(user, index) in filterUsers"
+        :key="index"
+        :id= "user.id"
+        :first_name = "user.first_name"
+        :surname = "user.surname"
+        :birthday = "user.birthday"
+        :email = "user.email"
+        />
+    </tbody>
     </table>
-
   </div>
 
 </template>
@@ -61,21 +47,31 @@
 <script>
 import axios from "axios";
 import Header from "../../components/ui/Header.vue";
+import MembersList from "../../components/Members/MembersList.vue"
+
 export default {
-  name: "MembersList",
+//   name: "MembersList",
   components: {
     Header,
+    MembersList: MembersList,
   },
   data() {
     return {
-      arrayUsers: [],
+      companyId: "",
+      filterUsers: [],
     };
   },
 
   async mounted() {
-    const getMembers = await axios.get("/api/user");
-    console.log('okk',getMembers.data);
-    this.arrayUsers = getMembers.data;
+    const loggedResponse = await axios.get("/api/login");
+    this.companyId = loggedResponse.data.company_id
+
+    const response = await axios.get("/api/user");
+    const users = response.data
+
+    this.filterUsers = users.filter( user => user.company_id === this.companyId);
+
+    console.log('filter',this.filterUsers)
   },
 
   // getMembers();
