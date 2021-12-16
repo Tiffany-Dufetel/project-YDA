@@ -44,6 +44,42 @@
         v-model="member_count"
       /><br />
 
+      <!-- Preferable day and time -->
+      <label for="day">Jour et creneau horaire préféré</label>
+      <div class="form-group row">
+        <div class="col-xs-3">
+          <select
+            v-model="day"
+            name="day"
+            id="day"
+            class="form-control"
+            required="true"
+          >
+            <option selected>choisir le jour...</option>
+            <option value="lundi">Lundi</option>
+            <option value="mardi">Mardi</option>
+            <option value="mercredi">Mercredi</option>
+            <option value="jeudi">Jeudi</option>
+            <option value="vendredi">Vendredi</option>
+          </select>
+        </div>
+        <div class="col-xs-2">
+          <select
+            v-model="time"
+            name="time"
+            id="time"
+            class="form-control"
+            required="true"
+          >
+            <option selected>Creneau...</option>
+            <option value="9">9h - 11h</option>
+            <option value="11">11h - 13h</option>
+            <option value="13">13h - 15h</option>
+            <option value="15">15h - 17h</option>
+          </select>
+        </div>
+      </div>
+
       <!--<button type="submit">Ajouter</button>-->
       <SubmitButton name="Ajouter" @click="addCompany" />
     </form>
@@ -114,5 +150,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+select {
+  width: 150px;
+}
 </style>
