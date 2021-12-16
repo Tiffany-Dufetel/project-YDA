@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('{any}', function () {
     return view('welcome');
 })->where("any", ".*");
+
+
+// Route::get('/welcome', [UserController::class, "index"]);

@@ -1,4 +1,4 @@
-<!--
+ <!--
 -- Add member Display form UI component
 -->
 
@@ -36,7 +36,7 @@
       </select>
       <br />
 
-      <input type="hidden" name="company_id" :value="company_id" />
+      <input type="hidden" name="company_id" :value="id" />
       <!-- </div> -->
 
       <SubmitButton name="Ajouter" />
@@ -48,8 +48,10 @@
 import SubmitButton from "../buttons/SubmitButton.vue";
 
 export default {
-  name: "companiesAddMembers",
-
+    name: "companiesAddMembers",
+    props: {
+        id: Number,
+    },
   data() {
     return {
       surname: "",
@@ -89,7 +91,6 @@ export default {
             company_id: this.id,
           })
           .then((response) => {
-            console.log(response);
             this.$router.push({
               name: "adminHome",
             });

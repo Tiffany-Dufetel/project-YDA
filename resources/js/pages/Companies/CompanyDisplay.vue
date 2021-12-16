@@ -59,6 +59,9 @@ export default {
     const userResponse = await axios.get("api/user/");
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
+    console.log("user", this.role);
+    console.log("response", response.data);
+
     this.company = response.data;
     this.userArray = userResponse;
     console.log(this.userArray);
