@@ -5,8 +5,7 @@
 <template>
   <div>
     <!-- Loading of reactive data thanks to the mounted axios-->
-    <Header title="name of company" subtitle="" />
-    <div>Client : {{ company.name }}</div>
+    <Header v-model:title="company.name" subtitle="" />
   </div>
   <div>
     <div>
@@ -17,11 +16,12 @@
         {{ company.city }}
       </p>
 
-      <button>Ajouter membre</button>
-
-      <AddMember title="Ajouter un membre" subtitle="" />
+      <button @click="isHidden = !isHidden">
+        {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
+      </button>
 
       <!--  Add members -->
+      <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
     </div>
   </div>
 </template>
@@ -46,22 +46,25 @@ export default {
 
   data() {
     return {
+      isHidden: true,
       company: {},
       user: {},
+      userArray: [],
     };
   },
 
   async mounted() {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
-    const userResponse = await axios.get("api/user/" + this.id);
+    const userResponse = await axios.get("api/user/");
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
     console.log("user", this.role);
-    console.log(response.data);
-    console.log(userResponse.data);
+    console.log("response", response.data);
 
     this.company = response.data;
+    this.userArray = userResponse;
+    console.log(this.userArray);
   },
 };
 </script>

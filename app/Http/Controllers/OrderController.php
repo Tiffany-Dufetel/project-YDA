@@ -17,7 +17,7 @@ class OrderController extends Controller
         $this->middleware('auth');
     } */
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -25,15 +25,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::user()->id; //récupération de l'id de l'utilisateur connecté
-        $products_id = Product::user()->id; //récupération du nom de l'utilisateur connecté
-
-        $orders = Order::with('product') // requete de la table title et user en relation
-            ->where('products_id', $products_id)
-            ->orderByDesc('created_at')
-            ->get();
-
-            return response()->json("Order history displayed");
+        return $orders = Order::with('product', 'user', 'user.company')->get();
     }
 
     /**
@@ -54,23 +46,22 @@ class OrderController extends Controller
      */
     public function store(Request $request/* , $id */)
     {
+        $date = date('Y-m-d');
         $user_id = Auth::user()->id;
         /* $product_id = Product::user()->products_id;  */
 
-        $request->validate([
-            'comment' => 'string',
-        ]);
+        $request->validate([]);
 
         $order = [
-            'date_delivery' => $request->input('date_delivery'),
-            'comment' => $request->input('comment'),
-            'products_id' => /* $product_id */"1",
-            'pdf' => $request->input('pdf'),
+            'date_delivery' => $request->date_delivery,
+            'comment' => $request->comment,
+            'products_id' => $request->products_id,
+            'pdf' => "fichier.pdf",
             'user_id' => $user_id,
+            'date_order' => $date,
         ];
 
-        return Order::create($order);
-
+        Order::create($order);
     }
 
     /**

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserController as ResourcesUserController;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,7 +17,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return ResourcesUserController::collection(User::all());
+        $company_id = Auth::user()->company_id;
+
+        return User::all();
+        // return ResourcesUserController::collection(User::all());
     }
 
     /**
@@ -37,7 +42,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $currentURL = url()->previous();
-        
+
         $request->validate([
             'surname' => 'required|string',
             'first_name' => 'required|string',
@@ -70,7 +75,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return $orders = Order::with('product', 'user', 'user.company')->where('user_id', $id)->get();
     }
 
     /**

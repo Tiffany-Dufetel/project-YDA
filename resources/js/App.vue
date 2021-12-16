@@ -13,21 +13,20 @@
 /** Imports */
 import Navbar from "./components/assets/Navbar.vue";
 import Footer from "./components/assets/Footer.vue";
+import { computed} from "vue";
+
 export default {
   name: "App",
   components: {
     Navbar,
     Footer,
   },
-  /* data() {
+  data() {
     return {
       isLoggedIn: false,
-      image: {
-        backgroundImage:
-          "url(https://www.sortiraparis.com/images/80/83517/584112-visuel-paris-conciergerie.jpg)",
-      },
+    }
   },
-    created() {
+    /* created() {
         if (window.Laravel.isLoggedin) {
             this.isLoggedIn = true
         }
@@ -51,6 +50,17 @@ export default {
             })
         }
     }, */
+    provide() {
+        return {
+            isLoggedIn : computed(() => this.isLoggedIn),
+            setLoginStatus: () => {
+                this.isLoggedIn = true;
+            },
+            removeLoginStatus: () => {
+                this.isLoggedIn = false;
+            }
+        }
+    }
 };
 </script>
 
