@@ -25,7 +25,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return $orders = Order::with('product', 'user', 'user.company')->get();
+        return Order::with('product', 'user', 'user.company')->get();
     }
 
     /**
@@ -72,7 +72,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return Order::where('id', $id)->get();
     }
 
     /**

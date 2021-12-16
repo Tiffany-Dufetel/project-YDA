@@ -2,6 +2,8 @@
   <!-- member list filtered by company id-->
 
   <tr>
+    <td valign="middle">{{ name }}</td>
+    <td valign="middle">{{ user_surname }} {{ user_firstname }}</td>
     <td valign="middle">{{ status }}</td>
     <td valign="middle">{{ date_order }}</td>
     <td valign="middle">{{ date_delivery }}</td>
@@ -20,6 +22,9 @@
 <script>
 export default {
   props: {
+    name: String,
+    user_surname: String,
+    user_firstname: String,
     id: Number,
     status: String,
     date_order: Date,

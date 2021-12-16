@@ -23,6 +23,37 @@
       <!--  Add members -->
       <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
 
+      <!-- Orders display -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nom de la commande</th>
+            <th>Utilisateur</th>
+
+            <th>Statut de la commande</th>
+            <th>Date de réservation de la commande</th>
+            <th>Date estimée</th>
+            <th>Commentaire</th>
+            <th>PDF</th>
+          </tr>
+        </thead>
+        <tbody>
+          <CatalogueDisplay
+            v-for="(order, index) in orders"
+            :key="index"
+            :id="order.id"
+            :name="order.product.name"
+            :user_surname="order.user.surname"
+            :user_firstname="order.user.first_name"
+            :status="order.status"
+            :date_order="order.date_order"
+            :date_delivery="order.date_delivery"
+            :comment="order.comment"
+            :pdf="order.pdf"
+          />
+        </tbody>
+      </table>
+
       <!-- Member list display -->
       <table class="table table-bordered">
         <thead>
@@ -76,9 +107,9 @@ export default {
       isHidden: true,
       company: {},
       user: {},
-      userArray: [],
       companyId: "",
       filterUsers: [],
+      orders: [],
     };
   },
 
@@ -91,8 +122,8 @@ export default {
     const users = userResponse.data;
 
     const orderResponse = await axios.get("/api/order");
-    const orders = orderResponse.data;
-    console.log(orders);
+    this.orders = orderResponse.data;
+    console.log("order", this.orders);
 
     const getUser = await axios.get("/api/login");
     this.companyId = getUser.data.company_id;
