@@ -11,20 +11,18 @@
   <div>
     <div>
       <p>Siret : {{ company.siret }}</p>
-      <p>
-        Responsable :
-        <!-- {{users.first_name}} {{users.surname}}-->
-      </p>
+
       <p>
         Adresse : {{ company.adress }} - {{ company.postcode }}
         {{ company.city }}
       </p>
 
-      <button>Ajouter membre</button>
-
-      <AddMember title="Ajouter un membre" subtitle="" />
+      <button @click="isHidden = !isHidden">
+        {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
+      </button>
 
       <!--  Add members -->
+      <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
     </div>
   </div>
 </template>
@@ -49,6 +47,7 @@ export default {
 
   data() {
     return {
+      isHidden: true,
       company: {},
       user: {},
     };
