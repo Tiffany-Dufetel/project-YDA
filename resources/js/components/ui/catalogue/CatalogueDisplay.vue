@@ -1,39 +1,34 @@
-<!--
--- Catalogue Display UI component
--->
-
 <template>
-  <div>
-    <!-- needs developing!! -->
-    <div v-for="product in products" :key="product" :value="product.id">
-      {{ product.name }}
-    </div>
-  </div>
+  <!-- member list filtered by company id-->
+
+  <tr>
+    <td valign="middle">{{ status }}</td>
+    <td valign="middle">{{ date_order }}</td>
+    <td valign="middle">{{ date_delivery }}</td>
+    <td valign="middle">{{ comment }}</td>
+    <td valign="middle">{{ pdf }}</td>
+
+    <td>
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </td>
+  </tr>
 </template>
 
 <script>
 export default {
-  name: "Catalogue",
-  data() {
-    return {
-      products: [],
-    };
-  },
-  // fetch the list of products on view creation using sanctum in axios
-  created() {
-    this.$axios.get("/sanctum/csrf-cookie").then((response) => {
-      this.$axios
-        .get("/api/product")
-        .then((response) => {
-          this.products = response.data;
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    });
+  props: {
+    id: Number,
+    status: String,
+    date_order: Date,
+    date_delivery: Date,
+    comment: String,
+    pdf: String,
   },
 };
 </script>
 
-<style scoped>
+<style>
 </style>

@@ -6,10 +6,9 @@
   <div class="catalogue_container">
     <Header title="Catalogue" subtitle="Produits et services" />
     <BackButton />
-    <CatalogueDisplay />
     <AddButton name="Ajouter Produit" @click="add" />
 
-        <br />
+    <br />
 
     <!-- Search box -->
     <form class="form-inline">
@@ -36,12 +35,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product,index) in productArray" :key="index">
-          <td valign="middle"><router-link :to="{ name: 'individualProduct', params: { id: product.id } }">{{ product.name }}</router-link></td>
+        <tr v-for="(product, index) in productArray" :key="index">
+          <td valign="middle">
+            <router-link
+              :to="{ name: 'individualProduct', params: { id: product.id } }"
+              >{{ product.name }}</router-link
+            >
+          </td>
           <td valign="middle">{{ product.description }}</td>
           <td valign="middle">{{ product.type }}</td>
           <td valign="middle">{{ product.category }}</td>
-          <td valign="middle"><img :src=" product.image " class="image_product"></td>
+          <td valign="middle">
+            <img :src="product.image" class="image_product" />
+          </td>
 
           <td>
             <div class="btn-group" role="group">
@@ -58,9 +64,7 @@
         </tr>
       </tbody>
     </table>
-
   </div>
-
 </template>
 
 <script>
@@ -78,17 +82,17 @@ export default {
     AddButton,
   },
 
-  data(){
-      return{
-          productArray: [],
-      }
+  data() {
+    return {
+      productArray: [],
+    };
   },
 
-  async mounted(){
-      const getProducts = await axios.get("/api/product");
-      this.productArray = getProducts.data.data;
+  async mounted() {
+    const getProducts = await axios.get("/api/product");
+    this.productArray = getProducts.data.data;
 
-      console.log("product",this.productArray);
+    console.log("product", this.productArray);
   },
 
   methods: {
@@ -100,8 +104,7 @@ export default {
 </script>
 
 <style>
-.image_product{
-    height: 50px;
+.image_product {
+  height: 50px;
 }
-
 </style>

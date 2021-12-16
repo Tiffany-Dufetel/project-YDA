@@ -22901,23 +22901,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Catalogue",
-  data: function data() {
-    return {
-      products: []
-    };
-  },
-  // fetch the list of products on view creation using sanctum in axios
-  created: function created() {
-    var _this = this;
-
-    this.$axios.get("/sanctum/csrf-cookie").then(function (response) {
-      _this.$axios.get("/api/product").then(function (response) {
-        _this.products = response.data;
-      })["catch"](function (error) {
-        console.error(error);
-      });
-    });
+  props: {
+    id: Number,
+    status: String,
+    date_order: Date,
+    date_delivery: Date,
+    comment: String,
+    pdf: String
   }
 });
 
@@ -23593,6 +23583,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/Header.vue */ "./resources/js/components/ui/Header.vue");
 /* harmony import */ var _components_ui_forms_AddMember_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ui/forms/AddMember.vue */ "./resources/js/components/ui/forms/AddMember.vue");
 /* harmony import */ var _components_Members_MembersList_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Members/MembersList.vue */ "./resources/js/components/Members/MembersList.vue");
+/* harmony import */ var _components_ui_catalogue_CatalogueDisplay_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ui/catalogue/CatalogueDisplay.vue */ "./resources/js/components/ui/catalogue/CatalogueDisplay.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -23602,12 +23593,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CompanyDisplay",
   components: {
     Header: _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     AddMember: _components_ui_forms_AddMember_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    MembersList: _components_Members_MembersList_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    MembersList: _components_Members_MembersList_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    CatalogueDisplay: _components_ui_catalogue_CatalogueDisplay_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   props: {
     id: {
@@ -23629,7 +23622,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var response, userResponse, users, getUser;
+      var response, userResponse, users, orderResponse, orders, getUser;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -23646,19 +23639,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               userResponse = _context.sent;
               users = userResponse.data;
               _context.next = 9;
-              return axios.get("/api/login");
+              return axios.get("/api/order");
 
             case 9:
+              orderResponse = _context.sent;
+              orders = orderResponse.data;
+              console.log(orders);
+              _context.next = 14;
+              return axios.get("/api/login");
+
+            case 14:
               getUser = _context.sent;
               _this.companyId = getUser.data.company_id;
               _this.filterUsers = users.filter(function (user) {
-                return user.company_id == _this.companyId;
+                return user.company_id == _this.id;
               });
               _this.role = getUser.data.role;
               console.log("user", users);
               _this.company = response.data;
 
-            case 15:
+            case 20:
             case "end":
               return _context.stop();
           }
@@ -24437,18 +24437,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["value"];
+var _hoisted_1 = {
+  valign: "middle"
+};
+var _hoisted_2 = {
+  valign: "middle"
+};
+var _hoisted_3 = {
+  valign: "middle"
+};
+var _hoisted_4 = {
+  valign: "middle"
+};
+var _hoisted_5 = {
+  valign: "middle"
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "btn-group",
+  role: "group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-primary"
+}, "Edit"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-danger"
+}, "Delete")])], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" needs developing!! "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      key: product,
-      value: product.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 9
-    /* TEXT, PROPS */
-    , _hoisted_1);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" member list filtered by company id"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.status), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.date_order), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.date_delivery), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.comment), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.pdf), 1
+  /* TEXT */
+  ), _hoisted_6])], 2112
+  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -24992,8 +25021,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_BackButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BackButton");
 
-  var _component_CatalogueDisplay = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CatalogueDisplay");
-
   var _component_AddButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddButton");
 
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -25001,7 +25028,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
     title: "Catalogue",
     subtitle: "Produits et services"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BackButton), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CatalogueDisplay), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddButton, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BackButton), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddButton, {
     name: "Ajouter Produit",
     onClick: $options.add
   }, null, 8
@@ -31593,7 +31620,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.image_product{\r\n    height: 50px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.image_product {\n  height: 50px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

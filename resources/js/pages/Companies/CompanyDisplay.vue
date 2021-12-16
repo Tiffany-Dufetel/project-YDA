@@ -53,6 +53,7 @@
 import Header from "../../components/ui/Header.vue";
 import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
+import CatalogueDisplay from "../../components/ui/catalogue/CatalogueDisplay.vue";
 
 export default {
   name: "CompanyDisplay",
@@ -60,6 +61,7 @@ export default {
     Header,
     AddMember,
     MembersList: MembersList,
+    CatalogueDisplay,
   },
 
   props: {
@@ -84,15 +86,18 @@ export default {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
 
+    // Loading of users' information
     const userResponse = await axios.get("/api/user");
     const users = userResponse.data;
+
+    const orderResponse = await axios.get("/api/order");
+    const orders = orderResponse.data;
+    console.log(orders);
 
     const getUser = await axios.get("/api/login");
     this.companyId = getUser.data.company_id;
 
-    this.filterUsers = users.filter(
-      (user) => user.company_id == this.companyId
-    );
+    this.filterUsers = users.filter((user) => user.company_id == this.id);
 
     this.role = getUser.data.role;
     console.log("user", users);
