@@ -19,7 +19,7 @@ class CreateCompaniesTable extends Migration
             $table->char('siret',14)->unique()->notnull();
             $table->string('name')->notnull();
             $table->string('adress')->notnull();
-            $table->string('postcode')->notnull();
+            $table->char('postcode',5)->notnull();
             $table->string('city')->notnull();
             $table->string('logo_id')->nullable();
             $table->string('colour_background')->nullable();
