@@ -11,10 +11,7 @@
   <div>
     <div>
       <p>Siret : {{ company.siret }}</p>
-      <p>
-        Responsable :
-        <!-- {{users.first_name}} {{users.surname}}-->
-      </p>
+
       <p>
         Adresse : {{ company.adress }} - {{ company.postcode }}
         {{ company.city }}
