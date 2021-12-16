@@ -23646,21 +23646,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: "adminAddCompany"
       });
     },
-    deleteCompany: function deleteCompany(id) {
-      var _this2 = this;
-
-      axios.get("/sanctum/csrf-cookie").then(function (response) {
-        axios["delete"]("/api/company/destroy/".concat(id)).then(function (response) {
-          var i = _this2.company.map(function (item) {
-            return item.id;
-          }).indexOf(id); // find index of your object
-
-
-          _this2.company.splice(i, 1);
+    deleteCompany: function deleteCompany(company_id) {
+      if (confirm("Etes-vous sur d'effacer cette entreprise ?")) {
+        axios["delete"]("api/company/".concat(company_id)).then(function (response) {
+          console.log(response);
         })["catch"](function (error) {
-          console.error(error);
+          console.log(error);
         });
-      });
+      }
     }
   }
 });

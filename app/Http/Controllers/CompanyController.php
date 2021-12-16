@@ -51,7 +51,7 @@ class CompanyController extends Controller
 
         ]);
 
-        $companies = [
+        $company = [
             'member_count' => $request->input('member_count'),
             'name' => $request->input('name'),
             'siret' => $request->input('siret'),
@@ -61,7 +61,7 @@ class CompanyController extends Controller
 
         ];
 
-        Company::create($companies);
+        return Company::create($company);
 
         //Company::create($request->all());
 
@@ -109,6 +109,22 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Company::findOrFail($id)->delete();
+
+        /* Check the status response */
+        if ($res) {
+            $data = [
+                'status'=>'1',
+                'msg'=>'success'
+            ];
+        } else {
+            $data = [
+                'status'=>'0',
+                'msg'=>'fail'
+            ];
+        }
+
+        /* Return the response as json */
+        return response()->json($data);
     }
 }

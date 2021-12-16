@@ -84,18 +84,17 @@ export default {
     add() {
       this.$router.push({ name: "adminAddCompany" });
     },
-    deleteCompany(id) {
-      axios.get("/sanctum/csrf-cookie").then((response) => {
+    deleteCompany(company_id) {
+      if (confirm("Etes-vous sur d'effacer cette entreprise ?")) {
         axios
-          .delete(`/api/company/destroy/${id}`)
-          .then((response) => {
-            let i = this.company.map((item) => item.id).indexOf(id); // find index of your object
-            this.company.splice(i, 1);
+          .delete(`api/company/${company_id}`)
+          .then(function (response) {
+            console.log(response);
           })
           .catch(function (error) {
-            console.error(error);
+            console.log(error);
           });
-      });
+      }
     },
   },
 };
