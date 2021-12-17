@@ -92,6 +92,7 @@ export default {
           .delete(`api/company/${company_id}`)
           .then(function (response) {
             console.log(response);
+            /* this.router.push({ name: "adminCompanies" }); */
           })
           .catch(function (error) {
             console.log(error);

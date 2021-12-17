@@ -23761,6 +23761,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (confirm("Etes-vous sur d'effacer cette entreprise ?")) {
         axios["delete"]("api/company/".concat(company_id)).then(function (response) {
           console.log(response);
+          /* this.router.push({ name: "adminCompanies" }); */
         })["catch"](function (error) {
           console.log(error);
         });
@@ -24631,7 +24632,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" développer affichage conditionnel ici "), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Presentation table for calendar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.companies, function (company) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: company.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-if=\"company.day === 'monday'\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ company.name }}<br />{{ company.time }}  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.monday), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" :value=\"company.id\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-if=\"company.day === 'monday'\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ company.name }}<br />{{ company.time }} "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.monday), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <td v-else-if=\"company.day === 'tuesday'\">\r\n              {{ company.name }}<br />{{ company.time }}\r\n            </td>\r\n            <td v-else-if=\"company.day === 'wednesday'\">\r\n              {{ company.name }}<br />{{ company.time }}\r\n            </td>\r\n            <td v-else-if=\"company.day === 'thursday'\">\r\n              {{ company.name }}<br />{{ company.time }}\r\n            </td>\r\n            <td v-else-if=\"company.day === 'friday'\">\r\n              {{ company.name }}<br />{{ company.time }}\r\n            </td>\r\n            <div v-else></div> ")]);
   }), 128
