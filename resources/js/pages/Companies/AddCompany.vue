@@ -10,6 +10,7 @@
     />
     <BackButton />
     <form method="POST" @submit.prevent>
+      <!-- Siret number to use government data -->
       <label for="siret">Siret</label><br />
       <input
         type="text"
@@ -19,12 +20,15 @@
         v-on:keypress.enter="siretSearch"
       /><br />
 
+      <!-- Name of company -->
       <label for="name">Dénomination social</label><br />
       <input type="text" id="name" name="name" v-model="name" /><br />
 
-      <label for="adress">Adresse</label><br />
+      <!-- Number and street -->
+      <label for="adress">Numéro et rue</label><br />
       <input type="text" id="adress" name="adress" v-model="adress" /><br />
 
+      <!-- Postcode -->
       <label for="postCode">Code postal</label><br />
       <input
         type="text"
@@ -33,9 +37,11 @@
         v-model="postcode"
       /><br />
 
+      <!-- Town -->
       <label for="city">Ville</label><br />
       <input type="text" id="city" name="city" v-model="city" /><br />
 
+      <!-- Total number of peopleworking at the company -->
       <label for="member_count">Nombre d'employés</label><br />
       <input
         type="number"
@@ -48,34 +54,22 @@
       <label for="day">Jour et creneau horaire préféré</label>
       <div class="form-group row">
         <div class="col-xs-3">
-          <select
-            v-model="day"
-            name="day"
-            id="day"
-            class="form-control"
-            required="true"
-          >
+          <select v-model="day" name="day" id="day" class="form-control">
             <option selected>choisir le jour...</option>
-            <option value="lundi">Lundi</option>
-            <option value="mardi">Mardi</option>
-            <option value="mercredi">Mercredi</option>
-            <option value="jeudi">Jeudi</option>
-            <option value="vendredi">Vendredi</option>
+            <option value="monday">Lundi</option>
+            <option value="tuesday">Mardi</option>
+            <option value="wednesday">Mercredi</option>
+            <option value="thursday">Jeudi</option>
+            <option value="friday">Vendredi</option>
           </select>
         </div>
         <div class="col-xs-2">
-          <select
-            v-model="time"
-            name="time"
-            id="time"
-            class="form-control"
-            required="true"
-          >
+          <select v-model="time" name="time" id="time" class="form-control">
             <option selected>Creneau...</option>
-            <option value="9">9h - 11h</option>
-            <option value="11">11h - 13h</option>
-            <option value="13">13h - 15h</option>
-            <option value="15">15h - 17h</option>
+            <option value="09:00 - 11:00">9h - 11h</option>
+            <option value="11:00 - 13:00">11h - 13h</option>
+            <option value="13:00 - 15:00">13h - 15h</option>
+            <option value="15:00 - 17:00">15h - 17h</option>
           </select>
         </div>
       </div>
@@ -103,6 +97,8 @@ export default {
       postcode: "",
       city: "",
       member_count: "",
+      day: "",
+      time: "",
     };
   },
 
@@ -136,6 +132,8 @@ export default {
             postcode: this.postcode,
             city: this.city,
             member_count: Number(this.member_count),
+            day: this.day,
+            time: this.time,
           })
           .then((response) => {
             console.log(response);

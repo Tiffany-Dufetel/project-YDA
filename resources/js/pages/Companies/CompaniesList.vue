@@ -30,16 +30,18 @@
           <th>Siret</th>
           <th>Adresse</th>
           <th>Total de membres</th>
+          <th>Creneau de livraison</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="company in companyArray" :key="company.id">
+        <tr v-for="company in companies" :key="company.id">
           <td>{{ company.name }}</td>
           <td>{{ company.siret }}</td>
           <td>
             {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
           </td>
           <td>{{ company.member_count }}</td>
+          <td>{{ company.day }} entre {{ company.day }}h et</td>
           <td>
             <div class="btn-group" role="group">
               <router-link
@@ -72,13 +74,13 @@ export default {
   },
   data() {
     return {
-      companyArray: [],
+      companies: [],
     };
   },
   async mounted() {
     const getCompanies = await axios.get("/api/company");
-    this.companyArray = getCompanies.data.data;
-    console.log(this.companyArray);
+    this.companies = getCompanies.data.data;
+    console.log(this.companies);
   },
   methods: {
     add() {

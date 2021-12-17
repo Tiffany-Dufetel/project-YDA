@@ -48,6 +48,8 @@ class CompanyController extends Controller
             'adress' => 'required|string',
             'postcode' => 'required|string',
             'city' => 'required|string',
+            'day' => 'string',
+            'time' => 'integer',
 
         ]);
 
@@ -58,7 +60,8 @@ class CompanyController extends Controller
             'adress' => $request->input('adress'),
             'postcode' => $request->input('postcode'),
             'city' => $request->input('city'),
-
+            'day' => $request->input('day'),
+            'time' => $request->input('time'),
         ];
 
         return Company::create($company);
