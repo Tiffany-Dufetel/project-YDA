@@ -41,16 +41,32 @@ const routes = [
                 meta: { guest: true },
         },
         {
+                path: "/contact",
+                name: "Contact",
+                component: Contact,
+                meta: { guest: true },
+        },
+
+        /**
+         * AUTH
+         */
+        {
                 path: "/login",
                 name: "Login",
                 component: Login,
                 meta: { guest: true },
         },
         {
-                path: "/contact",
-                name: "Contact",
-                component: Contact,
-                meta: { guest: true },
+                path: "/email-verification",
+                name: "FirstConnection",
+                component: FirstConnection,
+                /* meta: { guest: true }, */
+        },
+        {
+                path: "/reset-password",
+                name: "ResetPassword",
+                component: ResetPassword,
+                /* meta: { guest: true }, */
         },
 
         /**
@@ -151,26 +167,26 @@ const routes = [
                 meta: { requiresAuth: true },
         },
 
-         /**
-         * NEWS
-         */
+        /**
+        * NEWS
+        */
 
         // View the full news -
         {
-            path: "/news",
-            name: "adminNews",
-            component: NewsList,
-            meta: { requiresAuth: true },
-    },
-    // Add a news -
-    {
-            path: "/add-news",
-            name: "adminNewsAdd",
-            component: AddNews,
-            meta: { requiresAuth: true },
-    },
+                path: "/news",
+                name: "adminNews",
+                component: NewsList,
+                meta: { requiresAuth: true },
+        },
+        // Add a news -
+        {
+                path: "/add-news",
+                name: "adminNewsAdd",
+                component: AddNews,
+                meta: { requiresAuth: true },
+        },
 
-    ];
+];
 
 const router = createRouter({
         history: createWebHistory(),

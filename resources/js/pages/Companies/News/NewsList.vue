@@ -6,18 +6,17 @@
   <div>
     <!-- make title responsive -->
     <Header title="Les actualités" subtitle="Les actualités récentes" />
-    <div>Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces actualités </div>
-<BackButton />
-<button @click="newsAdd">Ajouter une actualité</button>
-        <div v-for="(news, index) in newsArray" :key="index">
-            <h2> {{ title }} </h2>
-            <p> {{ text }} </p>
-        </div>
+    <div>
+      Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces
+      actualités
+    </div>
+    <BackButton />
+    <button @click="newsAdd">Ajouter une actualité</button>
+    <div v-for="(news, index) in newsArray" :key="index">
+      <h2>{{ title }}</h2>
+      <p>{{ text }}</p>
+    </div>
   </div>
-
-
-
-
 </template>
 
 <script>
@@ -29,7 +28,7 @@ export default {
   components: {
     Header,
     BackButton,
-},
+  },
 
   data() {
     return {
@@ -42,25 +41,25 @@ export default {
   async mounted() {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id, {
-        headers: {
-            "Authorization" : "bearer " + localStorage.getItem("userToken")
-        }
+      headers: {
+        Authorization: "bearer " + localStorage.getItem("userToken"),
+      },
     });
 
     console.log(response.data);
     this.company = response.data;
 
-    const responseNews = await axios.get("/api/news");
+    const responseNews = await axios.get("/api/news" + this.company_id);
     this.newsArray = responseNews.data.data;
-    console.log(this.responseNews);
+    console.log(this.newsArray);
   },
 
-    methods: {
-         newsAdd() {
+  methods: {
+    newsAdd() {
       this.$router.push({ name: "adminNewsAdd" });
     },
-},
-}
+  },
+};
 </script>
 
 <style>

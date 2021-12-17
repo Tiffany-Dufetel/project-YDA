@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Company;
 use App\Models\User;
@@ -45,7 +47,7 @@ class AuthController extends BaseController
         $user = User::create($input);
         $success['token'] =  $user->createToken('LaravelSanctumAuth')->plainTextToken;
         $success['name'] =  $user->name;
-
+        event(new Registered($user));
         return $this->handleResponse($success, 'User successfully registered!');
     }
 

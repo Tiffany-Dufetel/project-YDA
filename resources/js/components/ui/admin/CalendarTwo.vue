@@ -24,8 +24,9 @@
             <!-- :value="company.id" -->
             <td>
               <!-- v-if="company.day === 'monday'" -->
+              Le Bocal Academy <br />
+              11h - 13h
               <!-- {{ company.name }}<br />{{ company.time }} -->
-              {{ thursday }}
             </td>
             <!-- <td v-else-if="company.day === 'tuesday'">
               {{ company.name }}<br />{{ company.time }}
