@@ -16,25 +16,30 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Date Ordered</th>
-          <th>Date delivered</th>
+          <th>Entreprise</th>
+          <th>Client</th>
+          <th>Commande</th>
+          <th>Commentaire</th>
+          <th>Date de commande</th>
+          <th>Date de livraison</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="order in orderArray" :key="order.id">
-          <td>{{ order.id }}</td>
-          <!-- {{ product.name }} -->
+          <td><b>{{ order.user.company.name}}</b></td>
+          <td><span class="capitalize_firstname">{{ order.user.first_name }}</span> {{order.user.surname.toUpperCase()}}</td>
+          <td>{{ order.product.name}}</td>
+          <td>{{ order.comment}}</td>
           <td>{{ order.date_order }}</td>
           <td>{{ order.date_delivery }}</td>
           <td>{{ order.status }}</td>
           <td>
             <div class="btn-group" role="group">
-              <router-link
+              <!-- <router-link
                 :to="{ name: 'individualorder', params: { id: order.id } }"
                 ><button class="btn btn-primary">Edit</button>
-              </router-link>
+              </router-link> -->
               <button
                 v-if="status"
                 class="btn btn-danger"
@@ -68,10 +73,11 @@ export default {
     };
   },
   async mounted() {
-    const getOrders = await axios.get("/api/order");
-    this.orderArray = getOrders.data.data;
-    console.log(this.orderArray);
+    const response = await axios.get("/api/order");
+    this.orderArray = response.data;
+    console.log("reponse",this.orderArray);
   },
+
   methods: {
     add() {
       this.$router.push({ name: "productOrder" });
@@ -92,3 +98,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.capitalize_firstname{
+    text-transform: capitalize;
+}
+</style>

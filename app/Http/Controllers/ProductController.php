@@ -44,12 +44,19 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:png,jpg,jpeg',
             'type' => 'required',
             'category' => 'required',
+        ], [
+            'name.required' => "Vous devez saisir un nom.",
+            'description.required' => "Vous devez saisir une description.",
+            'image.required' => "Vous devez télécharger une image.",
+            'image.image' => "Le fichier téléchargé n'est pas une image (format accepté: .png .jpg)",
+            'type.required' => "Aucun type selectionné.",
+            'category.required' => "Aucune catégorie selectionné."
         ]);
 
         $file = [
             'name' => $request->name,
             'description' => $request->description,
-            'image' => $request->file('image')->store('images'),
+            'image' => $request->file('image')->store('public'),
             'type' => $request->type,
             'category' => $request->category,
         ];
@@ -70,7 +77,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        Product::where('id', $id)->get();
     }
 
     /**

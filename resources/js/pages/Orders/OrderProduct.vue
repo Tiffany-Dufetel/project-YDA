@@ -11,20 +11,19 @@
       <form method="POST" @submit.prevent="addOrder">
         <!-- product/service choice -->
         <div class="form-group col-md-4">
-          <label for="name">Choisir votre service ou </label>
+          <label for="products_id">Choisir votre service ou </label>
           <select
-            v-model="name"
-            name="name"
-            id="name"
+            v-model="products_id"
+            name="products_id"
+            id="products_id"
             class="form-control"
             required="true"
           >
-            <option value="{{ product.id }}">
-              <div v-for="product in productArray" :key="product.id">
-                {{ product.id }} - {{ product.name }}
-              </div>
+            <option v-for="product in productArray" :key="product.id">
+                {{ product.id }}<!--  - {{product.name}} -->
             </option>
           </select>
+
         </div>
 
         <!-- comment - preferred delivery dates -->
@@ -42,6 +41,11 @@
             min="2022-01-01"
             max="2022-12-31"
           />
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="comment">Commentaires</label>
+            <input v-model="comment" type="text" name="comment" id="comment">
         </div>
         <SubmitButton name="Envoyer demande" />
       </form>
@@ -64,7 +68,8 @@ export default {
   },
   data() {
     return {
-      product_id: "",
+      comment:"",
+      products_id: "",
       date_delivery: "",
       productArray: [],
     };
@@ -73,14 +78,16 @@ export default {
   async mounted() {
     const getProduct = await axios.get("/api/product");
     this.productArray = getProduct.data.data;
+
   },
   methods: {
     addOrder() {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("/api/order", {
-            status: this.status,
-            product_id: this.product_id,
+            status: "en attente",
+            products_id: this.products_id,
+            comment: this.comment,
             date_delivery: this.date_delivery,
           })
           .then((response) => {

@@ -13,44 +13,54 @@
 /** Imports */
 import Navbar from "./components/assets/Navbar.vue";
 import Footer from "./components/assets/Footer.vue";
+import { computed} from "vue";
+
 export default {
   name: "App",
   components: {
     Navbar,
     Footer,
   },
-  /* data() {
+  data() {
     return {
       isLoggedIn: false,
-      image: {
-        backgroundImage:
-          "url(https://www.sortiraparis.com/images/80/83517/584112-visuel-paris-conciergerie.jpg)",
-      },
+      checkRole: "",
+      role: "",
+    }
   },
-    created() {
-        if (window.Laravel.isLoggedin) {
-            this.isLoggedIn = true
+
+
+mounted(){
+
+
+    const userToken = localStorage.getItem('userToken')
+    if (userToken == null){
+        return this.isLoggedIn = false
+    } else {
+        return this.isLoggedIn = true
+    };
+
+
+},
+
+    provide() {
+        return {
+            isLoggedIn : computed(() => this.isLoggedIn),
+            setLoginStatus: () => {
+                this.isLoggedIn = true;
+            },
+            removeLoginStatus: () => {
+                this.isLoggedIn = false;
+            },
+
+            checkRole: computed(() => this.checkRole),
+            whatRole: ()=>{
+                const getUser = axios.get("/api/login");
+                console.log('role',this.role);
+                this.checkRole = getUser.data.role;
+            }
         }
-    },
-    methods: {
-        logout(e) {
-            console.log('ss')
-            e.preventDefault()
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('/api/logout')
-                    .then(response => {
-                        if (response.data.success) {
-                            window.location.href = "/"
-                        } else {
-                            console.log(response)
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
-        }
-    }, */
+    }
 };
 </script>
 

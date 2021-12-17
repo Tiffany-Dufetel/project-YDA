@@ -29,11 +29,11 @@
         <!-- Sign Out -->
 
         <!-- Link Log in -->
-        <li v-if="userToken == null">
-          <button class="log" @click="logIn">Log In</button>
+        <li v-if="isLoggedIn.value">
+            <button class="log" @click="logOut">Log out</button>
         </li>
         <li v-else>
-          <button class="log" @click="logOut">Log out</button>
+            <button class="log" @click="logIn">Log In</button>
         </li>
       </ul>
     </nav>
@@ -48,10 +48,15 @@ export default {
       userToken: null,
     };
   },
+  inject: ["isLoggedIn", "removeLoginStatus"],
 
   mounted() {
     this.userToken = localStorage.getItem("userToken");
     console.log("token", this.userToken);
+  },
+
+  updated() {
+      console.log(this.isLoggedIn);
   },
 
   methods: {
@@ -60,6 +65,7 @@ export default {
     },
     logOut() {
       localStorage.removeItem("userToken");
+      this.removeLoginStatus();
       this.$router.push("/login");
       // window.location.reload()
     },

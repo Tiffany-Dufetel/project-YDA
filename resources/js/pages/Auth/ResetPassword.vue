@@ -70,15 +70,13 @@ import Header from "../../components/ui/Header.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 
 export default {
-  name: "Login",
+  name: "ResetPassword",
   components: {
     Header,
     SubmitButton,
   },
-  inject: ["setLoginStatus"],
   data() {
     return {
-      token: "",
       formData: {
         email: "",
         password: "",
@@ -86,28 +84,23 @@ export default {
       },
     };
   },
-  methods: {
+  /*  methods: {
     login() {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .post("/api/login", {
+          .post("/api/reset", {
             email: this.email,
             password: this.password,
           })
           .then((response) => {
             console.log("reponse: ", response);
-            localStorage.setItem("userToken", response.data.data.token);
-            this.setLoginStatus();
-            this.$router.push("/admin");
+            this.$router.push("/login");
           });
         //   .catch(function (error) {
         //     console.error(error);
         //   });
       });
     },
-    password() {
-      this.$router.push({ name: "ResetPassword" });
-    },
-  },
+  }, */
 };
 </script>

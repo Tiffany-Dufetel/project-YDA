@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../pages/Home.vue";
-import Login from "../pages/Auth/Login.vue";
 import Contact from "../pages/Contact.vue";
+
+/** Admin */
+import Login from "../pages/Auth/Login.vue";
+import ResetPassword from "../pages/Auth/ResetPassword.vue";
+import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
 
 /** Admin */
 import AdminHome from "../pages/Admin/AdminHome.vue";
@@ -19,7 +23,6 @@ import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
 
 /** Members */
 import MembersList from "../pages/Members/MembersList.vue";
-import AddMembers from "../pages/Members/AddMembers.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 
 // Orders - members
@@ -110,13 +113,7 @@ const routes = [
                 component: MembersList,
                 meta: { requiresAuth: true },
         },
-        // Add a member to a company -
-        {
-                path: "/add-members",
-                name: "companiesAddMembers",
-                component: AddMembers,
-                meta: { requiresAuth: true },
-        },
+
         // View a specific member from a company -
         {
                 path: "/membre/:id",
@@ -152,6 +149,7 @@ const routes = [
 ];
 
 export default createRouter({
-        history: createWebHistory(),
-        routes,
+    history: createWebHistory(),
+    routes,
 });
+
