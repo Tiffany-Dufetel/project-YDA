@@ -23,6 +23,37 @@
       <!--  Add members -->
       <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
 
+      <!-- Orders display -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nom de la commande</th>
+            <th>Utilisateur</th>
+
+            <th>Statut de la commande</th>
+            <th>Date de réservation de la commande</th>
+            <th>Date estimée</th>
+            <th>Commentaire</th>
+            <th>PDF</th>
+          </tr>
+        </thead>
+        <tbody>
+          <CatalogueDisplay
+            v-for="(order, index) in orders"
+            :key="index"
+            :id="order.id"
+            :name="order.product.name"
+            :user_surname="order.user.surname"
+            :user_firstname="order.user.first_name"
+            :status="order.status"
+            :date_order="order.date_order"
+            :date_delivery="order.date_delivery"
+            :comment="order.comment"
+            :pdf="order.pdf"
+          />
+        </tbody>
+      </table>
+
       <!-- Member list display -->
       <table class="table table-bordered">
         <thead>
@@ -53,6 +84,7 @@
 import Header from "../../components/ui/Header.vue";
 import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
+import CatalogueDisplay from "../../components/ui/catalogue/CatalogueDisplay.vue";
 
 export default {
   name: "CompanyDisplay",
@@ -60,6 +92,7 @@ export default {
     Header,
     AddMember,
     MembersList: MembersList,
+    CatalogueDisplay,
   },
 
   props: {
@@ -74,9 +107,9 @@ export default {
       isHidden: true,
       company: {},
       user: {},
-      userArray: [],
       companyId: "",
       filterUsers: [],
+      orders: [],
     };
   },
 
@@ -84,15 +117,18 @@ export default {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
 
+    // Loading of users' information
     const userResponse = await axios.get("/api/user");
     const users = userResponse.data;
+
+    const orderResponse = await axios.get("/api/order");
+    this.orders = orderResponse.data;
+    console.log("order", this.orders);
 
     const getUser = await axios.get("/api/login");
     this.companyId = getUser.data.company_id;
 
-    this.filterUsers = users.filter(
-      (user) => user.company_id == this.companyId
-    );
+    this.filterUsers = users.filter((user) => user.company_id == this.id);
 
     this.role = getUser.data.role;
     console.log("user", users);
