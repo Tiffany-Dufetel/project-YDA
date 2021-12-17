@@ -48,7 +48,7 @@ mounted(){
                 this.isLoggedIn = false;
             },
             checkRole: () => {
-                const getUser = await axios.get("/api/login");
+                const getUser = axios.get("/api/login");
                 this.role = getUser.data.role;
                 console.log('role',this.role);
             }
