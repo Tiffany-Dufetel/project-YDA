@@ -6,18 +6,23 @@
   <div>
     <!-- make title responsive -->
     <Header title="Les actualités" subtitle="Les actualités récentes" />
-    <div>Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces actualités </div>
+    <br/>
+    <div>Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces YD'Actualités </div>
 <BackButton />
+<p>______</p>
 <button @click="newsAdd">Ajouter une actualité</button>
+<br/>
+<p>______</p>
+<br/>
+<br/>
         <div v-for="(news, index) in newsArray" :key="index">
-            <h2> {{ title }} </h2>
-            <p> {{ text }} </p>
+            <h2><strong> {{ news.title }} </strong></h2>
+            <p> {{ news.text }} </p>
+            <i> {{ new Date(news.created_at).toLocaleString() }} </i>
+            <br/>
+            <br/>
         </div>
   </div>
-
-
-
-
 </template>
 
 <script>
@@ -51,8 +56,8 @@ export default {
     this.company = response.data;
 
     const responseNews = await axios.get("/api/news");
-    this.newsArray = responseNews.data.data;
-    console.log(this.responseNews);
+    this.newsArray = responseNews.data;
+    console.log(this.newsArray);
   },
 
     methods: {

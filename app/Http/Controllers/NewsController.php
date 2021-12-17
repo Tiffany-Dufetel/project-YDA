@@ -15,8 +15,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = Actuality::all();
+        $news = Actuality::orderByDesc('created_at')->get();
         return response()->json($news);
+
     }
 
     /**
@@ -40,12 +41,14 @@ class NewsController extends Controller
         $request->validate([
             'title' =>'required|string',
             'text' =>'required',
+
         ]);
 
         $news = [
             'title' =>$request->input ('title'),
             'text' =>$request->input ('text'),
             'company_id' =>'1',
+
         ];
         Actuality::create($news);
     }
