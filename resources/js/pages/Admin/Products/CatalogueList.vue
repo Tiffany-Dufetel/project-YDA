@@ -82,6 +82,8 @@ export default {
     AddButton,
   },
 
+  inject: ["checkRole", "whatRole"],
+
   data() {
     return {
       productArray: [],

@@ -5,10 +5,10 @@
 <template>
     <Header title="Ajouter un produit ou service" subtitle="...." />
     <BackButton />
-
+        <div class="alert alert-success" v-show="success">Votre produit a bien été rajouté</div>
         <div class="d-flex justify-content-center">
             <form>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-10">
                     <label for="name">Nom</label>
                     <input
                         v-model="formData.name"
@@ -19,7 +19,11 @@
                         autofocus>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div v-show="errors && errors.name">
+                    <p class="text-danger" v-for="(error, index) in errors.name" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
                     <label for="description">Description</label>
                     <input
                         v-model="formData.description"
@@ -29,7 +33,11 @@
                         required autocomplete="on">
                 </div>
 
-                <div class="form-group col-md-4">
+                <div v-show="errors && errors.description">
+                    <p class="text-danger" v-for="(error, index) in errors.description" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
                     <label for="type">Type</label>
                         <select
                             v-model="formData.type"
@@ -44,7 +52,11 @@
                         </select>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div v-show="errors && errors.type">
+                    <p class="text-danger" v-for="(error, index) in errors.type" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
                     <label for="category">Categorie</label>
                         <select
                             v-model="formData.category"
@@ -59,12 +71,21 @@
                         </select>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div v-show="errors && errors.category">
+                    <p class="text-danger" v-for="(error, index) in errors.category" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
                     <label>Image</label>
                         <!-- MOST IMPORTANT - SEE "ref" AND "@change" PROPERTIES -->
                         <input type="file" class="custom-file-input" id="customFile"
                             ref="file" @change="handleFileObject()">
                 </div>
+
+                <div v-show="errors && errors.image">
+                    <p class="text-danger" v-for="(error, index) in errors.image" :key="index" >{{error}}</p>
+                </div>
+
                   <SubmitButton  @click="submit" name="Ajouter"/>
             </form>
         </div>
@@ -87,17 +108,15 @@ export default {
 
   data() {
     return {
-        formData:{
-            name: null,
-            description: null,
-            type: null,
-            category: null,
-        },
+        formData:{},
         image:null,
+        success: false,
+        errors: {},
     };
   },
   methods: {
-      submit(){
+      submit(event){
+          event.preventDefault()
           let formData = new FormData()
           formData.append('image', this.image)
 
@@ -105,12 +124,19 @@ export default {
               formData.append(key, value)
           })
 
-          axios.post('api/product', formData,{
-              headers: {
-                'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
-             }
-          })
-        this.$router.push('/catalogue')
+        const response = axios.post('api/product', formData)
+            .then(res =>{
+
+                this.formData = {}
+                this.$refs.file.value = null
+                this.success = true
+            }).catch(error=>{
+                if (error.response.status == 422 ){
+                    this.errors = error.response.data.errors
+                }
+                console.log(this.errors)
+            })
+        // this.$router.push('/catalogue')
       },
 
     handleFileObject() {
@@ -119,3 +145,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+input, select{
+    width: 25vh;
+}
+</style>

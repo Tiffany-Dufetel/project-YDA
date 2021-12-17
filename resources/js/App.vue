@@ -24,17 +24,23 @@ export default {
   data() {
     return {
       isLoggedIn: false,
+      checkRole: "",
+      role: "",
     }
   },
 
 
 mounted(){
+
+
     const userToken = localStorage.getItem('userToken')
     if (userToken == null){
         return this.isLoggedIn = false
     } else {
         return this.isLoggedIn = true
-    }
+    };
+
+
 },
 
     provide() {
@@ -45,6 +51,13 @@ mounted(){
             },
             removeLoginStatus: () => {
                 this.isLoggedIn = false;
+            },
+
+            checkRole: computed(() => this.checkRole),
+            whatRole: ()=>{
+                const getUser = axios.get("/api/login");
+                console.log('role',this.role);
+                this.checkRole = getUser.data.role;
             }
         }
     }

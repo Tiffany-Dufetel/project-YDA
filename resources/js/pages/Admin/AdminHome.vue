@@ -16,40 +16,32 @@
 
       <button @click="companyAdd">Ajouter une entreprise</button>
       <button @click="orderList">Liste de commandes</button>
-
     </div>
-
 
     <!-- Calendar displaying upcoming events -->
-    <div class="d-flex justify-content-center mt-5 mb-1">
-      <vue-cal
-        :time-from="9 * 60"
-        :time-to="19 * 60"
-        :time-step="60"
-        hide-weekends
-        style="height: 350px; width: 80%"
-      />
-    </div>
+    <!--     <Calendar /> -->
+    <CalendarTwo />
   </div>
 
   <div v-else-if="role == 'manager'">
-     <Header
+    <Header
       title="Bienvenue à votre page de manager"
       subtitle="Gérer vos membres"
     />
     <div class="mt-5">
-        <button @click="showMembers">Liste des membres</button>
+      <button @click="showMembers">Liste des membres</button>
     </div>
   </div>
 
   <div v-else-if="role == 'member'">
-     <Header
+    <Header
       title="Bienvenue à votre page de membre"
       subtitle="Passez vos commandes"
     />
     <div class="mt-5">
-        <button @click="order">Commander</button>
-        <button @click="profile">Mon profile</button>
+      <button @click="catView">Voir Catalogue</button>
+      <button @click="order">Commander</button>
+      <button @click="profile">Mon profile</button>
     </div>
   </div>
 
@@ -59,14 +51,15 @@
 <script>
 import Header from "../../components/ui/Header.vue";
 import axios from "axios";
-import VueCal from "vue-cal";
-import "vue-cal/dist/vuecal.css";
+import Calendar from "../../components/ui/admin/Calendar.vue";
+import CalendarTwo from "../../components/ui/admin/CalendarTwo.vue";
 
 export default {
   name: "AdminHome",
   components: {
     Header,
-    VueCal,
+    Calendar,
+    CalendarTwo,
   },
 
   data() {
@@ -79,7 +72,7 @@ export default {
   async mounted() {
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
-    console.log('role',this.role);
+    console.log("role", this.role);
     this.id = getUser.data.id;
     // console.log("user", this.id);
   },
@@ -100,8 +93,8 @@ export default {
     order() {
       this.$router.push({ name: "productOrder" });
     },
-    profile(){
-        this.$router.push({ name: 'individualMember', params: {id: this.id} })
+    profile() {
+      this.$router.push({ name: "individualMember", params: { id: this.id } });
     },
     orderList() {
       this.$router.push({ name: "orders" });
@@ -109,9 +102,9 @@ export default {
     memberAdd() {
       this.$router.push({ name: "companiesAddMembers" });
     },
-    showMembers(){
-        this.$router.push({name: "companiesMembers"})
-    }
+    showMembers() {
+      this.$router.push({ name: "companiesMembers" });
+    },
   },
 };
 </script>
