@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       isLoggedIn: false,
+      role: "",
     }
   },
 
@@ -45,6 +46,11 @@ mounted(){
             },
             removeLoginStatus: () => {
                 this.isLoggedIn = false;
+            },
+            checkRole: () => {
+                const getUser = await axios.get("/api/login");
+                this.role = getUser.data.role;
+                console.log('role',this.role);
             }
         }
     }

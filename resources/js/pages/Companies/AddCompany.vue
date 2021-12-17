@@ -9,6 +9,9 @@
       subtitle="Tapez le SIRET afin de pré remplir"
     />
     <BackButton />
+
+    <div class="alert alert-success" v-show="success">L'entreprise a bien été rajouté</div>
+
     <form method="POST" @submit.prevent>
       <label for="siret">Siret</label><br />
       <input
@@ -19,11 +22,23 @@
         v-on:keypress.enter="siretSearch"
       /><br />
 
+        <div v-show="errors && errors.siret">
+            <p class="text-danger" v-for="(error, index) in errors.siret" :key="index" >{{error}}</p>
+        </div>
+
       <label for="name">Dénomination social</label><br />
       <input type="text" id="name" name="name" v-model="name" /><br />
 
+        <div v-show="errors && errors.name">
+            <p class="text-danger" v-for="(error, index) in errors.name" :key="index" >{{error}}</p>
+        </div>
+
       <label for="adress">Adresse</label><br />
       <input type="text" id="adress" name="adress" v-model="adress" /><br />
+
+        <div v-show="errors && errors.adress">
+            <p class="text-danger" v-for="(error, index) in errors.adress" :key="index" >{{error}}</p>
+        </div>
 
       <label for="postCode">Code postal</label><br />
       <input
@@ -33,8 +48,16 @@
         v-model="postcode"
       /><br />
 
+        <div v-show="errors && errors.postcode">
+            <p class="text-danger" v-for="(error, index) in errors.postcode" :key="index" >{{error}}</p>
+        </div>
+
       <label for="city">Ville</label><br />
       <input type="text" id="city" name="city" v-model="city" /><br />
+
+        <div v-show="errors && errors.city">
+            <p class="text-danger" v-for="(error, index) in errors.city" :key="index" >{{error}}</p>
+        </div>
 
       <label for="member_count">Nombre d'employés</label><br />
       <input
@@ -67,6 +90,8 @@ export default {
       postcode: "",
       city: "",
       member_count: "",
+      success: false,
+      errors: {},
     };
   },
 
@@ -101,13 +126,20 @@ export default {
             city: this.city,
             member_count: Number(this.member_count),
           })
-          .then((response) => {
-            console.log(response);
-            this.$router.push({ name: "adminCompanies" });
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
+          .then(res => {
+                this.siret= "",
+                this.name= "",
+                this.adress= "",
+                this.postcode= "",
+                this.city= "",
+                this.member_count= ""
+                this.success="true"
+          }).catch(error=>{
+                if (error.response.status == 422 ){
+                    this.errors = error.response.data.errors
+                    console.log(this.errors)
+                }
+            })
       });
     },
   },
