@@ -25,7 +25,7 @@
             <td>
               <!-- v-if="company.day === 'monday'" -->
               <!-- {{ company.name }}<br />{{ company.time }} -->
-              {{ monday }}
+              {{ thursday }}
             </td>
             <!-- <td v-else-if="company.day === 'tuesday'">
               {{ company.name }}<br />{{ company.time }}
@@ -66,8 +66,8 @@ export default {
     } */
   },
   computed: {
-    monday() {
-      return this.company.day === "monday"
+    thursday() {
+      return this.company.day === "thursday"
         ? `${this.company.name} <br/> ${this.company.time}`
         : "";
     },
