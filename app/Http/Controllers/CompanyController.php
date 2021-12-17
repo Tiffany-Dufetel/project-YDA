@@ -44,7 +44,7 @@ class CompanyController extends Controller
 
         $request->validate([
             'member_count' => 'integer',
-            'siret' => 'required|unique|string',
+            'siret' => 'required|string',
             'name' => 'required|string',
             'adress' => 'required|string',
             'postcode' => 'required|string',
