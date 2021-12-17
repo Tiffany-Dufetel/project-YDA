@@ -67,8 +67,8 @@ export default {
   },
   computed: {
     monday() {
-      return company.day === "monday"
-        ? `${company.name} <br/> ${company.time}`
+      return this.company.day === "monday"
+        ? `${this.company.name} <br/> ${this.company.time}`
         : "";
     },
   },
