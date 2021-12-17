@@ -33,7 +33,7 @@ Route::get('/info/{id}', [AuthController::class, 'getUserInfo']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('/calendar', CalendarController::class);
     Route::resource('/company', CompanyController::class);
-    Route::resource('/company/news', NewsController::class);
+    Route::resource('/news', NewsController::class);
     Route::resource('/home', HomeController::class);
     Route::resource('/order', OrderController::class);
     Route::resource('/product', ProductController::class);

@@ -29,6 +29,10 @@ import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
 import OrdersList from "../pages/Orders/OrdersList.vue";
 
+/** News */
+import NewsList from "../pages/Companies/News/NewsList.vue";
+import AddNews from "../pages/Companies/News/AddNews.vue";
+
 const routes = [
         {
                 path: "/",
@@ -146,7 +150,27 @@ const routes = [
                 component: AdminHome,
                 meta: { requiresAuth: true },
         },
-];
+
+         /**
+         * NEWS
+         */
+
+        // View the full news -
+        {
+            path: "/news",
+            name: "adminNews",
+            component: NewsList,
+            meta: { requiresAuth: true },
+    },
+    // Add a news -
+    {
+            path: "/add-news",
+            name: "adminNewsAdd",
+            component: AddNews,
+            meta: { requiresAuth: true },
+    },
+
+    ];
 
 const router = createRouter({
         history: createWebHistory(),
