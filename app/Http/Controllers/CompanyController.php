@@ -43,13 +43,12 @@ class CompanyController extends Controller
     {
 
         $request->validate([
-            'member_count' => 'integer',
+            'member_count' => 'required|integer',
             'siret' => 'required|string',
             'name' => 'required|string',
             'adress' => 'required|string',
             'postcode' => 'required|string',
             'city' => 'required|string',
-
         ], [
             'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
             'siret.required' => "Un numéro de siret est nécessaire.",

@@ -25425,7 +25425,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.success]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     method: "POST",
-    onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+    onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
   }, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "siret",
@@ -25435,7 +25435,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onKeypress: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.siretSearch && $options.siretSearch.apply($options, arguments);
-    }, ["enter"]))
+    }, ["enter"])),
+    onKeydown: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)((0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.siretSearch && $options.siretSearch.apply($options, arguments);
+    }, ["prevent"]), ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.siret]]), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.errors.siret, function (error, index) {
@@ -25453,7 +25456,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     id: "name",
     name: "name",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.name = $event;
     })
   }, null, 512
@@ -25473,7 +25476,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     id: "adress",
     name: "adress",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.adress = $event;
     })
   }, null, 512
@@ -25493,7 +25496,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     id: "postCode",
     name: "postCode",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.postcode = $event;
     })
   }, null, 512
@@ -25513,7 +25516,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     id: "city",
     name: "city",
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.city = $event;
     })
   }, null, 512
@@ -25533,7 +25536,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "number",
     id: "member_count",
     name: "member_count",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.member_count = $event;
     })
   }, null, 512
@@ -26491,11 +26494,10 @@ var routes = [{
     requiresAuth: true
   }
 }];
-var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_14__.createRouter)({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue_router__WEBPACK_IMPORTED_MODULE_14__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_14__.createWebHistory)(),
   routes: routes
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
+}));
 
 /***/ }),
 

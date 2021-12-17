@@ -20,6 +20,7 @@
         name="siret"
         v-model="siret"
         v-on:keypress.enter="siretSearch"
+        @keydown.enter.prevent="siretSearch"
       /><br />
 
         <div v-show="errors && errors.siret">
@@ -27,14 +28,14 @@
         </div>
 
       <label for="name">Dénomination social</label><br />
-      <input type="text" id="name" name="name" v-model="name" /><br />
+      <input type="text" id="name" name="name" v-model="name"/><br />
 
         <div v-show="errors && errors.name">
             <p class="text-danger" v-for="(error, index) in errors.name" :key="index" >{{error}}</p>
         </div>
 
       <label for="adress">Adresse</label><br />
-      <input type="text" id="adress" name="adress" v-model="adress" /><br />
+      <input type="text" id="adress" name="adress" v-model="adress"/><br />
 
         <div v-show="errors && errors.adress">
             <p class="text-danger" v-for="(error, index) in errors.adress" :key="index" >{{error}}</p>
