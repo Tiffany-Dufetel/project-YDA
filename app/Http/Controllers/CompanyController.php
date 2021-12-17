@@ -49,7 +49,7 @@ class CompanyController extends Controller
             'postcode' => 'required|string',
             'city' => 'required|string',
             'day' => 'string',
-            'time' => 'integer',
+            'time' => 'string',
 
         ]);
 

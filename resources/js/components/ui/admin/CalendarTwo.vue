@@ -21,8 +21,9 @@
         </thead>
         <tbody>
           <tr v-for="company in companies" :key="company.id">
-            <td v-if="company.day === 'monday'">
-              {{ company.name }}<br />{{ company.time }}
+            <td>
+              <!-- v-if="company.day === 'monday'" -->
+              <!-- {{ company.name }}<br />{{ company.time }}  -->{{ monday }}
             </td>
             <!-- <td v-else-if="company.day === 'tuesday'">
               {{ company.name }}<br />{{ company.time }}

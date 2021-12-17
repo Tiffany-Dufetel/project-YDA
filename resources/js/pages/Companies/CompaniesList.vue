@@ -41,7 +41,7 @@
             {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
           </td>
           <td>{{ company.member_count }}</td>
-          <td>{{ company.day }} entre {{ company.day }}h et</td>
+          <td>{{ company.day }} entre {{ company.time }}h et</td>
           <td>
             <div class="btn-group" role="group">
               <router-link
