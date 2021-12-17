@@ -10,7 +10,7 @@
     <AddButton name="Ajouter Produit" @click="add" />
 
         <br />
-
+{{checkRole}}
     <!-- Search box -->
     <form class="form-inline">
       <input
@@ -77,6 +77,8 @@ export default {
     BackButton,
     AddButton,
   },
+
+  inject: ["checkRole","whatRole"],
 
   data(){
       return{
