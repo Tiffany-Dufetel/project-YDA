@@ -87,6 +87,7 @@ export default {
   data() {
     return {
       productArray: [],
+      role : "",
     };
   },
 
@@ -95,7 +96,20 @@ export default {
     this.productArray = getProducts.data.data;
 
     console.log("product", this.productArray);
+    console.log("store",this.$store)
   },
+
+//   async beforeCreate(){
+
+//     const getUser = await axios.get("/api/login");
+//     this.role = getUser.data.role;
+//     console.log("role", this.role);
+
+//     if (this.role == "manager"){
+//         this.$router.push('/admin')
+//     }
+    // this.id = getUser.data.id;
+//   },
 
   methods: {
     add() {

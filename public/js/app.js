@@ -23330,7 +23330,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   inject: ["checkRole", "whatRole"],
   data: function data() {
     return {
-      productArray: []
+      productArray: [],
+      role: ""
     };
   },
   mounted: function mounted() {
@@ -23349,8 +23350,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               getProducts = _context.sent;
               _this.productArray = getProducts.data.data;
               console.log("product", _this.productArray);
+              console.log("store", _this.$store);
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -23358,6 +23360,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
+  //   async beforeCreate(){
+  //     const getUser = await axios.get("/api/login");
+  //     this.role = getUser.data.role;
+  //     console.log("role", this.role);
+  //     if (this.role == "manager"){
+  //         this.$router.push('/admin')
+  //     }
+  // this.id = getUser.data.id;
+  //   },
   methods: {
     add: function add() {
       this.$router.push({
@@ -32264,7 +32275,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nion-icon[data-v-0e82460c] {\n  font-size: 32px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nion-icon[data-v-0e82460c] {\r\n  font-size: 32px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
