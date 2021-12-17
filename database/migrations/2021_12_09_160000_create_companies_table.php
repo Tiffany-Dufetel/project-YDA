@@ -24,6 +24,8 @@ class CreateCompaniesTable extends Migration
             $table->string('logo_id')->nullable();
             $table->string('colour_background')->nullable();
             $table->string('colour_text')->nullable();
+            $table->string('day')->nullable();
+            $table->string('time')->nullable();
             $table->timestamps();
         });
     }
