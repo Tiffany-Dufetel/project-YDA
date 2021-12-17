@@ -6,11 +6,7 @@
   <div>
     <Header
       title="Ajouter un membre"
-<<<<<<< HEAD
       subtitle="Ajouter soit un membress, soit plusieurs"
-=======
-      subtitle="Ajouter soit un membre, soit plusieurs"
->>>>>>> origin/master
     />
     <form method="POST" @submit.prevent="addUser">
       <label for="surname">Nom</label><br />
