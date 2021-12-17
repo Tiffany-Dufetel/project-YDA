@@ -188,15 +188,15 @@ export default {
             time: this.time,
           })
           .then((res) => {
-            this.siret = "",
-              this.name = "",
-              this.adress = "",
-              this.postcode = "",
-              this.city = "",
-              this.member_count = "",
-              this.day = "",
-              this.time = "",
-              this.success = "true",
+            (this.siret = ""),
+              (this.name = ""),
+              (this.adress = ""),
+              (this.postcode = ""),
+              (this.city = ""),
+              (this.member_count = ""),
+              (this.day = ""),
+              (this.time = ""),
+              (this.success = "true");
           })
           .catch((error) => {
             if (error.response.status == 422) {
