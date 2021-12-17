@@ -39,6 +39,7 @@
       subtitle="Passez vos commandes"
     />
     <div class="mt-5">
+      <button @click="catView">Voir Catalogue</button>
       <button @click="order">Commander</button>
       <button @click="profile">Mon profile</button>
     </div>
