@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Actuality;
+use App\Http\Resources\NewsController as ResourcesNewsController;
 
 class NewsController extends Controller
 {
@@ -13,7 +15,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = Actuality::all();
+        return response()->json($news);
     }
 
     /**
@@ -34,7 +37,17 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' =>'required|string',
+            'text' =>'required',
+        ]);
+
+        $news = [
+            'title' =>$request->input ('title'),
+            'text' =>$request->input ('text'),
+            'company_id' =>'1',
+        ];
+        Actuality::create($news);
     }
 
     /**
@@ -45,7 +58,8 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+            $news = Actuality::findOrFail($id);
+            return response()->json($news);
     }
 
     /**
