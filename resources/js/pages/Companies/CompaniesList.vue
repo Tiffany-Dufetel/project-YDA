@@ -10,7 +10,7 @@
     <br />
 
     <!-- Search box -->
-  
+
       <input
       v-model="searchKey"
         class="form-control mr-sm-2"
@@ -87,7 +87,7 @@ export default {
     };
   },
 
-  
+
   async mounted() {
     const getCompanies = await axios.get("/api/company");
     this.companyArray = getCompanies.data.data;
@@ -98,7 +98,7 @@ export default {
   filteredList(){
 
       return this.companyArray.filter((company) => {
-          return company.name.toLowerCase().includes(this.searchKey.toLowerCase());
+          return company.name.toLowerCase().includes(this.searchKey.toLowerCase()) || company.city.toLowerCase().includes(this.searchKey.toLowerCase());
       })
   }
   },
