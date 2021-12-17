@@ -26190,7 +26190,7 @@ var _hoisted_5 = {
   role: "group"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Edit ");
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Voir ");
 
 var _hoisted_7 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -26245,7 +26245,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.deleteCompany(company.id);
       }
-    }, " Delete ", 8
+    }, " Effacer ", 8
     /* PROPS */
     , _hoisted_7)])])]);
   }), 128

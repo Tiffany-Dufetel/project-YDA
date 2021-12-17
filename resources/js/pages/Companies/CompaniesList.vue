@@ -47,10 +47,10 @@
               <router-link
                 :to="{ name: 'individualCompany', params: { id: company.id } }"
                 class="btn btn-primary"
-                >Edit
+                >Voir
               </router-link>
               <button class="btn btn-danger" @click="deleteCompany(company.id)">
-                Delete
+                Effacer
               </button>
             </div>
           </td>
