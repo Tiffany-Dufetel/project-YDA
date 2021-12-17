@@ -49,6 +49,9 @@ class CompanyController extends Controller
             'adress' => 'required|string',
             'postcode' => 'required|string',
             'city' => 'required|string',
+            'day' => 'string',
+            'time' => 'string',
+
         ], [
             'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
             'siret.required' => "Un numéro de siret est nécessaire.",
@@ -58,17 +61,18 @@ class CompanyController extends Controller
             'city.required' => "Vous devez inserez une ville."
         ]);
 
-        $companies = [
+        $company = [
             'member_count' => $request->input('member_count'),
             'name' => $request->input('name'),
             'siret' => $request->input('siret'),
             'adress' => $request->input('adress'),
             'postcode' => $request->input('postcode'),
             'city' => $request->input('city'),
-
+            'day' => $request->input('day'),
+            'time' => $request->input('time'),
         ];
 
-        Company::create($companies);
+        return Company::create($company);
 
         //Company::create($request->all());
 
@@ -116,6 +120,22 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Company::findOrFail($id)->delete();
+
+        /* Check the status response */
+        if ($res) {
+            $data = [
+                'status'=>'1',
+                'msg'=>'success'
+            ];
+        } else {
+            $data = [
+                'status'=>'0',
+                'msg'=>'fail'
+            ];
+        }
+
+        /* Return the response as json */
+        return response()->json($data);
     }
 }

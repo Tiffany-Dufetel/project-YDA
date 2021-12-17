@@ -82,12 +82,12 @@ export default {
     AddButton,
   },
 
-  inject: ["checkRole","whatRole"],
+  inject: ["checkRole", "whatRole"],
 
-  data(){
-      return{
-          productArray: [],
-      }
+  data() {
+    return {
+      productArray: [],
+    };
   },
 
   async mounted() {

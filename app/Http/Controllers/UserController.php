@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -62,7 +63,7 @@ class UserController extends Controller
             'company_id' => intval(basename($currentURL)),
         ];
 
-
+        event(new Registered($user));
 
         return User::create($user);
     }
