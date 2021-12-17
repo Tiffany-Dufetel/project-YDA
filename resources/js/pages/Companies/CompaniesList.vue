@@ -44,8 +44,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="company in filteredList" :key="company.id">
-        <!-- <tr v-for="company in companies" :key="company.id"> -->
+    <tr v-for="company in filteredList" :key="company.id">
+
           <td>{{ company.name }}</td>
           <td>{{ company.siret }}</td>
           <td>
@@ -87,15 +87,15 @@ export default {
     return {
       companyArray: [],
       searchKey: '',
-      companies: [],
+
     };
   },
 
 
   async mounted() {
     const getCompanies = await axios.get("/api/company");
-    this.companies = getCompanies.data.data;
-    console.log(this.companies);
+    this.companyArray = getCompanies.data.data;
+    console.log(this.companyArray);
   },
 
   computed:{
