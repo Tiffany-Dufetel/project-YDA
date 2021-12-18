@@ -150,7 +150,7 @@ export default {
     const companyCity = this.company.city;
 
     this.adressGPS = "https://maps.google.com/maps?q="+companyAdress.concat("+",companyPostcode,"+",companyCity)+"&output=embed"
-    console.log(this.adressGPS);
+    
   },
 };
 </script>
