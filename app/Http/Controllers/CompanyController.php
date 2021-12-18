@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Http\Resources\CompanyController as ResourcesCompanyController;
+use Illuminate\Support\Facades\Auth;
 
 use function GuzzleHttp\Promise\all;
 
@@ -17,6 +18,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
+
+        // dd(Auth::user()->role);
         return ResourcesCompanyController::collection(Company::all());
     }
 
@@ -38,30 +41,38 @@ class CompanyController extends Controller
      */
     public function store(Request $request) //$id
     {
-        //public function store(Request $request, $id)
-        // $user_id = Auth::user()->id;
 
         $request->validate([
-            'member_count' => 'integer',
+            'member_count' => 'required|integer',
             'siret' => 'required|string',
             'name' => 'required|string',
             'adress' => 'required|string',
             'postcode' => 'required|string',
             'city' => 'required|string',
+            'day' => 'string',
+            'time' => 'string',
 
+        ], [
+            'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
+            'siret.required' => "Un numéro de siret est nécessaire.",
+            'name.required' => "Vous devez inserez un nom d'entreprise.",
+            'adress.required' => "Vous devez inserez une adresse.",
+            'postcode.required' => "Vous devez inserez un code postal.",
+            'city.required' => "Vous devez inserez une ville."
         ]);
 
-        $companies = [
+        $company = [
             'member_count' => $request->input('member_count'),
             'name' => $request->input('name'),
             'siret' => $request->input('siret'),
             'adress' => $request->input('adress'),
             'postcode' => $request->input('postcode'),
             'city' => $request->input('city'),
-
+            'day' => $request->input('day'),
+            'time' => $request->input('time'),
         ];
 
-        Company::create($companies);
+        return Company::create($company);
 
         //Company::create($request->all());
 
@@ -109,6 +120,22 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Company::findOrFail($id)->delete();
+
+        /* Check the status response */
+        if ($res) {
+            $data = [
+                'status'=>'1',
+                'msg'=>'success'
+            ];
+        } else {
+            $data = [
+                'status'=>'0',
+                'msg'=>'fail'
+            ];
+        }
+
+        /* Return the response as json */
+        return response()->json($data);
     }
 }

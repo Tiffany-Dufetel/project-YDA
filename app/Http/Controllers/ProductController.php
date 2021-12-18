@@ -44,6 +44,13 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:png,jpg,jpeg',
             'type' => 'required',
             'category' => 'required',
+        ], [
+            'name.required' => "Vous devez saisir un nom.",
+            'description.required' => "Vous devez saisir une description.",
+            'image.required' => "Vous devez télécharger une image.",
+            'image.image' => "Le fichier téléchargé n'est pas une image (format accepté: .png .jpg)",
+            'type.required' => "Aucun type selectionné.",
+            'category.required' => "Aucune catégorie selectionné."
         ]);
 
         $file = [

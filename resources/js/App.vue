@@ -24,32 +24,25 @@ export default {
   data() {
     return {
       isLoggedIn: false,
+      checkRole: "",
+      role: "",
     }
   },
-    /* created() {
-        if (window.Laravel.isLoggedin) {
-            this.isLoggedIn = true
-        }
-    },
-    methods: {
-        logout(e) {
-            console.log('ss')
-            e.preventDefault()
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('/api/logout')
-                    .then(response => {
-                        if (response.data.success) {
-                            window.location.href = "/"
-                        } else {
-                            console.log(response)
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
-        }
-    }, */
+
+
+mounted(){
+
+
+    const userToken = localStorage.getItem('userToken')
+    if (userToken == null){
+        return this.isLoggedIn = false
+    } else {
+        return this.isLoggedIn = true
+    };
+
+
+},
+
     provide() {
         return {
             isLoggedIn : computed(() => this.isLoggedIn),
@@ -58,6 +51,13 @@ export default {
             },
             removeLoginStatus: () => {
                 this.isLoggedIn = false;
+            },
+
+            checkRole: computed(() => this.checkRole),
+            whatRole: ()=>{
+                const getUser = axios.get("/api/login");
+                console.log('role',this.role);
+                this.checkRole = getUser.data.role;
             }
         }
     }

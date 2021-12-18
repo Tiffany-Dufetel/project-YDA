@@ -10,18 +10,28 @@
     <br />
 
     <!-- Search box -->
-    <form class="form-inline">
+
       <input
+      v-model="searchKey"
         class="form-control mr-sm-2"
         type="search"
-        placeholder="Search"
+        placeholder="Rechercher...."
         aria-label="Search"
+        autocomplete="off"
       />
-      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+      <br/>
+      <div>
+      <span v-if="searchKey && filteredList.lenght == 1">
+      {{filteredList.lenght}}résultat</span> <span v-if="filteredList.lenght >= 2">s</span>
+      </div>
+     <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
         Search
       </button>
-    </form>
-
+      -->
+   <div v-if="filteredList.lenght == []">
+   <h3>Désolé</h3>
+   <p>Aucun résultat trouvé</p>
+   </div>
     <!-- Companies list -->
     <table class="table table-bordered">
       <thead>
@@ -30,25 +40,28 @@
           <th>Siret</th>
           <th>Adresse</th>
           <th>Total de membres</th>
+          <th>Creneau de livraison</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="company in companyArray" :key="company.id">
+    <tr v-for="company in filteredList" :key="company.id">
+
           <td>{{ company.name }}</td>
           <td>{{ company.siret }}</td>
           <td>
             {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
           </td>
           <td>{{ company.member_count }}</td>
+          <td>{{ company.day }} entre {{ company.time }}h et</td>
           <td>
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualCompany', params: { id: company.id } }"
                 class="btn btn-primary"
-                >Edit
+                >Voir
               </router-link>
               <button class="btn btn-danger" @click="deleteCompany(company.id)">
-                Delete
+                Effacer
               </button>
             </div>
           </td>
@@ -73,29 +86,42 @@ export default {
   data() {
     return {
       companyArray: [],
+      searchKey: '',
+
     };
   },
+
+
   async mounted() {
     const getCompanies = await axios.get("/api/company");
     this.companyArray = getCompanies.data.data;
     console.log(this.companyArray);
   },
+
+  computed:{
+  filteredList(){
+
+      return this.companyArray.filter((company) => {
+          return company.name.toLowerCase().includes(this.searchKey.toLowerCase()) || company.city.toLowerCase().includes(this.searchKey.toLowerCase());
+      })
+  }
+  },
   methods: {
     add() {
       this.$router.push({ name: "adminAddCompany" });
     },
-    deleteCompany(id) {
-      axios.get("/sanctum/csrf-cookie").then((response) => {
+    deleteCompany(company_id) {
+      if (confirm("Etes-vous sur d'effacer cette entreprise ?")) {
         axios
           .delete(`/api/company/destroy/${id}`)
           .then((response) => {
-            let i = this.company.map((item) => item.id).indexOf(id); // find index of your object
-            this.company.splice(i, 1);
+            let i = this.companyArray.map((item) => item.id).indexOf(id); // find index of your object
+            this.companyArray.splice(i, 1);
           })
           .catch(function (error) {
-            console.error(error);
+            console.log(error);
           });
-      });
+      }
     },
   },
 };

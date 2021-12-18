@@ -49,10 +49,5 @@ export default {
 ion-icon {
   font-size: 32px;
 }
-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
+
 </style>
