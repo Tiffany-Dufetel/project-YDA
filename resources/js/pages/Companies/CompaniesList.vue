@@ -21,16 +21,16 @@
     />
     <br />
     <div>
-      <span v-if="searchKey && filteredList.lenght == 1">
-        {{ filteredList.lenght }}résultat</span
+      <span v-if="searchKey && filteredList.length == 1">
+        {{ filteredList.length }}résultat</span
       >
-      <span v-if="filteredList.lenght >= 2">s</span>
+      <span v-if="filteredList.length >= 2">s</span>
     </div>
     <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
         Search
       </button>
       -->
-    <div v-if="filteredList.lenght == []">
+    <div v-if="filteredList.length == []">
       <h3>Désolé</h3>
       <p>Aucun résultat trouvé</p>
     </div>
