@@ -50,13 +50,13 @@
 
 <script>
 import Header from "../components/ui/Header.vue";
-import CatalogueDisplay from "../components/ui/catalogue/CatalogueDisplay.vue";
+import OrderDisplay from "../components/ui/orders/OrderDisplay.vue";
 
 export default {
   name: "Home",
   components: {
     Header,
-    CatalogueDisplay,
+    OrderDisplay,
   },
 };
 </script>

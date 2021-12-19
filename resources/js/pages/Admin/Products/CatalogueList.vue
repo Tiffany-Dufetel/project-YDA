@@ -37,10 +37,7 @@
       <tbody>
         <tr v-for="(product, index) in productArray" :key="index">
           <td valign="middle">
-            <router-link
-              :to="{ name: 'individualProduct', params: { id: product.id } }"
-              >{{ product.name }}</router-link
-            >
+            {{ product.name }}
           </td>
           <td valign="middle">{{ product.description }}</td>
           <td valign="middle">{{ product.type }}</td>
@@ -54,10 +51,10 @@
               <router-link
                 :to="{ name: 'individualProduct', params: { id: product.id } }"
                 class="btn btn-primary"
-                >Edit
+                >Voir
               </router-link>
               <button class="btn btn-danger" @click="deleteProduct(product.id)">
-                Delete
+                Supprimer
               </button>
             </div>
           </td>
@@ -69,7 +66,7 @@
 
 <script>
 import Header from "../../../components/ui/Header.vue";
-import CatalogueDisplay from "../../../components/ui/catalogue/CatalogueDisplay.vue";
+// import OrderDisplay from "../../../components/ui/orders/OrderDisplay.vue";
 import BackButton from "../../../components/ui/buttons/BackButton.vue";
 import AddButton from "../../../components/ui/buttons/AddButton.vue";
 
@@ -77,7 +74,7 @@ export default {
   name: "productList",
   components: {
     Header,
-    CatalogueDisplay,
+    // OrderDisplay,
     BackButton,
     AddButton,
   },

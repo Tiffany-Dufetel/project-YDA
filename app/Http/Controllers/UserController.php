@@ -51,6 +51,13 @@ class UserController extends Controller
             'password' => 'required|string',
             'birthday' => 'required|date',
             'role' => 'required|string',
+        ], [
+            'surname.required' => "Vous devez saisir un nom de famille",
+            'first_name.required' => "Vous devez saisir un prénom",
+            'email.required' => "Vous devez saisir un email",
+            'password.required' => "Vous devez saisir un mot de passe",
+            'birthday.required' => "Vous devez saisir une date de naissance",
+            'role.required' => "Vous devez choisir un role."
         ]);
 
         $user = [

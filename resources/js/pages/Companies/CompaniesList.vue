@@ -47,7 +47,7 @@
               <router-link
                 :to="{ name: 'individualCompany', params: { id: company.id } }"
                 class="btn btn-primary"
-                >Voir
+                >voir
               </router-link>
               <button class="btn btn-danger" @click="deleteCompany(company.id)">
                 Effacer

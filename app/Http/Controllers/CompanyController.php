@@ -107,9 +107,33 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $company)
     {
-        //
+        $company = Company::find($company);
+
+        $company->siret = $request->siret;
+        $company->member_count = $request->member_count;
+        $company->name = $request->name;
+        $company->adress = $request->adress;
+        $company->postcode = $request->postcode;
+        $company->city = $request->city;
+
+        $company->save();
+
+
+        if ($company) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        return response()->json($data);
     }
 
     /**
@@ -125,13 +149,13 @@ class CompanyController extends Controller
         /* Check the status response */
         if ($res) {
             $data = [
-                'status'=>'1',
-                'msg'=>'success'
+                'status' => '1',
+                'msg' => 'success'
             ];
         } else {
             $data = [
-                'status'=>'0',
-                'msg'=>'fail'
+                'status' => '0',
+                'msg' => 'fail'
             ];
         }
 

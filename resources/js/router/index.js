@@ -20,6 +20,7 @@ import ProductDisplay from "../pages/Admin/Products/ProductDisplay.vue";
 import CompaniesList from "../pages/Companies/CompaniesList.vue";
 import AddCompany from "../pages/Companies/AddCompany.vue";
 import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
+import CompanyUpdate from "../pages/Companies/CompanyUpdate.vue";
 
 /** Members */
 import MembersList from "../pages/Members/MembersList.vue";
@@ -28,6 +29,9 @@ import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 // Orders - members
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
 import OrdersList from "../pages/Orders/OrdersList.vue";
+
+// members role authorization
+
 
 const routes = [
         {
@@ -101,7 +105,13 @@ const routes = [
                 props: true,
                 meta: { requiresAuth: true },
         },
-
+        // Update company
+        {
+            path: "/company/:id/edit",
+            name: "companyUpdate",
+            component: CompanyUpdate,
+            meta: { requiresAuth: true },
+    },
         /**
          * MEMBRES
          */
