@@ -23754,50 +23754,80 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      companies: []
+      companies: [],
+      company: null
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var getCompanies;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return axios.get("/api/company");
-
-            case 2:
-              getCompanies = _context.sent;
-              _this.companies = getCompanies.data.data;
-              console.log(_this.companies);
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
   methods: {
+    /* forceRerender() {
+      this.id += 1;
+    }, */
+    retrieveCompanies: function retrieveCompanies() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var getCompanies;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get("/api/company");
+
+              case 2:
+                getCompanies = _context.sent;
+                _this.companies = getCompanies.data.data;
+                console.log(_this.companies);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    refreshList: function refreshList() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.retrieveCompanies();
+
+                _this2.company = null;
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     add: function add() {
       this.$router.push({
         name: "adminAddCompany"
       });
     },
     deleteCompany: function deleteCompany(company_id) {
+      var _this3 = this;
+
       if (confirm("Etes-vous sur d'effacer cette entreprise ?")) {
         axios["delete"]("api/company/".concat(company_id)).then(function (response) {
           console.log(response);
-          /* this.router.push({ name: "adminCompanies" }); */
         })["catch"](function (error) {
           console.log(error);
+        })["finally"](function () {
+          return _this3.refreshList();
         });
       }
     }
+  },
+  mounted: function mounted() {
+    this.retrieveCompanies();
   }
 });
 
@@ -27216,11 +27246,11 @@ _router__WEBPACK_IMPORTED_MODULE_3__["default"].beforeEach(function (to, from, n
     }
   }
   /*else if(to.matched.some(record => record.meta.guest)){
-    if (loggedIn()) {
-        next({
-          path: '/',
-          query: { redirect: to.fullPath }
-        })
+      if (loggedIn()) {
+          next({
+            path: '/',
+            query: { redirect: to.fullPath }
+          })
   }*/
   else {
     next(); // make sure to always call next()!

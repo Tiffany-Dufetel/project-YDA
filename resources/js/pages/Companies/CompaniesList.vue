@@ -75,14 +75,22 @@ export default {
   data() {
     return {
       companies: [],
+      company: null,
     };
   },
-  async mounted() {
-    const getCompanies = await axios.get("/api/company");
-    this.companies = getCompanies.data.data;
-    console.log(this.companies);
-  },
   methods: {
+    /* forceRerender() {
+      this.id += 1;
+    }, */
+    async retrieveCompanies() {
+      const getCompanies = await axios.get("/api/company");
+      this.companies = getCompanies.data.data;
+      console.log(this.companies);
+    },
+    async refreshList() {
+      this.retrieveCompanies();
+      this.company = null;
+    },
     add() {
       this.$router.push({ name: "adminAddCompany" });
     },
@@ -92,13 +100,16 @@ export default {
           .delete(`api/company/${company_id}`)
           .then(function (response) {
             console.log(response);
-            /* this.router.push({ name: "adminCompanies" }); */
           })
           .catch(function (error) {
             console.log(error);
-          });
+          })
+          .finally(() => this.refreshList());
       }
     },
+  },
+  mounted() {
+    this.retrieveCompanies();
   },
 };
 </script>
