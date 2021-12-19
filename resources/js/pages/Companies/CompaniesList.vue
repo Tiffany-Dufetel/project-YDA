@@ -10,18 +10,30 @@
     <br />
 
     <!-- Search box -->
-    <form class="form-inline">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+
+    <input
+      v-model="searchKey"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Rechercher...."
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <br />
+    <div>
+      <span v-if="searchKey && filteredList.lenght == 1">
+        {{ filteredList.lenght }}résultat</span
+      >
+      <span v-if="filteredList.lenght >= 2">s</span>
+    </div>
+    <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
         Search
       </button>
-    </form>
-
+      -->
+    <div v-if="filteredList.lenght == []">
+      <h3>Désolé</h3>
+      <p>Aucun résultat trouvé</p>
+    </div>
     <!-- Companies list -->
     <table class="table table-bordered">
       <thead>
@@ -34,7 +46,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="company in companies" :key="company.id">
+        <tr v-for="company in filteredList" :key="company.id">
           <td>{{ company.name }}</td>
           <td>{{ company.siret }}</td>
           <td>
@@ -76,21 +88,37 @@ export default {
     return {
       companies: [],
       company: null,
+      searchKey: "",
     };
   },
+  computed: {
+    /** Search box */
+    filteredList() {
+      return this.companyArray.filter((company) => {
+        return (
+          company.name.toLowerCase().includes(this.searchKey.toLowerCase()) ||
+          company.city.toLowerCase().includes(this.searchKey.toLowerCase())
+        );
+      });
+    },
+  },
   methods: {
+    /** Retrieve full list of companies from database */
     async retrieveCompanies() {
       const getCompanies = await axios.get("/api/company");
       this.companies = getCompanies.data.data;
       console.log(this.companies);
     },
+    /** Refresh the list when changes are made */
     async refreshList() {
       this.retrieveCompanies();
       this.company = null;
     },
+    /** Go to "add new company" page */
     add() {
       this.$router.push({ name: "adminAddCompany" });
     },
+    /** Delete a specific company */
     deleteCompany(company_id) {
       if (confirm("Etes-vous sur d'effacer cette entreprise ?")) {
         axios
@@ -105,6 +133,7 @@ export default {
       }
     },
   },
+  /** Mount with the full company list */
   mounted() {
     this.retrieveCompanies();
   },

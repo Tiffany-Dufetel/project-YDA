@@ -43,7 +43,7 @@ class CompanyController extends Controller
     {
 
         $request->validate([
-            'member_count' => 'integer',
+            'member_count' => 'required|integer',
             'siret' => 'required|string',
             'name' => 'required|string',
             'adress' => 'required|string',

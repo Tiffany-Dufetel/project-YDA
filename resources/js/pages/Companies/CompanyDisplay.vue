@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           <CatalogueDisplay
-            v-for="(order, index) in orders"
+            v-for="(order, index) in filterOrders"
             :key="index"
             :id="order.id"
             :name="order.product.name"
@@ -109,6 +109,7 @@ export default {
       user: {},
       companyId: "",
       filterUsers: [],
+      filterOrders: [],
       orders: [],
     };
   },
@@ -123,12 +124,16 @@ export default {
 
     const orderResponse = await axios.get("/api/order");
     this.orders = orderResponse.data;
+    const orders = this.orders;
     console.log("order", this.orders);
 
     const getUser = await axios.get("/api/login");
     this.companyId = getUser.data.company_id;
 
     this.filterUsers = users.filter((user) => user.company_id == this.id);
+    this.filterOrders = orders.filter((order) => order.user.company_id == this.id);
+    console.log('coucou', this.filterOrders)
+
 
     this.role = getUser.data.role;
     console.log("user", users);
