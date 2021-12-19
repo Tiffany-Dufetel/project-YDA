@@ -3,74 +3,93 @@
 -->
 
 <template>
-  <div>
     <Header title="Ajouter un produit ou service" subtitle="...." />
     <BackButton />
-    <div class="d-flex justify-content-center">
-      <form @submit.prevent="addProduct" enctype="multipart/form-data">
-        <!-- item name -->
-        <div class="form-group col-md-4">
-          <input
-            type="text"
-            name="name"
-            v-model="name"
-            placeholder="nom de produit"
-          />
-        </div>
-        <!-- item description -->
-        <div class="form-group col-md-4">
-          <textarea
-            rows="4"
-            cols="50"
-            type="text"
-            name="description"
-            v-model="description"
-            placeholder="descriptif du produit"
-            required="true"
-          >
-          </textarea>
+        <div class="alert alert-success" v-show="success">Votre produit a bien été rajouté</div>
+        <div class="d-flex justify-content-center">
+            <form>
+                <div class="form-group col-md-10">
+                    <label for="name">Nom</label>
+                    <input
+                        v-model="formData.name"
+                        id="name"
+                        type="text"
+                        name="name"
+                        required autocomplete="name"
+                        autofocus>
+                </div>
+
+                <div v-show="errors && errors.name">
+                    <p class="text-danger" v-for="(error, index) in errors.name" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
+                    <label for="description">Description</label>
+                    <input
+                        v-model="formData.description"
+                        id="description"
+                        type="text"
+                        name="description"
+                        required autocomplete="on">
+                </div>
+
+                <div v-show="errors && errors.description">
+                    <p class="text-danger" v-for="(error, index) in errors.description" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
+                    <label for="type">Type</label>
+                        <select
+                            v-model="formData.type"
+                            name="type"
+                            id="type"
+                            class="form-control"
+                            required="true"
+                            >
+                            <option selected>choisir le type...</option>
+                            <option value="service">service</option>
+                            <option value="produit">produit</option>
+                        </select>
+                </div>
+
+                <div v-show="errors && errors.type">
+                    <p class="text-danger" v-for="(error, index) in errors.type" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
+                    <label for="category">Categorie</label>
+                        <select
+                            v-model="formData.category"
+                            name="category"
+                            id="category"
+                            class="form-control"
+                            required="true"
+                        >
+                            <option selected>choisir la catégorie...</option>
+                            <option value="service">service</option>
+                            <option value="produit">produit</option>
+                        </select>
+                </div>
+
+                <div v-show="errors && errors.category">
+                    <p class="text-danger" v-for="(error, index) in errors.category" :key="index" >{{error}}</p>
+                </div>
+
+                <div class="form-group col-md-10">
+                    <label>Image</label>
+                        <!-- MOST IMPORTANT - SEE "ref" AND "@change" PROPERTIES -->
+                        <input type="file" class="custom-file-input" id="customFile"
+                            ref="file" @change="handleFileObject()">
+                </div>
+
+                <div v-show="errors && errors.image">
+                    <p class="text-danger" v-for="(error, index) in errors.image" :key="index" >{{error}}</p>
+                </div>
+
+                  <SubmitButton  @click="submit" name="Ajouter"/>
+            </form>
         </div>
 
-        <div class="form-group col-md-4">
-            <label for="image">Image</label><br>
-            <input type="file" name="image" @change = "uploadImage">
-        </div>
-
-        <!-- item type -->
-        <div class="form-group col-md-4">
-          <label for="type">Type</label>
-          <select
-            v-model="type"
-            name="type"
-            id="type"
-            class="form-control"
-            required="true"
-          >
-            <option selected>choisir le type...</option>
-            <option value="service">service</option>
-            <option value="produit">produit</option>
-          </select>
-        </div>
-        <!-- item type -->
-        <div class="form-group col-md-4">
-          <label for="category">Categorie</label>
-          <select
-            v-model="category"
-            name="category"
-            id="category"
-            class="form-control"
-            required="true"
-          >
-            <option selected>choisir la catégorie...</option>
-            <option value="service">service</option>
-            <option value="produit">produit</option>
-          </select>
-        </div>
-
-        <SubmitButton name="Ajouter" />
-      </form>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -86,66 +105,49 @@ export default {
     BackButton,
     SubmitButton,
   },
+
   data() {
     return {
-        name:"",
-        description:"",
+        formData:{},
         image:null,
-        type:"",
-        category:"",
+        success: false,
+        errors: {},
     };
   },
   methods: {
-    uploadImage(event){
-        this.image = event.target.files[0]
-    },
+      submit(event){
+          event.preventDefault()
+          let formData = new FormData()
+          formData.append('image', this.image)
 
-    addProduct() {
-      axios.get("/sanctum/csrf-cookie").then((response) => {
-        const formData = new FormData();
-        formData.append('image', this.image)
-        formData.append('name', this.name)
-        formData.append('description', this.description)
-        formData.append('type', this.type)
-        formData.append('category', this.category)
+          _.each(this.formData, (value, key) => {
+              formData.append(key, value)
+          })
 
-        axios.post('api/product', formData,{
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        })
-        .then((res)=>{
-            console.log(res)
-        })
+        const response = axios.post('api/product', formData)
+            .then(res =>{
 
-            alert('yes')
+                this.formData = {}
+                this.$refs.file.value = null
+                this.success = true
+            }).catch(error=>{
+                if (error.response.status == 422 ){
+                    this.errors = error.response.data.errors
+                }
+                console.log(this.errors)
+            })
+        // this.$router.push('/catalogue')
+      },
 
-      });
-    },
-
-    addProduct(){
-        // const config = {
-        //     headers: {
-        //         'X-CSRF-TOKEN': token.content,
-        //         'content-type': 'multipart/form-data'
-        //     }
-        // }
-
-        // axios.post('api/product',{
-        //     name: this.name,
-        //     description:this.description,
-        //     image:this.image,
-        //     type:this.type,
-        //     category:this.category,
-        // })
-        // .then((response)=>{
-        //     this.$router.push({name:"product"});
-        // })
-        // .catch(function(error){
-        //     console.error(error);
-        // });
-        // alert("ok")
+    handleFileObject() {
+        this.image = this.$refs.file.files[0]
     }
   },
 };
 </script>
+
+<style scoped>
+input, select{
+    width: 25vh;
+}
+</style>

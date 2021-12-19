@@ -1,8 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../pages/Home.vue";
-import Login from "../pages/Auth/Login.vue";
 import Contact from "../pages/Contact.vue";
+
+/** Admin */
+import Login from "../pages/Auth/Login.vue";
+import ForgottenPassword from "../pages/Auth/ForgottenPassword.vue";
+import ModifyPassword from "../pages/Auth/ModifyPassword.vue";
+import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
 
 /** Admin */
 import AdminHome from "../pages/Admin/AdminHome.vue";
@@ -19,7 +24,6 @@ import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
 
 /** Members */
 import MembersList from "../pages/Members/MembersList.vue";
-import AddMembers from "../pages/Members/AddMembers.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 
 // Orders - members
@@ -38,16 +42,38 @@ const routes = [
                 meta: { guest: true },
         },
         {
+                path: "/contact",
+                name: "Contact",
+                component: Contact,
+                meta: { guest: true },
+        },
+
+        /**
+         * AUTH
+         */
+        {
                 path: "/login",
                 name: "Login",
                 component: Login,
                 meta: { guest: true },
         },
         {
-                path: "/contact",
-                name: "Contact",
-                component: Contact,
-                meta: { guest: true },
+                path: "/email-verification",
+                name: "FirstConnection",
+                component: FirstConnection,
+                /* meta: { guest: true }, */
+        },
+        {
+                path: "/forgotten-password",
+                name: "ForgottenPassword",
+                component: ForgottenPassword,
+                /* meta: { guest: true }, */
+        },
+        {
+                path: "/modify-password",
+                name: "ModifyPassword",
+                component: ModifyPassword,
+                /* meta: { guest: true }, */
         },
 
         /**
@@ -114,13 +140,7 @@ const routes = [
                 component: MembersList,
                 meta: { requiresAuth: true },
         },
-        // Add a member to a company -
-        {
-                path: "/add-members",
-                name: "companiesAddMembers",
-                component: AddMembers,
-                meta: { requiresAuth: true },
-        },
+
         // View a specific member from a company -
         {
                 path: "/membre/:id",
@@ -154,28 +174,29 @@ const routes = [
                 meta: { requiresAuth: true },
         },
 
-         /**
-         * NEWS
-         */
+        /**
+        * NEWS
+        */
 
         // View the full news -
         {
-            path: "/news",
-            name: "adminNews",
-            component: NewsList,
-            meta: { requiresAuth: true },
-    },
-    // Add a news -
-    {
-            path: "/add-news",
-            name: "adminNewsAdd",
-            component: AddNews,
-            meta: { requiresAuth: true },
-    },
+                path: "/news",
+                name: "adminNews",
+                component: NewsList,
+                meta: { requiresAuth: true },
+        },
+        // Add a news -
+        {
+                path: "/add-news",
+                name: "adminNewsAdd",
+                component: AddNews,
+                meta: { requiresAuth: true },
+        },
 
-    ];
+];
 
 export default createRouter({
         history: createWebHistory(),
         routes,
 });
+

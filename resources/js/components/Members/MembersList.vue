@@ -1,34 +1,44 @@
 <template>
-  <div>
-    <h1>GAME OVER for Rebekah</h1>
-    <div v-for="user in arrayUsers" :key="user.id">{{ user.surname }}</div>
-  </div>
+  <!-- member list filtered by company id-->
+
+  <tr>
+    <td valign="middle">
+      <router-link
+        :to="{ name: 'individualMember', params: { id: this.id } }"
+        >{{ first_name }}</router-link
+      >
+    </td>
+    <td valign="middle">{{ surname }}</td>
+    <td valign="middle">{{ birthday }}</td>
+    <td valign="middle">{{ email }}</td>
+
+    <td>
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary">Modifier</button>
+        <button class="btn btn-danger">Effacer</button>
+        <button class="btn btn-primary" @click="verify">Vérifie</button>
+      </div>
+    </td>
+  </tr>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  data() {
-    return {
-      arrayUsers: [],
-    };
+  props: {
+    id: Number,
+    first_name: String,
+    surname: String,
+    birthday: String,
+    email: String,
   },
-  /*setup() {
-    const getMembers = async () => {
-      let members = await axios.get("/api/user");
-      console.log(members.data);
-      this.arrayUsers = members.data;
-      console.log(this.arrayUsers);
-    };
-    */
-  async mounted() {
-    const getMembers = await axios.get("/api/user");
-    console.log(getMembers.data);
-    this.arrayUsers = getMembers.data.data;
+  methods: {
+    verify() {
+      this.$router.push({
+        name: "FirstConnection",
+        /* params: { id: user.id }, */
+      });
+    },
   },
-
-  // getMembers();
 };
 </script>
 

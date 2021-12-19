@@ -15,9 +15,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = Actuality::orderByDesc('created_at')->get();
-        return response()->json($news);
-
+        return ResourcesNewsController::collection(Actuality::all());
     }
 
     /**
