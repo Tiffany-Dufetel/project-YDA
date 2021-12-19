@@ -111,6 +111,25 @@ class CompanyController extends Controller
     {
         $company = Company::find($company);
 
+        $request->validate([
+            'member_count' => 'required|integer',
+            'siret' => 'required|string',
+            'name' => 'required|string',
+            'adress' => 'required|string',
+            'postcode' => 'required|string',
+            'city' => 'required|string',
+            'day' => 'string',
+            'time' => 'string',
+
+        ], [
+            'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
+            'siret.required' => "Un numéro de siret est nécessaire.",
+            'name.required' => "Vous devez inserez un nom d'entreprise.",
+            'adress.required' => "Vous devez inserez une adresse.",
+            'postcode.required' => "Vous devez inserez un code postal.",
+            'city.required' => "Vous devez inserez une ville."
+        ]);
+
         $company->siret = $request->siret;
         $company->member_count = $request->member_count;
         $company->name = $request->name;

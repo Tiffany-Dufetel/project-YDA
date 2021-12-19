@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style>
-.vuecal__menu,
+/* .vuecal__menu,
 .vuecal__cell-events-count {
   background-color: #e78c15;
 }
@@ -124,5 +124,5 @@ export default {
 }
 .vuecal__cell--selected:before {
   border-color: #e78c15;
-}
+} */
 </style>

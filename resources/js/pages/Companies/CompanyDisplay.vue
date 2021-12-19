@@ -13,9 +13,9 @@
 
       <p>
         Adresse : {{ company.adress }} - {{ company.postcode }}
-        {{ company.city }} HFIAEfoaehfoa{{company.id}}
+        {{ company.city }}
       </p>
-              <button class="btn btn-warning" @click="goToUpdate">modifier</button>
+        <button class="btn btn-warning" @click="goToUpdate">modifier</button>
 
       <button class="btn btn-dark" @click="isHidden = !isHidden">
         {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
@@ -74,6 +74,7 @@
             :surname="user.surname"
             :birthday="user.birthday"
             :email="user.email"
+            :role="user.role"
           />
         </tbody>
       </table>
@@ -92,7 +93,7 @@ export default {
   components: {
     Header,
     AddMember,
-    MembersList: MembersList,
+    MembersList,
     OrderDisplay,
   },
 

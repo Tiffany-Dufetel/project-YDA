@@ -10,9 +10,6 @@
     />
     <BackButton />
 
-    <!-- <div class="alert alert-success" v-show="success">
-      L'entreprise a bien été rajouté
-    </div> -->
     <div class="alert alert-success" v-show="success">
       L'entreprise a bien été mis à jour
     </div>
@@ -21,29 +18,69 @@
 
       <!-- Siret number to use government data -->
       <label for="siret">Siret</label><br />
-      <input
-        type="text"
-        id="siret"
-        name="siret"
-        v-model="siret"
-      /><br />
+      <input type="text" id="siret" name="siret" v-model="siret"/><br />
+
+        <div v-show="errors && errors.siret">
+            <p
+            class="text-danger"
+            v-for="(error, index) in errors.siret"
+            :key="index"
+            >
+            {{ error }}
+            </p>
+        </div>
 
       <label for="name">Dénomination social</label><br />
       <input type="text" id="name" name="name" v-model="name"/><br />
 
+        <div v-show="errors && errors.name">
+            <p
+            class="text-danger"
+            v-for="(error, index) in errors.name"
+            :key="index"
+            >
+            {{ error }}
+            </p>
+        </div>
+
       <label for="adress">Adresse</label><br />
       <input type="text" id="adress" name="adress" v-model="adress"/><br />
 
+        <div v-show="errors && errors.adress">
+            <p
+            class="text-danger"
+            v-for="(error, index) in errors.adress"
+            :key="index"
+            >
+            {{ error }}
+            </p>
+        </div>
+
       <label for="postCode">Code postal</label><br />
-      <input
-        type="text"
-        id="postCode"
-        name="postCode"
-        v-model="postcode"
-      /><br />
+      <input type="text" id="postCode" name="postCode" v-model="postcode"/><br />
+
+        <div v-show="errors && errors.postcode">
+            <p
+            class="text-danger"
+            v-for="(error, index) in errors.postcode"
+            :key="index"
+            >
+            {{ error }}
+            </p>
+        </div>
 
       <label for="city">Ville</label><br />
       <input type="text" id="city" name="city" v-model="city" /><br />
+
+        <div v-show="errors && errors.city">
+            <p
+            class="text-danger"
+            v-for="(error, index) in errors.city"
+            :key="index"
+            >
+            {{ error }}
+            </p>
+        </div>
 
       <label for="member_count">Nombre d'employés</label><br />
       <input
@@ -88,7 +125,7 @@
 import Header from "../../components/ui/Header.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 export default {
-  name: "viewNewsLsit",
+  name: "companyUpdate",
   components: {
       Header,
       SubmitButton,
@@ -106,6 +143,7 @@ export default {
           day: "",
           time: "",
           success: false,
+          errors: {},
       }
   },
 
@@ -133,7 +171,7 @@ export default {
               (this.member_count = ""),
               (this.day = ""),
               (this.time = ""),
-              (this.success = "true");
+              (this.success = true);
           })
           .catch((error) => {
             if (error.response.status == 422) {
@@ -142,7 +180,6 @@ export default {
             }
           });
       });
-      this.success = true
     },
   },
 

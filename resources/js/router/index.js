@@ -25,10 +25,12 @@ import CompanyUpdate from "../pages/Companies/CompanyUpdate.vue";
 /** Members */
 import MembersList from "../pages/Members/MembersList.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
+import MemberUpdate from "../pages/Members/MemberUpdate.vue";
 
 // Orders - members
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
 import OrdersList from "../pages/Orders/OrdersList.vue";
+
 
 // members role authorization
 
@@ -111,25 +113,32 @@ const routes = [
             name: "companyUpdate",
             component: CompanyUpdate,
             meta: { requiresAuth: true },
-    },
+        },
         /**
          * MEMBRES
          */
 
         // The list of members -
         {
-                path: "/membres",
-                name: "companiesMembers",
-                component: MembersList,
-                meta: { requiresAuth: true },
+            path: "/membres",
+            name: "companiesMembers",
+            component: MembersList,
+            meta: { requiresAuth: true },
         },
 
         // View a specific member from a company -
         {
-                path: "/membre/:id",
-                name: "individualMember",
-                component: MemberDisplay,
-                meta: { requiresAuth: true },
+            path: "/membre/:id",
+            name: "individualMember",
+            component: MemberDisplay,
+            meta: { requiresAuth: true },
+        },
+        // Update Member
+        {
+            path: "/membre/:id/edit",
+            name: "membreUpdate",
+            component: MemberUpdate,
+            meta: { requiresAuth: true },
         },
 
         /**

@@ -6,10 +6,11 @@
           <td valign="middle">{{ surname }}</td>
           <td valign="middle">{{ birthday }}</td>
           <td valign="middle">{{ email }}</td>
+          <td valign="middle">{{ role }}</td>
 
           <td>
             <div class="btn-group" role="group">
-              <button class="btn btn-primary">
+              <button class="btn btn-primary" @click="goToUpdate">
                 Edit
               </button>
               <button class="btn btn-danger">
@@ -30,7 +31,13 @@ export default {
         surname: String,
         birthday: String,
         email: String,
-    }
+        role: String,
+    },
+      methods: {
+        goToUpdate(){
+            this.$router.push('/membre/'+ this.id +'/edit')
+        }
+  },
 };
 </script>
 
