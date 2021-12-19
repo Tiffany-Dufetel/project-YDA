@@ -23764,7 +23764,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     filteredList: function filteredList() {
       var _this = this;
 
-      return this.companyArray.filter(function (company) {
+      return this.companies.filter(function (company) {
         return company.name.toLowerCase().includes(_this.searchKey.toLowerCase()) || company.city.toLowerCase().includes(_this.searchKey.toLowerCase());
       });
     }

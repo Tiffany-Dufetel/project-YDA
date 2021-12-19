@@ -94,7 +94,7 @@ export default {
   computed: {
     /** Search box */
     filteredList() {
-      return this.companyArray.filter((company) => {
+      return this.companies.filter((company) => {
         return (
           company.name.toLowerCase().includes(this.searchKey.toLowerCase()) ||
           company.city.toLowerCase().includes(this.searchKey.toLowerCase())
