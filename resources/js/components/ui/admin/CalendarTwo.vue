@@ -26,19 +26,24 @@
               <!-- v-if="company.day === 'monday'" -->
               Le Bocal Academy <br />
               11h - 13h
+              {{ monday }}
               <!-- {{ company.name }}<br />{{ company.time }} -->
             </td>
             <!-- <td v-else-if="company.day === 'tuesday'">
               {{ company.name }}<br />{{ company.time }}
+              {{tuesday}}
             </td>
             <td v-else-if="company.day === 'wednesday'">
               {{ company.name }}<br />{{ company.time }}
+              {{wednesday}}
             </td>
             <td v-else-if="company.day === 'thursday'">
               {{ company.name }}<br />{{ company.time }}
+              {{thursday}}
             </td>
             <td v-else-if="company.day === 'friday'">
               {{ company.name }}<br />{{ company.time }}
+              {{friday}}
             </td>
             <div v-else></div> -->
           </tr>
