@@ -79,9 +79,6 @@ export default {
     };
   },
   methods: {
-    /* forceRerender() {
-      this.id += 1;
-    }, */
     async retrieveCompanies() {
       const getCompanies = await axios.get("/api/company");
       this.companies = getCompanies.data.data;
