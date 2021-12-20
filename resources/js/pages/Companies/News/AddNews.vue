@@ -5,16 +5,86 @@
 <template>
   <div>
     <!-- make title responsive -->
-    <Header title="Name of company" subtitle="Ajouter les actualités" />
+    <Header title="les actualités" subtitle="Ajouter les actualités" />
+    <BackButton />
+    <form method="POST" @submit.prevent="addNews">
+      <!-- Specific company choice -->
+      <label for="company">Choisir l'entreprise</label>
+      <select
+        v-model="company"
+        name="company"
+        id="company"
+        class="form-control"
+        required="true"
+      >
+        <option v-for="company in companies" :key="company.id">
+          {{ company.id }} - {{ company.name }}
+        </option>
+      </select>
+
+      <label for="title">Titre de l'actualité</label>
+      <br />
+      <input type="text" id="title" name="title" v-model="title" />
+      <br />
+      <label for="text">Actualité</label>
+      <br />
+      <textarea
+        name="text"
+        id="text"
+        v-model="text"
+        cols="90"
+        rows="4"
+      ></textarea>
+      <SubmitButton name="Ajouter" />
+    </form>
   </div>
 </template>
 
+
 <script>
 import Header from "../../../components/ui/Header.vue";
+import BackButton from "../../../components/ui/buttons/BackButton.vue";
+import SubmitButton from "../../../components/ui/buttons/SubmitButton.vue";
+import axios from "axios";
+
 export default {
-  name: "addNews",
+  name: "adminNewsAdd",
+
+  data() {
+    return {
+      title: "",
+      text: "",
+      company_id: "",
+      companies: [],
+    };
+  },
   components: {
     Header,
+    BackButton,
+    SubmitButton,
+  },
+  // fetch the list of companies on view creation
+  async mounted() {
+    const getCompany = await axios.get("/api/company");
+    this.companies = getCompany.data.data;
+  },
+  methods: {
+    addNews() {
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .post("/api/news", {
+            title: this.title,
+            text: this.text,
+          })
+          .then((response) => {
+            console.log(response);
+            this.$router.push({ name: "adminNews" });
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
+    },
   },
 };
 </script>

@@ -107,9 +107,52 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $company)
     {
-        //
+        $company = Company::find($company);
+
+        $request->validate([
+            'member_count' => 'required|integer',
+            'siret' => 'required|string',
+            'name' => 'required|string',
+            'adress' => 'required|string',
+            'postcode' => 'required|string',
+            'city' => 'required|string',
+            'day' => 'string',
+            'time' => 'string',
+
+        ], [
+            'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
+            'siret.required' => "Un numéro de siret est nécessaire.",
+            'name.required' => "Vous devez inserez un nom d'entreprise.",
+            'adress.required' => "Vous devez inserez une adresse.",
+            'postcode.required' => "Vous devez inserez un code postal.",
+            'city.required' => "Vous devez inserez une ville."
+        ]);
+
+        $company->siret = $request->siret;
+        $company->member_count = $request->member_count;
+        $company->name = $request->name;
+        $company->adress = $request->adress;
+        $company->postcode = $request->postcode;
+        $company->city = $request->city;
+
+        $company->save();
+
+
+        if ($company) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        return response()->json($data);
     }
 
     /**
@@ -125,13 +168,13 @@ class CompanyController extends Controller
         /* Check the status response */
         if ($res) {
             $data = [
-                'status'=>'1',
-                'msg'=>'success'
+                'status' => '1',
+                'msg' => 'success'
             ];
         } else {
             $data = [
-                'status'=>'0',
-                'msg'=>'fail'
+                'status' => '0',
+                'msg' => 'fail'
             ];
         }
 

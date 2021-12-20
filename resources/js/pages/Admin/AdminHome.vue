@@ -12,10 +12,10 @@
       <button @click="catView">Voir Catalogue</button>
       <button @click="catAdd">Ajouter dans le catalogue</button>
       <button @click="companyView">Voir entreprises</button>
-      <button @click="memberAdd">Ajouter une membre</button>
-
       <button @click="companyAdd">Ajouter une entreprise</button>
       <button @click="orderList">Liste de commandes</button>
+      <button @click="order">Commander</button>
+      <button @click="news">Actualités</button>
     </div>
 
     <!-- Calendar displaying upcoming events -->
@@ -105,12 +105,18 @@ export default {
     showMembers() {
       this.$router.push({ name: "companiesMembers" });
     },
+    news() {
+      this.$router.push({ name: "adminNews" });
+    },
+    newsAdd() {
+      this.$router.push({ name: "adminNewsAdd" });
+    },
   },
 };
 </script>
 
 <style>
-.vuecal__menu,
+/* .vuecal__menu,
 .vuecal__cell-events-count {
   background-color: #e78c15;
 }
@@ -126,5 +132,5 @@ export default {
 }
 .vuecal__cell--selected:before {
   border-color: #e78c15;
-}
+} */
 </style>
