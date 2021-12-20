@@ -158,22 +158,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
-    
-
-    public function destroy($user)
+    public function destroy($id)
     {
-        $res = User::findOrFail($user)->delete();
+        $res = User::findOrFail($id)->delete();
 
         if ($res) {
             $data = [
-                'status'=>'1',
-                'msg'=>'success'
+                'status' => '1',
+                'msg' => 'success'
             ];
         } else {
             $data = [
-                'status'=>'0',
-                'msg'=>'fail'
+                'status' => '0',
+                'msg' => 'fail'
             ];
         }
 

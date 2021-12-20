@@ -190,7 +190,7 @@ const routes = [
         },
         // Update company
         {
-            path: "/entreprise/:id/entreprise",
+            path: "/entreprise/:id/modifier",
             name: "companyUpdate",
             component: CompanyUpdate,
             meta: { requiresAuth: true },
@@ -243,7 +243,7 @@ const routes = [
         },
         // Update Member
         {
-            path: "/membre/:id/entreprise",
+            path: "/membre/:id/modifier",
             name: "membreUpdate",
             component: MemberUpdate,
             meta: { requiresAuth: true },
