@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header title="Connexion" />
+    <Header title="Modifier votre Mot de Passe" />
     <div class="row justify-content-center">
       <div class="col-md-8">
         <!-- <div class="alert alert-danger" role="alert" v-if="error !== null">
@@ -12,30 +12,12 @@
           <div class="card-body">
             <div class="d-flex justify-content-center">
               <form @submit.prevent="login">
-                <div class="form-group row">
-                  <label
-                    for="email"
-                    class="col-sm-4 col-form-label text-md-right"
-                    >E-Mail Address</label
-                  >
-                  <div class="col-md-6">
-                    <input
-                      id="email"
-                      type="email"
-                      class="form-control"
-                      v-model="email"
-                      required
-                      autofocus
-                      autocomplete="off"
-                    />
-                  </div>
-                </div>
 
                 <div class="form-group row">
                   <label
                     for="password"
                     class="col-md-4 col-form-label text-md-right"
-                    >Password</label
+                    >Votre de mot de passe</label
                   >
                   <div class="col-md-6">
                     <input
@@ -70,7 +52,7 @@ import Header from "../../components/ui/Header.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 
 export default {
-  name: "ResetPassword",
+  name: "ModifyPassword",
   components: {
     Header,
     SubmitButton,
@@ -84,8 +66,8 @@ export default {
       },
     };
   },
-  /*  methods: {
-    login() {
+ methods: {
+    /* login() {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("/api/reset", {
@@ -100,7 +82,8 @@ export default {
         //     console.error(error);
         //   });
       });
-    },
-  }, */
+    }, */
+
+  },
 };
 </script>
