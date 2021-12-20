@@ -24,7 +24,7 @@
       <span v-if="searchKey && filteredList.length == 1">
         {{ filteredList.length }}résultat</span
       >
-      <span v-if="filteredList.length >= 2">s</span>
+      <span v-if="filteredList.length >= 2"></span>
     </div>
     <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
         Search

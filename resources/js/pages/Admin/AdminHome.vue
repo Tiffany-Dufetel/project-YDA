@@ -12,13 +12,6 @@
       <button @click="catView">Voir Catalogue</button>
       <!--<button @click="catAdd">Ajouter dans le catalogue</button>-->
       <button @click="companyView">Voir entreprises</button>
-<<<<<<< HEAD
-      <!--<button @click="memberAdd">Ajouter une membre</button>-->
-
-      <!--<button @click="companyAdd">Ajouter une entreprise</button>-->
-=======
-      <button @click="companyAdd">Ajouter une entreprise</button>
->>>>>>> origin/master
       <button @click="orderList">Liste de commandes</button>
       <button @click="order">Commander</button>
       <button @click="news">Actualités</button>
