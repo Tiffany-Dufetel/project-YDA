@@ -54,11 +54,6 @@ export default {
       newsArray: [],
     };
   },
-
-  async mounted() {
-    //We are loading the company display thanks to the ID;
-  },
-
   methods: {
     newsAdd() {
       this.$router.push({ name: "adminNewsAdd" });
