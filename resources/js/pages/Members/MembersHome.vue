@@ -18,16 +18,8 @@
       <div class="card-body">
         <h5 class="card-title">Commandes</h5>
         <p class="card-text">Vos commandes en cours, en attente et terminés.</p>
-        <a @click="orderList" class="card-link">Voir</a>
-      </div>
-    </div>
-
-    <!-- Order request card -->
-    <div class="card" style="width: 18rem">
-      <div class="card-body">
-        <h5 class="card-title">Commandez</h5>
-        <p class="card-text">Commandez ici !</p>
-        <a @click="order" class="card-link">On y va !</a>
+        <a @click="orderList" class="card-link">Voir</a
+        ><a @click="order" class="card-link">Commandez à nouveau</a>
       </div>
     </div>
 

@@ -25,10 +25,12 @@
             <a><router-link to="/catalogue">Catalogue</router-link></a>
           </li>
 
+          <!-- <div v-if="user.id == 'manager'"> -->
           <!-- Link companies -->
           <li v-if="isLoggedIn.value">
             <a><router-link to="/entreprises">Entreprises</router-link></a>
           </li>
+          <!-- </div> -->
 
           <!-- Link orders -->
           <li v-if="isLoggedIn.value">
@@ -65,9 +67,12 @@ export default {
   },
   inject: ["isLoggedIn", "removeLoginStatus"],
 
-  mounted() {
+  async mounted() {
     this.userToken = localStorage.getItem("userToken");
     console.log("token", this.userToken);
+
+    /* const response = await axios.get("/api/user");
+    this.id = response.data.id; */
   },
 
   updated() {
