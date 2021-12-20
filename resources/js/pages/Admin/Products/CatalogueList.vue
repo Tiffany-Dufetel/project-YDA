@@ -92,9 +92,10 @@ export default {
     const getProducts = await axios.get("/api/product");
     this.productArray = getProducts.data.data;
 
-    console.log("product", this.productArray);
-    console.log("store",this.$store)
+    console.log("product", getProducts);
   },
+
+
 
 //   async beforeCreate(){
 
@@ -105,7 +106,7 @@ export default {
 //     if (this.role == "manager"){
 //         this.$router.push('/admin')
 //     }
-    // this.id = getUser.data.id;
+//     this.id = getUser.data.id;
 //   },
 
   methods: {
