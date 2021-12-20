@@ -11,18 +11,25 @@
     <br />
 
     <!-- Search box -->
-    <form class="form-inline">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-        Search
-      </button>
-    </form>
-
+    <input
+      v-model="searchKey"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Rechercher...."
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <br />
+    <div>
+      <span v-if="searchKey && filteredList.length == 1">
+        {{ filteredList.length }} résultat(s)</span
+      >
+      <span v-if="filteredList.length >= 2"></span>
+    </div>
+    <div v-if="filteredList.length == 0">
+      <h3>Désolé</h3>
+      <p>Aucun résultat trouvé</p>
+    </div>
     <!-- Companies list -->
     <table class="table table-bordered">
       <thead>
@@ -35,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index) in productArray" :key="index">
+        <tr v-for="product in products" :key="product.id">
           <td valign="middle">
             {{ product.name }}
           </td>
@@ -80,39 +87,79 @@ export default {
   },
 
   inject: ["checkRole", "whatRole"],
-
   data() {
     return {
-      productArray: [],
-      role : "",
+      products: [],
+      product: null,
+      role: "",
+      searchKey: "",
     };
   },
-
-  async mounted() {
+async mounted() {
     const getProducts = await axios.get("/api/product");
     this.productArray = getProducts.data.data;
 
-    console.log("product", this.productArray);
-    console.log("store",this.$store)
+    console.log("product", getProducts);
   },
-
-//   async beforeCreate(){
-
-//     const getUser = await axios.get("/api/login");
-//     this.role = getUser.data.role;
-//     console.log("role", this.role);
-
-//     if (this.role == "manager"){
-//         this.$router.push('/admin')
-//     }
-    // this.id = getUser.data.id;
-//   },
-
+  computed: {
+    /** Search box */
+    filteredList() {
+      return this.products.filter((product) => {
+        return (
+          product.name.toLowerCase().includes(this.searchKey.toLowerCase()) ||
+          product.type.toLowerCase().includes(this.searchKey.toLowerCase()) ||
+          product.category.toLowerCase().includes(this.searchKey.toLowerCase())
+        );
+      });
+    },
+  },
   methods: {
+    /** Go to "add new item" page */
     add() {
       this.$router.push({ name: "adminProductAdd" });
     },
+    /** Retrieve full list of companies from database */
+    async retrieveProducts() {
+      const getProducts = await axios.get("/api/product");
+      this.products = getProducts.data.data;
+      console.log("product", this.products);
+      console.log("store", this.$store);
+    },
+    /** Refresh the list when changes are made */
+    async refreshList() {
+      this.retrieveProducts();
+      this.product = null;
+    },
+    /** Delete a specific company */
+    deleteProduct(id) {
+      if (confirm("Etes-vous sur d'effacer cette produit ou service ?")) {
+        axios
+          .delete(`api/product/${id}`)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(() => this.refreshList());
+      }
+    },
   },
+  async mounted() {
+    this.retrieveProducts();
+  },
+
+  //   async beforeCreate(){
+
+  //     const getUser = await axios.get("/api/login");
+  //     this.role = getUser.data.role;
+  //     console.log("role", this.role);
+
+  //     if (this.role == "manager"){
+  //         this.$router.push('/admin')
+  //     }
+  // this.id = getUser.data.id;
+  //   },
 };
 </script>
 

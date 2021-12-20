@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, routerKey } from "vue-router";
 
 import Home from "../pages/Home.vue";
 import Contact from "../pages/Contact.vue";
@@ -8,6 +8,7 @@ import Login from "../pages/Auth/Login.vue";
 import ForgottenPassword from "../pages/Auth/ForgottenPassword.vue";
 import ModifyPassword from "../pages/Auth/ModifyPassword.vue";
 import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
+import MembersList from "../pages/Admin/MembersList.vue";
 
 /** Admin */
 import AdminHome from "../pages/Admin/AdminHome.vue";
@@ -24,7 +25,6 @@ import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
 import CompanyUpdate from "../pages/Companies/CompanyUpdate.vue";
 
 /** Members */
-import MembersList from "../pages/Members/MembersList.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 import MemberUpdate from "../pages/Members/MemberUpdate.vue";
 
@@ -62,17 +62,18 @@ const routes = [
                 meta: { guest: true },
         },
         {
-                path: "/email-verification",
+                path: "/verification",
                 name: "FirstConnection",
                 component: FirstConnection,
                 /* meta: { guest: true }, */
         },
         {
-                path: "/forgotten-password",
+                path: "/password-oublier",
                 name: "ForgottenPassword",
                 component: ForgottenPassword,
                 /* meta: { guest: true }, */
         },
+
         {
                 path: "/modifier-password/:id/:hash",
                 name: "ModifyPassword",
@@ -90,13 +91,32 @@ const routes = [
                 name: "adminCatalogue",
                 component: CatalogueList,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "manager"){
+                        router.push('/admin')
+                    }
+                }
         },
         // Add a product to the catalogue -
         {
-                path: "/add-product",
+                path: "/ajouter-produit",
                 name: "adminProductAdd",
                 component: AddProduct,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "member" && role == "manager"){
+                        router.push('/admin')
+                    }
+                }
+
         },
         // View a specific catalogue item -
         {
@@ -104,6 +124,15 @@ const routes = [
                 name: "individualProduct",
                 component: ProductDisplay,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "manager"){
+                        router.push('/admin')
+                    }
+                }
         },
 
         /**
@@ -116,28 +145,65 @@ const routes = [
                 name: "adminCompanies",
                 component: CompaniesList,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "member" || role == "manager"){
+                        router.push('/admin')
+                    }
+                }
         },
         // Add a company -
         {
-                path: "/add-entreprise",
+                path: "/ajouter-entreprise",
                 name: "adminAddCompany",
                 component: AddCompany,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "member" || role == "manager"){
+                        router.push('/admin')
+                    }
+                }
+
         },
         // View a specific company -
         {
-                path: "/company/:id",
+                path: "/entreprise/:id",
                 name: "individualCompany",
                 component: CompanyDisplay,
                 props: true,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "member" || role == "manager"){
+                        router.push('/admin')
+                    }
+                }
         },
         // Update company
         {
-            path: "/company/:id/edit",
+            path: "/entreprise/:id/modifier",
             name: "companyUpdate",
             component: CompanyUpdate,
             meta: { requiresAuth: true },
+            async beforeEnter(){
+                const getUser = await axios.get("/api/login");
+                console.log("response role",getUser.data.role)
+                const role = getUser.data.role
+
+                if (role == "member"){
+                    router.push('/admin')
+                }
+            }
         },
         /**
          * MEMBRES
@@ -149,6 +215,15 @@ const routes = [
             name: "companiesMembers",
             component: MembersList,
             meta: { requiresAuth: true },
+            async beforeEnter(){
+                const getUser = await axios.get("/api/login");
+                console.log("response role",getUser.data.role)
+                const role = getUser.data.role
+
+                if (role == "member"){
+                    router.push('/admin')
+                }
+            }
         },
 
         // View a specific member from a company -
@@ -160,10 +235,19 @@ const routes = [
         },
         // Update Member
         {
-            path: "/membre/:id/edit",
+            path: "/membre/:id/modifier",
             name: "membreUpdate",
             component: MemberUpdate,
             meta: { requiresAuth: true },
+            async beforeEnter(){
+                const getUser = await axios.get("/api/login");
+                console.log("response role",getUser.data.role)
+                const role = getUser.data.role
+
+                if (role == "member"){
+                    router.push('/admin')
+                }
+            }
         },
 
         /**
@@ -176,12 +260,30 @@ const routes = [
                 name: "productOrder",
                 component: ProductOrder,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "admin" || role == "manager"){
+                        router.push('/admin')
+                    }
+                }
         },
         {
                 path: "/commandes",
                 name: "orders",
                 component: OrdersList,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "member" || role == "manager"){
+                        router.push('/admin')
+                    }
+                }
         },
 
         {
@@ -197,23 +299,54 @@ const routes = [
 
         // View the full news -
         {
-                path: "/news",
+                path: "/actualités",
                 name: "adminNews",
                 component: NewsList,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "member"){
+                        router.push('/admin')
+                    }
+                }
         },
         // Add a news -
         {
-                path: "/add-news",
+                path: "/ajout-actualité",
                 name: "adminNewsAdd",
                 component: AddNews,
                 meta: { requiresAuth: true },
+                async beforeEnter(){
+                    const getUser = await axios.get("/api/login");
+                    console.log("response role",getUser.data.role)
+                    const role = getUser.data.role
+
+                    if (role == "member" || role == "manager"){
+                        router.push('/admin')
+                    }
+                }
         },
 
 ];
 
-export default createRouter({
+
+
+const router = createRouter({
         history: createWebHistory(),
         routes,
 });
+
+export default router
+
+// router.beforeEach((to, _1, next) =>{
+//         console.log('global before each');
+//         if (to.path === '/catalogue'){
+//             next();
+//         } else {
+//             next()
+//         }
+// });
 

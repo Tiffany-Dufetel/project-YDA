@@ -27,30 +27,34 @@
       </thead>
       <tbody>
         <tr v-for="order in orderArray" :key="order.id">
-          <td><b>{{ order.user.company.name}}</b></td>
-          <td><span class="capitalize_firstname">{{ order.user.first_name }}</span> {{order.user.surname.toUpperCase()}}</td>
-          <td>{{ order.product.name}}</td>
-          <td>{{ order.comment}}</td>
+          <td>
+            <b>{{ order.user.company.name }}</b>
+          </td>
+          <td>
+            <span class="capitalize_firstname">{{
+              order.user.first_name
+            }}</span>
+            {{ order.user.surname.toUpperCase() }}
+          </td>
+          <td>{{ order.product.name }}</td>
+          <td>{{ order.comment }}</td>
           <td>{{ order.date_order }}</td>
           <td>{{ order.date_delivery }}</td>
-            <td>
-              <select>
-                  <option>{{ order.status }}</option>
-                  <option>en cours</option>
-                  <option>terminé</option>
-              </select>
-            </td>
+          <td>
+            <select>
+              <option>{{ order.status }}</option>
+              <option>en cours</option>
+              <option>terminé</option>
+            </select>
+          </td>
           <td>
             <div class="btn-group" role="group">
               <!-- <router-link
                 :to="{ name: 'individualorder', params: { id: order.id } }"
                 ><button class="btn btn-primary">Edit</button>
               </router-link> -->
-              <button
-                v-if="status"
-                class="btn btn-danger"
-                @click="deleteorder(order.id)"
-              >
+              <!-- v-if="status" -->
+              <button class="btn btn-danger" @click="deleteOrder(order.id)">
                 Delete
               </button>
             </div>
@@ -76,37 +80,53 @@ export default {
   data() {
     return {
       orderArray: [],
+      order: null,
+      searchKey: "",
     };
   },
-  async mounted() {
-    const response = await axios.get("/api/order");
-    this.orderArray = response.data;
-    console.log("reponse",this.orderArray);
+  mounted() {
+    this.retrieveOrders();
   },
-
   methods: {
+    /** Retrieve full list of orders from database */
+    async retrieveOrders() {
+      const response = await axios.get("/api/order");
+      this.orderArray = response.data;
+      console.log("reponse", this.orderArray);
+    },
+    /** Refresh the list when changes are made */
+    async refreshList() {
+      this.retrieveOrders();
+      this.order = null;
+    },
+    /** Go to "add order" page */
     add() {
       this.$router.push({ name: "productOrder" });
     },
-    deleteorder(id) {
-      axios.get("/sanctum/csrf-cookie").then((response) => {
+    /** Delete a specific order */
+    deleteOrder(id) {
+      if (
+        confirm(
+          "Etes-vous sur d'effacer cette commande ? Vous pouvez également changé son status"
+        )
+      ) {
         axios
-          .delete(`/api/order/destroy/${id}`)
-          .then((response) => {
-            let i = this.order.map((item) => item.id).indexOf(id); // find index of your object
-            this.order.splice(i, 1);
+          .delete(`api/order/${id}`)
+          .then(function (response) {
+            console.log(response);
           })
           .catch(function (error) {
-            console.error(error);
-          });
-      });
+            console.log(error);
+          })
+          .finally(() => this.refreshList());
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-.capitalize_firstname{
-    text-transform: capitalize;
+.capitalize_firstname {
+  text-transform: capitalize;
 }
 </style>

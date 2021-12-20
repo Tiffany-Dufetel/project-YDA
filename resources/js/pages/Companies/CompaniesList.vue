@@ -22,7 +22,7 @@
     <br />
     <div>
       <span v-if="searchKey && filteredList.length == 1">
-        {{ filteredList.length }}résultat</span
+        {{ filteredList.length }} résultat(s)</span
       >
       <span v-if="filteredList.length >= 2"></span>
     </div>
