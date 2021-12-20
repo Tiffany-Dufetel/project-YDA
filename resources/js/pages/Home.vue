@@ -3,16 +3,16 @@
 -->
 
 <template>
-  <div class="container mt-5">
+  <!-- <div> -->
     <!-- rendre le nom reactive -->
     <Header
       title="Your Daily Assistant"
       subtitle="Faciliter la vie avec notre conciergerie"
     />
 
-    <div class="row d-flex justify-content-center mt-5">
+    <!-- <div> -->
       <!-- Catalogue card -->
-      <div class="row-md-4">
+      <!-- <div class="row-md-4">
         <div class="col d-flex justify-content-middle">
           <div class="row-sm">
             <h5 class="headers">Catalogue</h5>
@@ -45,18 +45,18 @@
         </figcaption>
       </figure>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 import Header from "../components/ui/Header.vue";
-import CatalogueDisplay from "../components/ui/catalogue/CatalogueDisplay.vue";
+import OrderDisplay from "../components/ui/orders/OrderDisplay.vue";
 
 export default {
   name: "Home",
   components: {
     Header,
-    CatalogueDisplay,
+    OrderDisplay,
   },
 };
 </script>

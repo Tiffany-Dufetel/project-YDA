@@ -1,11 +1,11 @@
- <!--
--- Add member Display form UI component
+<!--
+-- View company update page component
 -->
 
 <template>
   <div>
-    <div class ="alert alert-success" v-show="success">Le membre a bien été ajouté</div>
-    <form method="POST" @submit.prevent="addUser">
+    <!-- <div class ="alert alert-success" v-show="success">Le membre a bien été mis à jour</div> -->
+    <form @submit.prevent="updateMember">
       <label for="surname">Nom</label><br />
       <input type="text" id="surname" name="surname" v-model="surname" /><br />
         <div v-show="errors && errors.surname">
@@ -28,15 +28,14 @@
         <div v-show="errors && errors.email">
             <p class="text-danger" v-for="(error, index) in errors.email" :key="index" >{{error}}</p>
         </div>
-
       <label for="password">Mot de passe</label><br />
-      <input type="text" id="password" name="password" v-model="password" />
+      <input type="text" id="password" name="password" v-model="password" /><br>
         <div v-show="errors && errors.password">
             <p class="text-danger" v-for="(error, index) in errors.password" :key="index" >{{error}}</p>
         </div><br>
 
       <label for="birthday">Date d'anniversaire</label><br />
-      <input type="date" id="birthday" name="birthday" v-model="birthday" />
+      <input type="date" id="birthday" name="birthday" v-model="birthday" /><br>
         <div v-show="errors && errors.birthday">
             <p class="text-danger" v-for="(error, index) in errors.birthday" :key="index" >{{error}}</p>
         </div>
@@ -62,70 +61,70 @@
 </template>
 
 <script>
-import SubmitButton from "../buttons/SubmitButton.vue";
+import Header from "../../components/ui/Header.vue";
+import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 
 export default {
-    name: "companiesAddMembers",
-    props: {
-        id: Number,
-    },
-  data() {
-    return {
-      surname: "",
-      first_name: "",
-      email: "",
-      password: "",
-      birthday: "",
-      role: "",
-      company_id: "",
-      data: {},
-      success: false,
-      errors: {},
-    };
+  name: "MemberUpdate",
+  components: {
+      Header,
+      SubmitButton,
   },
 
-  /* async mounted() {
-    const getUser = await axios.get("/api/login");
-    this.role = getUser.data.role;
-    console.log("user", this.role);
-  }, */
-
-  components: {
-    SubmitButton,
+  data(){
+      return{
+          memberInfo: {},
+          surname: "",
+          first_name:"",
+          email:"",
+          password: "",
+          birthday:"",
+          role:"",
+          success: false,
+          errors: {}
+      }
   },
 
   methods: {
-    addUser() {
-      /* $company_id = this.$id;
-      console.log($company_id); */
+    updateMember() {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .post("/api/user", {
+          .post("/api/user/" + this.$route.params.id,{
             surname: this.surname,
             first_name: this.first_name,
             email: this.email,
             password: this.password,
-            role: this.role,
             birthday: this.birthday,
-            company_id: this.id,
+            role: this.role,
+
+            _method : 'put'
           })
-          .then((response) => {
-            this.surname = "",
-            this.first_name = "",
-            this.email = "",
-            this.password = "",
-            this.birthday = "",
-            this.role = "",
-            this.company_id = "",
+          .then((res) => {
+            this.surname="",
+            this.first_name="",
+            this.email="",
+            this.password="",
+            this.birthday="",
+            this.role="",
             this.success = true
-          }).catch(error=>{
-            if (error.response.status == 422 ){
-                this.errors = error.response.data.errors
+          })
+          .catch((error) => {
+            if (error.response.status == 422) {
+              this.errors = error.response.data.errors;
+              console.log(this.errors);
             }
-            })
+          });
       });
+      this.success = true
     },
   },
+
+//     async mounted(){
+        // const response = await axios.get("/api/company/" + this.$route.params.id);
+        // this.companyInfo =  response.data
+        // console.log('abc', this.companyInfo)
+
+    // }
 };
 </script>
 

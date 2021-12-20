@@ -33,7 +33,13 @@
           <td>{{ order.comment}}</td>
           <td>{{ order.date_order }}</td>
           <td>{{ order.date_delivery }}</td>
-          <td>{{ order.status }}</td>
+            <td>
+              <select>
+                  <option>{{ order.status }}</option>
+                  <option>en cours</option>
+                  <option>terminé</option>
+              </select>
+            </td>
           <td>
             <div class="btn-group" role="group">
               <!-- <router-link
