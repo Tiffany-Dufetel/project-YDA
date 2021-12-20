@@ -6,8 +6,7 @@
   <div class="catalogue_container">
     <Header title="Catalogue" subtitle="Produits et services" />
     <BackButton />
-    <AddButton name="Ajouter Produit" @click="add" />
-
+        <AddButton name="Ajouter Produit" @click="add"/>
     <br />
 
     <!-- Search box -->

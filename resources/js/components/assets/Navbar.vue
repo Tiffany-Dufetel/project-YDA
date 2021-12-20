@@ -13,7 +13,7 @@
             <nav>
                 <div class="dashboard-nav-list">
                     <!-- link to home logged -->
-                    <router-link to="/admin" class="dashboard-nav-item" v-if="isLoggedIn.value">Accueil</router-link>
+                    <router-link to="/yda" class="dashboard-nav-item" v-if="isLoggedIn.value">Accueil</router-link>
 
                     <!-- link to home not logged -->
                     <router-link to="/" class="dashboard-nav-item" v-else>Accueil</router-link>
@@ -87,7 +87,7 @@ export default {
 
   methods: {
     logIn() {
-      this.$router.push("/admin");
+      this.$router.push("/login");
     },
     logOut() {
       localStorage.removeItem("userToken");

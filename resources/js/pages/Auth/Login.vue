@@ -98,7 +98,7 @@ export default {
             console.log("reponse: ", response);
             localStorage.setItem("userToken", response.data.data.token);
             this.setLoginStatus();
-            this.$router.push("/");
+            this.$router.push("/yda");
           });
         //   .catch(function (error) {
         //     console.error(error);
