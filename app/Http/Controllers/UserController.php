@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -51,6 +52,13 @@ class UserController extends Controller
             'password' => 'required|string',
             'birthday' => 'required|date',
             'role' => 'required|string',
+        ], [
+            'surname.required' => "Vous devez saisir un nom de famille",
+            'first_name.required' => "Vous devez saisir un prénom",
+            'email.required' => "Vous devez saisir un email",
+            'password.required' => "Vous devez saisir un mot de passe",
+            'birthday.required' => "Vous devez saisir une date de naissance",
+            'role.required' => "Vous devez choisir un role."
         ]);
 
         $user = [
@@ -76,7 +84,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return $orders = Order::with('product', 'user', 'user.company')->where('user_id', $id)->get();
+        return $orders = Order::with('product', 'user', 'user.company')
+            ->where('user_id', $id)
+            ->get();
     }
 
     /**
@@ -97,9 +107,49 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        //
+        $user = User::find($user);
+
+        $request->validate([
+            'surname' => 'required|string',
+            'first_name' => 'required|string',
+            'email' => 'required|string',
+            'password' => 'required|string',
+            'birthday' => 'required|date',
+            'role' => 'required|string',
+        ], [
+            'surname.required' => "Vous devez saisir un nom de famille",
+            'first_name.required' => "Vous devez saisir un prénom",
+            'email.required' => "Vous devez saisir un email",
+            'password.required' => "Vous devez saisir un mot de passe",
+            'birthday.required' => "Vous devez saisir une date de naissance",
+            'role.required' => "Vous devez choisir un role."
+        ]);
+
+        $user->surname = $request->surname;
+        $user->first_name = $request->first_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->birthday = $request->birthday;
+        $user->role = $request->role;
+
+        $user->save();
+
+
+        if ($user) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        return response()->json($data);
     }
 
     /**
@@ -108,8 +158,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    
+    
+
+    public function destroy($user)
     {
-        //
+        $res = User::findOrFail($user)->delete();
+
+        if ($res) {
+            $data = [
+                'status'=>'1',
+                'msg'=>'success'
+            ];
+        } else {
+            $data = [
+                'status'=>'0',
+                'msg'=>'fail'
+            ];
+        }
+
+        return response()->json($data);
     }
 }

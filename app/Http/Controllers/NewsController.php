@@ -15,7 +15,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return ResourcesNewsController::collection(Actuality::all());
+        $news = Actuality::orderByDesc('created_at')->get();
+        return response()->json($news);
+
     }
 
     /**
@@ -39,12 +41,14 @@ class NewsController extends Controller
         $request->validate([
             'title' =>'required|string',
             'text' =>'required',
+
         ]);
 
         $news = [
             'title' =>$request->input ('title'),
             'text' =>$request->input ('text'),
             'company_id' =>'1',
+
         ];
         Actuality::create($news);
     }
@@ -92,6 +96,23 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+            $res = Actuality::findOrFail($id)->delete();
+
+            /* Check the status response */
+            if ($res) {
+                $data = [
+                    'status'=>'1',
+                    'msg'=>'success'
+                ];
+            } else {
+                $data = [
+                    'status'=>'0',
+                    'msg'=>'fail'
+                ];
+            }
+
+            /* Return the response as json */
+            return response()->json($data);
     }
 }
