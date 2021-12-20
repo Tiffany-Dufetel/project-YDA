@@ -24869,44 +24869,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return axios.get("/api/order");
-
-            case 2:
-              response = _context.sent;
-              _this.orderArray = response.data;
-              console.log("reponse", _this.orderArray);
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+    this.retrieveOrders();
   },
   methods: {
+    /** Retrieve full list of orders from database */
+    retrieveOrders: function retrieveOrders() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get("/api/order");
+
+              case 2:
+                response = _context.sent;
+                _this.orderArray = response.data;
+                console.log("reponse", _this.orderArray);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+
+    /** Refresh the list when changes are made */
+    refreshList: function refreshList() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.retrieveOrders();
+
+                _this2.order = null;
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+
+    /** Go to "add order" page */
     add: function add() {
       this.$router.push({
         name: "productOrder"
       });
     },
+
+    /** Delete a specific order */
     deleteOrder: function deleteOrder(id) {
-      if (confirm("Etes-vous sur d'effacer cette commande ?")) {
+      var _this3 = this;
+
+      if (confirm("Etes-vous sur d'effacer cette commande ? Vous pouvez également changé son status")) {
         axios["delete"]("api/order/".concat(id)).then(function (response) {
           console.log(response);
         })["catch"](function (error) {
           console.log(error);
+        })["finally"](function () {
+          return _this3.refreshList();
         });
-        /* .finally(() => this.refreshList()); */
       }
     }
   }

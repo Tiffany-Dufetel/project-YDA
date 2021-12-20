@@ -84,18 +84,32 @@ export default {
       searchKey: "",
     };
   },
-  async mounted() {
-    const response = await axios.get("/api/order");
-    this.orderArray = response.data;
-    console.log("reponse", this.orderArray);
+  mounted() {
+    this.retrieveOrders();
   },
-
   methods: {
+    /** Retrieve full list of orders from database */
+    async retrieveOrders() {
+      const response = await axios.get("/api/order");
+      this.orderArray = response.data;
+      console.log("reponse", this.orderArray);
+    },
+    /** Refresh the list when changes are made */
+    async refreshList() {
+      this.retrieveOrders();
+      this.order = null;
+    },
+    /** Go to "add order" page */
     add() {
       this.$router.push({ name: "productOrder" });
     },
+    /** Delete a specific order */
     deleteOrder(id) {
-      if (confirm("Etes-vous sur d'effacer cette commande ?")) {
+      if (
+        confirm(
+          "Etes-vous sur d'effacer cette commande ? Vous pouvez également changé son status"
+        )
+      ) {
         axios
           .delete(`api/order/${id}`)
           .then(function (response) {
@@ -103,8 +117,8 @@ export default {
           })
           .catch(function (error) {
             console.log(error);
-          });
-        /* .finally(() => this.refreshList()); */
+          })
+          .finally(() => this.refreshList());
       }
     },
   },
