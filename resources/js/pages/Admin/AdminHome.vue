@@ -12,8 +12,6 @@
       <button @click="catView">Voir Catalogue</button>
       <button @click="catAdd">Ajouter dans le catalogue</button>
       <button @click="companyView">Voir entreprises</button>
-      <button @click="memberAdd">Ajouter une membre</button>
-
       <button @click="companyAdd">Ajouter une entreprise</button>
       <button @click="orderList">Liste de commandes</button>
       <button @click="order">Commander</button>
@@ -118,7 +116,7 @@ export default {
 </script>
 
 <style>
-.vuecal__menu,
+/* .vuecal__menu,
 .vuecal__cell-events-count {
   background-color: #e78c15;
 }
@@ -134,5 +132,5 @@ export default {
 }
 .vuecal__cell--selected:before {
   border-color: #e78c15;
-}
+} */
 </style>

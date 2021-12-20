@@ -3,23 +3,25 @@
     <!-- Display the nav bar -->
     <Navbar />
     <!-- Import the router -->
-    <router-view />
+    <div class="router-view">
+        <router-view />
+    </div>
     <!-- Display the footer -->
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
 /** Imports */
 import Navbar from "./components/assets/Navbar.vue";
-import Footer from "./components/assets/Footer.vue";
+// import Footer from "./components/assets/Footer.vue";
 import { computed} from "vue";
 
 export default {
   name: "App",
   components: {
     Navbar,
-    Footer,
+    // Footer,
   },
   data() {
     return {
@@ -65,14 +67,27 @@ mounted(){
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+#app{
+    display: flex;
+    font-weight: lighter;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#app a {
+    text-decoration: none;
+}
+
+.router-view{
+    margin-left: 320px;
+}
+/* #app { */
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  /* text-align: center;
   color: #2c3e50;
   margin-top: 60px;
   background-repeat: round;
-  height: 700px;
-}
+  height: 700px; */
+/* } */
 </style>

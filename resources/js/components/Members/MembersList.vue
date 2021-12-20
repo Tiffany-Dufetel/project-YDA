@@ -11,15 +11,14 @@
     <td valign="middle">{{ surname }}</td>
     <td valign="middle">{{ birthday }}</td>
     <td valign="middle">{{ email }}</td>
+    <td valign="middle">{{ role }}</td>
 
     <td>
       <div class="btn-group" role="group">
-        <button class="btn btn-primary">Modifier</button>
-
         <button class="btn btn-danger" @click="deleteMember(this.id)">
           Effacer
         </button>
-
+        <button class="btn btn-primary" @click="goToUpdate">Modifier</button>
         <button class="btn btn-primary" @click="verify">Vérifie</button>
       </div>
     </td>
@@ -34,6 +33,7 @@ export default {
     surname: String,
     birthday: String,
     email: String,
+    role: String,
   },
   data() {
     return {
@@ -48,10 +48,16 @@ export default {
       this.members = getMembers.data.data;
       console.log(this.members);
     },
+    goToUpdate() {
+      this.$router.push("/membre/" + this.id + "/edit");
+    },
     /** Refresh the list when changes are made */
     async refreshList() {
       this.retrieveMembers();
       this.member = null;
+    },
+    goToUpdate() {
+      this.$router.push("/membre/" + this.id + "/edit");
     },
     verify() {
       this.$router.push({

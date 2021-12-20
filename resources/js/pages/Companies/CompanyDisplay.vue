@@ -20,7 +20,8 @@
             </div>
         </div>
 
-      <button @click="isHidden = !isHidden">
+        <button class="btn btn-warning" @click="goToUpdate">modifier</button>
+      <button class="btn btn-dark" @click="isHidden = !isHidden">
         {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
       </button>
 
@@ -42,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-          <CatalogueDisplay
+          <OrderDisplay
             v-for="(order, index) in filterOrders"
             :key="index"
             :id="order.id"
@@ -77,6 +78,7 @@
             :surname="user.surname"
             :birthday="user.birthday"
             :email="user.email"
+            :role="user.role"
           />
         </tbody>
       </table>
@@ -88,15 +90,15 @@
 import Header from "../../components/ui/Header.vue";
 import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
-import CatalogueDisplay from "../../components/ui/catalogue/CatalogueDisplay.vue";
+import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
 
 export default {
   name: "CompanyDisplay",
   components: {
     Header,
     AddMember,
-    MembersList: MembersList,
-    CatalogueDisplay,
+    MembersList,
+    OrderDisplay,
   },
 
   props: {
@@ -119,9 +121,16 @@ export default {
     };
   },
 
+  methods: {
+      goToUpdate(){
+          this.$router.push('/company/'+ this.$route.params.id +'/edit')
+      }
+  },
+
   async mounted() {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
+    console.log('response',response.data)
 
     // Loading of users' information
     const userResponse = await axios.get("/api/user");
@@ -137,7 +146,7 @@ export default {
 
     this.filterUsers = users.filter((user) => user.company_id == this.id);
     this.filterOrders = orders.filter((order) => order.user.company_id == this.id);
-    console.log('coucou', this.filterOrders)
+    console.log('coucou', this.companyId)
 
 
     this.role = getUser.data.role;
@@ -150,7 +159,7 @@ export default {
     const companyCity = this.company.city;
 
     this.adressGPS = "https://maps.google.com/maps?q="+companyAdress.concat("+",companyPostcode,"+",companyCity)+"&output=embed"
-    
+
   },
 };
 </script>

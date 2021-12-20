@@ -22,9 +22,11 @@ import ProductDisplay from "../pages/Admin/Products/ProductDisplay.vue";
 import CompaniesList from "../pages/Companies/CompaniesList.vue";
 import AddCompany from "../pages/Companies/AddCompany.vue";
 import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
+import CompanyUpdate from "../pages/Companies/CompanyUpdate.vue";
 
 /** Members */
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
+import MemberUpdate from "../pages/Members/MemberUpdate.vue";
 
 // Orders - members
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
@@ -34,7 +36,9 @@ import OrdersList from "../pages/Orders/OrdersList.vue";
 import NewsList from "../pages/Companies/News/NewsList.vue";
 import AddNews from "../pages/Companies/News/AddNews.vue";
 
+
 const routes = [
+
         {
                 path: "/",
                 name: "Home",
@@ -128,25 +132,38 @@ const routes = [
                 props: true,
                 meta: { requiresAuth: true },
         },
-
+        // Update company
+        {
+            path: "/company/:id/edit",
+            name: "companyUpdate",
+            component: CompanyUpdate,
+            meta: { requiresAuth: true },
+        },
         /**
          * MEMBRES
          */
 
         // The list of members -
         {
-                path: "/membres",
-                name: "companiesMembers",
-                component: MembersList,
-                meta: { requiresAuth: true },
+            path: "/membres",
+            name: "companiesMembers",
+            component: MembersList,
+            meta: { requiresAuth: true },
         },
 
         // View a specific member from a company -
         {
-                path: "/membre/:id",
-                name: "individualMember",
-                component: MemberDisplay,
-                meta: { requiresAuth: true },
+            path: "/membre/:id",
+            name: "individualMember",
+            component: MemberDisplay,
+            meta: { requiresAuth: true },
+        },
+        // Update Member
+        {
+            path: "/membre/:id/edit",
+            name: "membreUpdate",
+            component: MemberUpdate,
+            meta: { requiresAuth: true },
         },
 
         /**
