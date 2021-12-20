@@ -14,6 +14,8 @@
       <button @click="companyView">Voir entreprises</button>
       <button @click="companyAdd">Ajouter une entreprise</button>
       <button @click="orderList">Liste de commandes</button>
+      <button @click="order">Commander</button>
+      <button @click="news">Actualités</button>
     </div>
 
     <!-- Calendar displaying upcoming events -->
@@ -102,6 +104,12 @@ export default {
     },
     showMembers() {
       this.$router.push({ name: "companiesMembers" });
+    },
+    news() {
+      this.$router.push({ name: "adminNews" });
+    },
+    newsAdd() {
+      this.$router.push({ name: "adminNewsAdd" });
     },
   },
 };

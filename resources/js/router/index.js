@@ -5,7 +5,8 @@ import Contact from "../pages/Contact.vue";
 
 /** Admin */
 import Login from "../pages/Auth/Login.vue";
-import ResetPassword from "../pages/Auth/ResetPassword.vue";
+import ForgottenPassword from "../pages/Auth/ForgottenPassword.vue";
+import ModifyPassword from "../pages/Auth/ModifyPassword.vue";
 import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
 
 /** Admin */
@@ -31,21 +32,16 @@ import MemberUpdate from "../pages/Members/MemberUpdate.vue";
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
 import OrdersList from "../pages/Orders/OrdersList.vue";
 
-
-// members role authorization
+/** News */
+import NewsList from "../pages/Companies/News/NewsList.vue";
+import AddNews from "../pages/Companies/News/AddNews.vue";
 
 
 const routes = [
+
         {
                 path: "/",
                 name: "Home",
-                component: Home,
-                meta: { guest: true },
-        },
-        {
-                path: "/login",
-                name: "Login",
-                component: Login,
                 meta: { guest: true },
         },
         {
@@ -53,6 +49,34 @@ const routes = [
                 name: "Contact",
                 component: Contact,
                 meta: { guest: true },
+        },
+
+        /**
+         * AUTH
+         */
+        {
+                path: "/login",
+                name: "Login",
+                component: Login,
+                meta: { guest: true },
+        },
+        {
+                path: "/email-verification",
+                name: "FirstConnection",
+                component: FirstConnection,
+                /* meta: { guest: true }, */
+        },
+        {
+                path: "/forgotten-password",
+                name: "ForgottenPassword",
+                component: ForgottenPassword,
+                /* meta: { guest: true }, */
+        },
+        {
+                path: "/modify-password",
+                name: "ModifyPassword",
+                component: ModifyPassword,
+                /* meta: { guest: true }, */
         },
 
         /**
@@ -165,10 +189,30 @@ const routes = [
                 component: AdminHome,
                 meta: { requiresAuth: true },
         },
+
+        /**
+        * NEWS
+        */
+
+        // View the full news -
+        {
+                path: "/news",
+                name: "adminNews",
+                component: NewsList,
+                meta: { requiresAuth: true },
+        },
+        // Add a news -
+        {
+                path: "/add-news",
+                name: "adminNewsAdd",
+                component: AddNews,
+                meta: { requiresAuth: true },
+        },
+
 ];
 
 export default createRouter({
-    history: createWebHistory(),
-    routes,
+        history: createWebHistory(),
+        routes,
 });
 
