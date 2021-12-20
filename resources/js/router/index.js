@@ -11,7 +11,7 @@ import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
 import MembersList from "../pages/Admin/MembersList.vue";
 
 /** Admin */
-import AdminHome from "../pages/Admin/AdminHome.vue";
+import ConnectedHome from "../pages/ConnectedHome.vue";
 
 /** Catalogue */
 import CatalogueList from "../pages/Admin/Products/CatalogueList.vue";
@@ -78,6 +78,16 @@ const routes = [
                 name: "ModifyPassword",
                 component: ModifyPassword,
                 /* meta: { guest: true }, */
+        },
+
+        /**
+         * CONNECTED
+         */
+        {
+                path: "/YDA",
+                name: "ConnectedHome",
+                component: ConnectedHome,
+                meta: { requiresAuth: true },
         },
 
         /**
@@ -184,12 +194,7 @@ const routes = [
                 meta: { requiresAuth: true },
         },
 
-        {
-                path: "/admin",
-                name: "AdminHome",
-                component: AdminHome,
-                meta: { requiresAuth: true },
-        },
+
 
         /**
         * NEWS

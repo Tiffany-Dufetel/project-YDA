@@ -5,58 +5,57 @@
 <template>
   <header>
     <nav>
-        <div class="container">
-                <!-- YDA Logo -->
-                <div class="logo-container">
-                        <img alt="YDA logo"  src="../../assets/logo-orange.png"/>
-                </div>
-            <ul>
-                <!-- Link Home -->
-                <li v-if="isLoggedIn.value">
-                    <a><router-link to="/admin">Accueil</router-link></a>
-                </li>
-
-                <li v-else>
-                    <a><router-link to="/">Accueil</router-link></a>
-                </li>
-
-                <!-- Link catalogue -->
-                <li v-if="isLoggedIn.value">
-                    <a><router-link to="/catalogue">Catalogue</router-link></a>
-                </li>
-
-                <!-- Link companies -->
-                <li v-if="isLoggedIn.value">
-                    <a><router-link to="/entreprises">Entreprises</router-link></a>
-                </li>
-
-                <!-- Link orders -->
-                <li v-if="isLoggedIn.value">
-                    <a><router-link to="/commandes">Commandes</router-link></a>
-                </li>
-
-                <!-- Link Contact -->
-                <li>
-                <a><router-link to="Contact">Contact</router-link></a>
-                </li>
-            </ul>
-
-                <!-- Link Log in -->
-                <div class="btn-log">
-                    <div v-if="isLoggedIn.value">
-                        <button @click="logOut">Déconnexion</button>
-                    </div>
-                    <div v-else>
-                        <button @click="logIn">Log In</button>
-                    </div>
-                </div>
+      <div class="container">
+        <!-- YDA Logo -->
+        <div class="logo-container">
+          <img alt="YDA logo" src="../../assets/logo-orange.png" />
         </div>
+        <ul>
+          <!-- Link Home -->
+          <li v-if="isLoggedIn.value">
+            <a><router-link to="/YDA">Accueil</router-link></a>
+          </li>
+
+          <li v-else>
+            <a><router-link to="/">Accueil</router-link></a>
+          </li>
+
+          <!-- Link catalogue -->
+          <li v-if="isLoggedIn.value">
+            <a><router-link to="/catalogue">Catalogue</router-link></a>
+          </li>
+
+          <!-- Link companies -->
+          <li v-if="isLoggedIn.value">
+            <a><router-link to="/entreprises">Entreprises</router-link></a>
+          </li>
+
+          <!-- Link orders -->
+          <li v-if="isLoggedIn.value">
+            <a><router-link to="/commandes">Commandes</router-link></a>
+          </li>
+
+          <!-- Link Contact -->
+          <li>
+            <a><router-link to="Contact">Contact</router-link></a>
+          </li>
+        </ul>
+
+        <!-- Link Log in -->
+        <div class="btn-log">
+          <div v-if="isLoggedIn.value">
+            <button @click="logOut">Déconnexion</button>
+          </div>
+          <div v-else>
+            <button @click="logIn">Log In</button>
+          </div>
+        </div>
+      </div>
     </nav>
   </header>
 </template>
 
 <script>
-
 export default {
   name: "Navbar",
   data() {
@@ -72,7 +71,7 @@ export default {
   },
 
   updated() {
-      console.log(this.isLoggedIn);
+    console.log(this.isLoggedIn);
   },
 
   methods: {
@@ -91,65 +90,65 @@ export default {
 
 
 <style scoped>
-.container{
-    background-color: black;
-    width: 300px;
-    position: fixed;
-    height: 100%;
-    left: 0;
-    padding: 0;
+.container {
+  background-color: black;
+  width: 300px;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  padding: 0;
 }
 
-.container img{
-    width: 200px;
+.container img {
+  width: 200px;
 }
 
-.container ul{
-    margin-top: 40px;
+.container ul {
+  margin-top: 40px;
 }
 
-.logo-container{
-    text-align: center;
-    background-color: #db9024;
-    padding: 35px;
+.logo-container {
+  text-align: center;
+  background-color: #db9024;
+  padding: 35px;
 }
 
-ul{
-    list-style: none;
-    padding-right: 50px;
-    margin-bottom: 0px;
+ul {
+  list-style: none;
+  padding-right: 50px;
+  margin-bottom: 0px;
 }
 
-li{
-    padding: 15px 0;
+li {
+  padding: 15px 0;
 }
 
-li a{
-    color: white;
-    font-size: 20px;
-    padding-left: 15px;
+li a {
+  color: white;
+  font-size: 20px;
+  padding-left: 15px;
 }
 
 nav a.router-link-exact-active {
   border-left: 4px solid #db9024;
 }
 
-.btn-log{
-    text-align: center;
-    margin-top: 40px;
+.btn-log {
+  text-align: center;
+  margin-top: 40px;
 }
 
-.btn-log button{
-    font-size: 20px;
-    text-transform: uppercase ;
-    background-color: #e78c15;
-    border-radius: 5px;
-    padding: 5px 20px;
-    border: 1px solid #e78c15;
-    color: white;
+.btn-log button {
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: #e78c15;
+  border-radius: 5px;
+  padding: 5px 20px;
+  border: 1px solid #e78c15;
+  color: white;
 }
 
-.btn-log button:hover{
+.btn-log button:hover {
   background-color: white;
   color: #e78c15;
   border: 1px solid #e78c15;
