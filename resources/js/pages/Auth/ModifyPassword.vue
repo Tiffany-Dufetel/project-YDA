@@ -31,25 +31,6 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <label
-                    for="password"
-                    class="col-md-4 col-form-label text-md-right"
-                    >Vérification du pot de passe</label
-                  >
-                  <div class="col-md-6">
-                    <input
-                      id="password"
-                      type="password"
-                      class="form-control"
-                      v-model="password"
-                      required
-                      autocomplete="off"
-                    />
-                  </div>
-                </div>
-
-
                 <div class="form-group row mb-0 mt-2">
                   <SubmitButton name="Submit" />
                 </div>
