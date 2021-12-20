@@ -8,6 +8,7 @@ import Login from "../pages/Auth/Login.vue";
 import ForgottenPassword from "../pages/Auth/ForgottenPassword.vue";
 import ModifyPassword from "../pages/Auth/ModifyPassword.vue";
 import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
+import MembersList from "../pages/Admin/MembersList.vue";
 
 /** Admin */
 import AdminHome from "../pages/Admin/AdminHome.vue";
@@ -23,7 +24,6 @@ import AddCompany from "../pages/Companies/AddCompany.vue";
 import CompanyDisplay from "../pages/Companies/CompanyDisplay.vue";
 
 /** Members */
-import MembersList from "../pages/Members/MembersList.vue";
 import MemberDisplay from "../pages/Members/MemberDisplay.vue";
 
 // Orders - members
