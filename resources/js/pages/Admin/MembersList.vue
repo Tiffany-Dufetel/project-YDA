@@ -53,12 +53,6 @@ export default {
     Header,
     MembersList: MembersList,
   },
-  data() {
-    return {
-      companyId: "",
-      filterUsers: [],
-    };
-  },
 
   async mounted() {
     const loggedResponse = await axios.get("/api/login");
