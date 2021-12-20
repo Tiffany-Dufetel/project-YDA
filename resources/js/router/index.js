@@ -190,7 +190,7 @@ const routes = [
         },
         // Update company
         {
-            path: "/entreprise/:id/entreprise",
+            path: "/entreprise/:id/modifier",
             name: "companyUpdate",
             component: CompanyUpdate,
             meta: { requiresAuth: true },
@@ -199,7 +199,7 @@ const routes = [
                 console.log("response role",getUser.data.role)
                 const role = getUser.data.role
 
-                if (role == "member" || role == "manager"){
+                if (role == "member"){
                     router.push('/admin')
                 }
             }
@@ -231,19 +231,10 @@ const routes = [
             name: "individualMember",
             component: MemberDisplay,
             meta: { requiresAuth: true },
-            async beforeEnter(){
-                const getUser = await axios.get("/api/login");
-                console.log("response role",getUser.data.role)
-                const role = getUser.data.role
-
-                if (role == "member"){
-                    router.push('/admin')
-                }
-            }
         },
         // Update Member
         {
-            path: "/membre/:id/entreprise",
+            path: "/membre/:id/modifier",
             name: "membreUpdate",
             component: MemberUpdate,
             meta: { requiresAuth: true },
