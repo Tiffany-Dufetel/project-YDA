@@ -6,7 +6,6 @@
   <div>
     <!-- make title responsive -->
     <Header title="Les actualités" subtitle="Les actualités récentes" />
-<<<<<<< HEAD
     <br/>
     <div>Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces YD'Actualités </div>
 <BackButton />
@@ -21,20 +20,15 @@
             <p> {{ news.text }} </p>
             <i> {{ new Date(news.created_at).toLocaleString() }} </i>
             <br/>
+            <button class="btn btn-danger" @click="deleteActuality(news.id)">
+                Effacer l'actualité
+              </button>
             <br/>
+            <br/>
+            <br/>
+            <br/>
+
         </div>
-=======
-    <div>
-      Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces
-      actualités
-    </div>
-    <BackButton />
-    <button @click="newsAdd">Ajouter une actualité</button>
-    <div v-for="(news, index) in newsArray" :key="index">
-      <h2>{{ title }}</h2>
-      <p>{{ text }}</p>
-    </div>
->>>>>>> origin/master
   </div>
 </template>
 
@@ -47,7 +41,7 @@ export default {
   components: {
     Header,
     BackButton,
-  },
+},
 
   data() {
     return {
@@ -60,30 +54,52 @@ export default {
   async mounted() {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id, {
-      headers: {
-        Authorization: "bearer " + localStorage.getItem("userToken"),
-      },
+        headers: {
+            "Authorization" : "bearer " + localStorage.getItem("userToken")
+        }
     });
 
     console.log(response.data);
     this.company = response.data;
 
-<<<<<<< HEAD
     const responseNews = await axios.get("/api/news");
     this.newsArray = responseNews.data;
-=======
-    const responseNews = await axios.get("/api/news" + this.company_id);
-    this.newsArray = responseNews.data.data;
->>>>>>> origin/master
     console.log(this.newsArray);
   },
 
-  methods: {
-    newsAdd() {
+    methods: {
+         newsAdd() {
       this.$router.push({ name: "adminNewsAdd" });
     },
+    async retrieveActuality() {
+      const getActuality = await axios.get("/api/news");
+      this.actuality = getActuality.data;
+      console.log(this.actuality);
+    },
+    async refreshList() {
+       this.retrieveActuality();
+      this.actuality = null;
+    },
+
+ /** Delete a specific actuality */
+    deleteActuality(actuality_id) {
+      if (confirm("Etes-vous sur d'effacer cette actualité ?")) {
+        axios
+          .delete(`api/news/${actuality_id}`)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(() => this.refreshList());
+      }
+    },
+    },
+mounted() {
+    this.retrieveActuality();
   },
-};
+}
 </script>
 
 <style>
