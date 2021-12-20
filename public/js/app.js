@@ -28566,19 +28566,19 @@ var routes = [{
     guest: true
   }
 }, {
-  path: "/email-verification",
+  path: "/verification",
   name: "FirstConnection",
   component: _pages_Auth_Verification_FirstConnection_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   /* meta: { guest: true }, */
 
 }, {
-  path: "/forgotten-password",
+  path: "/password-oublier",
   name: "ForgottenPassword",
   component: _pages_Auth_ForgottenPassword_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   /* meta: { guest: true }, */
 
 }, {
-  path: "/modify-password",
+  path: "/modifier-password",
   name: "ModifyPassword",
   component: _pages_Auth_ModifyPassword_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   /* meta: { guest: true }, */
@@ -28597,7 +28597,7 @@ var routes = [{
   }
 }, // Add a product to the catalogue -
 {
-  path: "/add-product",
+  path: "/ajouter-produit",
   name: "adminProductAdd",
   component: _pages_Admin_Products_AddProduct_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
   meta: {
@@ -28625,7 +28625,7 @@ var routes = [{
   }
 }, // Add a company -
 {
-  path: "/add-entreprise",
+  path: "/ajouter-entreprise",
   name: "adminAddCompany",
   component: _pages_Companies_AddCompany_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
   meta: {
@@ -28633,7 +28633,7 @@ var routes = [{
   }
 }, // View a specific company -
 {
-  path: "/company/:id",
+  path: "/entreprise/:id",
   name: "individualCompany",
   component: _pages_Companies_CompanyDisplay_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
   props: true,
@@ -28642,7 +28642,7 @@ var routes = [{
   }
 }, // Update company
 {
-  path: "/company/:id/edit",
+  path: "/entreprise/:id/entreprise",
   name: "companyUpdate",
   component: _pages_Companies_CompanyUpdate_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
   meta: {
@@ -28670,7 +28670,7 @@ var routes = [{
   }
 }, // Update Member
 {
-  path: "/membre/:id/edit",
+  path: "/membre/:id/entreprise",
   name: "membreUpdate",
   component: _pages_Members_MemberUpdate_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
   meta: {
@@ -28708,7 +28708,7 @@ var routes = [{
 */
 // View the full news -
 {
-  path: "/news",
+  path: "/actualités",
   name: "adminNews",
   component: _pages_Companies_News_NewsList_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
   meta: {
@@ -28716,7 +28716,7 @@ var routes = [{
   }
 }, // Add a news -
 {
-  path: "/add-news",
+  path: "/ajout-actualité",
   name: "adminNewsAdd",
   component: _pages_Companies_News_AddNews_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
   meta: {

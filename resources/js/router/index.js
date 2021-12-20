@@ -62,19 +62,19 @@ const routes = [
                 meta: { guest: true },
         },
         {
-                path: "/email-verification",
+                path: "/verification",
                 name: "FirstConnection",
                 component: FirstConnection,
                 /* meta: { guest: true }, */
         },
         {
-                path: "/forgotten-password",
+                path: "/password-oublier",
                 name: "ForgottenPassword",
                 component: ForgottenPassword,
                 /* meta: { guest: true }, */
         },
         {
-                path: "/modify-password",
+                path: "/modifier-password",
                 name: "ModifyPassword",
                 component: ModifyPassword,
                 /* meta: { guest: true }, */
@@ -93,7 +93,7 @@ const routes = [
         },
         // Add a product to the catalogue -
         {
-                path: "/add-product",
+                path: "/ajouter-produit",
                 name: "adminProductAdd",
                 component: AddProduct,
                 meta: { requiresAuth: true },
@@ -119,14 +119,14 @@ const routes = [
         },
         // Add a company -
         {
-                path: "/add-entreprise",
+                path: "/ajouter-entreprise",
                 name: "adminAddCompany",
                 component: AddCompany,
                 meta: { requiresAuth: true },
         },
         // View a specific company -
         {
-                path: "/company/:id",
+                path: "/entreprise/:id",
                 name: "individualCompany",
                 component: CompanyDisplay,
                 props: true,
@@ -134,10 +134,10 @@ const routes = [
         },
         // Update company
         {
-            path: "/company/:id/edit",
-            name: "companyUpdate",
-            component: CompanyUpdate,
-            meta: { requiresAuth: true },
+                path: "/entreprise/:id/entreprise",
+                name: "companyUpdate",
+                component: CompanyUpdate,
+                meta: { requiresAuth: true },
         },
         /**
          * MEMBRES
@@ -145,25 +145,25 @@ const routes = [
 
         // The list of members -
         {
-            path: "/membres",
-            name: "companiesMembers",
-            component: MembersList,
-            meta: { requiresAuth: true },
+                path: "/membres",
+                name: "companiesMembers",
+                component: MembersList,
+                meta: { requiresAuth: true },
         },
 
         // View a specific member from a company -
         {
-            path: "/membre/:id",
-            name: "individualMember",
-            component: MemberDisplay,
-            meta: { requiresAuth: true },
+                path: "/membre/:id",
+                name: "individualMember",
+                component: MemberDisplay,
+                meta: { requiresAuth: true },
         },
         // Update Member
         {
-            path: "/membre/:id/edit",
-            name: "membreUpdate",
-            component: MemberUpdate,
-            meta: { requiresAuth: true },
+                path: "/membre/:id/entreprise",
+                name: "membreUpdate",
+                component: MemberUpdate,
+                meta: { requiresAuth: true },
         },
 
         /**
@@ -197,14 +197,14 @@ const routes = [
 
         // View the full news -
         {
-                path: "/news",
+                path: "/actualités",
                 name: "adminNews",
                 component: NewsList,
                 meta: { requiresAuth: true },
         },
         // Add a news -
         {
-                path: "/add-news",
+                path: "/ajout-actualité",
                 name: "adminNewsAdd",
                 component: AddNews,
                 meta: { requiresAuth: true },
