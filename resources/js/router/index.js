@@ -5,7 +5,8 @@ import Contact from "../pages/Contact.vue";
 
 /** Admin */
 import Login from "../pages/Auth/Login.vue";
-import ResetPassword from "../pages/Auth/ResetPassword.vue";
+import ForgottenPassword from "../pages/Auth/ForgottenPassword.vue";
+import ModifyPassword from "../pages/Auth/ModifyPassword.vue";
 import FirstConnection from "../pages/Auth/Verification/FirstConnection.vue";
 
 /** Admin */
@@ -63,9 +64,15 @@ const routes = [
                 /* meta: { guest: true }, */
         },
         {
-                path: "/reset-password",
-                name: "ResetPassword",
-                component: ResetPassword,
+                path: "/forgotten-password",
+                name: "ForgottenPassword",
+                component: ForgottenPassword,
+                /* meta: { guest: true }, */
+        },
+        {
+                path: "/modify-password",
+                name: "ModifyPassword",
+                component: ModifyPassword,
                 /* meta: { guest: true }, */
         },
 
@@ -189,7 +196,7 @@ const routes = [
 ];
 
 export default createRouter({
-    history: createWebHistory(),
-    routes,
+        history: createWebHistory(),
+        routes,
 });
 

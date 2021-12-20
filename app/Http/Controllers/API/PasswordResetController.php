@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class PasswordResetController extends Controller
 {
-       
       /**
        * Write code on Method
        *
