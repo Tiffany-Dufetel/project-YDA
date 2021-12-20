@@ -111,6 +111,22 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Product::findOrFail($id)->delete();
+
+        /* Check the status response */
+        if ($res) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        /* Return the response as json */
+        return response()->json($data);
     }
 }
