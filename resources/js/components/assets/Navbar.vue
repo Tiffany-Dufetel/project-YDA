@@ -63,7 +63,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Navbar",
   data() {
@@ -83,7 +82,7 @@ export default {
   },
 
   updated() {
-      console.log(this.isLoggedIn);
+    console.log(this.isLoggedIn);
   },
 
   methods: {
@@ -121,22 +120,22 @@ nav a.router-link-exact-active {
   border-left: 4px solid #db9024;
 }
 
-.btn-log{
-    text-align: center;
-    margin-top: 40px;
+.btn-log {
+  text-align: center;
+  margin-top: 40px;
 }
 
-.btn-log button{
-    font-size: 20px;
-    text-transform: uppercase ;
-    background-color: #e78c15;
-    border-radius: 5px;
-    padding: 5px 20px;
-    border: 1px solid #e78c15;
-    color: white;
+.btn-log button {
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: #e78c15;
+  border-radius: 5px;
+  padding: 5px 20px;
+  border: 1px solid #e78c15;
+  color: white;
 }
 
-.btn-log button:hover{
+.btn-log button:hover {
   background-color: white;
   color: #e78c15;
   border: 1px solid #e78c15;

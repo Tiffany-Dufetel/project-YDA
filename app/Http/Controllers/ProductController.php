@@ -98,9 +98,41 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $product)
     {
-        //
+        $product = Product::find($product);
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
+            'type' => 'required',
+            'category' => 'required',
+
+        ];
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->image = $request->image;
+        $product->type = $request->type;
+        $product->category = $request->category;
+
+        $product->save();
+
+
+        if ($product) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        return response()->json($data);
     }
 
     /**
