@@ -200,19 +200,19 @@ const routes = [
         },
         // Update company
         {
-                path: "/entreprise/:id/modifier",
-                name: "companyUpdate",
-                component: CompanyUpdate,
-                meta: { requiresAuth: true },
-                async beforeEnter() {
-                        const getUser = await axios.get("/api/login");
-                        console.log("response role", getUser.data.role)
-                        const role = getUser.data.role
+            path: "/entreprise/:id/modifier",
+            name: "companyUpdate",
+            component: CompanyUpdate,
+            meta: { requiresAuth: true },
+            async beforeEnter(){
+                const getUser = await axios.get("/api/login");
+                console.log("response role",getUser.data.role)
+                const role = getUser.data.role
 
-                        if (role == "member") {
-                                router.push('/admin')
-                        }
+                if (role == "member" || role == "manager"){
+                    router.push('/admin')
                 }
+            },
         },
         /**
          * MEMBRES
@@ -244,19 +244,19 @@ const routes = [
         },
         // Update Member
         {
-                path: "/membre/:id/modifier",
-                name: "membreUpdate",
-                component: MemberUpdate,
-                meta: { requiresAuth: true },
-                async beforeEnter() {
-                        const getUser = await axios.get("/api/login");
-                        console.log("response role", getUser.data.role)
-                        const role = getUser.data.role
+            path: "/membre/:id/modifier",
+            name: "membreUpdate",
+            component: MemberUpdate,
+            meta: { requiresAuth: true },
+            async beforeEnter(){
+                const getUser = await axios.get("/api/login");
+                console.log("response role",getUser.data.role)
+                const role = getUser.data.role
 
-                        if (role == "member") {
-                                router.push('/admin')
-                        }
+                if (role == "member"){
+                    router.push('/admin')
                 }
+            },
         },
 
         /**

@@ -3,58 +3,63 @@
 -->
 
 <template>
-  <header>
-    <nav>
-      <div class="container">
-        <!-- YDA Logo -->
-        <div class="logo-container">
-          <img alt="YDA logo" src="../../assets/logo-orange.png" />
-        </div>
-        <ul>
-          <!-- Link Home -->
-          <li v-if="isLoggedIn.value">
-            <a><router-link to="/YDA">Accueil</router-link></a>
-          </li>
+<div class='dashboard'>
+    <div class="dashboard-nav">
+        <header>
+            <div class="brand-logo">
+                <img alt="YDA logo"  src="../../assets/logo-orange.png"/>
+            </div>
+        </header>
+            <nav>
+                <div class="dashboard-nav-list">
+                    <!-- link to home logged -->
+                    <router-link to="/admin" class="dashboard-nav-item" v-if="isLoggedIn.value">Accueil</router-link>
 
-          <li v-else>
-            <a><router-link to="/">Accueil</router-link></a>
-          </li>
+                    <!-- link to home not logged -->
+                    <router-link to="/" class="dashboard-nav-item" v-else>Accueil</router-link>
 
-          <!-- Link catalogue -->
-          <li v-if="isLoggedIn.value">
-            <a><router-link to="/catalogue">Catalogue</router-link></a>
-          </li>
+                    <!-- link to catalogue -->
+                    <router-link to="/catalogue" class="dashboard-nav-item" v-if="isLoggedIn.value && role == 'admin' || role == 'member'">Catalogue</router-link>
 
-          <!-- <div v-if="user.id == 'manager'"> -->
-          <!-- Link companies -->
-          <li v-if="isLoggedIn.value">
-            <a><router-link to="/entreprises">Entreprises</router-link></a>
-          </li>
-          <!-- </div> -->
+                    <!-- link to companies -->
+                    <router-link to="/entreprises" class="dashboard-nav-item" v-if="isLoggedIn.value">Entreprises</router-link>
 
-          <!-- Link orders -->
-          <li v-if="isLoggedIn.value">
-            <a><router-link to="/commandes">Commandes</router-link></a>
-          </li>
+                    <!-- link to orders -->
+                    <router-link to="/commandes" class="dashboard-nav-item" v-if="isLoggedIn.value">Commandes</router-link>
 
-          <!-- Link Contact -->
-          <li>
-            <a><router-link to="Contact">Contact</router-link></a>
-          </li>
-        </ul>
+                    <!-- link to orders -->
+                    <router-link to="/contact" class="dashboard-nav-item" v-else>Contact</router-link>
 
-        <!-- Link Log in -->
-        <div class="btn-log">
-          <div v-if="isLoggedIn.value">
-            <button @click="logOut">Déconnexion</button>
-          </div>
-          <div v-else>
-            <button @click="logIn">Log In</button>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
+                    <!-- link to orders -->
+                    <router-link to="/actualités" class="dashboard-nav-item" v-if="isLoggedIn.value">Actualités</router-link>
+
+                </div>
+            <div class="nav-item-divider"></div>
+            <!-- button Login logout -->
+                <div class="btn-log">
+                    <div v-if="isLoggedIn.value">
+                        <button @click="logOut">Déconnexion</button>
+                    </div>
+                    <div v-else>
+                        <button @click="logIn">Log In</button>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <small>&copy; Your Daily Assistant<br/>
+                    <a href="mailto:assistantes@your-daily-assistant.fr">assistantes@your-daily-assistant.fr</a><br />
+                    06 43 88 43 82
+                    </small>
+                </div>
+
+                <div class="container-icons">
+                    <!-- logo social network -->
+                    <ion-icon name="logo-facebook" class="mr-1" @click="fb"></ion-icon>
+                    <ion-icon name="logo-instagram" class="mr-1" @click="insta" ></ion-icon>
+                    <ion-icon name="logo-linkedin" @click="linkedIn"></ion-icon>
+                </div>
+            </nav>
+    </div>
+</div>
 </template>
 
 <script>
@@ -63,6 +68,7 @@ export default {
   data() {
     return {
       userToken: null,
+      role: "",
     };
   },
   inject: ["isLoggedIn", "removeLoginStatus"],
@@ -71,8 +77,8 @@ export default {
     this.userToken = localStorage.getItem("userToken");
     console.log("token", this.userToken);
 
-    /* const response = await axios.get("/api/user");
-    this.id = response.data.id; */
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
   },
 
   updated() {
@@ -89,49 +95,25 @@ export default {
       this.$router.push("/login");
       // window.location.reload()
     },
-  },
+    fb() {
+      window.open("https://www.facebook.com/yda.yourdailyassistant/");
+    },
+    insta() {
+      window.open("https://www.instagram.com/yda.yourdailyassistant/");
+    },
+    linkedIn() {
+      window.open(
+        "https://www.linkedin.com/company/yourdailyassistant/posts/?feedView=all"
+      );
+    },
+  }
 };
 </script>
 
 
 <style scoped>
-.container {
-  background-color: black;
-  width: 300px;
-  position: fixed;
-  height: 100%;
-  left: 0;
-  padding: 0;
-}
-
-.container img {
-  width: 200px;
-}
-
-.container ul {
-  margin-top: 40px;
-}
-
-.logo-container {
-  text-align: center;
-  background-color: #db9024;
-  padding: 35px;
-}
-
-ul {
-  list-style: none;
-  padding-right: 50px;
-  margin-bottom: 0px;
-}
-
-li {
-  padding: 15px 0;
-}
-
-li a {
-  color: white;
-  font-size: 20px;
-  padding-left: 15px;
+nav {
+    display: block;
 }
 
 nav a.router-link-exact-active {
@@ -158,47 +140,204 @@ nav a.router-link-exact-active {
   color: #e78c15;
   border: 1px solid #e78c15;
 }
-/* body {
-  height: 125vh;
-  margin-top: 80px;
-  padding: 30px;
-  background-size: cover;
-  font-family: sans-serif;
-}
-header {
-  background-color: #fcfcfc;
-  color: #0e1d06;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 5px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 5px 25px 0 #00000036;
-}
-header * {
-  display: inline;
-}
-header li {
-  margin: 20px;
-}
-header li a {
-  color: rgb(219 144 36);
-  text-decoration: none;
+
+.dashboard {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 100vh;
+    font-size: 18px;
 }
 
-.log {
-  background-color: #e78c15;
-  border-radius: 5px;
-  padding: 5px 20px;
-  border: 1px solid #e78c15;
-  color: white;
+.dashboard-app {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 2;
+    -webkit-flex-grow: 2;
+    -ms-flex-positive: 2;
+    flex-grow: 2;
+    margin-top: 84px;
 }
 
-.log:hover {
-  background-color: black;
-  color: #e78c15;
-  border: 1px solid #e78c15;
-} */
+.dashboard-content {
+    -webkit-box-flex: 2;
+    -webkit-flex-grow: 2;
+    -ms-flex-positive: 2;
+    flex-grow: 2;
+    padding: 25px;
+}
+
+.dashboard-nav {
+    min-width: 238px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+    background-color: #373193;
+}
+
+.dashboard-compact .dashboard-nav {
+    display: none;
+}
+
+.dashboard-nav header {
+    min-height: 84px;
+    padding: 8px 27px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.dashboard-nav {
+    background-color: #000000;
+}
+
+.dashboard-nav a {
+    color: rgb(255, 255, 255);
+}
+
+.dashboard-nav-list{
+    margin: 7vh 0;
+}
+
+header{
+    background-color: #db9024;
+}
+.brand-logo {
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    color: #515151;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.brand-logo img{
+    width: 15vh;
+    padding: 20px 0;
+}
+
+.dashboard-nav-item {
+    min-height: 56px;
+    padding: 8px 20px 8px 70px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    letter-spacing: 0.02em;
+    transition: ease-out 0.5s;
+}
+
+.dashboard-nav-item i {
+    width: 36px;
+    font-size: 19px;
+    margin-left: -40px;
+}
+
+.dashboard-nav-item:hover {
+    background: rgba(100, 100, 100, 0.25);
+}
+
+.nav-item-divider {
+    height: 1px;
+    margin: 1rem 0;
+    overflow: hidden;
+    background-color: rgba(236, 238, 239, 0.3);
+}
+
+ion-icon{
+    cursor: pointer;
+    padding: 5px;
+}
+
+.container-icons{
+    text-align: center;
+}
+
+.contact-info{
+    text-align: center;
+    line-height: 17px;
+    margin: 20px 10px;
+    color: #dddddd;
+}
+
+@media (min-width: 992px) {
+    .dashboard-app {
+        margin-left: 238px;
+    }
+
+    .dashboard-compact .dashboard-app {
+        margin-left: 0;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        padding: 15px 0px;
+    }
+}
+
+@media (max-width: 992px) {
+    .dashboard-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1070;
+    }
+
+    .dashboard-nav.mobile-show {
+        display: block;
+    }
+}
+
+@media (max-width: 992px) {
+    .dashboard-nav header .menu-toggle {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+@media (min-width: 992px) {
+    .dashboard-toolbar {
+        left: 238px;
+    }
+
+    .dashboard-compact .dashboard-toolbar {
+        left: 0;
+    }
+}
 </style>
