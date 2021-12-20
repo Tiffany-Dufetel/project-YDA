@@ -95,6 +95,12 @@ export default {
       searchKey: "",
     };
   },
+async mounted() {
+    const getProducts = await axios.get("/api/product");
+    this.productArray = getProducts.data.data;
+
+    console.log("product", getProducts);
+  },
   computed: {
     /** Search box */
     filteredList() {
