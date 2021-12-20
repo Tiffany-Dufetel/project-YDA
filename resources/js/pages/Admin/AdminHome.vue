@@ -48,6 +48,9 @@
     </div>
   </div>
 
+  <!-- Pie chart-->
+  <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
+
   <!-- Calendar displaying upcoming events -->
   <CalendarTwo />
 </template>
@@ -55,11 +58,13 @@
 <script>
 import axios from "axios";
 import CalendarTwo from "../../components/ui/admin/CalendarTwo.vue";
-
+import PieChart from "../../components/ui/PieChart.vue";
+import Chart from "chart.js/auto";
 export default {
   name: "AdminHome",
   components: {
     CalendarTwo,
+    PieChart,
   },
 
   data() {
@@ -67,6 +72,21 @@ export default {
       productArray: [],
       role: "",
       id: "",
+      chartOptions: {
+        hoverBorderWidth: 20,
+      },
+      chartData: {
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
+        labels: ["Green", "Red", "Blue"],
+        datasets: [
+          {
+            label: "Data One",
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            data: [1, 10, 5],
+          },
+        ],
+      },
     };
   },
   async mounted() {
