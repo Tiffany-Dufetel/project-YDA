@@ -70,7 +70,7 @@ const routes = [
                 /* meta: { guest: true }, */
         },
         {
-                path: "/modify-password",
+                path: "/modifier-password",
                 name: "ModifyPassword",
                 component: ModifyPassword,
                 /* meta: { guest: true }, */
