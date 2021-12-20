@@ -8,16 +8,52 @@
       title="Bienvenue à votre page administration"
       subtitle="Gérer vos entreprises et catalogue ici"
     />
-    <div class="mt-5">
-      <button @click="catView">Voir Catalogue</button>
-      <button @click="catAdd">Ajouter dans le catalogue</button>
-      <button @click="companyView">Voir entreprises</button>
-      <button @click="companyAdd">Ajouter une entreprise</button>
-      <button @click="orderList">Liste de commandes</button>
-      <button @click="order">Commander</button>
-      <button @click="news">Actualités</button>
-    </div>
+    <div class="d-flex justify-content-center flex-wrap mt-3">
+      <!-- Catalogue card -->
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Catalogue</h5>
+          <p class="card-text">Vos produits et services.</p>
+          <a @click="catView" class="card-link">Voir</a>
+          <a @click="catAdd" class="card-link">Ajouter</a>
+        </div>
+      </div>
 
+      <!-- Companies card -->
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Entreprises</h5>
+          <p class="card-text">
+            Tous les entreprises actuellement actives sur YDA.
+          </p>
+          <a @click="companyView" class="card-link">Voir</a>
+          <a @click="companyAdd" class="card-link">Ajouter</a>
+        </div>
+      </div>
+
+      <!-- Orders card -->
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Commandes</h5>
+          <p class="card-text">
+            Les commandes en cours, en attente et terminés.
+          </p>
+          <a @click="orderList" class="card-link">Voir</a>
+        </div>
+      </div>
+
+      <!-- News card -->
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Actualités</h5>
+          <p class="card-text">
+            Les actualités que vous avez ajoutés pour les entreprises.
+          </p>
+          <a @click="news" class="card-link">Voir</a>
+          <a @click="newsAdd" class="card-link">Ajouter</a>
+        </div>
+      </div>
+    </div>
     <!-- Calendar displaying upcoming events -->
     <!--     <Calendar /> -->
     <CalendarTwo />
