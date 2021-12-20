@@ -23177,16 +23177,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+/* import PieChart from "../../components/ui/PieChart.vue"; */
+
+/* import Chart from "chart.js/auto"; */
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AdminHome",
   components: {
     CalendarTwo: _components_ui_admin_CalendarTwo_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    /* PieChart, */
+
   },
   data: function data() {
     return {
       productArray: [],
       role: "",
-      id: ""
+      id: "",
+      chartOptions: {
+        hoverBorderWidth: 20
+      },
+      chartData: {
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
+        labels: ["Green", "Red", "Blue"],
+        datasets: [{
+          label: "Data One",
+          backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+          data: [1, 10, 5]
+        }]
+      }
     };
   },
   mounted: function mounted() {
@@ -26066,7 +26085,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.newsAdd && $options.newsAdd.apply($options, arguments);
     }),
     "class": "card-link"
-  }, "Ajouter")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Calendar displaying upcoming events "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CalendarTwo)], 64
+  }, "Ajouter")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Pie chart"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <pie-chart :data=\"chartData\" :options=\"chartOptions\"></pie-chart> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Calendar displaying upcoming events "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CalendarTwo)], 64
   /* STABLE_FRAGMENT */
   );
 }

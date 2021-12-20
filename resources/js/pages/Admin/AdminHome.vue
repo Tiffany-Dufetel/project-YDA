@@ -49,7 +49,7 @@
   </div>
 
   <!-- Pie chart-->
-  <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
+  <!-- <pie-chart :data="chartData" :options="chartOptions"></pie-chart> -->
 
   <!-- Calendar displaying upcoming events -->
   <CalendarTwo />
@@ -58,13 +58,13 @@
 <script>
 import axios from "axios";
 import CalendarTwo from "../../components/ui/admin/CalendarTwo.vue";
-import PieChart from "../../components/ui/PieChart.vue";
-import Chart from "chart.js/auto";
+/* import PieChart from "../../components/ui/PieChart.vue"; */
+/* import Chart from "chart.js/auto"; */
 export default {
   name: "AdminHome",
   components: {
     CalendarTwo,
-    PieChart,
+    /* PieChart, */
   },
 
   data() {
