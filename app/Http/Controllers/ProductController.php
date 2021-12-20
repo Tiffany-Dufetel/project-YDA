@@ -108,8 +108,7 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:png,jpg,jpeg',
             'type' => 'required',
             'category' => 'required',
-
-        ];
+        ]);
 
         $product->name = $request->name;
         $product->description = $request->description;

@@ -97,7 +97,7 @@ export default {
   },
 async mounted() {
     const getProducts = await axios.get("/api/product");
-    this.productArray = getProducts.data.data;
+    this.products = getProducts.data.data;
 
     console.log("product", getProducts);
   },
