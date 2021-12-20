@@ -65,7 +65,7 @@ class UserController extends Controller
             'surname' => $request->input('surname'),
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
             'birthday' => $request->input('birthday'),
             'role' => $request->input('role'),
             'company_id' => intval(basename($currentURL)),

@@ -22863,17 +22863,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Navbar",
   data: function data() {
     return {
-      userToken: null
+      userToken: null,
+      role: ""
     };
   },
   inject: ["isLoggedIn", "removeLoginStatus"],
   mounted: function mounted() {
-    this.userToken = localStorage.getItem("userToken");
-    console.log("token", this.userToken);
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var getUser;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.userToken = localStorage.getItem("userToken");
+              console.log("token", _this.userToken);
+              _context.next = 4;
+              return axios.get("/api/login");
+
+            case 4:
+              getUser = _context.sent;
+              _this.role = getUser.data.role;
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   updated: function updated() {
     console.log(this.isLoggedIn);
@@ -22886,6 +22917,15 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.removeItem("userToken");
       this.removeLoginStatus();
       this.$router.push("/login"); // window.location.reload()
+    },
+    fb: function fb() {
+      window.open("https://www.facebook.com/yda.yourdailyassistant/");
+    },
+    insta: function insta() {
+      window.open("https://www.instagram.com/yda.yourdailyassistant/");
+    },
+    linkedIn: function linkedIn() {
+      window.open("https://www.linkedin.com/company/yourdailyassistant/posts/?feedView=all");
     }
   }
 });
@@ -25103,75 +25143,93 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "container"
+  "class": "dashboard"
+};
+var _hoisted_2 = {
+  "class": "dashboard-nav"
 };
 
-var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "logo-container"
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "brand-logo"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     alt: "YDA logo",
     src: _assets_logo_orange_png__WEBPACK_IMPORTED_MODULE_1__["default"]
-  })], -1
+  })])], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_3 = {
-  key: 0
+var _hoisted_4 = {
+  "class": "dashboard-nav-list"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Accueil");
-
-var _hoisted_5 = {
-  key: 1
-};
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Accueil");
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Accueil");
 
-var _hoisted_7 = {
-  key: 2
-};
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Catalogue");
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Catalogue");
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Entreprises");
 
-var _hoisted_9 = {
-  key: 3
-};
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Commandes");
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Entreprises");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Contact");
 
-var _hoisted_11 = {
-  key: 4
-};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Actualités");
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Commandes");
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "nav-item-divider"
+  }, null, -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Contact");
-
-var _hoisted_14 = {
+var _hoisted_13 = {
   "class": "btn-log"
 };
-var _hoisted_15 = {
+var _hoisted_14 = {
   key: 0
 };
-var _hoisted_16 = {
+var _hoisted_15 = {
   key: 1
+};
+
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "contact-info"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("© Your Daily Assistant"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "mailto:assistantes@your-daily-assistant.fr"
+  }, "assistantes@your-daily-assistant.fr"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 06 43 88 43 82 ")])], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_17 = {
+  "class": "container-icons"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" YDA Logo "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link Home "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/admin"
+  var _component_ion_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ion-icon");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to home logged "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 0,
+    to: "/admin",
+    "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_4];
+      return [_hoisted_5];
     }),
     _: 1
     /* STABLE */
 
-  })])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/"
+  })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to home not logged "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/",
+    "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_6];
@@ -25179,8 +25237,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link catalogue "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/catalogue"
+  })], 2112
+  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to catalogue "), $options.isLoggedIn.value && $data.role == 'admin' || $data.role == 'member' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 2,
+    to: "/catalogue",
+    "class": "dashboard-nav-item"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_7];
+    }),
+    _: 1
+    /* STABLE */
+
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to companies "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 3,
+    to: "/entreprises",
+    "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_8];
@@ -25188,8 +25261,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link companies "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/entreprises"
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to orders "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 4,
+    to: "/commandes",
+    "class": "dashboard-nav-item"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_9];
+    }),
+    _: 1
+    /* STABLE */
+
+  })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 5
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to orders "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/contact",
+    "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_10];
@@ -25197,33 +25284,45 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link orders "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/commandes"
+  })], 2112
+  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to orders "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 6,
+    to: "/actualités",
+    "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_12];
+      return [_hoisted_11];
     }),
     _: 1
     /* STABLE */
 
-  })])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link Contact "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "Contact"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_13];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Link Log in "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [$options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" button Login logout "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [$options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.logOut && $options.logOut.apply($options, arguments);
     })
-  }, "Déconnexion")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Déconnexion")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.logIn && $options.logIn.apply($options, arguments);
     })
-  }, "Log In")]))])])])]);
+  }, "Log In")]))]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo social network "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ion_icon, {
+    name: "logo-facebook",
+    "class": "mr-1",
+    onClick: $options.fb
+  }, null, 8
+  /* PROPS */
+  , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ion_icon, {
+    name: "logo-instagram",
+    "class": "mr-1",
+    onClick: $options.insta
+  }, null, 8
+  /* PROPS */
+  , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ion_icon, {
+    name: "logo-linkedin",
+    onClick: $options.linkedIn
+  }, null, 8
+  /* PROPS */
+  , ["onClick"])])])])]);
 }
 
 /***/ }),
@@ -34440,7 +34539,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-a5972bfe]{\r\n    background-color: black;\r\n    width: 300px;\r\n    position: fixed;\r\n    height: 100%;\r\n    left: 0;\r\n    padding: 0;\n}\n.container img[data-v-a5972bfe]{\r\n    width: 200px;\n}\n.container ul[data-v-a5972bfe]{\r\n    margin-top: 40px;\n}\n.logo-container[data-v-a5972bfe]{\r\n    text-align: center;\r\n    background-color: #db9024;\r\n    padding: 35px;\n}\nul[data-v-a5972bfe]{\r\n    list-style: none;\r\n    padding-right: 50px;\r\n    margin-bottom: 0px;\n}\nli[data-v-a5972bfe]{\r\n    padding: 15px 0;\n}\nli a[data-v-a5972bfe]{\r\n    color: white;\r\n    font-size: 20px;\r\n    padding-left: 15px;\n}\nnav a.router-link-exact-active[data-v-a5972bfe] {\r\n  border-left: 4px solid #db9024;\n}\n.btn-log[data-v-a5972bfe]{\r\n    text-align: center;\r\n    margin-top: 40px;\n}\n.btn-log button[data-v-a5972bfe]{\r\n    font-size: 20px;\r\n    text-transform: uppercase ;\r\n    background-color: #e78c15;\r\n    border-radius: 5px;\r\n    padding: 5px 20px;\r\n    border: 1px solid #e78c15;\r\n    color: white;\n}\n.btn-log button[data-v-a5972bfe]:hover{\r\n  background-color: white;\r\n  color: #e78c15;\r\n  border: 1px solid #e78c15;\n}\r\n/* body {\r\n  height: 125vh;\r\n  margin-top: 80px;\r\n  padding: 30px;\r\n  background-size: cover;\r\n  font-family: sans-serif;\r\n}\r\nheader {\r\n  background-color: #fcfcfc;\r\n  color: #0e1d06;\r\n  position: fixed;\r\n  left: 0;\r\n  right: 0;\r\n  top: 5px;\r\n  height: 70px;\r\n  display: flex;\r\n  align-items: center;\r\n  box-shadow: 0 5px 25px 0 #00000036;\r\n}\r\nheader * {\r\n  display: inline;\r\n}\r\nheader li {\r\n  margin: 20px;\r\n}\r\nheader li a {\r\n  color: rgb(219 144 36);\r\n  text-decoration: none;\r\n}\r\n\r\n.log {\r\n  background-color: #e78c15;\r\n  border-radius: 5px;\r\n  padding: 5px 20px;\r\n  border: 1px solid #e78c15;\r\n  color: white;\r\n}\r\n\r\n.log:hover {\r\n  background-color: black;\r\n  color: #e78c15;\r\n  border: 1px solid #e78c15;\r\n} */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nnav[data-v-a5972bfe] {\n    display: block;\n}\nnav a.router-link-exact-active[data-v-a5972bfe] {\n  border-left: 4px solid #db9024;\n}\n.btn-log[data-v-a5972bfe]{\n    text-align: center;\n    margin-top: 40px;\n}\n.btn-log button[data-v-a5972bfe]{\n    font-size: 20px;\n    text-transform: uppercase ;\n    background-color: #e78c15;\n    border-radius: 5px;\n    padding: 5px 20px;\n    border: 1px solid #e78c15;\n    color: white;\n}\n.btn-log button[data-v-a5972bfe]:hover{\n  background-color: white;\n  color: #e78c15;\n  border: 1px solid #e78c15;\n}\n.dashboard[data-v-a5972bfe] {\n    display: flex;\n    min-height: 100vh;\n    font-size: 18px;\n}\n.dashboard-app[data-v-a5972bfe] {\n    display: flex;\n    flex-direction: column;\n    flex-grow: 2;\n    margin-top: 84px;\n}\n.dashboard-content[data-v-a5972bfe] {\n    flex-grow: 2;\n    padding: 25px;\n}\n.dashboard-nav[data-v-a5972bfe] {\n    min-width: 238px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    overflow: auto;\n    background-color: #373193;\n}\n.dashboard-compact .dashboard-nav[data-v-a5972bfe] {\n    display: none;\n}\n.dashboard-nav header[data-v-a5972bfe] {\n    min-height: 84px;\n    padding: 8px 27px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.dashboard-nav[data-v-a5972bfe] {\n    background-color: #000000;\n}\n.dashboard-nav a[data-v-a5972bfe] {\n    color: rgb(255, 255, 255);\n}\n.dashboard-nav-list[data-v-a5972bfe]{\n    margin: 7vh 0;\n}\nheader[data-v-a5972bfe]{\n    background-color: #db9024;\n}\n.brand-logo[data-v-a5972bfe] {\n    font-family: \"Nunito\", sans-serif;\n    font-weight: bold;\n    font-size: 20px;\n    display: flex;\n    color: #515151;\n    align-items: center;\n}\n.brand-logo img[data-v-a5972bfe]{\n    width: 15vh;\n    padding: 20px 0;\n}\n.dashboard-nav-item[data-v-a5972bfe] {\n    min-height: 56px;\n    padding: 8px 20px 8px 70px;\n    display: flex;\n    align-items: center;\n    letter-spacing: 0.02em;\n    transition: ease-out 0.5s;\n}\n.dashboard-nav-item i[data-v-a5972bfe] {\n    width: 36px;\n    font-size: 19px;\n    margin-left: -40px;\n}\n.dashboard-nav-item[data-v-a5972bfe]:hover {\n    background: rgba(100, 100, 100, 0.25);\n}\n.nav-item-divider[data-v-a5972bfe] {\n    height: 1px;\n    margin: 1rem 0;\n    overflow: hidden;\n    background-color: rgba(236, 238, 239, 0.3);\n}\nion-icon[data-v-a5972bfe]{\n    cursor: pointer;\n    padding: 5px;\n}\n.container-icons[data-v-a5972bfe]{\n    text-align: center;\n}\n.contact-info[data-v-a5972bfe]{\n    text-align: center;\n    line-height: 17px;\n    margin: 20px 10px;\n    color: #dddddd;\n}\n@media (min-width: 992px) {\n.dashboard-app[data-v-a5972bfe] {\n        margin-left: 238px;\n}\n.dashboard-compact .dashboard-app[data-v-a5972bfe] {\n        margin-left: 0;\n}\n}\n@media (max-width: 768px) {\n.dashboard-content[data-v-a5972bfe] {\n        padding: 15px 0px;\n}\n}\n@media (max-width: 992px) {\n.dashboard-nav[data-v-a5972bfe] {\n        display: none;\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        bottom: 0;\n        z-index: 1070;\n}\n.dashboard-nav.mobile-show[data-v-a5972bfe] {\n        display: block;\n}\n}\n@media (max-width: 992px) {\n.dashboard-nav header .menu-toggle[data-v-a5972bfe] {\n        display: flex;\n}\n}\n@media (min-width: 992px) {\n.dashboard-toolbar[data-v-a5972bfe] {\n        left: 238px;\n}\n.dashboard-compact .dashboard-toolbar[data-v-a5972bfe] {\n        left: 0;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
