@@ -110,9 +110,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($order)
     {
-        $res = Order::findOrFail($id)->delete();
+        $res = Order::findOrFail($order)->delete();
 
         /* Check the status response */
         if ($res) {
