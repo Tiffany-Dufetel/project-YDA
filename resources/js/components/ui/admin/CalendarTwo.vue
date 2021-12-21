@@ -4,51 +4,111 @@
 
 <template>
   <div>
-    <!-- développer affichage conditionnel ici -->
-    <div></div>
-
-    <!-- Presentation table for calendar -->
     <div class="table-responsive-md d-flex justify-content-center mt-4">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Lundi</th>
-            <th scope="col">Mardi</th>
-            <th scope="col">Mercredi</th>
-            <th scope="col">Jeudi</th>
-            <th scope="col">Vendredi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="company in companies" :key="company.id">
-            <!-- :value="company.id" -->
-            <td>
-              <!-- v-if="company.day === 'monday'" -->
-              Le Bocal Academy <br />
-              11h - 13h
-              {{ monday }}
-              <!-- {{ company.name }}<br />{{ company.time }} -->
-            </td>
-            <!-- <td v-else-if="company.day === 'tuesday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{tuesday}}
-            </td>
-            <td v-else-if="company.day === 'wednesday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{wednesday}}
-            </td>
-            <td v-else-if="company.day === 'thursday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{thursday}}
-            </td>
-            <td v-else-if="company.day === 'friday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{friday}}
-            </td>
-            <div v-else></div> -->
-          </tr>
-        </tbody>
-      </table>
+      <!-- Monday Table -->
+      <div class="table-responsive-md d-flex justify-content-center mt-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Lundi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Monday -->
+              <div v-for="company in companies" :key="company.id">
+                <td v-if="company.day === 'monday'">
+                  {{ company.name }}<br />{{ company.time }}
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tuesday Table -->
+      <div class="table-responsive-md d-flex justify-content-center mt-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Mardi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Tuesday -->
+              <div v-for="company in companies" :key="company.id">
+                <td v-if="company.day === 'tuesday'">
+                  {{ company.name }}<br />{{ company.time }}
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Wednesday Table -->
+      <div class="table-responsive-md d-flex justify-content-center mt-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Mercredi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Wednesday -->
+              <div v-for="company in companies" :key="company.id">
+                <td v-if="company.day === 'wednesday'">
+                  {{ company.name }}<br />{{ company.time }}
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Thursday Table -->
+      <div class="table-responsive-md d-flex justify-content-center mt-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Jeudi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Thursday -->
+              <div v-for="company in companies" :key="company.id">
+                <td v-if="company.day === 'thursday'">
+                  {{ company.name }}<br />{{ company.time }}
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Friday Table -->
+      <div class="table-responsive-md d-flex justify-content-center mt-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Vendredi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Friday -->
+              <div v-for="company in companies" :key="company.id">
+                <td v-if="company.day === 'friday'">
+                  {{ company.name }}<br />{{ company.time }}
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

@@ -1,5 +1,7 @@
 <!--
 -- Company individual display page component
+REFRESH ON MEMBER ADD / DELETE
+BACK BUTTON
 -->
 
 <template>
@@ -138,7 +140,7 @@ export default {
 
   methods: {
     goToUpdate() {
-      this.$router.push("/company/" + this.$route.params.id + "/edit");
+      this.$router.push("/entreprise/" + this.$route.params.id + "/modifier");
     },
   },
 

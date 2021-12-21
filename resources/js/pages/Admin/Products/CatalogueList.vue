@@ -6,7 +6,9 @@
   <div class="catalogue_container">
     <Header title="Catalogue" subtitle="Produits et services" />
     <BackButton />
-        <AddButton name="Ajouter Produit" @click="add"/>
+    <div v-if="role == 'admin'">
+      <AddButton name="Ajouter Produit" @click="add" />
+    </div>
     <br />
 
     <!-- Search box -->
@@ -59,9 +61,14 @@
                 class="btn btn-primary"
                 >Voir
               </router-link>
-              <button class="btn btn-danger" @click="deleteProduct(product.id)">
-                Supprimer
-              </button>
+              <div v-if="role == 'admin'">
+                <button
+                  class="btn btn-danger"
+                  @click="deleteProduct(product.id)"
+                >
+                  Supprimer
+                </button>
+              </div>
             </div>
           </td>
         </tr>
@@ -93,12 +100,6 @@ export default {
       role: "",
       searchKey: "",
     };
-  },
-async mounted() {
-    const getProducts = await axios.get("/api/product");
-    this.products = getProducts.data.data;
-
-    console.log("product", getProducts);
   },
   computed: {
     /** Search box */
@@ -146,6 +147,10 @@ async mounted() {
   },
   async mounted() {
     this.retrieveProducts();
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
+    console.log("role", this.role);
+    this.id = getUser.data.id;
   },
 
   //   async beforeCreate(){
