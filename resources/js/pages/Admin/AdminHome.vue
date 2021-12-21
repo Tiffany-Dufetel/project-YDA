@@ -3,62 +3,68 @@
 -->
 
 <template>
-  <div v-if="role == 'admin'">
-    <Header
-      title="Bienvenue à votre page administration"
-      subtitle="Gérer vos entreprises et catalogue ici"
-    />
-    <div class="mt-5">
-      <button @click="catView">Voir Catalogue</button>
-      <!--<button @click="catAdd">Ajouter dans le catalogue</button>-->
-      <button @click="companyView">Voir entreprises</button>
-      <button @click="orderList">Liste de commandes</button>
-      <button @click="order">Commander</button>
-      <button @click="news">Actualités</button>
+  <div class="d-flex justify-content-center flex-wrap mt-3">
+    <!-- Catalogue card -->
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">Catalogue</h5>
+        <p class="card-text">Vos produits et services.</p>
+        <a @click="catView" class="card-link">Voir</a>
+        <a @click="catAdd" class="card-link">Ajouter</a>
+      </div>
     </div>
 
-    <!-- Calendar displaying upcoming events -->
-    <!--     <Calendar /> -->
-    <CalendarTwo />
-  </div>
+    <!-- Companies card -->
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">Entreprises</h5>
+        <p class="card-text">
+          Tous les entreprises actuellement actives sur YDA.
+        </p>
+        <a @click="companyView" class="card-link">Voir</a>
+        <a @click="companyAdd" class="card-link">Ajouter</a>
+      </div>
+    </div>
 
-  <div v-else-if="role == 'manager'">
-    <Header
-      title="Bienvenue à votre page de manager"
-      subtitle="Gérer vos membres"
-    />
-    <div class="mt-5">
-      <button @click="showMembers">Liste des membres</button>
+    <!-- Orders card -->
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">Commandes</h5>
+        <p class="card-text">Les commandes en cours, en attente et terminés.</p>
+        <a @click="orderList" class="card-link">Voir</a>
+      </div>
+    </div>
+
+    <!-- News card -->
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">Actualités</h5>
+        <p class="card-text">
+          Les actualités que vous avez ajoutés pour les entreprises.
+        </p>
+        <a @click="news" class="card-link">Voir</a>
+        <a @click="newsAdd" class="card-link">Ajouter</a>
+      </div>
     </div>
   </div>
 
-  <div v-else-if="role == 'member'">
-    <Header
-      title="Bienvenue à votre page de membre"
-      subtitle="Passez vos commandes"
-    />
-    <div class="mt-5">
-      <button @click="catView">Voir Catalogue</button>
-      <button @click="order">Commander</button>
-      <button @click="profile">Mon profile</button>
-    </div>
-  </div>
+  <!-- Pie chart-->
+  <!-- <pie-chart :data="chartData" :options="chartOptions"></pie-chart> -->
 
-  <div v-else></div>
+  <!-- Calendar displaying upcoming events -->
+  <CalendarTwo />
 </template>
 
 <script>
-import Header from "../../components/ui/Header.vue";
 import axios from "axios";
-import Calendar from "../../components/ui/admin/Calendar.vue";
 import CalendarTwo from "../../components/ui/admin/CalendarTwo.vue";
-
+/* import PieChart from "../../components/ui/PieChart.vue"; */
+/* import Chart from "chart.js/auto"; */
 export default {
   name: "AdminHome",
   components: {
-    Header,
-    Calendar,
     CalendarTwo,
+    /* PieChart, */
   },
 
   data() {
@@ -66,6 +72,21 @@ export default {
       productArray: [],
       role: "",
       id: "",
+      chartOptions: {
+        hoverBorderWidth: 20,
+      },
+      chartData: {
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
+        labels: ["Green", "Red", "Blue"],
+        datasets: [
+          {
+            label: "Data One",
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            data: [1, 10, 5],
+          },
+        ],
+      },
     };
   },
   async mounted() {
@@ -115,21 +136,4 @@ export default {
 </script>
 
 <style>
-/* .vuecal__menu,
-.vuecal__cell-events-count {
-  background-color: #e78c15;
-}
-.vuecal__title-bar {
-  background-color: #f3f5e4a8;
-}
-.vuecal__cell--today,
-.vuecal__cell--current {
-  background-color: rgba(240, 240, 255, 0.4);
-}
-.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
-  background-color: rgba(235, 255, 245, 0.4);
-}
-.vuecal__cell--selected:before {
-  border-color: #e78c15;
-} */
 </style>
