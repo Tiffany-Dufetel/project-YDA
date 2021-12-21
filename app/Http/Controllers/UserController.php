@@ -65,7 +65,7 @@ class UserController extends Controller
             'surname' => $request->input('surname'),
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
             'birthday' => $request->input('birthday'),
             'role' => $request->input('role'),
             'company_id' => intval(basename($currentURL)),
@@ -158,22 +158,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
-
-    public function destroy($user)
+    public function destroy($id)
     {
-        $res = User::findOrFail($user)->delete();
+        $res = User::findOrFail($id)->delete();
 
         if ($res) {
             $data = [
-                'status'=>'1',
-                'msg'=>'success'
+                'status' => '1',
+                'msg' => 'success'
             ];
         } else {
             $data = [
-                'status'=>'0',
-                'msg'=>'fail'
+                'status' => '0',
+                'msg' => 'fail'
             ];
         }
 

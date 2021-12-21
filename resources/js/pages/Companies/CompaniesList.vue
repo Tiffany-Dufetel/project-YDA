@@ -41,8 +41,10 @@
           <th>Name</th>
           <th>Siret</th>
           <th>Adresse</th>
+          <th>Téléphone</th>
           <th>Total de membres</th>
-          <th>Creneau de livraison</th>
+          <th>Creneau de livraison 1</th>
+          <th>Creneau de livraison 2</th>
         </tr>
       </thead>
       <tbody>
@@ -52,14 +54,16 @@
           <td>
             {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
           </td>
+          <td>{{ company.number }}</td>
           <td>{{ company.member_count }}</td>
-          <td>{{ company.day }} entre {{ company.time }}h et</td>
+          <td>{{ company.day }} - {{ company.time }}</td>
+          <td>{{ company.dayTwo }} - {{ company.timeTwo }}</td>
           <td>
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualCompany', params: { id: company.id } }"
                 class="btn btn-primary"
-                >voir
+                >Voir
               </router-link>
               <button class="btn btn-danger" @click="deleteCompany(company.id)">
                 Effacer
