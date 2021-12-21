@@ -59,28 +59,31 @@ export default {
   },
   data() {
     return {
-      formData: {
         password: "",
         error: null,
-      },
     };
   },
  methods: {
-      resetPassword() {
-      axios.get("/sanctum/csrf-cookie").then((response) => {
+    resetPassword() {
         axios
-          .post("/api/user", {
+          .post("http://127.0.0.1:8000/api/user/edit-firstPassword/" + this.$route.params.id,{
+            //verifier le token avec le this.$route.params
             password: this.password,
+            token: this.$route.params.token
           })
-          .then((response) => {
-            this.$router.push({
-              name: "adminHome",
-            });
+          .then((res) => {
+
+            this.success = true,
+            this.$router.push("/admin")
           })
-          .catch(function (error) {
-            console.error(error);
+          .catch((error) => {
+            if (error.response.status == 422) {
+              this.errors = error.response.data.errors;
+              console.log(this.errors);
+            }
           });
-      });
+
+      this.success = true
     },
 
   },

@@ -158,8 +158,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
-    
+
+
 
     public function destroy($user)
     {
@@ -178,5 +178,13 @@ class UserController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function resetPassword(Request $request, $id){
+        dd($request->input());
+        $user = User::find($id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
     }
 }
