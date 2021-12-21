@@ -8,8 +8,19 @@
     <Header title="Les actualités" subtitle="Les actualités récentes" />
     <br />
     <div>
-      Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces
-      YD'Actualités
+
+     <label for="company">Choisir l'entreprise</label>
+      <select
+        v-model="company"
+        name="company"
+        id="company"
+        class="form-control"
+        required="true"
+      >
+        <option v-for="company in companies" :key="company.id">
+          {{ company.id }} - {{ company.name }}
+        </option>
+      </select>
     </div>
     <BackButton />
     <p>______</p>
@@ -49,14 +60,19 @@ export default {
 
   data() {
     return {
-      id: 1,
+      id: 9,
       company: {},
       newsArray: [],
+      companies: [],
     };
   },
 
   async mounted() {
     //We are loading the company display thanks to the ID;
+     const getCompanys = await axios.get("/api/company");
+    this.companies = getCompanys.data.data;
+    console.log('here')
+
   },
 
   methods: {
@@ -69,11 +85,11 @@ export default {
           Authorization: "bearer " + localStorage.getItem("userToken"),
         },
       });
-
-      console.log(response.data);
+        console.log(this.companies);
+      //console.log(response.data);
       this.company = response.data;
 
-      const responseNews = await axios.get("/api/news");
+      const responseNews = await axios.get("/api/news/by-company/" + this.id);
       this.newsArray = responseNews.data;
       console.log(this.newsArray);
     },
@@ -99,6 +115,7 @@ export default {
   },
   mounted() {
     this.retrieveActuality();
+    console.log(this.companies);
   },
 };
 </script>

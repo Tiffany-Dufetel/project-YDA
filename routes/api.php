@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('/user', UserController::class);
 });
 
+route::get('/news/by-company/{companyId}', [NewsController::class, 'findByCompanyId']);
+
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');

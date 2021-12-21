@@ -115,4 +115,11 @@ class NewsController extends Controller
             /* Return the response as json */
             return response()->json($data);
     }
+
+    public function findByCompanyId($companyId)
+    {
+        $actualites = Actuality::where('company_id', $companyId)->get();
+
+        return response($actualites);
+    }
 }
