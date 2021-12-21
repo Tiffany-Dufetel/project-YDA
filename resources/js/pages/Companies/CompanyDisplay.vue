@@ -115,6 +115,7 @@ export default {
   components: {
     Header,
     AddMember,
+    BackButton,
     MembersList,
     OrderDisplay,
     BackButton,
