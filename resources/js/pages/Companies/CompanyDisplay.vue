@@ -9,6 +9,7 @@ BACK BUTTON
     <!-- Loading of reactive data thanks to the mounted axios-->
     <Header v-model:title="company.name" subtitle="" />
   </div>
+  <BackButton />
   <div>
     <div class="mt-5">
       <div class="row">
@@ -106,6 +107,7 @@ BACK BUTTON
 <script>
 import Header from "../../components/ui/Header.vue";
 import AddMember from "../../components/ui/forms/AddMember.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 import MembersList from "../../components/Members/MembersList.vue";
 import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
 
@@ -114,6 +116,7 @@ export default {
   components: {
     Header,
     AddMember,
+    BackButton,
     MembersList,
     OrderDisplay,
   },
