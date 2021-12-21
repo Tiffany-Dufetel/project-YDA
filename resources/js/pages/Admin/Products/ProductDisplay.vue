@@ -7,6 +7,8 @@
     <!-- make title and subtitle responsive -->
     <Header title="Voir les détails" subtitle="" /><br /><br />
     <BackButton />
+
+    <!-- Product card -->
     <div v-for="(product, index) in productArray" :key="index">
       <div class="card" style="width: 25rem">
         <img
