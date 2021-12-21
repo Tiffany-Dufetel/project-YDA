@@ -101,15 +101,12 @@ export default {
       searchKeyCatalogue: "",
     };
   },
-<<<<<<< HEAD
 async mounted() {
     const getProducts = await axios.get("/api/product");
     this.productArray = getProducts.data.data;
 
 
   },
-=======
->>>>>>> 81efe5b821a04423c4220c7428e70e4d79dcb20c
   computed: {
     /** Search box */
     filteredListCatalogue() {
@@ -120,7 +117,7 @@ async mounted() {
           product.category.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase())
         );
       });
-    },
+    }
   },
   methods: {
     /** Go to "add new item" page */
