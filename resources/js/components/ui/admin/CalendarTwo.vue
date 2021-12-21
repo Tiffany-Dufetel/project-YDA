@@ -17,7 +17,9 @@
             <tr>
               <!-- Monday -->
               <div v-for="company in companies" :key="company.id">
-                <td v-if="company.day === 'monday'">
+                <td
+                  v-if="company.day === 'monday' || company.dayTwo === 'monday'"
+                >
                   {{ company.name }}<br />{{ company.time }}
                 </td>
               </div>
@@ -38,7 +40,11 @@
             <tr>
               <!-- Tuesday -->
               <div v-for="company in companies" :key="company.id">
-                <td v-if="company.day === 'tuesday'">
+                <td
+                  v-if="
+                    company.day === 'tuesday' || company.dayTwo === 'tuesday'
+                  "
+                >
                   {{ company.name }}<br />{{ company.time }}
                 </td>
               </div>
@@ -59,7 +65,12 @@
             <tr>
               <!-- Wednesday -->
               <div v-for="company in companies" :key="company.id">
-                <td v-if="company.day === 'wednesday'">
+                <td
+                  v-if="
+                    company.day === 'wednesday' ||
+                    company.dayTwo === 'wednesday'
+                  "
+                >
                   {{ company.name }}<br />{{ company.time }}
                 </td>
               </div>
@@ -67,7 +78,6 @@
           </tbody>
         </table>
       </div>
-
       <!-- Thursday Table -->
       <div class="table-responsive-md d-flex justify-content-center mt-4">
         <table class="table">
@@ -80,7 +90,11 @@
             <tr>
               <!-- Thursday -->
               <div v-for="company in companies" :key="company.id">
-                <td v-if="company.day === 'thursday'">
+                <td
+                  v-if="
+                    company.day === 'thursday' || company.dayTwo === 'thursday'
+                  "
+                >
                   {{ company.name }}<br />{{ company.time }}
                 </td>
               </div>
@@ -101,7 +115,9 @@
             <tr>
               <!-- Friday -->
               <div v-for="company in companies" :key="company.id">
-                <td v-if="company.day === 'friday'">
+                <td
+                  v-if="company.day === 'friday' || company.dayTwo === 'friday'"
+                >
                   {{ company.name }}<br />{{ company.time }}
                 </td>
               </div>
@@ -126,9 +142,9 @@ export default {
     const companyList = await axios.get("/api/company");
     this.companies = companyList.data.data;
     // check that we have the data
-    console.log(this.companies);
     /* if (companyList.day === "lundi") {
-        
+
+
     } */
   },
   computed: {
