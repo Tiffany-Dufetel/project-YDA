@@ -30,6 +30,8 @@ class AuthController extends BaseController
 
     public function register(Request $request)
     {
+        $currentURL = url()->previous();
+
         $validator = Validator::make($request->all(), [
             // 'name' => 'required',
             // 'email' => 'required|email',
@@ -42,7 +44,7 @@ class AuthController extends BaseController
             return $this->handleError($validator->errors());
         }
 
-        $input = $request->all();
+        $input =$request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('LaravelSanctumAuth')->plainTextToken;

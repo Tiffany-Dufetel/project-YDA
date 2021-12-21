@@ -65,7 +65,8 @@ export default {
   },
  methods: {
     resetPassword() {
-        axios
+        axios.get("/sanctum/csrf-cookie").then((response) => {
+         axios
           .post("http://127.0.0.1:8000/api/user/edit-firstPassword/" + this.$route.params.id,{
             password: this.password,
             token: this.$route.params.hash
@@ -73,7 +74,7 @@ export default {
           .then((res) => {
 
             this.success = true,
-            this.$router.push("/admin")
+            this.$router.push("/")
           })
           .catch((error) => {
             if (error.response.status == 422) {
@@ -81,10 +82,11 @@ export default {
               console.log(this.errors);
             }
           });
-
+        });
       this.success = true;
       console.log('id', this.$route.params.id);
       console.log('token', this.$route.params.hash);
+
     },
 
   },
