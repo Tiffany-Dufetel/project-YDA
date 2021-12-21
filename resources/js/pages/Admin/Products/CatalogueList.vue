@@ -99,8 +99,19 @@ export default {
     console.log("product", this.productArray);
   },
 
+computed: {
+    /** Search box */
+    filteredListCatalogue() {
+      return this.productArray.filter((product) => {
+        return (
+          product.name.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase())
 
-  
+        );
+      });
+    },
+  },
+
+
   methods: {
     add() {
       this.$router.push({ name: "adminProductAdd" });
