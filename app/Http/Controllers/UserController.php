@@ -44,36 +44,34 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $currentURL = url()->previous();
-
-        $request->validate([
-            'surname' => 'required|string',
-            'first_name' => 'required|string',
-            'email' => 'required|string',
-            'password' => 'required|string',
-            'birthday' => 'required|date',
-            'role' => 'required|string',
-        ], [
-            'surname.required' => "Vous devez saisir un nom de famille",
-            'first_name.required' => "Vous devez saisir un prénom",
-            'email.required' => "Vous devez saisir un email",
-            'password.required' => "Vous devez saisir un mot de passe",
-            'birthday.required' => "Vous devez saisir une date de naissance",
-            'role.required' => "Vous devez choisir un role."
+/*         $validator = Validator::make($request->all(), [
+            // 'name' => 'required',
+            // 'email' => 'required|email',
+            // 'password' => 'required',
+            // 'confirm_password' => 'required|same:password',
+            // 'first_name' => 'required',
         ]);
-
-        $user = [
+ */
+/*         if ($validator->fails()) {
+            return $this->handleError($validator->errors());
+        }
+ */
+        $input = [
             'surname' => $request->input('surname'),
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
+            'password' => $request->input('password'),
             'birthday' => $request->input('birthday'),
             'role' => $request->input('role'),
-            'company_id' => intval(basename($currentURL)),
+            'company_id' => intval(basename($currentURL))
         ];
 
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['token'] =  $user->createToken('LaravelSanctumAuth')->plainTextToken;
+        $success['name'] =  $user->name;
         event(new Registered($user));
-
-        return User::create($user);
+        return $this->handleResponse($success, 'User successfully registered!');
     }
 
     /**
@@ -175,5 +173,13 @@ class UserController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function resetPassword(Request $request, $id){
+        //dd($request->input());
+        $user = User::find($id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
     }
 }
