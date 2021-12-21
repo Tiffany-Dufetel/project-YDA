@@ -78,16 +78,7 @@ const routes = [
                 name: "ModifyPassword",
                 component: ModifyPassword,
                 props: true,
-                meta: { requiresAuth: true },
-                async beforeEnter(){
-                    const getUser = await axios.get("/api/login");
-                    console.log("response role",getUser.data.role)
-                    const role = getUser.data.role
-
-                    if (role == "member" || role == "manager"){
-                        router.push('/admin')
-                    }
-                }
+                meta: { guest: true },
         },
 
         /**
