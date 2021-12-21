@@ -289,7 +289,7 @@ ion-icon{
     color: #dddddd;
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
     .dashboard-app {
         margin-left: 238px;
     }
@@ -339,5 +339,5 @@ ion-icon{
     .dashboard-compact .dashboard-toolbar {
         left: 0;
     }
-}
+} */
 </style>
