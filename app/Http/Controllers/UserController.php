@@ -181,7 +181,7 @@ class UserController extends Controller
     }
 
     public function resetPassword(Request $request, $id){
-        dd($request->input());
+        //dd($request->input());
         $user = User::find($id);
         $user->password = Hash::make($request->password);
         $user->save();

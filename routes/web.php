@@ -36,5 +36,5 @@ Route::get('send-mail', function () {
 
     \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\MyTestMail($details));
 
-    dd("Email is Sent.");
+    //dd("Email is Sent.");
 });

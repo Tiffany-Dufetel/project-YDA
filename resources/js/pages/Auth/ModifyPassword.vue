@@ -67,9 +67,8 @@ export default {
     resetPassword() {
         axios
           .post("http://127.0.0.1:8000/api/user/edit-firstPassword/" + this.$route.params.id,{
-            //verifier le token avec le this.$route.params
             password: this.password,
-            token: this.$route.params.token
+            token: this.$route.params.hash
           })
           .then((res) => {
 
@@ -83,7 +82,9 @@ export default {
             }
           });
 
-      this.success = true
+      this.success = true;
+      console.log('id', this.$route.params.id);
+      console.log('token', this.$route.params.hash);
     },
 
   },
