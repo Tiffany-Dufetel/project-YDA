@@ -12,7 +12,7 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
       subtitle="Gérer vos commandes en attente, en cours et terminé"
     />
     <BackButton />
-    <div v-if="role === 'member'">
+    <div v-if="role === 'membre'">
       <AddButton name="Commandez" @click="add" />
       <br />
     </div>
