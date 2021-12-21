@@ -32,7 +32,7 @@
       <p>Aucun résultat trouvé</p>
     </div>
     <!-- Companies list -->
-    <table class="table table-bordered">
+    <table class="center-table">
       <thead>
         <tr>
           <th>Name</th>
@@ -40,6 +40,7 @@
           <th>type</th>
           <th>Catégorie</th>
           <th>Image</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -58,15 +59,16 @@
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualProduct', params: { id: product.id } }"
-                class="btn btn-primary"
+                class="btn-show"
                 >Voir
               </router-link>
               <div v-if="role == 'admin'">
+
                 <button
-                  class="btn btn-danger"
+                  class="btn-delete"
                   @click="deleteProduct(product.id)"
                 >
-                  Supprimer
+                  <ion-icon name="trash"></ion-icon>
                 </button>
               </div>
             </div>
@@ -177,4 +179,56 @@ async mounted() {
 .image_product {
   height: 50px;
 }
+
+.center-table{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table{
+    background-color: white;
+      border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+    width: auto;
+    margin-bottom: 30px;
+}
+
+th, td {
+  padding: 10px 25px;
+  width: 200px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+thead{
+    background-color: #e78c15!important;
+    padding: 30px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 20px;
+}
+
+.btn-show{
+    background-color: white;
+    padding: 8px 20px 5px 20px;
+    border-radius: 5px;
+    border: 2px solid #e78c15;
+    color: #e78c15;
+}
+.btn-show:hover{
+    color: black;
+        border: 2px solid black;
+}
+
+.btn-delete{
+    border: none;
+    background-color: transparent;
+        padding: 8px 4px 5px 4px;
+
+}
+
 </style>
