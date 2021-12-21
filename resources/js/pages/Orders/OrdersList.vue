@@ -12,10 +12,23 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
       subtitle="Gérer vos commandes en attente, en cours et terminé"
     />
     <BackButton />
+<<<<<<< HEAD
     <div v-if="role === 'membre'">
       <AddButton name="Commandez" @click="add" />
       <br />
     </div>
+=======
+
+    <input
+      v-model="searchKeyOrder"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Rechercher...."
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <br />
+>>>>>>> origin/master
 
     <table class="table table-bordered">
       <thead>
@@ -30,7 +43,7 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
         </tr>
       </thead>
       <tbody>
-        <tr v-for="order in orderArray" :key="order.id">
+        <tr v-for="order in filteredListOrder" :key="order.id">
           <td>
             <b>{{ order.user.company.name }}</b>
           </td>
@@ -40,6 +53,13 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
             }}</span>
             {{ order.user.surname.toUpperCase() }}
           </td>
+          <td>{{ order.product.name }}</td>
+          <td>{{ order.comment }}</td>
+
+          {{
+            order.user.surname.toUpperCase()
+          }}
+
           <td>{{ order.product.name }}</td>
           <td>{{ order.comment }}</td>
           <td>{{ order.date_order }}</td>
@@ -86,9 +106,8 @@ export default {
   data() {
     return {
       orderArray: [],
+      searchKeyOrder: "",
       order: null,
-      searchKey: "",
-      role: "",
     };
   },
   async mounted() {
@@ -97,6 +116,23 @@ export default {
     this.role = getUser.data.role;
     console.log("roleadmin", this.role);
     this.id = getUser.data.id;
+  },
+
+  computed: {
+    /** Search box */
+    filteredListOrder() {
+      return this.orderArray.filter((order) => {
+        return (
+          order.user.company.name
+            .toLowerCase()
+            .includes(this.searchKeyOrder.toLowerCase()) ||
+          order.user.surname
+            .toLowerCase()
+            .includes(this.searchKeyOrder.toLowerCase()) ||
+          order.status.toLowerCase().includes(this.searchKeyOrder.toLowerCase())
+        );
+      });
+    },
   },
   methods: {
     /** Retrieve full list of orders from database */

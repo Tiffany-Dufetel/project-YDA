@@ -1,7 +1,6 @@
 <!--
 -- Company individual display page component
 REFRESH ON MEMBER ADD / DELETE
-BACK BUTTON
 -->
 
 <template>
@@ -106,8 +105,8 @@ BACK BUTTON
 
 <script>
 import Header from "../../components/ui/Header.vue";
-import AddMember from "../../components/ui/forms/AddMember.vue";
 import BackButton from "../../components/ui/buttons/BackButton.vue";
+import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
 import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
 
@@ -119,6 +118,7 @@ export default {
     BackButton,
     MembersList,
     OrderDisplay,
+    BackButton,
   },
 
   props: {

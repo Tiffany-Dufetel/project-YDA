@@ -24,7 +24,7 @@
       title="Bienvenue à votre page de membre"
       subtitle="Passez vos commandes"
     />
-    <MembersHome />
+    <MembersDisplay />
   </div>
 
   <div v-else></div>
@@ -34,7 +34,7 @@
 import Header from "../components/ui/Header.vue";
 import axios from "axios";
 import CalendarTwo from "../components/ui/admin/CalendarTwo.vue";
-import MembersHome from "../pages/Members/MembersHome.vue";
+import MembersDisplay from "../pages/Members/MemberDisplay.vue";
 import CompanyHome from "../pages/Companies/CompanyHome.vue";
 import AdminHome from "../pages/Admin/AdminHome.vue";
 
@@ -43,7 +43,7 @@ export default {
   components: {
     Header,
     CalendarTwo,
-    MembersHome,
+    MembersDisplay,
     AdminHome,
     CompanyHome,
   },
@@ -63,7 +63,7 @@ export default {
     // console.log("user", this.id);
   },
 
-  methods: {
+  /* methods: {
     catView() {
       this.$router.push({ name: "adminCatalogue" });
     },
@@ -97,7 +97,7 @@ export default {
     newsAdd() {
       this.$router.push({ name: "adminNewsAdd" });
     },
-  },
+  }, */
 };
 </script>
 

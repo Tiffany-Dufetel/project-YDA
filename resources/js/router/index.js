@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, routerKey } from "vue-router";
 
 import Home from "../pages/Home.vue";
-import Contact from "../pages/Contact.vue";
 
 /** Admin */
 import Login from "../pages/Auth/Login.vue";
@@ -17,6 +16,7 @@ import ConnectedHome from "../pages/ConnectedHome.vue";
 import CatalogueList from "../pages/Admin/Products/CatalogueList.vue";
 import AddProduct from "../pages/Admin/Products/AddProduct.vue";
 import ProductDisplay from "../pages/Admin/Products/ProductDisplay.vue";
+import ProductUpdate from "../pages/Admin/Products/ProductUpdate.vue";
 
 /** Companies */
 import CompaniesList from "../pages/Companies/CompaniesList.vue";
@@ -45,12 +45,6 @@ const routes = [
                 component: Home,
                 meta: { guest: true },
         },
-        {
-                path: "/contact",
-                name: "Contact",
-                component: Contact,
-                meta: { guest: true },
-        },
 
         /**
          * AUTH
@@ -74,10 +68,20 @@ const routes = [
                 /* meta: { guest: true }, */
         },
         {
-                path: "/modifier-password",
+                path: "/modifier-password/:id/:hash",
                 name: "ModifyPassword",
                 component: ModifyPassword,
-                /* meta: { guest: true }, */
+                props: true,
+                meta: { requiresAuth: true },
+                async beforeEnter() {
+                        const getUser = await axios.get("/api/login");
+                        console.log("response role", getUser.data.role)
+                        const role = getUser.data.role
+
+                        if (role == "member" || role == "manager") {
+                                router.push('/YDA')
+                        }
+                }
         },
 
         /**
@@ -139,9 +143,25 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "manager") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
+        },
+        // Update catalogue item
+        {
+                path: "/catalogue/:id/modifier",
+                name: "itemUpdate",
+                component: ProductUpdate,
+                meta: { requiresAuth: true },
+                async beforeEnter() {
+                        const getUser = await axios.get("/api/login");
+                        console.log("response role", getUser.data.role)
+                        const role = getUser.data.role
+
+                        if (role == "member" || role == "manager") {
+                                router.push('/YDA')
+                        }
+                },
         },
 
         /**
@@ -160,7 +180,7 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "member" || role == "manager") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
         },
@@ -176,7 +196,7 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "member" || role == "manager") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
 
@@ -194,25 +214,25 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "member" || role == "manager") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
         },
         // Update company
         {
-            path: "/entreprise/:id/modifier",
-            name: "companyUpdate",
-            component: CompanyUpdate,
-            meta: { requiresAuth: true },
-            async beforeEnter(){
-                const getUser = await axios.get("/api/login");
-                console.log("response role",getUser.data.role)
-                const role = getUser.data.role
+                path: "/entreprise/:id/modifier",
+                name: "companyUpdate",
+                component: CompanyUpdate,
+                meta: { requiresAuth: true },
+                async beforeEnter() {
+                        const getUser = await axios.get("/api/login");
+                        console.log("response role", getUser.data.role)
+                        const role = getUser.data.role
 
-                if (role == "member" || role == "manager"){
-                    router.push('/admin')
-                }
-            },
+                        if (role == "member" || role == "manager") {
+                                router.push('/YDA')
+                        }
+                },
         },
         /**
          * MEMBRES
@@ -230,7 +250,7 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "member") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
         },
@@ -244,19 +264,19 @@ const routes = [
         },
         // Update Member
         {
-            path: "/membre/:id/modifier",
-            name: "membreUpdate",
-            component: MemberUpdate,
-            meta: { requiresAuth: true },
-            async beforeEnter(){
-                const getUser = await axios.get("/api/login");
-                console.log("response role",getUser.data.role)
-                const role = getUser.data.role
+                path: "/membre/:id/modifier",
+                name: "membreUpdate",
+                component: MemberUpdate,
+                meta: { requiresAuth: true },
+                async beforeEnter() {
+                        const getUser = await axios.get("/api/login");
+                        console.log("response role", getUser.data.role)
+                        const role = getUser.data.role
 
-                if (role == "member"){
-                    router.push('/admin')
-                }
-            },
+                        if (role == "member") {
+                                router.push('/YDA')
+                        }
+                },
         },
 
         /**
@@ -275,7 +295,7 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "admin" || role == "manager") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
         },
@@ -290,7 +310,7 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "member" || role == "manager") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
         },
@@ -313,7 +333,7 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "member") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
         },
@@ -329,7 +349,7 @@ const routes = [
                         const role = getUser.data.role
 
                         if (role == "member" || role == "manager") {
-                                router.push('/admin')
+                                router.push('/YDA')
                         }
                 }
         },
