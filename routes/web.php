@@ -27,7 +27,7 @@ Route::get('/modifier-password/{id}/{hash}', function (EmailVerificationRequest 
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // Route::get('/welcome', [UserController::class, "index"]);
-Route::get('send-mail', function () {
+/* Route::get('send-mail', function () {
 
     $details = [
         'title' => 'Mail from ItSolutionStuff.com',
@@ -37,4 +37,4 @@ Route::get('send-mail', function () {
     \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\MyTestMail($details));
 
     //dd("Email is Sent.");
-});
+}); */
