@@ -10,10 +10,8 @@
     <br />
 
     <!-- Search box -->
-
-       <input
+    <input
       v-model="searchKeyCatalogue"
-
       class="form-control mr-sm-2"
       type="search"
       placeholder="Rechercher...."
@@ -21,9 +19,16 @@
       autocomplete="off"
     />
     <br />
-
-
-
+    <div>
+      <span v-if="searchKeyCatalogue && filteredListCatalogue.length == 1">
+        {{ filteredListCatalogue.length }} résultat(s)</span
+      >
+      <span v-if="filteredListCatalogue.length >= 2"></span>
+    </div>
+    <div v-if="filteredListCatalogue.length == 0">
+      <h3>Désolé</h3>
+      <p>Aucun résultat trouvé</p>
+    </div>
     <!-- Companies list -->
     <table class="table table-bordered">
       <thead>
@@ -36,7 +41,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index) in filteredListCatalogue" :key="index">
+        <tr v-for="product in filteredListCatalogue" :key="product.id">
           <td valign="middle">
             {{ product.name }}
           </td>
@@ -84,43 +89,29 @@ export default {
   data() {
     return {
       productArray: [],
-      searchKeyCatalogue: "",
-      products: [],
+      product: null,
       role: "",
+      searchKeyCatalogue: "",
     };
   },
 async mounted() {
     const getProducts = await axios.get("/api/product");
-    this.products = getProducts.data.data;
+    this.productArray = getProducts.data.data;
 
-    console.log("product", getProducts);
+
   },
   computed: {
-    /** Search box */
-    filteredList() {
-      return this.products.filter((product) => {
-        return (
-          product.name.toLowerCase().includes(this.searchKey.toLowerCase()) ||
-          product.type.toLowerCase().includes(this.searchKey.toLowerCase()) ||
-          product.category.toLowerCase().includes(this.searchKey.toLowerCase())
-        );
-      });
-    },
-  },
-
-computed: {
     /** Search box */
     filteredListCatalogue() {
       return this.productArray.filter((product) => {
         return (
-          product.name.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase())
-
+          product.name.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase()) ||
+          product.type.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase()) ||
+          product.category.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase())
         );
       });
     },
   },
-
-
   methods: {
     /** Go to "add new item" page */
     add() {
@@ -129,7 +120,7 @@ computed: {
     /** Retrieve full list of companies from database */
     async retrieveProducts() {
       const getProducts = await axios.get("/api/product");
-      this.products = getProducts.data.data;
+      this.productArray = getProducts.data.data;
       console.log("product", this.products);
       console.log("store", this.$store);
     },
