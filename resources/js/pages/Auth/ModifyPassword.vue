@@ -11,7 +11,7 @@
           <div class="card-header">Login</div>
           <div class="card-body">
             <div class="d-flex justify-content-center">
-              <form @submit.prevent="login">
+              <form @submit.prevent="updatePassword">
 
                 <div class="form-group row">
                   <label
@@ -59,13 +59,12 @@ export default {
   },
   data() {
     return {
-      formData: {
-        email: "",
+
         password: "",
-        error: null,
-      },
-    };
-  },
+        error: null
+      }
+    },
+
  methods: {
     /* login() {
       axios.get("/sanctum/csrf-cookie").then((response) => {
@@ -83,6 +82,29 @@ export default {
         //   });
       });
     }, */
+    updatePassword() {
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .post("/api/user/" + this.$route.params.id,{
+
+            password: this.password,
+
+            _method : 'put'
+          })
+          .then((res) => {
+
+            this.success = true,
+            this.$router.push("/admin")
+          })
+          .catch((error) => {
+            if (error.response.status == 422) {
+              this.errors = error.response.data.errors;
+              console.log(this.errors);
+            }
+          });
+      });
+      this.success = true
+    },
 
   },
 };
