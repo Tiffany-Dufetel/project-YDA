@@ -89,6 +89,9 @@
         </p>
       </div>
 
+      <label for="number">Numéro de contact</label><br />
+      <input type="number" id="number" name="number" v-model="number" /><br />
+
       <label for="member_count">Nombre d'employés</label><br />
       <input
         type="number"
@@ -123,7 +126,7 @@
       </div>
 
       <!-- Preferable day and time TWO -->
-      <label for="dayTwo">Jour et creneau horaire préféré 1</label>
+      <label for="dayTwo">Jour et creneau horaire préféré 2 </label>
       <div class="form-group row">
         <div class="col-xs-3">
           <select
@@ -180,6 +183,7 @@ export default {
       postcode: "",
       city: "",
       member_count: "",
+      number: "",
       day: "",
       time: "",
       dayTwo: "",
@@ -208,17 +212,20 @@ export default {
       this.postcode = responseDataSiret.etablissement.code_postal;
       this.city = responseDataSiret.etablissement.libelle_commune;
     },
-
+    seeList() {
+      this.$router.push({ name: "adminCompanies" });
+    },
     addCompany(e) {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .put("/api/company", {
+          .post("/api/company", {
             siret: this.siret,
             name: this.name,
             adress: this.adress,
             postcode: this.postcode,
             city: this.city,
             member_count: Number(this.member_count),
+            number: this.number,
             day: this.day,
             time: this.time,
             dayTwo: this.day,
@@ -231,6 +238,7 @@ export default {
               (this.postcode = ""),
               (this.city = ""),
               (this.member_count = ""),
+              (this.number = ""),
               (this.day = ""),
               (this.time = ""),
               (this.dayTwo = ""),
@@ -242,7 +250,8 @@ export default {
               this.errors = error.response.data.errors;
               console.log(this.errors);
             }
-          });
+          })
+          .finally(() => this.seeList());
       });
     },
   },
