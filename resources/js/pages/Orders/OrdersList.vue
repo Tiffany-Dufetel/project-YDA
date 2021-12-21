@@ -41,16 +41,10 @@
           <td><span class="capitalize_firstname">{{ order.user.first_name }}</span> {{order.user.surname.toUpperCase()}}</td>
           <td>{{ order.product.name}}</td>
           <td>{{ order.comment}}</td>
-        <tr v-for="order in orderArray" :key="order.id">
-          <td>
-            <b>{{ order.user.company.name }}</b>
-          </td>
-          <td>
-            <span class="capitalize_firstname">{{
-              order.user.first_name
-            }}</span>
+
+
             {{ order.user.surname.toUpperCase() }}
-          </td>
+
           <td>{{ order.product.name }}</td>
           <td>{{ order.comment }}</td>
           <td>{{ order.date_order }}</td>
