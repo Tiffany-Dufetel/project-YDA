@@ -42,23 +42,22 @@ export default {
     };
   },
   methods: {
+    goToUpdate() {
+      this.$router.push("/membre/" + this.id + "/modifier");
+    },
     /** Retrieve full list of companies from database */
     async retrieveMembers() {
       const getMembers = await axios.get("/api/user");
       this.members = getMembers.data.data;
       console.log(this.members);
     },
-    goToUpdate() {
-      this.$router.push("/membre/" + this.id + "/edit");
-    },
+
     /** Refresh the list when changes are made */
     async refreshList() {
       this.retrieveMembers();
       this.member = null;
     },
-    goToUpdate() {
-      this.$router.push("/membre/" + this.id + "/edit");
-    },
+
     verify() {
       this.$router.push({
         name: "FirstConnection",
@@ -68,8 +67,9 @@ export default {
     /** Delete a specific member */
     deleteMember(id) {
       if (confirm("Etes-vous sur d'effacer ce membre ?")) {
+            
         axios
-          .delete(`api/user/${id}`)
+          .delete(`http://127.0.0.1:8000/api/user/${id}`)
           .then(function (response) {
             console.log(response);
           })
@@ -77,6 +77,7 @@ export default {
             console.log(error);
           })
           .finally(() => this.refreshList());
+
       }
     },
     /** Mount with the full company list */
