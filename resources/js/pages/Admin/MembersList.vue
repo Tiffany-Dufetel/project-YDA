@@ -6,6 +6,7 @@
     <Header title="name of company" subtitle="Tous les membres" />
     <br />
 
+    <BackButton />
     <!-- Search box -->
     <form class="form-inline">
       <input
@@ -45,12 +46,14 @@
 <script>
 import axios from "axios";
 import Header from "../../components/ui/Header.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 import MembersList from "../../components/Members/MembersList.vue";
 
 export default {
   //   name: "MembersList",
   components: {
     Header,
+    BackButton,
     MembersList: MembersList,
   },
 

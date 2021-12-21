@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, routerKey } from "vue-router";
 
 import Home from "../pages/Home.vue";
-import Contact from "../pages/Contact.vue";
 
 /** Admin */
 import Login from "../pages/Auth/Login.vue";
@@ -44,12 +43,6 @@ const routes = [
                 path: "/",
                 name: "Home",
                 component: Home,
-                meta: { guest: true },
-        },
-        {
-                path: "/contact",
-                name: "Contact",
-                component: Contact,
                 meta: { guest: true },
         },
 
