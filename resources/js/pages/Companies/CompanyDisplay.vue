@@ -9,18 +9,33 @@
   </div>
   <div>
     <div class="mt-5">
-        <div class="row">
-            <div class="col">
-                <p>Siret : {{ company.siret }}</p>
+      <div class="row">
+        <div class="col">
+          <p>Siret : {{ company.siret }}</p>
 
-                <p>Adresse : {{ company.adress }} - {{ company.postcode }} {{ company.city }}</p>
-            </div>
-            <div class="col">
-                <iframe class="border border-warning shadow p-3 mb-5 bg-white rounded" width="600" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" v-bind:src="adressGPS"></iframe><br />
-            </div>
+          <p>
+            Adresse : {{ company.adress }} - {{ company.postcode }}
+            {{ company.city }}
+          </p>
+
+          <p>Numéro de téléphone : {{ company.number }}</p>
         </div>
+        <div class="col">
+          <iframe
+            class="border border-warning shadow p-3 mb-5 bg-white rounded"
+            width="600"
+            height="250"
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+            v-bind:src="adressGPS"
+          ></iframe
+          ><br />
+        </div>
+      </div>
 
-        <button class="btn btn-warning" @click="goToUpdate">modifier</button>
+      <button class="btn btn-warning" @click="goToUpdate">modifier</button>
       <button class="btn btn-dark" @click="isHidden = !isHidden">
         {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
       </button>
@@ -117,20 +132,20 @@ export default {
       filterUsers: [],
       filterOrders: [],
       orders: [],
-      adressGPS:"",
+      adressGPS: "",
     };
   },
 
   methods: {
-      goToUpdate(){
-          this.$router.push('/company/'+ this.$route.params.id +'/edit')
-      }
+    goToUpdate() {
+      this.$router.push("/company/" + this.$route.params.id + "/edit");
+    },
   },
 
   async mounted() {
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
-    console.log('response',response.data)
+    console.log("response", response.data);
 
     // Loading of users' information
     const userResponse = await axios.get("/api/user");
@@ -145,9 +160,10 @@ export default {
     this.companyId = getUser.data.company_id;
 
     this.filterUsers = users.filter((user) => user.company_id == this.id);
-    this.filterOrders = orders.filter((order) => order.user.company_id == this.id);
-    console.log('coucou', this.companyId)
-
+    this.filterOrders = orders.filter(
+      (order) => order.user.company_id == this.id
+    );
+    console.log("coucou", this.companyId);
 
     this.role = getUser.data.role;
     console.log("user", users);
@@ -158,8 +174,10 @@ export default {
     const companyPostcode = this.company.postcode;
     const companyCity = this.company.city;
 
-    this.adressGPS = "https://maps.google.com/maps?q="+companyAdress.concat("+",companyPostcode,"+",companyCity)+"&output=embed"
-
+    this.adressGPS =
+      "https://maps.google.com/maps?q=" +
+      companyAdress.concat("+", companyPostcode, "+", companyCity) +
+      "&output=embed";
   },
 };
 </script>

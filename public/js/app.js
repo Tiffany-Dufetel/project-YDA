@@ -23427,13 +23427,13 @@ __webpack_require__.r(__webpack_exports__);
 
       event.preventDefault();
       var formData = new FormData();
-      formData.append('image', this.image);
+      formData.append("image", this.image);
 
       _.each(this.formData, function (value, key) {
         formData.append(key, value);
       });
 
-      var response = axios__WEBPACK_IMPORTED_MODULE_3___default().post('api/product', formData).then(function (res) {
+      var response = axios__WEBPACK_IMPORTED_MODULE_3___default().post("api/product", formData).then(function (res) {
         _this.formData = {};
         _this.$refs.file.value = null;
         _this.success = true;
@@ -23927,8 +23927,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       postcode: "",
       city: "",
       member_count: "",
+      number: "",
       day: "",
       time: "",
+      dayTwo: "",
+      timeTwo: "",
       success: false,
       errors: {}
     };
@@ -23975,26 +23978,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+    seeList: function seeList() {
+      this.$router.push({
+        name: "adminCompanies"
+      });
+    },
     addCompany: function addCompany(e) {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_4___default().get("/sanctum/csrf-cookie").then(function (response) {
-        axios__WEBPACK_IMPORTED_MODULE_4___default().put("/api/company", {
+        axios__WEBPACK_IMPORTED_MODULE_4___default().post("/api/company", {
           siret: _this2.siret,
           name: _this2.name,
           adress: _this2.adress,
           postcode: _this2.postcode,
           city: _this2.city,
           member_count: Number(_this2.member_count),
+          number: _this2.number,
           day: _this2.day,
-          time: _this2.time
+          time: _this2.time,
+          dayTwo: _this2.day,
+          timeTwo: _this2.time
         }).then(function (res) {
-          _this2.siret = "", _this2.name = "", _this2.adress = "", _this2.postcode = "", _this2.city = "", _this2.member_count = "", _this2.day = "", _this2.time = "", _this2.success = "true";
+          _this2.siret = "", _this2.name = "", _this2.adress = "", _this2.postcode = "", _this2.city = "", _this2.member_count = "", _this2.number = "", _this2.day = "", _this2.time = "", _this2.dayTwo = "", _this2.timeTwo = "", _this2.success = "true";
         })["catch"](function (error) {
           if (error.response.status == 422) {
             _this2.errors = error.response.data.errors;
             console.log(_this2.errors);
           }
+        })["finally"](function () {
+          return _this2.seeList();
         });
       });
     }
@@ -24188,7 +24201,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     goToUpdate: function goToUpdate() {
-      this.$router.push('/company/' + this.$route.params.id + '/edit');
+      this.$router.push("/company/" + this.$route.params.id + "/edit");
     }
   },
   mounted: function mounted() {
@@ -24205,7 +24218,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 2:
               response = _context.sent;
-              console.log('response', response.data); // Loading of users' information
+              console.log("response", response.data); // Loading of users' information
 
               _context.next = 6;
               return axios.get("/api/user");
@@ -24233,7 +24246,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this.filterOrders = orders.filter(function (order) {
                 return order.user.company_id == _this.id;
               });
-              console.log('coucou', _this.companyId);
+              console.log("coucou", _this.companyId);
               _this.role = getUser.data.role;
               console.log("user", users);
               _this.company = response.data;
@@ -26334,36 +26347,14 @@ var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    selected: ""
-  }, "choisir la catégorie...", -1
-  /* HOISTED */
-  );
-});
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option selected data-v-2442ea20>choisir la catégorie...</option><option value=\"nourriture\" data-v-2442ea20>nourriture</option><option value=\"boissons\" data-v-2442ea20>boisson</option><option value=\"bien-être\" data-v-2442ea20>bien-être</option><option value=\"maison\" data-v-2442ea20>maison</option><option value=\"quotidien\" data-v-2442ea20>quotidien</option><option value=\"coffret\" data-v-2442ea20>coffret</option>", 7);
 
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "service"
-  }, "service", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "produit"
-  }, "produit", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_18 = [_hoisted_15, _hoisted_16, _hoisted_17];
-var _hoisted_19 = {
+var _hoisted_22 = [_hoisted_15];
+var _hoisted_23 = {
   "class": "form-group col-md-10"
 };
 
-var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Image", -1
   /* HOISTED */
   );
@@ -26379,7 +26370,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
     title: "Ajouter un produit ou service",
     subtitle: "...."
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BackButton), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, "Votre produit a bien été rajouté", 512
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BackButton), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, " Votre produit a bien été rajouté ", 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.success]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -26455,7 +26446,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "category",
     "class": "form-control",
     required: "true"
-  }, _hoisted_18, 512
+  }, _hoisted_22, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.formData.category]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.errors.category, function (error, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
@@ -26468,7 +26459,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors && $data.errors.category]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" MOST IMPORTANT - SEE \"ref\" AND \"@change\" PROPERTIES "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors && $data.errors.category]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" MOST IMPORTANT - SEE \"ref\" AND \"@change\" PROPERTIES "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
     "class": "custom-file-input",
     id: "customFile",
@@ -27226,8 +27217,8 @@ var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "member_count"
-  }, "Nombre d'employés", -1
+    "for": "number"
+  }, "Numéro de contact", -1
   /* HOISTED */
   );
 });
@@ -27246,27 +27237,47 @@ var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "day"
-  }, "Jour et creneau horaire préféré", -1
+    "for": "member_count"
+  }, "Nombre d'employés", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_20 = {
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "day"
+  }, "Jour et creneau horaire préféré 1", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_23 = {
   "class": "form-group row"
 };
-var _hoisted_21 = {
+var _hoisted_24 = {
   "class": "col-xs-3"
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option selected data-v-3c4baa79>choisir le jour...</option><option value=\"monday\" data-v-3c4baa79>Lundi</option><option value=\"tuesday\" data-v-3c4baa79>Mardi</option><option value=\"wednesday\" data-v-3c4baa79>Mercredi</option><option value=\"thursday\" data-v-3c4baa79>Jeudi</option><option value=\"friday\" data-v-3c4baa79>Vendredi</option>", 6);
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option selected data-v-3c4baa79>choisir le jour...</option><option value=\"monday\" data-v-3c4baa79>Lundi</option><option value=\"tuesday\" data-v-3c4baa79>Mardi</option><option value=\"wednesday\" data-v-3c4baa79>Mercredi</option><option value=\"thursday\" data-v-3c4baa79>Jeudi</option><option value=\"friday\" data-v-3c4baa79>Vendredi</option>", 6);
 
-var _hoisted_28 = [_hoisted_22];
-var _hoisted_29 = {
+var _hoisted_31 = [_hoisted_25];
+var _hoisted_32 = {
   "class": "col-xs-2"
 };
 
-var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_33 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "time"
   }, "Créneau de passage", -1
@@ -27274,9 +27285,43 @@ var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option selected data-v-3c4baa79>Creneau...</option><option value=\"09:00 - 11:00\" data-v-3c4baa79>9h - 11h</option><option value=\"11:00 - 13:00\" data-v-3c4baa79>11h - 13h</option><option value=\"13:00 - 15:00\" data-v-3c4baa79>13h - 15h</option><option value=\"15:00 - 17:00\" data-v-3c4baa79>15h - 17h</option>", 5);
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option selected data-v-3c4baa79>Creneau...</option><option value=\"09:00 - 11:00\" data-v-3c4baa79>9h - 11h</option><option value=\"11:00 - 13:00\" data-v-3c4baa79>11h - 13h</option><option value=\"13:00 - 15:00\" data-v-3c4baa79>13h - 15h</option><option value=\"15:00 - 17:00\" data-v-3c4baa79>15h - 17h</option>", 5);
 
-var _hoisted_36 = [_hoisted_31];
+var _hoisted_39 = [_hoisted_34];
+
+var _hoisted_40 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "dayTwo"
+  }, "Jour et creneau horaire préféré 2 ", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_41 = {
+  "class": "form-group row"
+};
+var _hoisted_42 = {
+  "class": "col-xs-3"
+};
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option selected data-v-3c4baa79>choisir le jour...</option><option value=\"monday\" data-v-3c4baa79>Lundi</option><option value=\"tuesday\" data-v-3c4baa79>Mardi</option><option value=\"wednesday\" data-v-3c4baa79>Mercredi</option><option value=\"thursday\" data-v-3c4baa79>Jeudi</option><option value=\"friday\" data-v-3c4baa79>Vendredi</option>", 6);
+
+var _hoisted_49 = [_hoisted_43];
+var _hoisted_50 = {
+  "class": "col-xs-2"
+};
+
+var _hoisted_51 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "timeTwo"
+  }, "Créneau de passage", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option selected data-v-3c4baa79>Creneau...</option><option value=\"09:00 - 11:00\" data-v-3c4baa79>9h - 11h</option><option value=\"11:00 - 13:00\" data-v-3c4baa79>11h - 13h</option><option value=\"13:00 - 15:00\" data-v-3c4baa79>13h - 15h</option><option value=\"15:00 - 17:00\" data-v-3c4baa79>15h - 17h</option>", 5);
+
+var _hoisted_57 = [_hoisted_52];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
 
@@ -27289,7 +27334,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     subtitle: "Tapez le SIRET afin de pré remplir"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BackButton), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     method: "PUT",
-    onSubmit: _cache[10] || (_cache[10] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+    onSubmit: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Siret number to use government data "), _hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "siret",
@@ -27398,32 +27443,59 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors && $data.errors.city]]), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "number",
+    id: "number",
+    name: "number",
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return $data.number = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.number]]), _hoisted_18, _hoisted_19, _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "number",
     id: "member_count",
     name: "member_count",
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $data.member_count = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.member_count]]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Preferable day and time "), _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.member_count]]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Preferable day and time ONE "), _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
       return $data.day = $event;
     }),
     name: "day",
     id: "day",
     "class": "form-control"
-  }, _hoisted_28, 512
+  }, _hoisted_31, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.day]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.day]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [_hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
       return $data.time = $event;
     }),
     name: "time",
     id: "time",
     "class": "form-control"
-  }, _hoisted_36, 512
+  }, _hoisted_39, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.time]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<button type=\"submit\">Ajouter</button>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubmitButton, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.time]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Preferable day and time TWO "), _hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
+      return $data.dayTwo = $event;
+    }),
+    name: "dayTwo",
+    id: "dayTwo",
+    "class": "form-control"
+  }, _hoisted_49, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.dayTwo]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [_hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+      return $data.timeTwo = $event;
+    }),
+    name: "timeTwo",
+    id: "timeTwo",
+    "class": "form-control"
+  }, _hoisted_57, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.timeTwo]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<button type=\"submit\">Ajouter</button>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubmitButton, {
     name: "Ajouter",
     onClick: $options.addCompany
   }, null, 8
@@ -27493,7 +27565,7 @@ var _hoisted_9 = {
 };
 
 var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Siret"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Adresse"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Total de membres"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Creneau de livraison")])], -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Siret"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Adresse"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Téléphone"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Total de membres"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Creneau de livraison 1"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Creneau de livraison 2")])], -1
   /* HOISTED */
   );
 });
@@ -27503,7 +27575,7 @@ var _hoisted_11 = {
   role: "group"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("voir ");
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Voir ");
 
 var _hoisted_13 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -27545,9 +27617,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.adress) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.postcode) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.city), 1
     /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.number), 1
+    /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.member_count), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.day) + " entre " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.time) + "h et", 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.day) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.time), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.dayTwo) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(company.timeTwo), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: {
@@ -27647,7 +27723,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["title"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Siret : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.siret), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Adresse : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.adress) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.postcode) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.city), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Adresse : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.adress) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.postcode) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.city), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Numéro de téléphone : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.company.number), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("iframe", {
     "class": "border border-warning shadow p-3 mb-5 bg-white rounded",
@@ -35072,7 +35150,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[data-v-2442ea20], select[data-v-2442ea20]{\r\n    width: 25vh;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ninput[data-v-2442ea20],\r\nselect[data-v-2442ea20] {\r\n  width: 25vh;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

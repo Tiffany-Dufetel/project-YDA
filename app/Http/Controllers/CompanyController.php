@@ -43,14 +43,17 @@ class CompanyController extends Controller
     {
 
         $request->validate([
-            'member_count' => 'required|integer',
-            'siret' => 'required|string',
             'name' => 'required|string',
+            'member_count' => 'integer',
+            'siret' => 'required|string',
             'adress' => 'required|string',
             'postcode' => 'required|string',
             'city' => 'required|string',
+            'number' => 'integer',
             'day' => 'string',
             'time' => 'string',
+            'dayTwo' => 'string',
+            'timeTwo' => 'string',
 
         ], [
             'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
@@ -70,6 +73,9 @@ class CompanyController extends Controller
             'city' => $request->input('city'),
             'day' => $request->input('day'),
             'time' => $request->input('time'),
+            'dayTwo' => $request->input('dayTwo'),
+            'timeTwo' => $request->input('timeTwo'),
+            'number' => $request->input('number'),
         ];
 
         return Company::create($company);
@@ -118,9 +124,11 @@ class CompanyController extends Controller
             'adress' => 'required|string',
             'postcode' => 'required|string',
             'city' => 'required|string',
+            'number' => 'integer',
             'day' => 'string',
             'time' => 'string',
-
+            'dayTwo' => 'string',
+            'timeTwo' => 'string',
         ], [
             'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
             'siret.required' => "Un numéro de siret est nécessaire.",
@@ -136,6 +144,11 @@ class CompanyController extends Controller
         $company->adress = $request->adress;
         $company->postcode = $request->postcode;
         $company->city = $request->city;
+        $company->number = $request->number;
+        $company->day = $request->day;
+        $company->time = $request->time;
+        $company->dayTwo = $request->dayTwo;
+        $company->timeTwo = $request->timeTwo;
 
         $company->save();
 
