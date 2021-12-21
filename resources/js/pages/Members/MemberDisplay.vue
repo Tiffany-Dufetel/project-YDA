@@ -45,6 +45,15 @@
 
     <!-- List of orders -->
     <center><h1>Mes commandes</h1></center>
+    <input
+      v-model="searchKeyMembre"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Rechercher...."
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <br />
     <table id="table_margin" class="table table-bordered">
       <thead>
         <tr>

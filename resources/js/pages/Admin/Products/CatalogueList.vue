@@ -13,7 +13,7 @@
 
     <!-- Search box -->
     <input
-      v-model="searchKey"
+      v-model="searchKeyCatalogue"
       class="form-control mr-sm-2"
       type="search"
       placeholder="Rechercher...."
@@ -22,12 +22,12 @@
     />
     <br />
     <div>
-      <span v-if="searchKey && filteredList.length == 1">
-        {{ filteredList.length }} résultat(s)</span
+      <span v-if="searchKeyCatalogue && filteredListCatalogue.length == 1">
+        {{ filteredListCatalogue.length }} résultat(s)</span
       >
-      <span v-if="filteredList.length >= 2"></span>
+      <span v-if="filteredListCatalogue.length >= 2"></span>
     </div>
-    <div v-if="filteredList.length == 0">
+    <div v-if="filteredListCatalogue.length == 0">
       <h3>Désolé</h3>
       <p>Aucun résultat trouvé</p>
     </div>
@@ -43,7 +43,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in products" :key="product.id">
+        <tr v-for="product in filteredListCatalogue" :key="product.id">
           <td valign="middle">
             {{ product.name }}
           </td>
@@ -95,23 +95,29 @@ export default {
   inject: ["checkRole", "whatRole"],
   data() {
     return {
-      products: [],
+      productArray: [],
       product: null,
       role: "",
-      searchKey: "",
+      searchKeyCatalogue: "",
     };
+  },
+async mounted() {
+    const getProducts = await axios.get("/api/product");
+    this.productArray = getProducts.data.data;
+
+
   },
   computed: {
     /** Search box */
-    filteredList() {
-      return this.products.filter((product) => {
+    filteredListCatalogue() {
+      return this.productArray.filter((product) => {
         return (
-          product.name.toLowerCase().includes(this.searchKey.toLowerCase()) ||
-          product.type.toLowerCase().includes(this.searchKey.toLowerCase()) ||
-          product.category.toLowerCase().includes(this.searchKey.toLowerCase())
+          product.name.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase()) ||
+          product.type.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase()) ||
+          product.category.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase())
         );
       });
-    },
+    }
   },
   methods: {
     /** Go to "add new item" page */
@@ -121,7 +127,7 @@ export default {
     /** Retrieve full list of companies from database */
     async retrieveProducts() {
       const getProducts = await axios.get("/api/product");
-      this.products = getProducts.data.data;
+      this.productArray = getProducts.data.data;
       console.log("product", this.products);
       console.log("store", this.$store);
     },
