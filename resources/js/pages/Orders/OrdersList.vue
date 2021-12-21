@@ -29,6 +29,7 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
       </thead>
       <tbody>
         <tr v-for="order in orderArray" :key="order.id">
+          <td v-if="whatRole === 'member'"></td>
           <td>
             <b>{{ order.user.company.name }}</b>
           </td>
@@ -79,6 +80,8 @@ export default {
     BackButton,
     AddButton,
   },
+
+  inject: ["checkRole", "whatRole"],
   data() {
     return {
       orderArray: [],
@@ -86,8 +89,12 @@ export default {
       searchKey: "",
     };
   },
-  mounted() {
+  async mounted() {
     this.retrieveOrders();
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
+    console.log("roleadmin", this.role);
+    this.id = getUser.data.id;
   },
   methods: {
     /** Retrieve full list of orders from database */
