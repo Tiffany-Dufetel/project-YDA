@@ -12,8 +12,10 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
       subtitle="Gérer vos commandes en attente, en cours et terminé"
     />
     <BackButton />
-    <AddButton name="Commandez" @click="add" />
-    <br />
+    <div v-if="role === 'member'">
+      <AddButton name="Commandez" @click="add" />
+      <br />
+    </div>
 
     <table class="table table-bordered">
       <thead>
@@ -79,15 +81,22 @@ export default {
     BackButton,
     AddButton,
   },
+
+  inject: ["checkRole", "whatRole"],
   data() {
     return {
       orderArray: [],
       order: null,
       searchKey: "",
+      role: "",
     };
   },
-  mounted() {
+  async mounted() {
     this.retrieveOrders();
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
+    console.log("roleadmin", this.role);
+    this.id = getUser.data.id;
   },
   methods: {
     /** Retrieve full list of orders from database */

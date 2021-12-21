@@ -6,6 +6,8 @@ BACK BUTTON
 <template>
   <div>
     <!-- <div class ="alert alert-success" v-show="success">Le membre a bien été mis à jour</div> -->
+    <BackButton />
+
     <form @submit.prevent="updateMember">
       <label for="surname">Nom</label><br />
       <input type="text" id="surname" name="surname" v-model="surname" /><br />
@@ -110,12 +112,14 @@ BACK BUTTON
 
 <script>
 import Header from "../../components/ui/Header.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 
 export default {
   name: "MemberUpdate",
   components: {
     Header,
+    BackButton,
     SubmitButton,
   },
 
