@@ -17,12 +17,12 @@ export default {
 </script>
 
 <style>
-.header {
+/* .header {
   background: #eeeeee;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 2px 0 0 10px #e78c15;
   width: 80vw;
   margin: 75px auto 0 auto;
-}
+} */
 </style>

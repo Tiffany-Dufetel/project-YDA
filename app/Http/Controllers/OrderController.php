@@ -112,10 +112,22 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $order = Order::find($id);
-        $order->delete();
+        $res = Order::findOrFail($id)->delete();
 
-        return redirect()->back()
-            ->with('success', 'The order was successfully cancelled');
+        /* Check the status response */
+        if ($res) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        /* Return the response as json */
+        return response()->json($data);
     }
 }

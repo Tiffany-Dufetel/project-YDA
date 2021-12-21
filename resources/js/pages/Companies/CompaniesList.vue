@@ -22,9 +22,9 @@
     <br />
     <div>
       <span v-if="searchKey && filteredList.length == 1">
-        {{ filteredList.length }}résultat</span
+        {{ filteredList.length }} résultat(s)</span
       >
-      <span v-if="filteredList.length >= 2">s</span>
+      <span v-if="filteredList.length >= 2"></span>
     </div>
     <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
         Search
@@ -41,8 +41,10 @@
           <th>Name</th>
           <th>Siret</th>
           <th>Adresse</th>
+          <th>Téléphone</th>
           <th>Total de membres</th>
-          <th>Creneau de livraison</th>
+          <th>Creneau de livraison 1</th>
+          <th>Creneau de livraison 2</th>
         </tr>
       </thead>
       <tbody>
@@ -52,8 +54,10 @@
           <td>
             {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
           </td>
+          <td>{{ company.number }}</td>
           <td>{{ company.member_count }}</td>
-          <td>{{ company.day }} entre {{ company.time }}h et</td>
+          <td>{{ company.day }} - {{ company.time }}</td>
+          <td>{{ company.dayTwo }} - {{ company.timeTwo }}</td>
           <td>
             <div class="btn-group" role="group">
               <router-link

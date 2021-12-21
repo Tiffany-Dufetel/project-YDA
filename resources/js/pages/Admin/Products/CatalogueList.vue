@@ -6,14 +6,14 @@
   <div class="catalogue_container">
     <Header title="Catalogue" subtitle="Produits et services" />
     <BackButton />
-    <AddButton name="Ajouter Produit" @click="add" />
-
+        <AddButton name="Ajouter Produit" @click="add"/>
     <br />
 
     <!-- Search box -->
-    <form class="form-inline">
+
        <input
       v-model="searchKeyCatalogue"
+
       class="form-control mr-sm-2"
       type="search"
       placeholder="Rechercher...."
@@ -22,7 +22,7 @@
     />
     <br />
 
-    </form>
+
 
     <!-- Companies list -->
     <table class="table table-bordered">
@@ -38,10 +38,7 @@
       <tbody>
         <tr v-for="(product, index) in filteredListCatalogue" :key="index">
           <td valign="middle">
-            <router-link
-              :to="{ name: 'individualProduct', params: { id: product.id } }"
-              >{{ product.name }}</router-link
-            >
+            {{ product.name }}
           </td>
           <td valign="middle">{{ product.description }}</td>
           <td valign="middle">{{ product.type }}</td>
@@ -55,10 +52,10 @@
               <router-link
                 :to="{ name: 'individualProduct', params: { id: product.id } }"
                 class="btn btn-primary"
-                >Edit
+                >Voir
               </router-link>
               <button class="btn btn-danger" @click="deleteProduct(product.id)">
-                Delete
+                Supprimer
               </button>
             </div>
           </td>
@@ -70,7 +67,7 @@
 
 <script>
 import Header from "../../../components/ui/Header.vue";
-import CatalogueDisplay from "../../../components/ui/catalogue/CatalogueDisplay.vue";
+// import OrderDisplay from "../../../components/ui/orders/OrderDisplay.vue";
 import BackButton from "../../../components/ui/buttons/BackButton.vue";
 import AddButton from "../../../components/ui/buttons/AddButton.vue";
 
@@ -78,25 +75,37 @@ export default {
   name: "productList",
   components: {
     Header,
-    CatalogueDisplay,
+    // OrderDisplay,
     BackButton,
     AddButton,
   },
 
   inject: ["checkRole", "whatRole"],
-
   data() {
     return {
       productArray: [],
       searchKeyCatalogue: "",
+      products: [],
+      role: "",
     };
   },
-
-  async mounted() {
+async mounted() {
     const getProducts = await axios.get("/api/product");
-    this.productArray = getProducts.data.data;
+    this.products = getProducts.data.data;
 
-    console.log("product", this.productArray);
+    console.log("product", getProducts);
+  },
+  computed: {
+    /** Search box */
+    filteredList() {
+      return this.products.filter((product) => {
+        return (
+          product.name.toLowerCase().includes(this.searchKey.toLowerCase()) ||
+          product.type.toLowerCase().includes(this.searchKey.toLowerCase()) ||
+          product.category.toLowerCase().includes(this.searchKey.toLowerCase())
+        );
+      });
+    },
   },
 
 computed: {
@@ -113,10 +122,52 @@ computed: {
 
 
   methods: {
+    /** Go to "add new item" page */
     add() {
       this.$router.push({ name: "adminProductAdd" });
     },
+    /** Retrieve full list of companies from database */
+    async retrieveProducts() {
+      const getProducts = await axios.get("/api/product");
+      this.products = getProducts.data.data;
+      console.log("product", this.products);
+      console.log("store", this.$store);
+    },
+    /** Refresh the list when changes are made */
+    async refreshList() {
+      this.retrieveProducts();
+      this.product = null;
+    },
+    /** Delete a specific company */
+    deleteProduct(id) {
+      if (confirm("Etes-vous sur d'effacer cette produit ou service ?")) {
+        axios
+          .delete(`api/product/${id}`)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(() => this.refreshList());
+      }
+    },
   },
+  async mounted() {
+    this.retrieveProducts();
+  },
+
+  //   async beforeCreate(){
+
+  //     const getUser = await axios.get("/api/login");
+  //     this.role = getUser.data.role;
+  //     console.log("role", this.role);
+
+  //     if (this.role == "manager"){
+  //         this.$router.push('/admin')
+  //     }
+  // this.id = getUser.data.id;
+  //   },
 };
 </script>
 

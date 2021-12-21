@@ -43,14 +43,17 @@ class CompanyController extends Controller
     {
 
         $request->validate([
-            'member_count' => 'required|integer',
-            'siret' => 'required|string',
             'name' => 'required|string',
+            'member_count' => 'integer',
+            'siret' => 'required|string',
             'adress' => 'required|string',
             'postcode' => 'required|string',
             'city' => 'required|string',
+            'number' => 'integer',
             'day' => 'string',
             'time' => 'string',
+            'dayTwo' => 'string',
+            'timeTwo' => 'string',
 
         ], [
             'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
@@ -70,6 +73,9 @@ class CompanyController extends Controller
             'city' => $request->input('city'),
             'day' => $request->input('day'),
             'time' => $request->input('time'),
+            'dayTwo' => $request->input('dayTwo'),
+            'timeTwo' => $request->input('timeTwo'),
+            'number' => $request->input('number'),
         ];
 
         return Company::create($company);
@@ -107,9 +113,59 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $company)
     {
-        //
+        $company = Company::find($company);
+
+        $request->validate([
+            'member_count' => 'required|integer',
+            'siret' => 'required|string',
+            'name' => 'required|string',
+            'adress' => 'required|string',
+            'postcode' => 'required|string',
+            'city' => 'required|string',
+            'number' => 'integer',
+            'day' => 'string',
+            'time' => 'string',
+            'dayTwo' => 'string',
+            'timeTwo' => 'string',
+        ], [
+            'siret.unique' => "L'entreprise que vous essayez de rajouter existe déjà.",
+            'siret.required' => "Un numéro de siret est nécessaire.",
+            'name.required' => "Vous devez inserez un nom d'entreprise.",
+            'adress.required' => "Vous devez inserez une adresse.",
+            'postcode.required' => "Vous devez inserez un code postal.",
+            'city.required' => "Vous devez inserez une ville."
+        ]);
+
+        $company->siret = $request->siret;
+        $company->member_count = $request->member_count;
+        $company->name = $request->name;
+        $company->adress = $request->adress;
+        $company->postcode = $request->postcode;
+        $company->city = $request->city;
+        $company->number = $request->number;
+        $company->day = $request->day;
+        $company->time = $request->time;
+        $company->dayTwo = $request->dayTwo;
+        $company->timeTwo = $request->timeTwo;
+
+        $company->save();
+
+
+        if ($company) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        return response()->json($data);
     }
 
     /**
@@ -125,13 +181,13 @@ class CompanyController extends Controller
         /* Check the status response */
         if ($res) {
             $data = [
-                'status'=>'1',
-                'msg'=>'success'
+                'status' => '1',
+                'msg' => 'success'
             ];
         } else {
             $data = [
-                'status'=>'0',
-                'msg'=>'fail'
+                'status' => '0',
+                'msg' => 'fail'
             ];
         }
 

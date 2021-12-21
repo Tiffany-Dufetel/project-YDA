@@ -10,11 +10,7 @@
     />
     <BackButton />
 
-    <div class="alert alert-success" v-show="success">
-      L'entreprise a bien été rajouté
-    </div>
-
-    <form method="POST" @submit.prevent>
+    <form method="PUT" @submit.prevent>
       <!-- Siret number to use government data -->
       <label for="siret">Siret</label><br />
       <input
@@ -37,7 +33,7 @@
       </div>
 
       <label for="name">Dénomination social</label><br />
-      <input type="text" id="name" name="name" v-model="name"/><br />
+      <input type="text" id="name" name="name" v-model="name" /><br />
 
       <div v-show="errors && errors.name">
         <p
@@ -50,7 +46,7 @@
       </div>
 
       <label for="adress">Adresse</label><br />
-      <input type="text" id="adress" name="adress" v-model="adress"/><br />
+      <input type="text" id="adress" name="adress" v-model="adress" /><br />
 
       <div v-show="errors && errors.adress">
         <p
@@ -93,6 +89,9 @@
         </p>
       </div>
 
+      <label for="number">Numéro de contact</label><br />
+      <input type="number" id="number" name="number" v-model="number" /><br />
+
       <label for="member_count">Nombre d'employés</label><br />
       <input
         type="number"
@@ -101,8 +100,8 @@
         v-model="member_count"
       /><br />
 
-      <!-- Preferable day and time -->
-      <label for="day">Jour et creneau horaire préféré</label>
+      <!-- Preferable day and time ONE -->
+      <label for="day">Jour et creneau horaire préféré 1</label>
       <div class="form-group row">
         <div class="col-xs-3">
           <select v-model="day" name="day" id="day" class="form-control">
@@ -115,7 +114,43 @@
           </select>
         </div>
         <div class="col-xs-2">
+          <label for="time">Créneau de passage</label>
           <select v-model="time" name="time" id="time" class="form-control">
+            <option selected>Creneau...</option>
+            <option value="09:00 - 11:00">9h - 11h</option>
+            <option value="11:00 - 13:00">11h - 13h</option>
+            <option value="13:00 - 15:00">13h - 15h</option>
+            <option value="15:00 - 17:00">15h - 17h</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Preferable day and time TWO -->
+      <label for="dayTwo">Jour et creneau horaire préféré 2 </label>
+      <div class="form-group row">
+        <div class="col-xs-3">
+          <select
+            v-model="dayTwo"
+            name="dayTwo"
+            id="dayTwo"
+            class="form-control"
+          >
+            <option selected>choisir le jour...</option>
+            <option value="monday">Lundi</option>
+            <option value="tuesday">Mardi</option>
+            <option value="wednesday">Mercredi</option>
+            <option value="thursday">Jeudi</option>
+            <option value="friday">Vendredi</option>
+          </select>
+        </div>
+        <div class="col-xs-2">
+          <label for="timeTwo">Créneau de passage</label>
+          <select
+            v-model="timeTwo"
+            name="timeTwo"
+            id="timeTwo"
+            class="form-control"
+          >
             <option selected>Creneau...</option>
             <option value="09:00 - 11:00">9h - 11h</option>
             <option value="11:00 - 13:00">11h - 13h</option>
@@ -148,8 +183,11 @@ export default {
       postcode: "",
       city: "",
       member_count: "",
+      number: "",
       day: "",
       time: "",
+      dayTwo: "",
+      timeTwo: "",
       success: false,
       errors: {},
     };
@@ -174,7 +212,9 @@ export default {
       this.postcode = responseDataSiret.etablissement.code_postal;
       this.city = responseDataSiret.etablissement.libelle_commune;
     },
-
+    seeList() {
+      this.$router.push({ name: "adminCompanies" });
+    },
     addCompany(e) {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
@@ -185,8 +225,11 @@ export default {
             postcode: this.postcode,
             city: this.city,
             member_count: Number(this.member_count),
+            number: this.number,
             day: this.day,
             time: this.time,
+            dayTwo: this.day,
+            timeTwo: this.time,
           })
           .then((res) => {
             (this.siret = ""),
@@ -195,8 +238,11 @@ export default {
               (this.postcode = ""),
               (this.city = ""),
               (this.member_count = ""),
+              (this.number = ""),
               (this.day = ""),
               (this.time = ""),
+              (this.dayTwo = ""),
+              (this.timeTwo = ""),
               (this.success = "true");
           })
           .catch((error) => {
@@ -204,7 +250,8 @@ export default {
               this.errors = error.response.data.errors;
               console.log(this.errors);
             }
-          });
+          })
+          .finally(() => this.seeList());
       });
     },
   },

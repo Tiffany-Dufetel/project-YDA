@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style>
-.user_info_container{
+/* .user_info_container{
     border: 5px solid black;
     border-radius: 10px;
     padding: 20px;
@@ -135,6 +135,6 @@ export default {
 
 .table_margin{
     margin-bottom: 500px !important;
-}
+} */
 
 </style>
