@@ -12,60 +12,60 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
       subtitle="Gérer vos commandes en attente, en cours et terminé"
     />
     <BackButton />
-    <div v-if="role == 'member'">
+    <div v-if="role === 'member'">
       <AddButton name="Commandez" @click="add" />
       <br />
+    </div>
 
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Entreprise</th>
-            <th>Client</th>
-            <th>Commande</th>
-            <th>Commentaire</th>
-            <th>Date de commande</th>
-            <th>Date de livraison</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="order in orderArray" :key="order.id">
-            <td>
-              <b>{{ order.user.company.name }}</b>
-            </td>
-            <td>
-              <span class="capitalize_firstname">{{
-                order.user.first_name
-              }}</span>
-              {{ order.user.surname.toUpperCase() }}
-            </td>
-            <td>{{ order.product.name }}</td>
-            <td>{{ order.comment }}</td>
-            <td>{{ order.date_order }}</td>
-            <td>{{ order.date_delivery }}</td>
-            <td>
-              <select>
-                <option>{{ order.status }}</option>
-                <option>en cours</option>
-                <option>terminé</option>
-              </select>
-            </td>
-            <td>
-              <div class="btn-group" role="group">
-                <!-- <router-link
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Entreprise</th>
+          <th>Client</th>
+          <th>Commande</th>
+          <th>Commentaire</th>
+          <th>Date de commande</th>
+          <th>Date de livraison</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="order in orderArray" :key="order.id">
+          <td>
+            <b>{{ order.user.company.name }}</b>
+          </td>
+          <td>
+            <span class="capitalize_firstname">{{
+              order.user.first_name
+            }}</span>
+            {{ order.user.surname.toUpperCase() }}
+          </td>
+          <td>{{ order.product.name }}</td>
+          <td>{{ order.comment }}</td>
+          <td>{{ order.date_order }}</td>
+          <td>{{ order.date_delivery }}</td>
+          <td>
+            <select>
+              <option>{{ order.status }}</option>
+              <option>en cours</option>
+              <option>terminé</option>
+            </select>
+          </td>
+          <td>
+            <div class="btn-group" role="group">
+              <!-- <router-link
                 :to="{ name: 'individualorder', params: { id: order.id } }"
                 ><button class="btn btn-primary">Edit</button>
               </router-link> -->
-                <!-- v-if="status" -->
-                <button class="btn btn-danger" @click="deleteOrder(order.id)">
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              <!-- v-if="status" -->
+              <button class="btn btn-danger" @click="deleteOrder(order.id)">
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -88,6 +88,7 @@ export default {
       orderArray: [],
       order: null,
       searchKey: "",
+      role: "",
     };
   },
   async mounted() {
