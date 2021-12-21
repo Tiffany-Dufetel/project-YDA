@@ -5,42 +5,72 @@
 <template>
   <div>
     <!-- make title and subtitle responsive -->
-    <Header title="namfezfzeet" subtitle="something else...." /><br><br>
-
-        <div v-for="(product, index) in productArray" :key="index">
-            <small>{{product.type}} / {{product.category}}</small>
-            <h3>{{product.name}}</h3>
-            <p>{{product.description}}</p>
-            <div>
-                <img :src="product.image" class="image_product" />
-            </div>
+    <Header title="Voir les détails" subtitle="" /><br /><br />
+    <BackButton />
+    <div v-for="(product, index) in productArray" :key="index">
+      <div class="card" style="width: 25rem">
+        <img
+          src="product.image"
+          class="card-img-top image_product"
+          alt="product.description"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">
+            {{ product.description }}
+            <i>{{ product.type }} / {{ product.category }}</i>
+          </p>
         </div>
+      </div>
+    </div>
+
+    <!-- Button to modify item if role is admin -->
+    <div v-if="role == 'admin'">
+      <button @click="edit" class="btn btn-primary">Modifier</button>
+    </div>
+    <!-- Button to order item if role is member -->
+    <div v-if="role == 'member'">
+      <button @click="order" class="btn btn-primary">Commandez</button>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "../../../components/ui/Header.vue";
+import BackButton from "../../../components/ui/buttons/BackButton.vue";
 export default {
   name: "ProductDisplay",
   components: {
     Header,
+    BackButton,
   },
-    data(){
-        return{
-            products: null,
-            productArray: [],
-            url_data: null
-        }
-    },
-  async mounted(){
-    const response = await axios.get("/api/product/"+this.$route.params.id)
+  data() {
+    return {
+      products: null,
+      productArray: [],
+      url_data: null,
+      role: "",
+    };
+  },
+  async mounted() {
+    const response = await axios.get("/api/product/" + this.$route.params.id);
     this.productArray = response.data;
-
-    console.log("coucou",this.productArray)
-  }
+    console.log("coucou", this.productArray);
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
+    console.log("role", this.role);
+    this.id = getUser.data.id;
+  },
+  methods: {
+    order() {
+      this.$router.push("/commander");
+    },
+    edit() {
+      this.$router.push("/catalogue/" + this.$route.params.id + "/modifier");
+    },
+  },
 };
 </script>
 
 <style>
-
 </style>

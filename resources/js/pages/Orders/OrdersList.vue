@@ -1,5 +1,7 @@
 <!--
 -- Order list display page component
+HIDE COMMANDEZ SI NON MEMBER
+SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
 -->
 
 <template>
