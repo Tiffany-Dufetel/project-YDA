@@ -25,6 +25,15 @@
     </div><br><br>
 
     <center><h1>Mes commandes</h1></center>
+     <input
+      v-model="searchKeyMembre"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Rechercher...."
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <br />
     <table id="table_margin" class="table table-bordered">
       <thead>
         <tr>
@@ -36,7 +45,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="order in orderArray" :key="order.id">
+        <tr v-for="order in filteredListMembre" :key="order.id">
           <td>{{ order.product.name}}</td>
           <td>{{ order.comment}}</td>
           <td>{{ order.date_order }}</td>
@@ -73,6 +82,8 @@ export default {
       return{
           userInfo: [],
           orderArray: [],
+          searchKeyMembre: "",
+
       }
   },
 
@@ -85,6 +96,19 @@ export default {
     this.userInfo = responseUser.data;
     console.log(this.userInfo)
   },
+
+  computed: {
+    /** Search box */
+    filteredListMembre() {
+      return this.orderArray.filter((order) => {
+        return (
+          order.product.name.toLowerCase().includes(this.searchKeyMembre.toLowerCase()) ||
+          order.status.toLowerCase().includes(this.searchKeyMembre.toLowerCase())
+        );
+      });
+    },
+  },
+
 
     methods: {
         add(){

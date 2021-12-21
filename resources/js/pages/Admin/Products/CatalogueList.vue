@@ -12,15 +12,16 @@
 
     <!-- Search box -->
     <form class="form-inline">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-        Search
-      </button>
+       <input
+      v-model="searchKeyCatalogue"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Rechercher...."
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <br />
+
     </form>
 
     <!-- Companies list -->
@@ -35,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index) in productArray" :key="index">
+        <tr v-for="(product, index) in filteredListCatalogue" :key="index">
           <td valign="middle">
             <router-link
               :to="{ name: 'individualProduct', params: { id: product.id } }"
@@ -87,6 +88,7 @@ export default {
   data() {
     return {
       productArray: [],
+      searchKeyCatalogue: "",
     };
   },
 
@@ -97,6 +99,8 @@ export default {
     console.log("product", this.productArray);
   },
 
+
+  
   methods: {
     add() {
       this.$router.push({ name: "adminProductAdd" });

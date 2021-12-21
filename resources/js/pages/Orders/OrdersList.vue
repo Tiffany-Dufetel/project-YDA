@@ -13,6 +13,16 @@
     <AddButton name="Commandez" @click="add" />
     <br />
 
+    <input
+      v-model="searchKeyOrder"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Rechercher...."
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <br />
+
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -26,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="order in orderArray" :key="order.id">
+        <tr v-for="order in filteredListOrder" :key="order.id">
           <td><b>{{ order.user.company.name}}</b></td>
           <td><span class="capitalize_firstname">{{ order.user.first_name }}</span> {{order.user.surname.toUpperCase()}}</td>
           <td>{{ order.product.name}}</td>
@@ -70,6 +80,8 @@ export default {
   data() {
     return {
       orderArray: [],
+      searchKeyOrder: "",
+
     };
   },
   async mounted() {
@@ -78,6 +90,19 @@ export default {
     console.log("reponse",this.orderArray);
   },
 
+   computed: {
+    /** Search box */
+    filteredListOrder() {
+      return this.orderArray.filter((order) => {
+        return(
+          order.user.company.name.toLowerCase().includes(this.searchKeyOrder.toLowerCase()) ||
+          order.user.surname.toLowerCase().includes(this.searchKeyOrder.toLowerCase()) ||
+          order.status.toLowerCase().includes(this.searchKeyOrder.toLowerCase())
+        );
+
+      });
+    },
+   },
   methods: {
     add() {
       this.$router.push({ name: "productOrder" });
@@ -96,7 +121,8 @@ export default {
       });
     },
   },
-};
+}
+
 </script>
 
 <style scoped>
