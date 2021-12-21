@@ -44,20 +44,28 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $currentURL = url()->previous();
-
-        $validator = Validator::make($request->all(), [
+/*         $validator = Validator::make($request->all(), [
             // 'name' => 'required',
             // 'email' => 'required|email',
             // 'password' => 'required',
             // 'confirm_password' => 'required|same:password',
             // 'first_name' => 'required',
         ]);
-
-        if ($validator->fails()) {
+ */
+/*         if ($validator->fails()) {
             return $this->handleError($validator->errors());
         }
+ */
+        $input = [
+            'surname' => $request->input('surname'),
+            'first_name' => $request->input('first_name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'birthday' => $request->input('birthday'),
+            'role' => $request->input('role'),
+            'company_id' => intval(basename($currentURL))
+        ];
 
-        $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('LaravelSanctumAuth')->plainTextToken;

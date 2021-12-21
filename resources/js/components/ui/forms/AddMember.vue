@@ -100,7 +100,7 @@ export default {
       console.log($company_id); */
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .post("/api/register", {
+          .post("/api/user", {
             surname: this.surname,
             first_name: this.first_name,
             email: this.email,

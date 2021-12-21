@@ -9,6 +9,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Company;
 use App\Models\User;
+use Dotenv\Validator as DotenvValidator;
 use Validator;
 
 

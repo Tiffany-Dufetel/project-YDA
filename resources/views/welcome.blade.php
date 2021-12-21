@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" value="{{ csrf_token() }}"/>
         <title>{{env('APP_NAME')}}</title>
- 
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
- 
+
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
@@ -16,7 +16,7 @@
         </style>
     </head>
     <body>
- 
+
     <!-- @if (Auth::check())
         @php
         $user_auth_data = [
@@ -34,7 +34,7 @@
     <script>
         window.Laravel = JSON.parse(atob('{{ base64_encode(json_encode($user_auth_data)) }}'));
     </script> -->
- 
+
     <div id="app">
     </div>
 
