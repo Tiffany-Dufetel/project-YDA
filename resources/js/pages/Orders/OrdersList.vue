@@ -12,23 +12,10 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
       subtitle="Gérer vos commandes en attente, en cours et terminé"
     />
     <BackButton />
-<<<<<<< HEAD
     <div v-if="role === 'membre'">
       <AddButton name="Commandez" @click="add" />
       <br />
     </div>
-=======
-
-    <input
-      v-model="searchKeyOrder"
-      class="form-control mr-sm-2"
-      type="search"
-      placeholder="Rechercher...."
-      aria-label="Search"
-      autocomplete="off"
-    />
-    <br />
->>>>>>> origin/master
 
     <table class="table table-bordered">
       <thead>
