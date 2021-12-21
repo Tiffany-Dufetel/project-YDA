@@ -66,15 +66,6 @@ export default {
       companies: [],
     };
   },
-
-  async mounted() {
-    //We are loading the company display thanks to the ID;
-     const getCompanys = await axios.get("/api/company");
-    this.companies = getCompanys.data.data;
-    console.log('here')
-
-  },
-
   methods: {
     newsAdd() {
       this.$router.push({ name: "adminNewsAdd" });

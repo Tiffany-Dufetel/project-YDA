@@ -6,8 +6,7 @@
   <div class="catalogue_container">
     <Header title="Catalogue" subtitle="Produits et services" />
     <BackButton />
-    <AddButton name="Ajouter Produit" @click="add" />
-
+        <AddButton name="Ajouter Produit" @click="add"/>
     <br />
 
     <!-- Search box -->
@@ -94,6 +93,12 @@ export default {
       role: "",
       searchKey: "",
     };
+  },
+async mounted() {
+    const getProducts = await axios.get("/api/product");
+    this.products = getProducts.data.data;
+
+    console.log("product", getProducts);
   },
   computed: {
     /** Search box */
