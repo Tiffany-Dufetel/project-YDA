@@ -4,7 +4,7 @@ REFRESH ON MEMBER ADD / DELETE
 -->
 
 <template>
-  <div>
+  <div class="catologue_container">
     <!-- Loading of reactive data thanks to the mounted axios-->
     <Header v-model:title="company.name" subtitle="" />
   </div>
@@ -47,17 +47,18 @@ REFRESH ON MEMBER ADD / DELETE
       <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
 
       <!-- Orders display -->
-      <table class="table table-bordered">
+      <table class="center-table">
         <thead>
           <tr>
             <th>Nom de la commande</th>
             <th>Utilisateur</th>
 
-            <th>Statut de la commande</th>
-            <th>Date de réservation de la commande</th>
+            <th>Statut</th>
+            <th>Date de commande</th>
             <th>Date estimée</th>
             <th>Commentaire</th>
             <th>PDF</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -78,13 +79,15 @@ REFRESH ON MEMBER ADD / DELETE
       </table>
 
       <!-- Member list display -->
-      <table class="table table-bordered">
+      <table class="center-table">
         <thead>
           <tr>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Date de naissance</th>
             <th>Email</th>
+            <th>Rôle</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -122,8 +125,8 @@ REFRESH ON MEMBER ADD / DELETE
       <p>{{ news.text }}</p>
       <i> {{ new Date(news.created_at).toLocaleString() }} </i>
       <br />
-      <button class="btn btn-danger" @click="deleteActuality(news.id)">
-        Effacer l'actualité
+      <button class="btn-delete" @click="deleteActuality(news.id)">
+        <ion-icon name="trash"></ion-icon>
       </button>
 
   </div>

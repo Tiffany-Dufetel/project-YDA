@@ -45,38 +45,39 @@
 
     <!-- List of orders -->
     <center><h1>Mes commandes</h1></center>
-    <input
+    <!-- <input
       v-model="searchKeyMembre"
       class="form-control mr-sm-2"
       type="search"
       placeholder="Rechercher...."
       aria-label="Search"
       autocomplete="off"
-    />
+    /> -->
     <br />
-    <table id="table_margin" class="table table-bordered">
+    <table id="table_margin" class="center-table">
       <thead>
         <tr>
           <th>Commande</th>
           <th>Date de commande</th>
           <th>Date de livraison</th>
           <th>Status</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="order in orderArray" :key="order.id">
-          <td>{{ order.product.name }}</td>
-          <td>{{ order.date_order }}</td>
-          <td>{{ order.date_delivery }}</td>
-          <td>{{ order.status }}</td>
-          <td>
+          <td valign="middle">{{ order.product.name }}</td>
+          <td valign="middle">{{ order.date_order }}</td>
+          <td valign="middle">{{ order.date_delivery }}</td>
+          <td valign="middle">{{ order.status }}</td>
+          <td valign="middle">
             <div class="btn-group" role="group">
               <div v-if="order.status == 'en attente'">
                 <button
                   @click="deleteOrder(order.product.id)"
-                  class="btn btn-danger"
+                  class="btn-delete"
                 >
-                  Delete
+                    <ion-icon name="trash"></ion-icon>
                 </button>
               </div>
             </div>
@@ -115,11 +116,11 @@ export default {
       this.id = getUser.data.id;
       console.log("ID", this.id);
 
-      const response = await axios.get("/api/user/" + this.id);
+      const response = await axios.get("/api/user/" + this.$route.params.id);
       this.orderArray = response.data;
       console.log("order array", this.orderArray);
 
-      const responseUser = await axios.get("/api/info/" + this.id);
+      const responseUser = await axios.get("/api/info/" + this.$route.params.id);
       this.userInfo = responseUser.data;
       console.log(this.userInfo);
     },
