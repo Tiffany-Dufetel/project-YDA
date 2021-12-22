@@ -9,16 +9,19 @@ REFRESH ON MEMBER ADD / DELETE
     <Header v-model:title="company.name" subtitle="" />
   </div>
   <BackButton />
+  <div class="container">
 
-    <div>
-        <p>
-            <b><u>Siret :</u></b> {{ company.siret }}<br>
-            <b><u>Adresse :</u></b> {{ company.adress }} - {{ company.postcode }} {{ company.city }}<br>
-            <b><u>Numéro de téléphone :</u></b> {{ company.number }}
-        </p>
+    <div class="info-company-container">
+        <div class="info-company">
+            <p>
+                <b><u>Siret :</u></b> {{ company.siret }}<br>
+                <b><u>Adresse :</u></b> {{ company.adress }} - {{ company.postcode }} {{ company.city }}<br>
+                <b><u>Numéro de téléphone :</u></b> {{ company.number }}
+            </p>
 
-    </div>
-        <div class="col">
+            <button class="btn-show" @click="goToUpdate">Modifier</button>
+        </div>
+        <div class="map">
           <iframe
             class="border border-warning shadow p-3 mb-5 bg-white rounded"
             width="600"
@@ -31,16 +34,20 @@ REFRESH ON MEMBER ADD / DELETE
           ></iframe
           ><br />
         </div>
-      <button class="btn btn-warning" @click="goToUpdate">modifier</button>
-      <button class="btn btn-dark" @click="isHidden = !isHidden">
+    </div>
+</div>
+
+    <div class="buttons-show-info">
+      <button @click="isHidden = !isHidden">
         {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
       </button>
+    </div>
 
       <!--  Add members -->
       <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
 
       <!-- Orders display -->
-      <table class="center-table">
+    <table class="center-table">
         <thead>
           <tr>
             <th>Nom de la commande</th>
@@ -50,7 +57,7 @@ REFRESH ON MEMBER ADD / DELETE
             <th>Date de commande</th>
             <th>Date estimée</th>
             <th>Commentaire</th>
-            <th>PDF</th>
+            <!-- <th>PDF</th> -->
             <th></th>
           </tr>
         </thead>
@@ -66,11 +73,10 @@ REFRESH ON MEMBER ADD / DELETE
             :date_order="order.date_order"
             :date_delivery="order.date_delivery"
             :comment="order.comment"
-            :pdf="order.pdf"
           />
         </tbody>
-      </table>
 
+      </table>
       <!-- Member list display -->
       <table class="center-table">
         <thead>
@@ -96,7 +102,6 @@ REFRESH ON MEMBER ADD / DELETE
           />
         </tbody>
       </table>
-
 <br />
 
 <div>
@@ -133,6 +138,7 @@ import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
 import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
 import axios from "axios";
+
 export default {
   name: "CompanyDisplay",
 name: "adminNews",
@@ -158,6 +164,8 @@ name: "adminNews",
       newsArray: [],
       companies: [],
       isHidden: true,
+      isHiddenOrders: true,
+      isHiddenMembers: true,
       company: {},
       user: {},
       companyId: "",
@@ -219,6 +227,9 @@ name: "adminNews",
 
 
   methods: {
+    toggleModale() {
+      this.revele = !this.revele;
+    },
     goToUpdate() {
       this.$router.push("/entreprise/" + this.$route.params.id + "/modifier");
     },
@@ -263,4 +274,48 @@ name: "adminNews",
 </script>
 
 <style>
+.info-company-container{
+    display: flex;
+    justify-content: center;
+    border: none;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: white;
+    height: 347px;
+}
+
+.info-company{
+    flex-direction: column;
+    height: 328px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map{
+    padding: 30px;
+}
+
+.buttons-show-info{
+    text-align: center;
+}
+
+.buttons-show-info button{
+    background-color: white;
+    padding: 8px 20px 5px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 2px solid #e78c15;
+    border-right: 2px solid #e78c15;
+    border-left: 2px solid #e78c15;
+    border-bottom: none;
+    position: relative;
+    top: 30;
+
+    color: #e78c15;
+}
 </style>

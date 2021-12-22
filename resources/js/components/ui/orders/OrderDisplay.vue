@@ -8,7 +8,6 @@
     <td valign="middle">{{ date_order }}</td>
     <td valign="middle">{{ date_delivery }}</td>
     <td valign="middle">{{ comment }}</td>
-    <td valign="middle">{{ pdf }}</td>
 
     <td>
       <div class="btn-group" role="group">
