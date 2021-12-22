@@ -20,7 +20,7 @@
             required="true"
           >
             <option v-for="product in productArray" :key="product.id">
-                {{ product.id }}<!--  - {{product.name}} -->
+                {{ product.id }} - {{product.name}}
             </option>
           </select>
 
@@ -78,6 +78,7 @@ export default {
   async mounted() {
     const getProduct = await axios.get("/api/product");
     this.productArray = getProduct.data.data;
+    console.log(this.productArray);
 
   },
   methods: {
@@ -86,7 +87,7 @@ export default {
         axios
           .post("/api/order", {
             status: "en attente",
-            products_id: this.products_id,
+            products_id: this.products_id.split(" ").shift(),
             comment: this.comment,
             date_delivery: this.date_delivery,
           })
