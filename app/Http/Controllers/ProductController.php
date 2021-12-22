@@ -77,7 +77,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::where('id', $id)->get();
+        return Product::where('id', $id)->first();
     }
 
     /**

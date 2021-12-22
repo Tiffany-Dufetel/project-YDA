@@ -9,18 +9,18 @@
     <BackButton />
 
     <!-- Product card -->
-    <div v-for="(product, index) in productArray" :key="index">
+    <div >
       <div class="card" style="width: 25rem">
         <img
-          src="product.image"
+          src="productArray.image"
           class="card-img-top image_product"
           alt="product.description"
         />
         <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
+          <h5 class="card-title">{{ productArray.name }}</h5>
           <p class="card-text">
-            {{ product.description }}
-            <i>{{ product.type }} / {{ product.category }}</i>
+            {{ productArray.description }}
+            <i>{{ productArray.type }} / {{ productArray.category }}</i>
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       products: null,
-      productArray: [],
+      productArray: {},
       url_data: null,
       role: "",
     };

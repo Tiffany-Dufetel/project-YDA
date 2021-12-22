@@ -5,7 +5,7 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
 -->
 
 <template>
-  <div>
+  <div class="catalogue_container">
     <!-- rendre le nom reactive -->
     <Header
       title="Vos commandes"
@@ -14,16 +14,17 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
     <BackButton />
 
     <input
+      id="input-search"
       v-model="searchKeyOrder"
       class="form-control mr-sm-2"
-      type="search"
+      type="text"
       placeholder="Rechercher...."
       aria-label="Search"
       autocomplete="off"
     />
     <br />
 
-    <table class="table table-bordered">
+    <table class="center-table">
       <thead>
         <tr>
           <th>Entreprise</th>
@@ -33,46 +34,36 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
           <th>Date de commande</th>
           <th>Date de livraison</th>
           <th>Status</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="order in filteredListOrder" :key="order.id">
-          <td>
+          <td  valign="middle">
             <b>{{ order.user.company.name }}</b>
           </td>
-          <td>
+          <td valign="middle">
             <span class="capitalize_firstname">{{
               order.user.first_name
             }}</span>
             {{ order.user.surname.toUpperCase() }}
           </td>
-          <td>{{ order.product.name }}</td>
-          <td>{{ order.comment }}</td>
-
-          {{
-            order.user.surname.toUpperCase()
-          }}
-
-          <td>{{ order.product.name }}</td>
-          <td>{{ order.comment }}</td>
-          <td>{{ order.date_order }}</td>
-          <td>{{ order.date_delivery }}</td>
-          <td>
-            <select>
-              <option>{{ order.status }}</option>
-              <option>en cours</option>
-              <option>terminé</option>
-            </select>
+          <td valign="middle">{{ order.product.name }}</td>
+          <td valign="middle">{{ order.comment }}</td>
+          <td valign="middle">{{ order.date_order }}</td>
+          <td valign="middle">{{ order.date_delivery }}</td>
+          <td valign="middle">
+              {{order.status}}
           </td>
-          <td>
+          <td valign="middle">
             <div class="btn-group" role="group">
-              <!-- <router-link
+              <router-link
                 :to="{ name: 'individualorder', params: { id: order.id } }"
                 ><button class="btn btn-primary">Edit</button>
-              </router-link> -->
+              </router-link>
               <!-- v-if="status" -->
-              <button class="btn btn-danger" @click="deleteOrder(order.id)">
-                Delete
+              <button class="btn-delete" @click="deleteOrder(order.id)">
+                <ion-icon name="trash"></ion-icon>
               </button>
             </div>
           </td>
@@ -86,6 +77,7 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
 import Header from "../../components/ui/Header.vue";
 import BackButton from "../../components/ui/buttons/BackButton.vue";
 import AddButton from "../../components/ui/buttons/AddButton.vue";
+import OrderUpdate from "./OrderUpdate.vue"
 
 export default {
   name: "orderList",
@@ -93,6 +85,7 @@ export default {
     Header,
     BackButton,
     AddButton,
+    OrderUpdate,
   },
 
   inject: ["checkRole", "whatRole"],
@@ -101,6 +94,7 @@ export default {
       orderArray: [],
       searchKeyOrder: "",
       order: null,
+      orderStatus:{},
     };
   },
   async mounted() {
@@ -109,6 +103,10 @@ export default {
     this.role = getUser.data.role;
     console.log("roleadmin", this.role);
     this.id = getUser.data.id;
+
+    const response = await axios.get(`/api/order/`);
+    this.productInfo = response.data;
+
   },
 
   computed: {
@@ -128,6 +126,10 @@ export default {
     },
   },
   methods: {
+
+      statusUpdate(){
+
+      },
     /** Retrieve full list of orders from database */
     async retrieveOrders() {
       const response = await axios.get("/api/order");
