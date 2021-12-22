@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div>
+  <div class="addButton">
     <!-- Add button -->
     <button class="btn text-white bg-dark btn-block">
       {{ name }}
@@ -19,4 +19,7 @@ export default {
 </script>
 
 <style>
+.addButton{
+    text-align: center;
+}
 </style>
