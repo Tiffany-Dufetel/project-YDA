@@ -18,7 +18,7 @@ export default {
 
 <style>
 .header {
-  padding: 10px;
+  padding:4vh ;
   width: 80vw;
   margin: 20px auto 0 auto;
   text-align: center;

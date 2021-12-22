@@ -15,22 +15,24 @@
     <input
       v-model="searchKeyCatalogue"
       class="form-control mr-sm-2"
-      type="search"
+      type="text"
       placeholder="Rechercher...."
       aria-label="Search"
       autocomplete="off"
     />
     <br />
-    <div>
+    <div class="search-result">
       <span v-if="searchKeyCatalogue && filteredListCatalogue.length == 1">
         {{ filteredListCatalogue.length }} résultat(s)</span
       >
       <span v-if="filteredListCatalogue.length >= 2"></span>
     </div>
-    <div v-if="filteredListCatalogue.length == 0">
-      <h3>Désolé</h3>
-      <p>Aucun résultat trouvé</p>
+
+    <div class="search-result" v-if="filteredListCatalogue.length == 0">
+        <h3>Désolé</h3>
+        <p>Aucun résultat trouvé</p>
     </div>
+
     <!-- Companies list -->
     <table class="center-table">
       <thead>
@@ -43,19 +45,15 @@
           <th></th>
         </tr>
       </thead>
+
       <tbody>
         <tr v-for="product in filteredListCatalogue" :key="product.id">
-          <td valign="middle">
-            {{ product.name }}
-          </td>
-          <td valign="middle">{{ product.description }}</td>
-          <td valign="middle">{{ product.type }}</td>
-          <td valign="middle">{{ product.category }}</td>
-          <td valign="middle">
-            <img :src="product.image" class="image_product" />
-          </td>
-
-          <td>
+                    <td @click="link" valign="middle">{{ product.name }}</td>
+                    <td @click="displayCompany" valign="middle">{{ product.description }}</td>
+                    <td @click="displayCompany" valign="middle">{{ product.type }}</td>
+                    <td @click="displayCompany" valign="middle">{{ product.category }}</td>
+                    <td @click="displayCompany" valign="middle"><img :src="product.image" class="image_product" /></td>
+                    <td>
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualProduct', params: { id: product.id } }"
@@ -97,6 +95,7 @@ export default {
   inject: ["checkRole", "whatRole"],
   data() {
     return {
+      link: "/",
       productArray: [],
       product: null,
       role: "",
@@ -122,6 +121,10 @@ async mounted() {
     }
   },
   methods: {
+    displayCompany(){
+        console.log()
+        // this.$router.push("/catalogue" + id)
+    },
     /** Go to "add new item" page */
     add() {
       this.$router.push({ name: "adminProductAdd" });
@@ -199,6 +202,15 @@ th, td {
   width: 200px;
 }
 
+/* td{
+    cursor:pointer;
+}
+
+tr:hover{
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+} */
+
 tbody tr:nth-child(odd) {
     background-color: #f5f5f5;
 }
@@ -230,5 +242,19 @@ thead{
         padding: 8px 4px 5px 4px;
 
 }
+.catalogue_container input{
+    background-image: url('https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-8.png');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 40vh;
+    margin-right: auto;
+    margin-left: auto;
+}
 
+.search-result{
+    text-align: center;
+}
 </style>

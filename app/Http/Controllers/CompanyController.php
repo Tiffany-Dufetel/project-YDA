@@ -144,11 +144,11 @@ class CompanyController extends Controller
         $company->adress = $request->adress;
         $company->postcode = $request->postcode;
         $company->city = $request->city;
-        $company->number = $request->number;
+        $company->member_count = $request->member_count;
         $company->day = $request->day;
         $company->time = $request->time;
-        $company->dayTwo = $request->dayTwo;
-        $company->timeTwo = $request->timeTwo;
+        // $company->dayTwo = $request->dayTwo;
+        // $company->timeTwo = $request->timeTwo;
 
         $company->save();
 

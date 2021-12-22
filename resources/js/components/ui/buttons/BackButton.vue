@@ -3,13 +3,11 @@
 -->
 
 <template>
-  <div>
+  <div class="backbutton">
     <!-- Back button -->
-    <ion-icon
-      name="return-up-back-outline"
-      size="large"
-      @click="back"
-    ></ion-icon>
+    <a @click="back">
+        <img src="../../../assets/backbutton.png"><p>retour</p>
+    </a>
   </div>
 </template>
 
@@ -19,13 +17,32 @@ export default {
   methods: {
     back() {
       this.$router.go(-1);
+
     },
   },
+
 };
 </script>
 
 <style>
 ion-icon {
-  color: rgb(218, 132, 20);
+  color: #da8414;
+}
+.backbutton a{
+    padding: 10px 0;
+    display: flex;
+    cursor: pointer;
+}
+.backbutton p {
+    text-transform: uppercase;
+    font-size: 19px;
+    letter-spacing: 2px;
+    padding-left: 10px;
+    padding-bottom: 2px;
+}
+
+.backbutton img {
+    width: 25px;
+    height: 25px;
 }
 </style>
