@@ -3,51 +3,52 @@
 -->
 
 <template>
-  <div>
+  <div class="container marginBotXL">
     <div class ="alert alert-success" v-show="success">Le membre a bien été ajouté</div>
-    <form method="POST" @submit.prevent="addUser">
-      <label for="surname">Nom</label><br />
-      <input type="text" id="surname" name="surname" v-model="surname" /><br />
+    <form class="formContent" method="POST" @submit.prevent="addUser">
+      <div><label for="surname">Nom</label>
+      <input type="text" class="inputText marginBot" id="surname" name="surname" v-model="surname" /></div>
         <div v-show="errors && errors.surname">
             <p class="text-danger" v-for="(error, index) in errors.surname" :key="index" >{{error}}</p>
         </div>
 
-      <label for="first_name">Prénom</label><br />
+      <div><label for="first_name">Prénom</label>
       <input
         type="text"
         id="first_name"
         name="first_name"
+        class="inputText marginBot"
         v-model="first_name"
-      /><br />
+      /></div>
         <div v-show="errors && errors.first_name">
             <p class="text-danger" v-for="(error, index) in errors.first_name" :key="index" >{{error}}</p>
         </div>
 
-      <label for="email">Email</label><br />
-      <input type="text" id="email" name="email" v-model="email" /><br />
+      <div><label for="email">Email</label>
+      <input type="text" id="email" name="email" class="inputText marginBot" v-model="email" /></div>
         <div v-show="errors && errors.email">
             <p class="text-danger" v-for="(error, index) in errors.email" :key="index" >{{error}}</p>
         </div>
 
-      <label for="password">Mot de passe</label><br />
-      <input type="text" id="password" name="password" v-model="password" />
+      <div><label for="password">Mot de passe</label>
+      <input type="text" id="password" class="inputText marginBot" name="password" v-model="password" /></div>
         <div v-show="errors && errors.password">
             <p class="text-danger" v-for="(error, index) in errors.password" :key="index" >{{error}}</p>
-        </div><br>
+        </div>
 
-      <label for="birthday">Date d'anniversaire</label><br />
-      <input type="date" id="birthday" name="birthday" v-model="birthday" />
+      <div><label for="birthday">Date d'anniversaire</label>
+      <input type="date" id="birthday" class="inputText marginBot" name="birthday" v-model="birthday" /></div>
         <div v-show="errors && errors.birthday">
             <p class="text-danger" v-for="(error, index) in errors.birthday" :key="index" >{{error}}</p>
         </div>
 
       <!-- Admin can add the role of the new member -->
       <!-- <div v-if="role == 'admin'"> -->
-      <label for="role">Role</label><br />
-      <select id="role" name="role" v-model="role">
+      <div><label for="role">Role</label>
+      <select class="inputText marginBot" id="role" name="role" v-model="role">
         <option value="manager">Gestionnaire</option>
         <option value="member">Membre</option>
-      </select>
+      </select></div>
         <div v-show="errors && errors.role">
             <p class="text-danger" v-for="(error, index) in errors.role" :key="index" >{{error}}</p>
         </div>
@@ -130,4 +131,7 @@ export default {
 </script>
 
 <style>
+.marginBotXL{
+    margin-bottom: 30px;
+}
 </style>
