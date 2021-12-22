@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div>
+    <div>
     <!-- make title responsive -->
     <Header title="Les actualités" subtitle="Les actualités récentes" />
     </div>
@@ -11,27 +11,25 @@
 
 
     <BackButton />
+<div class="info-news-container">
+    <div  class="info-new" v-for="news in newsArray" :key="news.id">
+            <h2>
+                <strong> {{ news.title }} </strong>
+            </h2>
+            <p>{{ news.text }}<br>
+                <i> {{ new Date(news.created_at).toLocaleString() }} </i>
+            </p>
 
-    <p>______</p>
-    <br />
-    <br />
-    <div v-for="news in newsArray" :key="news.id">
-      <h2>
-        <strong> {{ news.title }} </strong>
-      </h2>
-      <p>{{ news.text }}</p>
-      <i> {{ new Date(news.created_at).toLocaleString() }} </i>
-      <br />
-      <button class="btn btn-danger" @click="deleteActuality(news.id)">
-        Effacer l'actualité
-      </button>
-      <br />
-      <br />
-      <br />
-      <br />
+            <br />
+
+            <button class="btn btn-danger" @click="deleteActuality(news.id)">
+                Effacer l'actualité
+            </button>
     </div>
+</div>
 
 </template>
+
 
 <script>
 import Header from "../../../components/ui/Header.vue";
@@ -107,4 +105,20 @@ export default {
 </script>
 
 <style>
+.info-news-container{
+    display: flex;
+}
+
+.info-new{
+    border: none;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    margin: 10px;
+    padding: 33px;
+    border-radius: 15px;
+    background-color: white;
+    height: 277px;
+    width: 487px;
+}
+
 </style>

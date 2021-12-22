@@ -7,8 +7,9 @@ REFRESH ON MEMBER ADD / DELETE
   <div class="catologue_container">
     <!-- Loading of reactive data thanks to the mounted axios-->
     <Header v-model:title="company.name" subtitle="" />
+    <BackButton />
   </div>
-  <BackButton />
+
   <div class="container">
 
     <div class="info-company-container">
@@ -41,6 +42,9 @@ REFRESH ON MEMBER ADD / DELETE
       <button @click="isHidden = !isHidden">
         {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
       </button>
+
+    <button @click="newsAdd">Ajouter une actualité</button>
+
     </div>
 
       <!--  Add members -->
@@ -105,15 +109,6 @@ REFRESH ON MEMBER ADD / DELETE
 <br />
 
 <div>
-
-<p>______</p>
-    <button @click="newsAdd">Ajouter une actualité</button>
-    <br />
-    <p>______</p>
-    <br />
-    <br />
-
-
     <h1><u>Les actualités récentes:</u></h1>
     <br/>
     <div v-for="news in newsArray" :key="news.id">
@@ -129,6 +124,8 @@ REFRESH ON MEMBER ADD / DELETE
 
   </div>
 </div>
+
+
 </template>
 
 <script>
@@ -160,12 +157,10 @@ name: "adminNews",
 
   data() {
     return {
-        company: {},
+      company: {},
       newsArray: [],
       companies: [],
       isHidden: true,
-      isHiddenOrders: true,
-      isHiddenMembers: true,
       company: {},
       user: {},
       companyId: "",
@@ -307,13 +302,10 @@ name: "adminNews",
 .buttons-show-info button{
     background-color: white;
     padding: 8px 20px 5px 20px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-top: 2px solid #e78c15;
-    border-right: 2px solid #e78c15;
-    border-left: 2px solid #e78c15;
-    border-bottom: none;
+    border-radius: 5px;
+    border: 2px solid #e78c15;
     position: relative;
+    margin: 20px;
     top: 30;
 
     color: #e78c15;
