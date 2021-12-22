@@ -9,18 +9,7 @@
     <BackButton />
     <form method="POST" @submit.prevent="addNews">
       <!-- Specific company choice -->
-      <label for="company">Choisir l'entreprise</label>
-      <select
-        v-model="company"
-        name="company"
-        id="company"
-        class="form-control"
-        required="true"
-      >
-        <option v-for="company in companies" :key="company.id">
-          {{ company.id }} - {{ company.name }}
-        </option>
-      </select>
+
 
       <label for="title">Titre de l'actualité</label>
       <br />
@@ -50,11 +39,18 @@ import axios from "axios";
 export default {
   name: "adminNewsAdd",
 
+  props: {
+      id: String
+  },
+
+  mounted() {
+      console.log(this.id);
+  },
+
   data() {
     return {
       title: "",
       text: "",
-      company_id: "",
       companies: [],
     };
   },
@@ -75,6 +71,7 @@ export default {
           .post("/api/news", {
             title: this.title,
             text: this.text,
+            company_id: Number(this.id)
           })
           .then((response) => {
             console.log(response);

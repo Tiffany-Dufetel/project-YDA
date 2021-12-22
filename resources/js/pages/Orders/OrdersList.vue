@@ -23,6 +23,10 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
       autocomplete="off"
     />
     <br />
+    <div v-if="role === 'membre'">
+      <AddButton name="Commandez" @click="add" />
+      <br />
+    </div>
 
     <table class="center-table">
       <thead>

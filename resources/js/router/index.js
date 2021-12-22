@@ -351,7 +351,7 @@ const routes = [
         },
         // Add a news -
         {
-                path: "/ajout-actualité",
+                path: "/entreprise/:id/ajout-actualité",
                 name: "adminNewsAdd",
                 component: AddNews,
                 meta: { requiresAuth: true },
@@ -363,7 +363,8 @@ const routes = [
                         if (role == "member" || role == "manager") {
                                 router.push('/YDA')
                         }
-                }
+                },
+                props: true
         },
 
 ];
