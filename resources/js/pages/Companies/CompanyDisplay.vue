@@ -119,13 +119,19 @@ REFRESH ON MEMBER ADD / DELETE
       <h3>
         <strong> {{ news.title }} </strong>
       </h3>
+      <h4>
       <p>{{ news.text }}</p>
+      </h4>
       <i> {{ new Date(news.created_at).toLocaleString() }} </i>
+      <br />
       <br />
       <button class="btn btn-danger" @click="deleteActuality(news.id)">
         Effacer l'actualité
       </button>
 
+<br />
+<br />
+<p>_________</p>
   </div>
 </div>
 </template>

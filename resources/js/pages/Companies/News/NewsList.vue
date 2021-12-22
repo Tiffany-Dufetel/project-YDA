@@ -15,10 +15,12 @@
     <p>______</p>
     <br />
     <br />
+
     <div v-for="news in newsArray" :key="news.id">
-      <h2>
+    <p>Pour l'entreprise {{ company.name }} </p>
+      <h3>
         <strong> {{ news.title }} </strong>
-      </h2>
+      </h3>
       <p>{{ news.text }}</p>
       <i> {{ new Date(news.created_at).toLocaleString() }} </i>
       <br />
@@ -27,6 +29,7 @@
       </button>
       <br />
       <br />
+      <p>___________________</p>
       <br />
       <br />
     </div>
@@ -46,38 +49,32 @@ export default {
 
   data() {
     return {
+    company: {},
+    newsArray: [],
+    companies: [],
 
-      newsArray: [],
-      companies: [],
+
 
     };
   },
-
-  async mounted() {
-    //We are loading the company display thanks to the ID;
-     const getCompany = await axios.get("/api/company");
-    this.companies = getCompany.data.data;
-
-
-  },
-
-
 
   methods: {
 
     async retrieveActuality() {
       const response = await axios.get("/api/company/", {
         headers: {
-          Authorization: "bearer " + localStorage.getItem("userToken"),
+        Authorization: "bearer " + localStorage.getItem("userToken"),
         },
       });
-        console.log(this.companies);
-      //console.log(response.data);
-      this.company = response.data;
+
+      console.log(response.data);
+      this.company = response.data.data;
+
 
       const responseNews = await axios.get("/api/news");
       this.newsArray = responseNews.data;
-      console.log("NEWS",this.newsArray);
+      console.log("this", this.newsArray);
+
     },
     async refreshList() {
       this.retrieveActuality();
@@ -102,6 +99,7 @@ export default {
   mounted() {
     this.retrieveActuality();
     console.log(this.companies);
+
   },
 };
 </script>
