@@ -148,11 +148,11 @@ export default {
     } */
   },
   computed: {
-    monday() {
+    /* monday() {
       return this.company.day === "monday"
         ? `${this.company.name} <br/> ${this.company.time}`
         : "";
-    },
+    }, */
   },
 };
 </script>
