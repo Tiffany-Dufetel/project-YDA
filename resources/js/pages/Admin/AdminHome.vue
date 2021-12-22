@@ -5,45 +5,53 @@
 <template>
   <div class="d-flex justify-content-center flex-wrap mt-3">
     <!-- Catalogue card -->
-    <div class="card" style="width: 18rem">
+    <div class="card-container" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Catalogue</h5>
         <p class="card-text">Vos produits et services.</p>
-        <a @click="catView" class="card-link">Voir</a>
-        <a @click="catAdd" class="card-link">Ajouter</a>
+            <div class="buttons">
+                <button @click="catView" class="card-link">Voir</button>
+                <button @click="catAdd" class="card-link">Ajouter</button>
+            </div>
       </div>
     </div>
 
     <!-- Companies card -->
-    <div class="card" style="width: 18rem">
+    <div class="card-container" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Entreprises</h5>
         <p class="card-text">
           Tous les entreprises actuellement actives sur YDA.
         </p>
-        <a @click="companyView" class="card-link">Voir</a>
-        <a @click="companyAdd" class="card-link">Ajouter</a>
+        <div class="buttons">
+            <button @click="companyView" class="card-link">Voir</button>
+            <button @click="companyAdd" class="card-link">Ajouter</button>
+        </div>
       </div>
     </div>
 
     <!-- Orders card -->
-    <div class="card" style="width: 18rem">
+    <div class="card-container" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Commandes</h5>
         <p class="card-text">Les commandes en cours, en attente et terminés.</p>
-        <a @click="orderList" class="card-link">Voir</a>
+            <div class="buttons">
+                <button @click="orderList" class="card-link">Voir</button>
+            </div>
       </div>
     </div>
 
     <!-- News card -->
-    <div class="card" style="width: 18rem">
+    <div class="card-container" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Actualités</h5>
         <p class="card-text">
           Les actualités que vous avez ajoutés pour les entreprises.
         </p>
-        <a @click="news" class="card-link">Voir</a>
-        <a @click="newsAdd" class="card-link">Ajouter</a>
+        <div class="buttons">
+            <button @click="news" class="card-link">Voir</button>
+            <button @click="newsAdd" class="card-link">Ajouter</button>
+        </div>
       </div>
     </div>
   </div>
@@ -136,4 +144,31 @@ export default {
 </script>
 
 <style>
+.card-container{
+    border: none;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: white;
+    height: 190px;
+}
+
+.card-title{
+    color: #e78c15;
+    border-bottom: 1px solid #e78c15;
+    padding: 0 10px 10px 10px;
+}
+
+.buttons{
+    text-align: center;
+}
+
+.buttons button{
+    border: 1px solid #e78c15;
+    border-radius: 5px;
+    background-color: white;
+    color: #e78c15;
+}
 </style>

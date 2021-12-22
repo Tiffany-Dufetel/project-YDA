@@ -1,5 +1,6 @@
 <!--
 -- Company individual display page component
+REFRESH ON MEMBER ADD / DELETE
 -->
 
 <template>
@@ -7,6 +8,7 @@
     <!-- Loading of reactive data thanks to the mounted axios-->
     <Header v-model:title="company.name" subtitle="" />
   </div>
+  <BackButton />
   <div>
     <div class="mt-5">
       <div class="row">
@@ -103,6 +105,7 @@
 
 <script>
 import Header from "../../components/ui/Header.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
 import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
@@ -112,8 +115,10 @@ export default {
   components: {
     Header,
     AddMember,
+    BackButton,
     MembersList,
     OrderDisplay,
+    BackButton,
   },
 
   props: {
@@ -138,7 +143,7 @@ export default {
 
   methods: {
     goToUpdate() {
-      this.$router.push("/company/" + this.$route.params.id + "/edit");
+      this.$router.push("/entreprise/" + this.$route.params.id + "/modifier");
     },
   },
 
@@ -163,7 +168,6 @@ export default {
     this.filterOrders = orders.filter(
       (order) => order.user.company_id == this.id
     );
-    console.log("coucou", this.companyId);
 
     this.role = getUser.data.role;
     console.log("user", users);

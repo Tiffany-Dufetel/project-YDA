@@ -1,86 +1,95 @@
 <!--
 -- View company update page component
+BACK BUTTON
 -->
 
 <template>
   <div>
-    <Header
-      title="modifier entreprise"
-      subtitle="update "
-    />
+    <Header title="modifier entreprise" subtitle="update " />
     <BackButton />
+
 
     <div class="alert alert-success" v-show="success">
       L'entreprise a bien été mis à jour
     </div>
 
-    <form method="POST" @submit.prevent>
+       <div v-for="(info, index) in companyInfo" :key="index">
+{{info.name}}
+        <input type="text" :value="info.name" >
+        </div>
+
+    <form method="POST" @submit.prevent >
 
       <!-- Siret number to use government data -->
       <label for="siret">Siret</label><br />
-      <input type="text" id="siret" name="siret" v-model="siret"/><br />
+      <input type="text" id="siret" name="siret" v-model="siret" /><br />
 
-        <div v-show="errors && errors.siret">
-            <p
-            class="text-danger"
-            v-for="(error, index) in errors.siret"
-            :key="index"
-            >
-            {{ error }}
-            </p>
-        </div>
+      <div v-show="errors && errors.siret">
+        <p
+          class="text-danger"
+          v-for="(error, index) in errors.siret"
+          :key="index"
+        >
+          {{ error }}
+        </p>
+      </div>
 
       <label for="name">Dénomination social</label><br />
-      <input type="text" id="name" name="name" v-model="name"/><br />
+      <input type="text" id="name" name="name" v-model="name" /><br />
 
-        <div v-show="errors && errors.name">
-            <p
-            class="text-danger"
-            v-for="(error, index) in errors.name"
-            :key="index"
-            >
-            {{ error }}
-            </p>
-        </div>
+      <div v-show="errors && errors.name">
+        <p
+          class="text-danger"
+          v-for="(error, index) in errors.name"
+          :key="index"
+        >
+          {{ error }}
+        </p>
+      </div>
 
       <label for="adress">Adresse</label><br />
-      <input type="text" id="adress" name="adress" v-model="adress"/><br />
+      <input type="text" id="adress" name="adress" v-model="adress" /><br />
 
-        <div v-show="errors && errors.adress">
-            <p
-            class="text-danger"
-            v-for="(error, index) in errors.adress"
-            :key="index"
-            >
-            {{ error }}
-            </p>
-        </div>
+      <div v-show="errors && errors.adress">
+        <p
+          class="text-danger"
+          v-for="(error, index) in errors.adress"
+          :key="index"
+        >
+          {{ error }}
+        </p>
+      </div>
 
       <label for="postCode">Code postal</label><br />
-      <input type="text" id="postCode" name="postCode" v-model="postcode"/><br />
+      <input
+        type="text"
+        id="postCode"
+        name="postCode"
+        v-model="postcode"
+      /><br />
 
-        <div v-show="errors && errors.postcode">
-            <p
-            class="text-danger"
-            v-for="(error, index) in errors.postcode"
-            :key="index"
-            >
-            {{ error }}
-            </p>
-        </div>
+      <div v-show="errors && errors.postcode">
+        <p
+          class="text-danger"
+          v-for="(error, index) in errors.postcode"
+          :key="index"
+        >
+          {{ error }}
+        </p>
+      </div>
 
       <label for="city">Ville</label><br />
       <input type="text" id="city" name="city" v-model="city" /><br />
 
-        <div v-show="errors && errors.city">
-            <p
-            class="text-danger"
-            v-for="(error, index) in errors.city"
-            :key="index"
-            >
-            {{ error }}
-            </p>
-        </div>
+      <div v-show="errors && errors.city">
+        <p
+          class="text-danger"
+          v-for="(error, index) in errors.city"
+          :key="index"
+        >
+          {{ error }}
+        </p>
+      </div>
 
       <label for="member_count">Nombre d'employés</label><br />
       <input
@@ -104,7 +113,7 @@
           </select>
         </div>
         <div class="col-xs-2">
-            <label for="time">Créneau de passage</label>
+          <label for="time">Créneau de passage</label>
           <select v-model="time" name="time" id="time" class="form-control">
             <option selected>Creneau...</option>
             <option value="09:00 - 11:00">9h - 11h</option>
@@ -117,6 +126,7 @@
 
       <!--<button type="submit">Ajouter</button>-->
       <SubmitButton name="Ajouter" @click="updateCompany" />
+
     </form>
   </div>
 </template>
@@ -127,31 +137,32 @@ import SubmitButton from "../../components/ui/buttons/SubmitButton.vue";
 export default {
   name: "companyUpdate",
   components: {
-      Header,
-      SubmitButton,
+    Header,
+    SubmitButton,
   },
 
-  data(){
-      return{
-          companyInfo: {},
-          siret: "",
-          name:"",
-          adress:"",
-          postcode: "",
-          city:"",
-          member_count:"",
-          day: "",
-          time: "",
-          success: false,
-          errors: {},
-      }
+  data() {
+    return {
+      companyInfo: [],
+      infos:[],
+      siret: "",
+      name: "",
+      adress: "",
+      postcode: "",
+      city: "",
+      member_count: "",
+      day: "",
+      time: "",
+      success: false,
+      errors: {},
+    };
   },
 
   methods: {
     updateCompany() {
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .post("/api/company/" + this.$route.params.id,{
+          .post("/api/company/" + this.$route.params.id, {
             siret: this.siret,
             name: this.name,
             adress: this.adress,
@@ -160,10 +171,10 @@ export default {
             member_count: Number(this.member_count),
             day: this.day,
             time: this.time,
-            _method : 'put'
+            _method: "put",
           })
           .then((res) => {
-              (this.siret = ""),
+            (this.siret = ""),
               (this.name = ""),
               (this.adress = ""),
               (this.postcode = ""),
@@ -181,14 +192,17 @@ export default {
           });
       });
     },
+
+
   },
 
-    async mounted(){
-        const response = await axios.get("/api/company/" + this.$route.params.id);
-        this.companyInfo =  response.data
-        console.log('abc', this.companyInfo)
+  async mounted() {
+    const response = await axios.get("/api/company/");
+    const infos = response.data.data;
 
-    }
+    this.companyInfo = infos.filter(info => info.id == this.$route.params.id)
+    console.log('bfizbf', this.companyInfo)
+  },
 };
 </script>
 

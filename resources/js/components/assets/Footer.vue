@@ -2,9 +2,7 @@
 -- Footer asset component
 -->
 
-<template>
-  footer
-</template>
+<template>footer</template>
 
 <script>
 export default {
@@ -29,5 +27,4 @@ export default {
 ion-icon {
   font-size: 32px;
 }
-
 </style>

@@ -103,16 +103,18 @@ class ProductController extends Controller
         $product = Product::find($product);
 
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg',
-            'type' => 'required',
-            'category' => 'required',
+            // 'name' => 'required',
+            //     'description' => 'required',
+            //     'image' => 'required|image|mimes:png,jpg,jpeg',
+            //     'type' => 'required',
+            //     'category' => 'required',
+            // ], [
+            //     'name.required' => 'oups',
         ]);
 
         $product->name = $request->name;
         $product->description = $request->description;
-        $product->image = $request->image;
+        // $product->image = $request->file('image')->store('/public');
         $product->type = $request->type;
         $product->category = $request->category;
 
