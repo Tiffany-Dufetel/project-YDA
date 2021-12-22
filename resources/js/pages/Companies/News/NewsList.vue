@@ -6,26 +6,12 @@
   <div>
     <!-- make title responsive -->
     <Header title="Les actualités" subtitle="Les actualités récentes" />
-    <br />
-    <div>
-
-     <label for="company">Choisir l'entreprise</label>
-      <select
-        v-model="company"
-        name="company"
-        id="company"
-        class="form-control"
-        required="true"
-      >
-        <option v-for="company in companies" :key="company.id">
-          {{ company.id }} - {{ company.name }}
-        </option>
-      </select>
     </div>
-    <BackButton />
-    <p>______</p>
-    <button @click="newsAdd">Ajouter une actualité</button>
     <br />
+
+
+    <BackButton />
+
     <p>______</p>
     <br />
     <br />
@@ -44,7 +30,7 @@
       <br />
       <br />
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -60,18 +46,27 @@ export default {
 
   data() {
     return {
-      id: 9,
-      company: {},
+
       newsArray: [],
       companies: [],
+
     };
   },
+
+  async mounted() {
+    //We are loading the company display thanks to the ID;
+     const getCompany = await axios.get("/api/company");
+    this.companies = getCompany.data.data;
+
+
+  },
+
+
+
   methods: {
-    newsAdd() {
-      this.$router.push({ name: "adminNewsAdd" });
-    },
+
     async retrieveActuality() {
-      const response = await axios.get("/api/company/" + this.id, {
+      const response = await axios.get("/api/company/", {
         headers: {
           Authorization: "bearer " + localStorage.getItem("userToken"),
         },
@@ -80,9 +75,9 @@ export default {
       //console.log(response.data);
       this.company = response.data;
 
-      const responseNews = await axios.get("/api/news/by-company/" + this.id);
+      const responseNews = await axios.get("/api/news");
       this.newsArray = responseNews.data;
-      console.log(this.newsArray);
+      console.log("NEWS",this.newsArray);
     },
     async refreshList() {
       this.retrieveActuality();

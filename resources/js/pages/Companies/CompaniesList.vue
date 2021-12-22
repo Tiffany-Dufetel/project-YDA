@@ -11,7 +11,7 @@
 
     <!-- Search box -->
 
-    <input
+     <input
       v-model="searchKey"
       class="form-control mr-sm-2"
       type="search"
@@ -26,11 +26,7 @@
       >
       <span v-if="filteredList.length >= 2"></span>
     </div>
-    <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-        Search
-      </button>
-      -->
-    <div v-if="filteredList.length == []">
+    <div v-if="filteredList.length == 0">
       <h3>Désolé</h3>
       <p>Aucun résultat trouvé</p>
     </div>

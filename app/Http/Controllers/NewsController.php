@@ -38,19 +38,24 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'title' =>'required|string',
             'text' =>'required',
+            'company_id' => 'required|int'
 
         ]);
 
         $news = [
-            'title' =>$request->input ('title'),
-            'text' =>$request->input ('text'),
-            'company_id' =>'1',
+            'title' => $request->input ('title'),
+            'text' => $request->input ('text'),
+            'company_id' => $request->input ('company_id'),
+
 
         ];
         Actuality::create($news);
+
+
     }
 
     /**
