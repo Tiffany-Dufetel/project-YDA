@@ -8,10 +8,10 @@
   <div class="alert alert-success" v-show="success">
     Votre produit a bien été rajouté
   </div>
-  <div class="d-flex justify-content-center">
-    <form>
-      <div class="form-group col-md-10">
-        <label for="name">Nom</label>
+  <div class="container">
+    <form class="formContent">
+      <div>
+        <label for="name">Nom</label><br>
         <input
           v-model="formData.name"
           id="name"
@@ -19,6 +19,7 @@
           name="name"
           required
           autocomplete="name"
+          class="inputText marginBot"
           autofocus
         />
       </div>
@@ -33,14 +34,15 @@
         </p>
       </div>
 
-      <div class="form-group col-md-10">
-        <label for="description">Description</label>
+      <div >
+        <label for="description">Description</label><br>
         <input
           v-model="formData.description"
           id="description"
           type="text"
           name="description"
           required
+          class="inputText marginBot"
           autocomplete="on"
         />
       </div>
@@ -55,13 +57,13 @@
         </p>
       </div>
 
-      <div class="form-group col-md-10">
-        <label for="type">Type</label>
+      <div>
+        <label for="type">Type</label><br>
         <select
           v-model="formData.type"
           name="type"
           id="type"
-          class="form-control"
+          class="inputText marginBot"
           required="true"
         >
           <option selected>choisir le type...</option>
@@ -80,13 +82,13 @@
         </p>
       </div>
 
-      <div class="form-group col-md-10">
-        <label for="category">Categorie</label>
+      <div>
+        <label for="category">Categorie</label><br>
         <select
           v-model="formData.category"
           name="category"
+          class="inputText marginBot"
           id="category"
-          class="form-control"
           required="true"
         >
           <option selected>choisir la catégorie...</option>
@@ -109,12 +111,12 @@
         </p>
       </div>
 
-      <div class="form-group col-md-10">
-        <label>Image</label>
+      <div>
+        <label>Image</label><br>
         <!-- MOST IMPORTANT - SEE "ref" AND "@change" PROPERTIES -->
         <input
           type="file"
-          class="custom-file-input"
+          class="inputFile"
           id="customFile"
           ref="file"
           @change="handleFileObject()"
@@ -131,7 +133,7 @@
         </p>
       </div>
 
-      <SubmitButton @click="submit" name="Ajouter" />
+      <SubmitButton class="marginTop" @click="submit" name="Ajouter" />
     </form>
   </div>
 </template>
@@ -191,9 +193,56 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 input,
 select {
   width: 25vh;
 }
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.formContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    letter-spacing: 3px;
+    font-size:20px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    width: 450px;
+    box-shadow: 0.3em 0.3em 1em #acacac, -0.3em -0.3em 1em #dbdbdb;
+    padding: 30px;
+
+}
+
+.marginTop{
+    margin-top: 15px;
+}
+
+.marginBot{
+    margin-bottom: 15px;
+}
+
+.inputText{
+    border-radius: 10px;
+    height: 2.5rem;
+    outline: none;
+    border: 1px solid black;
+    width: 350px;
+    color: #333333;
+    padding-left: 10px;
+}
+
+.inputText:focus{
+    border: 2px solid #e78c15;
+    background-color: #fafafa;
+}
+
+.inputFile{
+    width: 350px;
+}
+
 </style>
