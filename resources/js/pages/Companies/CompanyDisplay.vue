@@ -9,19 +9,15 @@ REFRESH ON MEMBER ADD / DELETE
     <Header v-model:title="company.name" subtitle="" />
   </div>
   <BackButton />
-  <div>
-    <div class="mt-5">
-      <div class="row">
-        <div class="col">
-          <p>Siret : {{ company.siret }}</p>
 
-          <p>
-            Adresse : {{ company.adress }} - {{ company.postcode }}
-            {{ company.city }}
-          </p>
+    <div>
+        <p>
+            <b><u>Siret :</u></b> {{ company.siret }}<br>
+            <b><u>Adresse :</u></b> {{ company.adress }} - {{ company.postcode }} {{ company.city }}<br>
+            <b><u>Numéro de téléphone :</u></b> {{ company.number }}
+        </p>
 
-          <p>Numéro de téléphone : {{ company.number }}</p>
-        </div>
+    </div>
         <div class="col">
           <iframe
             class="border border-warning shadow p-3 mb-5 bg-white rounded"
@@ -35,9 +31,6 @@ REFRESH ON MEMBER ADD / DELETE
           ></iframe
           ><br />
         </div>
-      </div>
-      </div>
-</div>
       <button class="btn btn-warning" @click="goToUpdate">modifier</button>
       <button class="btn btn-dark" @click="isHidden = !isHidden">
         {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
