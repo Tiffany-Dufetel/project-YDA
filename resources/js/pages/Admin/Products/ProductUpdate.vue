@@ -17,7 +17,7 @@ BACK BUTTON
       <div class="form-group col-md-10">
         <label for="name">Nom</label>
         <input
-          v-model="formData.name"
+          v-model="name"
           id="name"
           type="text"
           name="name"
@@ -40,7 +40,7 @@ BACK BUTTON
       <div class="form-group col-md-10">
         <label for="description">Description</label>
         <input
-          v-model="formData.description"
+          v-model="description"
           id="description"
           type="text"
           name="description"
@@ -62,7 +62,7 @@ BACK BUTTON
       <div class="form-group col-md-10">
         <label for="type">Type</label>
         <select
-          v-model="formData.type"
+          v-model="type"
           name="type"
           id="type"
           class="form-control"
@@ -87,7 +87,7 @@ BACK BUTTON
       <div class="form-group col-md-10">
         <label for="category">Categorie</label>
         <select
-          v-model="formData.category"
+          v-model="category"
           name="category"
           id="category"
           class="form-control"
@@ -135,7 +135,7 @@ BACK BUTTON
         </p>
       </div>
 
-      <SubmitButton @click="submit" name="Ajouter" />
+      <SubmitButton @click="productUpdate" name="Ajouter" />
     </form>
   </div>
 </template>
@@ -153,7 +153,7 @@ export default {
   data() {
     return {
       productInfo: {},
-      formData: {},
+    //   formData: {},
       name: "",
       type: "",
       description: "",
@@ -165,11 +165,23 @@ export default {
   },
 
   methods: {
-    updateCompany() {
+    productUpdate(event) {
+      event.preventDefault();
+      let formData = new FormData();
+      formData.append("image", this.image);
+
+      _.each(this.formData, (value, key) => {
+        formData.append(key, value);
+      });
+
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .post("/api/product/" + this.$route.params.id, {
-            formData,
+          .put("/api/product/" + this.$route.params.id,{
+            name: this.name,
+            type: this.type,
+            description: this.description,
+            category: this.category,
+            // image: this.image,
             _method: "put",
           })
           .then((res) => {
@@ -187,6 +199,10 @@ export default {
             }
           });
       });
+    },
+
+    handleFileObject() {
+      this.image = this.$refs.file.files[0];
     },
   },
 

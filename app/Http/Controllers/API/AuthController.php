@@ -31,7 +31,7 @@ class AuthController extends BaseController
 
     public function register(Request $request)
     {
-        $currentURL = url()->previous();
+/*         $currentURL = url()->previous();
 
         $validator = Validator::make($request->all(), [
             // 'name' => 'required',
@@ -51,7 +51,7 @@ class AuthController extends BaseController
         $success['token'] =  $user->createToken('LaravelSanctumAuth')->plainTextToken;
         $success['name'] =  $user->name;
         event(new Registered($user));
-        return $this->handleResponse($success, 'User successfully registered!');
+        return $this->handleResponse($success, 'User successfully registered!'); */
     }
 
 

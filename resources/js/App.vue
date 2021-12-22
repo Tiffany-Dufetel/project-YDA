@@ -71,6 +71,7 @@ mounted(){
     display: flex;
     font-weight: lighter;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(250, 250, 250);
 }
 
 #app a {
@@ -78,7 +79,7 @@ mounted(){
 }
 
 .router-view{
-    margin-left: 320px;
+    margin-left: 300px;
 }
 /* #app { */
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */

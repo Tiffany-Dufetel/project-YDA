@@ -8,11 +8,18 @@ BACK BUTTON
     <Header title="modifier entreprise" subtitle="update " />
     <BackButton />
 
+
     <div class="alert alert-success" v-show="success">
       L'entreprise a bien été mis à jour
     </div>
 
-    <form method="POST" @submit.prevent>
+       <div v-for="(info, index) in companyInfo" :key="index">
+{{info.name}}
+        <input type="text" :value="info.name" >
+        </div>
+
+    <form method="POST" @submit.prevent >
+
       <!-- Siret number to use government data -->
       <label for="siret">Siret</label><br />
       <input type="text" id="siret" name="siret" v-model="siret" /><br />
@@ -119,6 +126,7 @@ BACK BUTTON
 
       <!--<button type="submit">Ajouter</button>-->
       <SubmitButton name="Ajouter" @click="updateCompany" />
+
     </form>
   </div>
 </template>
@@ -135,7 +143,8 @@ export default {
 
   data() {
     return {
-      companyInfo: {},
+      companyInfo: [],
+      infos:[],
       siret: "",
       name: "",
       adress: "",
@@ -183,12 +192,16 @@ export default {
           });
       });
     },
+
+
   },
 
   async mounted() {
-    const response = await axios.get("/api/company/" + this.$route.params.id);
-    this.companyInfo = response.data;
-    console.log("abc", this.companyInfo);
+    const response = await axios.get("/api/company/");
+    const infos = response.data.data;
+
+    this.companyInfo = infos.filter(info => info.id == this.$route.params.id)
+    console.log('bfizbf', this.companyInfo)
   },
 };
 </script>

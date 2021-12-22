@@ -64,7 +64,7 @@
             <button @click="logOut">Déconnexion</button>
           </div>
           <div v-else>
-            <button @click="logIn">Log In</button>
+            <button @click="logIn">Connexion</button>
           </div>
         </div>
         <div class="contact-info">
@@ -141,7 +141,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
 nav {
   display: block;
 }
@@ -294,6 +294,7 @@ header {
 
 .dashboard-nav-item:hover {
   background: rgba(100, 100, 100, 0.25);
+  color:#e78c15;
 }
 
 .nav-item-divider {
@@ -319,10 +320,10 @@ ion-icon {
   color: #dddddd;
 }
 
-@media (min-width: 992px) {
-  .dashboard-app {
-    margin-left: 238px;
-  }
+/* @media (min-width: 992px) {
+    .dashboard-app {
+        margin-left: 238px;
+    }
 
   .dashboard-compact .dashboard-app {
     margin-left: 0;
@@ -365,8 +366,8 @@ ion-icon {
     left: 238px;
   }
 
-  .dashboard-compact .dashboard-toolbar {
-    left: 0;
-  }
-}
+    .dashboard-compact .dashboard-toolbar {
+        left: 0;
+    }
+} */
 </style>

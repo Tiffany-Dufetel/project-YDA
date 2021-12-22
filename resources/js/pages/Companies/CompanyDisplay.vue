@@ -168,7 +168,6 @@ export default {
     this.filterOrders = orders.filter(
       (order) => order.user.company_id == this.id
     );
-    console.log("coucou", this.companyId);
 
     this.role = getUser.data.role;
     console.log("user", users);
