@@ -22876,7 +22876,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       userToken: null,
-      role: ""
+      role: "",
+      companyId: "",
+      id: ""
     };
   },
   inject: ["isLoggedIn", "removeLoginStatus"],
@@ -22884,7 +22886,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var getUser;
+      var getUser, getCompanies;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -22897,8 +22899,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 4:
               getUser = _context.sent;
               _this.role = getUser.data.role;
+              _this.id = getUser.data.company_id;
+              console.log("role", _this.companyId);
+              _context.next = 10;
+              return axios.get("/api/company");
 
-            case 6:
+            case 10:
+              getCompanies = _context.sent;
+              _this.companies = getCompanies.data.data;
+
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -22945,7 +22955,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Header",
-  props: ["title", "subtitle"]
+  props: ["message", "title", "subtitle", "accueil"],
+  role: ""
 });
 
 /***/ }),
@@ -24464,6 +24475,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     Header: _components_ui_Header_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {
+      companyId: ""
+    };
+  },
   methods: {
     profile: function profile() {
       this.$router.push("/entreprise/" + this.company_id);
@@ -24506,17 +24522,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this.role = getUser.data.role;
               console.log("role", _this.role);
               _this.id = getUser.data.id;
-              console.log("ID", _this.id); // Loading of company information
+              console.log("ID", _this.id);
+              _this.companyId = getUser.data.company_id; // Loading of company information
 
-              _context.next = 9;
+              _context.next = 10;
               return axios.get("/api/company" + _this.id);
 
-            case 9:
+            case 10:
               getCompany = _context.sent;
               _this.company = getCompany.data.role;
               console.log("company:", _this.company);
 
-            case 12:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -24878,7 +24895,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       productArray: [],
       role: "",
-      id: ""
+      id: "",
+      firstname: ""
     };
   },
   mounted: function mounted() {
@@ -24897,9 +24915,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               getUser = _context.sent;
               _this.role = getUser.data.role;
               console.log("role", _this.role);
+              _this.firstname = getUser.data.first_name;
+              console.log("blabla", _this.firstname);
               _this.id = getUser.data.id; // console.log("user", this.id);
 
-            case 6:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -25591,29 +25611,31 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Catalogue");
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Entreprises");
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Membres de l'entreprise ");
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Commandes");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Entreprises");
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Actualités");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Commandes");
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Actualités");
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "nav-item-divider"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "btn-log"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   key: 0
 };
-var _hoisted_14 = {
+var _hoisted_15 = {
   key: 1
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "contact-info"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("© Your Daily Assistant"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "mailto:assistantes@your-daily-assistant.fr"
@@ -25621,7 +25643,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_17 = {
   "class": "container-icons"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -25665,9 +25687,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to companies "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
-    key: 3,
-    to: "/entreprises",
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to company's members "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: '/entreprise/' + $data.id,
     "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25676,9 +25697,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to orders "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
-    key: 4,
-    to: "/commandes",
+  }, 8
+  /* PROPS */
+  , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to companies "), $options.isLoggedIn.value && $data.role == 'admin' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 3,
+    to: "/entreprises",
     "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25687,9 +25710,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to orders "), $options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
-    key: 5,
-    to: "/actualités",
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to orders "), $options.isLoggedIn.value && $data.role == 'member' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 4,
+    to: "/commandes",
     "class": "dashboard-nav-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25698,15 +25721,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" button Login logout "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [$options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" link to orders "), $options.isLoggedIn.value && $data.role == 'member' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 5,
+    to: "/actualités",
+    "class": "dashboard-nav-item"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_11];
+    }),
+    _: 1
+    /* STABLE */
+
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" button Login logout "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [$options.isLoggedIn.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.logOut && $options.logOut.apply($options, arguments);
     })
-  }, "Déconnexion")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Déconnexion")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.logIn && $options.logIn.apply($options, arguments);
     })
-  }, "Connexion")]))]), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo social network "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ion_icon, {
+  }, "Connexion")]))]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo social network "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ion_icon, {
     name: "logo-facebook",
     "class": "mr-1",
     onClick: $options.fb
@@ -25745,7 +25779,7 @@ var _hoisted_1 = {
   "class": "header"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.message) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.accueil), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.subtitle), 1
   /* TEXT */
@@ -28288,99 +28322,24 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_6 = {
-  "class": "card",
-  style: {
-    "width": "18rem"
-  }
-};
-var _hoisted_7 = {
-  "class": "card-body"
-};
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-  "class": "card-title"
-}, "Profil", -1
-/* HOISTED */
-);
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "card-text"
-}, "Voir et modifier vos détails.", -1
-/* HOISTED */
-);
-
-var _hoisted_10 = {
-  "class": "card",
-  style: {
-    "width": "18rem"
-  }
-};
-var _hoisted_11 = {
-  "class": "card-body"
-};
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-  "class": "card-title"
-}, "Commandes", -1
-/* HOISTED */
-);
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "card-text"
-}, "Les commandes en cours, en attente et terminés.", -1
-/* HOISTED */
-);
-
-var _hoisted_14 = {
-  "class": "card",
-  style: {
-    "width": "18rem"
-  }
-};
-var _hoisted_15 = {
-  "class": "card-body"
-};
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-  "class": "card-title"
-}, "Actualités", -1
-/* HOISTED */
-);
-
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "card-text"
-}, "Vos actualités personalisées.", -1
-/* HOISTED */
-);
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Gérer les membres ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Members card "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $options.showMembers && $options.showMembers.apply($options, arguments);
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Members card "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: '/entreprise/' + $data.companyId,
+    "class": "dashboard-nav-item"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_6];
     }),
-    "class": "card-link"
-  }, "Voir"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $options.memberAdd && $options.memberAdd.apply($options, arguments);
-    }),
-    "class": "card-link"
-  }, "Ajouter")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile card "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    onClick: _cache[2] || (_cache[2] = function () {
-      return $options.profile && $options.profile.apply($options, arguments);
-    }),
-    "class": "card-link"
-  }, "Voir")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Orders card "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    onClick: _cache[3] || (_cache[3] = function () {
-      return $options.orderList && $options.orderList.apply($options, arguments);
-    }),
-    "class": "card-link"
-  }, "Voir")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" News card "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    onClick: _cache[4] || (_cache[4] = function () {
-      return $options.news && $options.news.apply($options, arguments);
-    }),
-    "class": "card-link"
-  }, "Voir")])])]);
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  Profile card\n    <div class=\"card\" style=\"width: 18rem\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">Profil</h5>\n        <p class=\"card-text\">Voir et modifier vos détails.</p>\n        <a @click=\"profile\" class=\"card-link\">Voir</a>\n      </div>\n    </div>\n\n     Orders card\n    <div class=\"card\" style=\"width: 18rem\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">Commandes</h5>\n        <p class=\"card-text\">Les commandes en cours, en attente et terminés.</p>\n        <a @click=\"orderList\" class=\"card-link\">Voir</a>\n      </div>\n    </div>\n\n     News card\n    <div class=\"card\" style=\"width: 18rem\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">Actualités</h5>\n        <p class=\"card-text\">Vos actualités personalisées.</p>\n        <a @click=\"news\" class=\"card-link\">Voir</a>\n      </div>\n    </div> ")]);
 }
 
 /***/ }),
@@ -28907,15 +28866,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_MembersDisplay = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MembersDisplay");
 
   return $data.role == 'admin' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
-    title: "Bienvenue à votre page administration",
+    title: $data.firstname,
+    "onUpdate:title": _cache[0] || (_cache[0] = function ($event) {
+      return $data.firstname = $event;
+    }),
     subtitle: "Gérer vos entreprises et catalogue ici"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AdminHome)])) : $data.role == 'manager' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
-    title: "Bienvenue à votre page de manager",
-    subtitle: "Gérer vos membres"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CompanyHome)])) : $data.role == 'member' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
-    title: "Bienvenue à votre page de membre",
+  }, null, 8
+  /* PROPS */
+  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AdminHome)])) : $data.role == 'manager' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
+    title: $data.firstname,
+    "onUpdate:title": _cache[1] || (_cache[1] = function ($event) {
+      return $data.firstname = $event;
+    }),
+    message: "bienvenue",
+    accueil: "sur votre page d'accueil",
+    subtitle: "Gérer les membres de votre entreprise"
+  }, null, 8
+  /* PROPS */
+  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CompanyHome)])) : $data.role == 'member' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header, {
+    title: $data.firstname,
+    "onUpdate:title": _cache[2] || (_cache[2] = function ($event) {
+      return $data.firstname = $event;
+    }),
     subtitle: "Passez vos commandes"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MembersDisplay)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4));
+  }, null, 8
+  /* PROPS */
+  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MembersDisplay)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4));
 }
 
 /***/ }),
@@ -29864,14 +29840,13 @@ var routes = [{
 
             case 2:
               getUser = _context.sent;
-              console.log("response role", getUser.data.role);
               role = getUser.data.role;
 
               if (role == "manager") {
-                router.push('/admin');
+                router.push("/admin");
               }
 
-            case 6:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -29899,14 +29874,13 @@ var routes = [{
 
             case 2:
               getUser = _context2.sent;
-              console.log("response role", getUser.data.role);
               role = getUser.data.role;
 
               if (role == "member" && role == "manager") {
-                router.push('/admin');
+                router.push("/admin");
               }
 
-            case 6:
+            case 5:
             case "end":
               return _context2.stop();
           }
@@ -29934,14 +29908,13 @@ var routes = [{
 
             case 2:
               getUser = _context3.sent;
-              console.log("response role", getUser.data.role);
               role = getUser.data.role;
 
               if (role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
-            case 6:
+            case 5:
             case "end":
               return _context3.stop();
           }
@@ -29973,7 +29946,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member" || role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30012,7 +29985,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member" || role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30047,7 +30020,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member" || role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30079,14 +30052,13 @@ var routes = [{
 
             case 2:
               getUser = _context7.sent;
-              console.log("response role", getUser.data.role);
               role = getUser.data.role;
 
-              if (role == "member" || role == "manager") {
-                router.push('/YDA');
+              if (role == "member") {
+                router.push("/YDA");
               }
 
-            case 6:
+            case 5:
             case "end":
               return _context7.stop();
           }
@@ -30118,7 +30090,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member" || role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30157,7 +30129,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30200,7 +30172,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30239,7 +30211,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "admin" || role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30273,7 +30245,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member" || role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30286,8 +30258,8 @@ var routes = [{
   }
 },
 /**
-* NEWS
-*/
+ * NEWS
+ */
 // View the full news -
 {
   path: "/actualités",
@@ -30312,7 +30284,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -30347,7 +30319,7 @@ var routes = [{
               role = getUser.data.role;
 
               if (role == "member" || role == "manager") {
-                router.push('/YDA');
+                router.push("/YDA");
               }
 
             case 6:
@@ -35466,7 +35438,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nnav {\r\n  display: block;\n}\nnav a.router-link-exact-active {\r\n  border-left: 4px solid #db9024;\n}\n.btn-log {\r\n  text-align: center;\r\n  margin-top: 40px;\n}\n.btn-log button {\r\n  font-size: 20px;\r\n  text-transform: uppercase;\r\n  background-color: #e78c15;\r\n  border-radius: 5px;\r\n  padding: 5px 20px;\r\n  border: 1px solid #e78c15;\r\n  color: white;\n}\n.btn-log button:hover {\r\n  background-color: white;\r\n  color: #e78c15;\r\n  border: 1px solid #e78c15;\n}\n.dashboard {\r\n  display: flex;\r\n  min-height: 100vh;\r\n  font-size: 18px;\n}\n.dashboard-app {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-grow: 2;\r\n  margin-top: 84px;\n}\n.dashboard-content {\r\n  flex-grow: 2;\r\n  padding: 25px;\n}\n.dashboard-nav {\r\n  min-width: 238px;\r\n  position: fixed;\r\n  left: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n  overflow: auto;\r\n  background-color: #373193;\n}\n.dashboard-compact .dashboard-nav {\r\n  display: none;\n}\n.dashboard-nav header {\r\n  min-height: 84px;\r\n  padding: 8px 27px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.dashboard-nav {\r\n  background-color: #000000;\n}\n.dashboard-nav a {\r\n  color: rgb(255, 255, 255);\n}\n.dashboard-nav-list {\r\n  margin: 7vh 0;\n}\nheader {\r\n  background-color: #db9024;\n}\n.brand-logo {\r\n  font-family: \"Nunito\", sans-serif;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  display: flex;\r\n  color: #515151;\r\n  align-items: center;\n}\n.brand-logo img {\r\n  width: 15vh;\r\n  padding: 20px 0;\n}\n.dashboard-nav-item {\r\n  min-height: 56px;\r\n  padding: 8px 20px 8px 70px;\r\n  display: flex;\r\n  align-items: center;\r\n  letter-spacing: 0.02em;\r\n  transition: ease-out 0.5s;\n}\n.dashboard-nav-item i {\r\n  width: 36px;\r\n  font-size: 19px;\r\n  margin-left: -40px;\n}\n.dashboard-nav-item:hover {\r\n  background: rgba(100, 100, 100, 0.25);\r\n  color:#e78c15;\n}\n.nav-item-divider {\r\n  height: 1px;\r\n  margin: 1rem 0;\r\n  overflow: hidden;\r\n  background-color: rgba(236, 238, 239, 0.3);\n}\nion-icon {\r\n  cursor: pointer;\r\n  padding: 5px;\n}\n.container-icons {\r\n  text-align: center;\n}\n.contact-info {\r\n  text-align: center;\r\n  line-height: 17px;\r\n  margin: 20px 10px;\r\n  color: #dddddd;\n}\r\n\r\n/* @media (min-width: 992px) {\r\n    .dashboard-app {\r\n        margin-left: 238px;\r\n    }\r\n\r\n  .dashboard-compact .dashboard-app {\r\n    margin-left: 0;\r\n  }\r\n}\r\n\r\n@media (max-width: 768px) {\r\n  .dashboard-content {\r\n    padding: 15px 0px;\r\n  }\r\n}\r\n\r\n@media (max-width: 992px) {\r\n  .dashboard-nav {\r\n    display: none;\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    z-index: 1070;\r\n  }\r\n\r\n  .dashboard-nav.mobile-show {\r\n    display: block;\r\n  }\r\n}\r\n\r\n@media (max-width: 992px) {\r\n  .dashboard-nav header .menu-toggle {\r\n    display: -webkit-box;\r\n    display: -webkit-flex;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n  }\r\n}\r\n\r\n@media (min-width: 992px) {\r\n  .dashboard-toolbar {\r\n    left: 238px;\r\n  }\r\n\r\n    .dashboard-compact .dashboard-toolbar {\r\n        left: 0;\r\n    }\r\n} */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nnav {\n  display: block;\n}\nnav a.router-link-exact-active {\n  border-left: 4px solid #db9024;\n}\n.btn-log {\n  text-align: center;\n  margin-top: 40px;\n}\n.btn-log button {\n  font-size: 20px;\n  text-transform: uppercase;\n  background-color: #e78c15;\n  border-radius: 5px;\n  padding: 5px 20px;\n  border: 1px solid #e78c15;\n  color: white;\n}\n.btn-log button:hover {\n  background-color: white;\n  color: #e78c15;\n  border: 1px solid #e78c15;\n}\n.dashboard {\n  display: flex;\n  min-height: 100vh;\n  font-size: 18px;\n}\n.dashboard-app {\n  display: flex;\n  flex-direction: column;\n  flex-grow: 2;\n  margin-top: 84px;\n}\n.dashboard-content {\n  flex-grow: 2;\n  padding: 25px;\n}\n.dashboard-nav {\n  min-width: 238px;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  overflow: auto;\n  background-color: #373193;\n}\n.dashboard-compact .dashboard-nav {\n  display: none;\n}\n.dashboard-nav header {\n  min-height: 84px;\n  padding: 8px 27px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.dashboard-nav {\n  background-color: #000000;\n}\n.dashboard-nav a {\n  color: rgb(255, 255, 255);\n}\n.dashboard-nav-list {\n  margin: 7vh 0;\n}\nheader {\n  background-color: #db9024;\n}\n.brand-logo {\n  font-family: \"Nunito\", sans-serif;\n  font-weight: bold;\n  font-size: 20px;\n  display: flex;\n  color: #515151;\n  align-items: center;\n}\n.brand-logo img {\n  width: 15vh;\n  padding: 20px 0;\n}\n.dashboard-nav-item {\n  min-height: 56px;\n  padding: 8px 20px 8px 70px;\n  display: flex;\n  align-items: center;\n  letter-spacing: 0.02em;\n  transition: ease-out 0.5s;\n}\n.dashboard-nav-item i {\n  width: 36px;\n  font-size: 19px;\n  margin-left: -40px;\n}\n.dashboard-nav-item:hover {\n  background: rgba(100, 100, 100, 0.25);\n  color: #e78c15;\n}\n.nav-item-divider {\n  height: 1px;\n  margin: 1rem 0;\n  overflow: hidden;\n  background-color: rgba(236, 238, 239, 0.3);\n}\nion-icon {\n  cursor: pointer;\n  padding: 5px;\n}\n.container-icons {\n  text-align: center;\n}\n.contact-info {\n  text-align: center;\n  line-height: 17px;\n  margin: 20px 10px;\n  color: #dddddd;\n}\n\n/* @media (min-width: 992px) {\n    .dashboard-app {\n        margin-left: 238px;\n    }\n\n  .dashboard-compact .dashboard-app {\n    margin-left: 0;\n  }\n}\n\n@media (max-width: 768px) {\n  .dashboard-content {\n    padding: 15px 0px;\n  }\n}\n\n@media (max-width: 992px) {\n  .dashboard-nav {\n    display: none;\n    position: fixed;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    z-index: 1070;\n  }\n\n  .dashboard-nav.mobile-show {\n    display: block;\n  }\n}\n\n@media (max-width: 992px) {\n  .dashboard-nav header .menu-toggle {\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n  }\n}\n\n@media (min-width: 992px) {\n  .dashboard-toolbar {\n    left: 238px;\n  }\n\n    .dashboard-compact .dashboard-toolbar {\n        left: 0;\n    }\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35490,7 +35462,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\r\n  padding:4vh ;\r\n  width: 80vw;\r\n  margin: 20px auto 0 auto;\r\n  text-align: center;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 15px 1px #f3f3f3;\n}\n.header h2{\r\n    text-transform: uppercase;\r\n    color: #e78c15;\r\n    letter-spacing: 3px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\n  padding: 4vh;\n  width: 80vw;\n  margin: 20px auto 0 auto;\n  text-align: center;\n  background-color: white;\n  box-shadow: 1px 1px 15px 1px #f3f3f3;\n}\n.header h2 {\n  text-transform: uppercase;\n  color: #e78c15;\n  letter-spacing: 3px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

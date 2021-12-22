@@ -5,7 +5,7 @@
 <template>
   <div v-if="role == 'admin'">
     <Header
-      title="Bienvenue à votre page administration"
+      v-model:title="firstname"
       subtitle="Gérer vos entreprises et catalogue ici"
     />
     <AdminHome />
@@ -13,17 +13,16 @@
 
   <div v-else-if="role == 'manager'">
     <Header
-      title="Bienvenue à votre page de manager"
-      subtitle="Gérer vos membres"
+      v-model:title="firstname"
+      message="bienvenue"
+      accueil="sur votre page d'accueil"
+      subtitle="Gérer les membres de votre entreprise"
     />
     <CompanyHome />
   </div>
 
   <div v-else-if="role == 'member'">
-    <Header
-      title="Bienvenue à votre page de membre"
-      subtitle="Passez vos commandes"
-    />
+    <Header v-model:title="firstname" subtitle="Passez vos commandes" />
     <MembersDisplay />
   </div>
 
@@ -53,12 +52,15 @@ export default {
       productArray: [],
       role: "",
       id: "",
+      firstname: "",
     };
   },
   async mounted() {
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
     console.log("role", this.role);
+    this.firstname = getUser.data.first_name;
+    console.log("blabla", this.firstname);
     this.id = getUser.data.id;
     // console.log("user", this.id);
   },

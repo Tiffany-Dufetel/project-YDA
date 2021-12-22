@@ -33,11 +33,16 @@
             >Catalogue</router-link
           >
 
+          <!-- link to company's members -->
+          <router-link :to="'/entreprise/' + id" class="dashboard-nav-item"
+            >Membres de l'entreprise
+          </router-link>
+
           <!-- link to companies -->
           <router-link
             to="/entreprises"
             class="dashboard-nav-item"
-            v-if="isLoggedIn.value"
+            v-if="isLoggedIn.value && role == 'admin'"
             >Entreprises</router-link
           >
 
@@ -45,7 +50,7 @@
           <router-link
             to="/commandes"
             class="dashboard-nav-item"
-            v-if="isLoggedIn.value"
+            v-if="isLoggedIn.value && role == 'member'"
             >Commandes</router-link
           >
 
@@ -53,7 +58,7 @@
           <router-link
             to="/actualités"
             class="dashboard-nav-item"
-            v-if="isLoggedIn.value"
+            v-if="isLoggedIn.value && role == 'member'"
             >Actualités</router-link
           >
         </div>
@@ -99,8 +104,11 @@ export default {
     return {
       userToken: null,
       role: "",
+      companyId: "",
+      id: "",
     };
   },
+
   inject: ["isLoggedIn", "removeLoginStatus"],
 
   async mounted() {
@@ -109,6 +117,11 @@ export default {
 
     const getUser = await axios.get("/api/login");
     this.role = getUser.data.role;
+    this.id = getUser.data.company_id;
+    console.log("role", this.companyId);
+
+    const getCompanies = await axios.get("/api/company");
+    this.companies = getCompanies.data.data;
   },
 
   updated() {
@@ -294,7 +307,7 @@ header {
 
 .dashboard-nav-item:hover {
   background: rgba(100, 100, 100, 0.25);
-  color:#e78c15;
+  color: #e78c15;
 }
 
 .nav-item-divider {

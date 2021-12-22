@@ -11,12 +11,13 @@
         <p class="card-text">
           Gérer les membres qui peuvent accéder à des services et produits.
         </p>
-        <a @click="showMembers" class="card-link">Voir</a>
-        <a @click="memberAdd" class="card-link">Ajouter</a>
+        <router-link :to="'/entreprise/' + companyId" class="dashboard-nav-item"
+          >Gérer les membres
+        </router-link>
       </div>
     </div>
 
-    <!-- Profile card -->
+    <!--  Profile card
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Profil</h5>
@@ -25,7 +26,7 @@
       </div>
     </div>
 
-    <!-- Orders card -->
+     Orders card
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Commandes</h5>
@@ -34,14 +35,14 @@
       </div>
     </div>
 
-    <!-- News card -->
+     News card
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Actualités</h5>
         <p class="card-text">Vos actualités personalisées.</p>
         <a @click="news" class="card-link">Voir</a>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -51,6 +52,11 @@ export default {
   name: "CompanyHome",
   components: {
     Header,
+  },
+  data() {
+    return {
+      companyId: "",
+    };
   },
   methods: {
     profile() {
@@ -75,6 +81,8 @@ export default {
     console.log("role", this.role);
     this.id = getUser.data.id;
     console.log("ID", this.id);
+    this.companyId = getUser.data.company_id;
+
     // Loading of company information
     const getCompany = await axios.get("/api/company" + this.id);
     this.company = getCompany.data.role;
