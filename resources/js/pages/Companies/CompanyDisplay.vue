@@ -1,5 +1,6 @@
 <!--
 -- Company individual display page component
+REFRESH ON MEMBER ADD / DELETE
 -->
 
 <template>
@@ -7,6 +8,7 @@
     <!-- Loading of reactive data thanks to the mounted axios-->
     <Header v-model:title="company.name" subtitle="" />
   </div>
+  <BackButton />
   <div>
     <div class="mt-5">
       <div class="row">
@@ -130,6 +132,7 @@
 
 <script>
 import Header from "../../components/ui/Header.vue";
+import BackButton from "../../components/ui/buttons/BackButton.vue";
 import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
 import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
@@ -140,8 +143,10 @@ name: "adminNews",
   components: {
     Header,
     AddMember,
+    BackButton,
     MembersList,
     OrderDisplay,
+    BackButton,
   },
 
   props: {
@@ -170,6 +175,7 @@ name: "adminNews",
   async mounted() {
 
 
+
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
     console.log("response", response.data);
@@ -190,7 +196,6 @@ name: "adminNews",
     this.filterOrders = orders.filter(
       (order) => order.user.company_id == this.id
     );
-
 
     this.role = getUser.data.role;
     console.log("user", users);
@@ -219,7 +224,7 @@ name: "adminNews",
 
   methods: {
     goToUpdate() {
-      this.$router.push("/company/" + this.$route.params.id + "/edit");
+      this.$router.push("/entreprise/" + this.$route.params.id + "/modifier");
     },
     newsAdd() {
       this.$router.push({ name: "adminNewsAdd" });

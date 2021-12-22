@@ -4,51 +4,32 @@
 
 <template>
   <div>
-    <!-- développer affichage conditionnel ici -->
-    <div></div>
-
-    <!-- Presentation table for calendar -->
     <div class="table-responsive-md d-flex justify-content-center mt-4">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Lundi</th>
-            <th scope="col">Mardi</th>
-            <th scope="col">Mercredi</th>
-            <th scope="col">Jeudi</th>
-            <th scope="col">Vendredi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="company in companies" :key="company.id">
-            <!-- :value="company.id" -->
-            <td>
-              <!-- v-if="company.day === 'monday'" -->
-              Le Bocal Academy <br />
-              11h - 13h
-              {{ monday }}
-              <!-- {{ company.name }}<br />{{ company.time }} -->
-            </td>
-            <!-- <td v-else-if="company.day === 'tuesday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{tuesday}}
-            </td>
-            <td v-else-if="company.day === 'wednesday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{wednesday}}
-            </td>
-            <td v-else-if="company.day === 'thursday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{thursday}}
-            </td>
-            <td v-else-if="company.day === 'friday'">
-              {{ company.name }}<br />{{ company.time }}
-              {{friday}}
-            </td>
-            <div v-else></div> -->
-          </tr>
-        </tbody>
-      </table>
+      <!-- Day Table -->
+      <div
+        v-for="(dayLabel, day) in weekDays"
+        :key="day"
+        class="table-responsive-md d-flex justify-content-center mt-4"
+      >
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ dayLabel }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td
+                v-for="(appointment, index) in companiesPlanning[day]"
+                :key="index"
+              >
+                {{ appointment.name }}<br />{{ appointment.time }}
+              </td>
+              <td v-if="!companiesPlanning[day]">Aucun rendez-vous ce jour</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -59,6 +40,13 @@ export default {
   data() {
     return {
       companies: [],
+      weekDays: {
+        monday: "Lundi",
+        tuesday: "Mardi",
+        wednesday: "Mercredi",
+        thursday: "Jeudi",
+        friday: "Vendredi",
+      },
     };
   },
   // fetch the list of companies on view creation
@@ -66,16 +54,33 @@ export default {
     const companyList = await axios.get("/api/company");
     this.companies = companyList.data.data;
     // check that we have the data
-    console.log(this.companies);
     /* if (companyList.day === "lundi") {
-        
+
+
     } */
   },
   computed: {
-    monday() {
-      return this.company.day === "monday"
-        ? `${this.company.name} <br/> ${this.company.time}`
-        : "";
+    companiesPlanning() {
+      let planning = {};
+
+      this.companies.forEach((company) => {
+        if (!Array.isArray(planning[company.day])) {
+          planning[company.day] = [];
+        }
+
+        planning[company.day].push({ name: company.name, time: company.time });
+
+        if (!Array.isArray(planning[company.dayTwo])) {
+          planning[company.dayTwo] = [];
+        }
+
+        planning[company.dayTwo].push({
+          name: company.name,
+          time: company.time,
+        });
+      });
+
+      return planning;
     },
   },
 };

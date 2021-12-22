@@ -21,7 +21,7 @@
       <div class="card-body">
         <h5 class="card-title">Profil</h5>
         <p class="card-text">Voir et modifier vos détails.</p>
-        <a class="card-link">Voir</a>
+        <a @click="profile" class="card-link">Voir</a>
       </div>
     </div>
 
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     profile() {
-      this.$router.push({ name: "CompanyDisplay", params: { id: this.id } });
+      this.$router.push("/entreprise/" + this.company_id);
     },
     orderList() {
       this.$router.push({ name: "orders" });
@@ -68,6 +68,17 @@ export default {
     news() {
       this.$router.push({ name: "adminNews" });
     },
+  },
+  async mounted() {
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
+    console.log("role", this.role);
+    this.id = getUser.data.id;
+    console.log("ID", this.id);
+    // Loading of company information
+    const getCompany = await axios.get("/api/company" + this.id);
+    this.company = getCompany.data.role;
+    console.log("company:", this.company);
   },
 };
 </script>

@@ -6,31 +6,35 @@
   <div class="catalogue_container">
     <Header title="Catalogue" subtitle="Produits et services" />
     <BackButton />
-        <AddButton name="Ajouter Produit" @click="add"/>
+    <div v-if="role == 'admin'">
+      <AddButton name="Ajouter Produit" @click="add" />
+    </div>
     <br />
 
     <!-- Search box -->
     <input
-      v-model="searchKey"
+      v-model="searchKeyCatalogue"
       class="form-control mr-sm-2"
-      type="search"
+      type="text"
       placeholder="Rechercher...."
       aria-label="Search"
       autocomplete="off"
     />
     <br />
-    <div>
-      <span v-if="searchKey && filteredList.length == 1">
-        {{ filteredList.length }} résultat(s)</span
+    <div class="search-result">
+      <span v-if="searchKeyCatalogue && filteredListCatalogue.length == 1">
+        {{ filteredListCatalogue.length }} résultat(s)</span
       >
-      <span v-if="filteredList.length >= 2"></span>
+      <span v-if="filteredListCatalogue.length >= 2"></span>
     </div>
-    <div v-if="filteredList.length == 0">
-      <h3>Désolé</h3>
-      <p>Aucun résultat trouvé</p>
+
+    <div class="search-result" v-if="filteredListCatalogue.length == 0">
+        <h3>Désolé</h3>
+        <p>Aucun résultat trouvé</p>
     </div>
+
     <!-- Companies list -->
-    <table class="table table-bordered">
+    <table class="center-table">
       <thead>
         <tr>
           <th>Name</th>
@@ -38,30 +42,33 @@
           <th>type</th>
           <th>Catégorie</th>
           <th>Image</th>
+          <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="product in products" :key="product.id">
-          <td valign="middle">
-            {{ product.name }}
-          </td>
-          <td valign="middle">{{ product.description }}</td>
-          <td valign="middle">{{ product.type }}</td>
-          <td valign="middle">{{ product.category }}</td>
-          <td valign="middle">
-            <img :src="product.image" class="image_product" />
-          </td>
 
-          <td>
+      <tbody>
+        <tr v-for="product in filteredListCatalogue" :key="product.id">
+                    <td @click="link" valign="middle">{{ product.name }}</td>
+                    <td @click="displayCompany" valign="middle">{{ product.description }}</td>
+                    <td @click="displayCompany" valign="middle">{{ product.type }}</td>
+                    <td @click="displayCompany" valign="middle">{{ product.category }}</td>
+                    <td @click="displayCompany" valign="middle"><img :src="product.image" class="image_product" /></td>
+                    <td>
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualProduct', params: { id: product.id } }"
-                class="btn btn-primary"
+                class="btn-show"
                 >Voir
               </router-link>
-              <button class="btn btn-danger" @click="deleteProduct(product.id)">
-                Supprimer
-              </button>
+              <div v-if="role == 'admin'">
+
+                <button
+                  class="btn-delete"
+                  @click="deleteProduct(product.id)"
+                >
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+              </div>
             </div>
           </td>
         </tr>
@@ -88,31 +95,36 @@ export default {
   inject: ["checkRole", "whatRole"],
   data() {
     return {
-      products: [],
+      link: "/",
+      productArray: [],
       product: null,
       role: "",
-      searchKey: "",
+      searchKeyCatalogue: "",
     };
   },
 async mounted() {
     const getProducts = await axios.get("/api/product");
-    this.products = getProducts.data.data;
+    this.productArray = getProducts.data.data;
 
-    console.log("product", getProducts);
+
   },
   computed: {
     /** Search box */
-    filteredList() {
-      return this.products.filter((product) => {
+    filteredListCatalogue() {
+      return this.productArray.filter((product) => {
         return (
-          product.name.toLowerCase().includes(this.searchKey.toLowerCase()) ||
-          product.type.toLowerCase().includes(this.searchKey.toLowerCase()) ||
-          product.category.toLowerCase().includes(this.searchKey.toLowerCase())
+          product.name.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase()) ||
+          product.type.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase()) ||
+          product.category.toLowerCase().includes(this.searchKeyCatalogue.toLowerCase())
         );
       });
-    },
+    }
   },
   methods: {
+    displayCompany(){
+        console.log()
+        // this.$router.push("/catalogue" + id)
+    },
     /** Go to "add new item" page */
     add() {
       this.$router.push({ name: "adminProductAdd" });
@@ -120,7 +132,7 @@ async mounted() {
     /** Retrieve full list of companies from database */
     async retrieveProducts() {
       const getProducts = await axios.get("/api/product");
-      this.products = getProducts.data.data;
+      this.productArray = getProducts.data.data;
       console.log("product", this.products);
       console.log("store", this.$store);
     },
@@ -146,6 +158,10 @@ async mounted() {
   },
   async mounted() {
     this.retrieveProducts();
+    const getUser = await axios.get("/api/login");
+    this.role = getUser.data.role;
+    console.log("role", this.role);
+    this.id = getUser.data.id;
   },
 
   //   async beforeCreate(){
@@ -165,5 +181,80 @@ async mounted() {
 <style>
 .image_product {
   height: 50px;
+}
+
+.center-table{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table{
+    background-color: white;
+      border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+    width: auto;
+    margin-bottom: 30px;
+}
+
+th, td {
+  padding: 10px 25px;
+  width: 200px;
+}
+
+/* td{
+    cursor:pointer;
+}
+
+tr:hover{
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+} */
+
+tbody tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+thead{
+    background-color: #e78c15!important;
+    padding: 30px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 20px;
+}
+
+.btn-show{
+    background-color: white;
+    padding: 8px 20px 5px 20px;
+    border-radius: 5px;
+    border: 2px solid #e78c15;
+    color: #e78c15;
+}
+.btn-show:hover{
+    color: black;
+        border: 2px solid black;
+}
+
+.btn-delete{
+    border: none;
+    background-color: transparent;
+        padding: 8px 4px 5px 4px;
+
+}
+.catalogue_container input{
+    background-image: url('https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-8.png');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 40vh;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.search-result{
+    text-align: center;
 }
 </style>

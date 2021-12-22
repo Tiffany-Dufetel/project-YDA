@@ -9,6 +9,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Company;
 use App\Models\User;
+use Dotenv\Validator as DotenvValidator;
 use Validator;
 
 
@@ -30,6 +31,8 @@ class AuthController extends BaseController
 
     public function register(Request $request)
     {
+/*         $currentURL = url()->previous();
+
         $validator = Validator::make($request->all(), [
             // 'name' => 'required',
             // 'email' => 'required|email',
@@ -42,13 +45,13 @@ class AuthController extends BaseController
             return $this->handleError($validator->errors());
         }
 
-        $input = $request->all();
+        $input =$request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('LaravelSanctumAuth')->plainTextToken;
         $success['name'] =  $user->name;
         event(new Registered($user));
-        return $this->handleResponse($success, 'User successfully registered!');
+        return $this->handleResponse($success, 'User successfully registered!'); */
     }
 
 

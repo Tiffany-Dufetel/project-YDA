@@ -4,7 +4,7 @@
 
 <template>
   <div class="header">
-    <h3>{{ title }}</h3>
+    <h2>{{ title }}</h2>
     <h5>{{ subtitle }}</h5>
   </div>
 </template>
@@ -17,12 +17,20 @@ export default {
 </script>
 
 <style>
-/* .header {
-  background: #eeeeee;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 2px 0 0 10px #e78c15;
+.header {
+  padding:4vh ;
   width: 80vw;
-  margin: 75px auto 0 auto;
-} */
+  margin: 20px auto 0 auto;
+  text-align: center;
+  background-color: white;
+  -webkit-box-shadow: 1px 1px 15px 1px #f3f3f3;
+  box-shadow: 1px 1px 15px 1px #f3f3f3;
+
+}
+
+.header h2{
+    text-transform: uppercase;
+    color: #e78c15;
+    letter-spacing: 3px;
+}
 </style>
