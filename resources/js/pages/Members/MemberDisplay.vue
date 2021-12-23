@@ -3,17 +3,15 @@
 -->
 
 <template>
-  <div>
+            <Header/><br />
+  <div class="container">
     <!-- rendre le nom reactive -->
     <div v-for="(info, index) in userInfo" :key="index">
-      <!--       <Header
-        :title="info.company.name"
-        subtitle="Votre page de profil"
-      /><br /> -->
+
       <BackButton />
 
       <!-- Catalogue card -->
-      <div class="d-flex justify-content-center flex-wrap mt-3">
+      <!-- <div class="d-flex justify-content-center flex-wrap mt-3">
         <div class="card" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title">Catalogue</h5>
@@ -22,27 +20,31 @@
             <a @click="order" class="card-link">Commandez</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Profile -->
-      <div class="d-flex justify-content-center">
-        <div class="center col-md-5 user_info_container">
+    <div class="info-user-container">
+        <div class="info-user">
           <h3>{{ info.first_name }} {{ info.surname.toUpperCase() }}</h3>
           <u>Prénom:</u> {{ info.first_name }}<br />
           <u>Nom:</u> {{ info.surname.toUpperCase() }}<br />
           <u>Email:</u> {{ info.email }}<br />
           <u>Date de naissance:</u> {{ info.birthday }}<br /><br />
-        </div>
-      </div>
-      <p>
-        <i>
+
+                          <i>
           Si vous voulez modifier votre profil, veuillez contacter votre
           gestionnaire.
         </i>
+        </div>
+
+      </div>
+      <p>
+
       </p>
     </div>
     <br /><br />
 
+<div class="orders-container">
     <!-- List of orders -->
     <center><h1>Mes commandes</h1></center>
     <!-- <input
@@ -85,6 +87,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 
@@ -161,21 +164,23 @@ export default {
 </script>
 
 <style>
-/* .user_info_container{
-    border: 5px solid black;
-    border-radius: 10px;
-    padding: 20px;
+.info-user-container{
+    display: flex;
+    justify-content: center;
+    border: none;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    margin: 10px;
+    padding: 33px;
+    border-radius: 15px;
+    background-color: white;
+    height: 277px;
+    width: 487px;
 }
-
-.log {
-  background-color: #e78c15;
-  border-radius: 5px;
-  padding: 5px 20px;
-  border: 1px solid #e78c15;
-  color: white;
-}
-
-.table_margin{
-    margin-bottom: 500px !important;
+/*
+.info-user{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 } */
 </style>

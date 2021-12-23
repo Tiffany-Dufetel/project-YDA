@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div>
+    <div>
     <!-- make title responsive -->
     <Header title="Les actualités" subtitle="Les actualités récentes" />
     </div>
@@ -33,8 +33,10 @@
       <br />
       <br />
     </div>
+</div>
 
 </template>
+
 
 <script>
 import Header from "../../../components/ui/Header.vue";
@@ -105,4 +107,20 @@ export default {
 </script>
 
 <style>
+.info-news-container{
+    display: flex;
+}
+
+.info-new{
+    border: none;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    margin: 10px;
+    padding: 33px;
+    border-radius: 15px;
+    background-color: white;
+    height: 277px;
+    width: 487px;
+}
+
 </style>

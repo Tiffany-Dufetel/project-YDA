@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <Header title="Ajouter un produit ou service" subtitle="...." />
+  <Header title="Ajouter un produit ou service" subtitle="" />
   <BackButton />
   <div class="alert alert-success" v-show="success">
     Votre produit a bien été rajouté
@@ -209,12 +209,13 @@ select {
     justify-content: flex-start;
     align-items: center;
     letter-spacing: 3px;
-    font-size:20px;
+    font-size:17px;
     border: 1px solid transparent;
     border-radius: 10px;
     width: 450px;
-    box-shadow: 0.3em 0.3em 1em #acacac, -0.3em -0.3em 1em #dbdbdb;
-    padding: 30px;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    padding: 50px;
 
 }
 

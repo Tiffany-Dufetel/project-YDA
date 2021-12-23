@@ -55,8 +55,8 @@
           </td>
           <td valign="middle">{{ company.number }}</td>
           <td valign="middle">{{ company.member_count }}</td>
-          <td valign="middle">{{ company.day }} - {{ company.time }}</td>
-          <td valign="middle">{{ company.dayTwo }} - {{ company.timeTwo }}</td>
+          <td valign="middle">{{ company.day }} <br>{{ company.time }}</td>
+          <td valign="middle">{{ company.dayTwo }} <br> {{ company.timeTwo }}</td>
           <td valign="middle">
             <div class="btn-group" role="group">
               <router-link

@@ -9,27 +9,28 @@
     <BackButton />
 
     <!-- Product card -->
-    <div >
-      <div class="card" style="width: 25rem">
-        <img
+  <div class="d-flex justify-content-center flex-wrap mt-3">
+      <div class="card-container" style="width: 25rem">
+        <!-- <img
           src="productArray.image"
           class="card-img-top image_product"
           alt="product.description"
-        />
+        /> -->
         <div class="card-body">
           <h5 class="card-title">{{ productArray.name }}</h5>
           <p class="card-text">
             {{ productArray.description }}
             <i>{{ productArray.type }} / {{ productArray.category }}</i>
           </p>
+            <div class="buttons" v-if="role == 'admin'">
+                <button @click="edit" class="card-link">Modifier</button>
+            </div>
         </div>
       </div>
     </div>
 
     <!-- Button to modify item if role is admin -->
-    <div v-if="role == 'admin'">
-      <button @click="edit" class="btn btn-primary">Modifier</button>
-    </div>
+
     <!-- Button to order item if role is member -->
     <div v-if="role == 'member'">
       <button @click="order" class="btn btn-primary">Commandez</button>

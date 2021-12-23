@@ -7,22 +7,22 @@ REFRESH ON MEMBER ADD / DELETE
   <div class="catologue_container">
     <!-- Loading of reactive data thanks to the mounted axios-->
     <Header v-model:title="company.name" subtitle="" />
+    <BackButton />
   </div>
-  <BackButton />
-  <div>
-    <div class="mt-5">
-      <div class="row">
-        <div class="col">
-          <p>Siret : {{ company.siret }}</p>
 
-          <p>
-            Adresse : {{ company.adress }} - {{ company.postcode }}
-            {{ company.city }}
-          </p>
+  <div class="container">
 
-          <p>Numéro de téléphone : {{ company.number }}</p>
+    <div class="info-company-container">
+        <div class="info-company">
+            <p>
+                <b><u>Siret :</u></b> {{ company.siret }}<br>
+                <b><u>Adresse :</u></b> {{ company.adress }} - {{ company.postcode }} {{ company.city }}<br>
+                <b><u>Numéro de téléphone :</u></b> {{ company.number }}
+            </p>
+
+            <button class="btn-show" @click="goToUpdate">Modifier</button>
         </div>
-        <div class="col">
+        <div class="map">
           <iframe
             class="border border-warning shadow p-3 mb-5 bg-white rounded"
             width="600"
@@ -35,86 +35,88 @@ REFRESH ON MEMBER ADD / DELETE
           ></iframe
           ><br />
         </div>
-      </div>
     </div>
-  </div>
-  <button class="btn btn-warning" @click="goToUpdate">modifier</button>
-  <button class="btn btn-dark" @click="isHidden = !isHidden">
-    {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
-  </button>
+</div>
 
-  <!--  Add members -->
-  <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
-  <div v-if="role == 'admin'">
-    <!-- Orders display -->
+    <div class="buttons-show-info">
+      <button @click="isHidden = !isHidden">
+        {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
+      </button>
+
+    <button @click="newsAdd">Ajouter une actualité</button>
+
+    </div>
+
+      <!--  Add members -->
+      <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
+
+      <!-- Orders display -->
     <table class="center-table">
-      <thead>
-        <tr>
-          <th>Nom de la commande</th>
-          <th>Utilisateur</th>
+        <thead>
+          <tr>
+            <th>Nom de la commande</th>
+            <th>Utilisateur</th>
 
-          <th>Statut</th>
-          <th>Date de commande</th>
-          <th>Date estimée</th>
-          <th>Commentaire</th>
-          <th>PDF</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <OrderDisplay
-          v-for="(order, index) in filterOrders"
-          :key="index"
-          :id="order.id"
-          :name="order.product.name"
-          :user_surname="order.user.surname"
-          :user_firstname="order.user.first_name"
-          :status="order.status"
-          :date_order="order.date_order"
-          :date_delivery="order.date_delivery"
-          :comment="order.comment"
-          :pdf="order.pdf"
-        />
-      </tbody>
-    </table>
-  </div>
-  <!-- Member list display -->
-  <table class="center-table">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Date de naissance</th>
-        <th>Email</th>
-        <th>Rôle</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <MembersList
-        v-for="(user, index) in filterUsers"
-        :key="index"
-        :id="user.id"
-        :first_name="user.first_name"
-        :surname="user.surname"
-        :birthday="user.birthday"
-        :email="user.email"
-        :role="user.role"
-      />
-    </tbody>
-  </table>
+            <th>Statut</th>
+            <th>Date de commande</th>
+            <th>Date estimée</th>
+            <th>Commentaire</th>
+            <!-- <th>PDF</th> -->
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <OrderDisplay
+            v-for="(order, index) in filterOrders"
+            :key="index"
+            :id="order.id"
+            :name="order.product.name"
+            :user_surname="order.user.surname"
+            :user_firstname="order.user.first_name"
+            :status="order.status"
+            :date_order="order.date_order"
+            :date_delivery="order.date_delivery"
+            :comment="order.comment"
+          />
+        </tbody>
 
-  <br />
+      </table>
+      <!-- Member list display -->
+      <table class="center-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <MembersList
+            v-for="(user, index) in filterUsers"
+            :key="index"
+            :id="user.id"
+            :first_name="user.first_name"
+            :surname="user.surname"
+            :birthday="user.birthday"
+            :email="user.email"
+            :role="user.role"
+          />
+        </tbody>
+      </table>
+<br />
 
-  <div>
-    <div v-if="role == 'admin'">
-      <p>______</p>
-
-      <button @click="newsAdd">Ajouter une actualité</button>
-
-      <br />
-      <p>______</p>
-
+<div>
+    <h1><u>Les actualités récentes:</u></h1>
+    <br/>
+    <div v-for="news in newsArray" :key="news.id">
+      <h3>
+        <strong> {{ news.title }} </strong>
+      </h3>
+      <p>{{ news.text }}</p>
+      <i> {{ new Date(news.created_at).toLocaleString() }} </i>
       <br />
       <br />
 
@@ -133,6 +135,9 @@ REFRESH ON MEMBER ADD / DELETE
       </div>
     </div>
   </div>
+
+
+
 </template>
 
 <script>
@@ -142,6 +147,7 @@ import AddMember from "../../components/ui/forms/AddMember.vue";
 import MembersList from "../../components/Members/MembersList.vue";
 import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
 import axios from "axios";
+
 export default {
   name: "CompanyDisplay",
   name: "adminNews",
@@ -220,6 +226,9 @@ export default {
   },
 
   methods: {
+    toggleModale() {
+      this.revele = !this.revele;
+    },
     goToUpdate() {
       this.$router.push("/entreprise/" + this.$route.params.id + "/modifier");
     },
@@ -264,4 +273,45 @@ export default {
 </script>
 
 <style>
+.info-company-container{
+    display: flex;
+    justify-content: center;
+    border: none;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: white;
+    height: 347px;
+}
+
+.info-company{
+    flex-direction: column;
+    height: 328px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map{
+    padding: 30px;
+}
+
+.buttons-show-info{
+    text-align: center;
+}
+
+.buttons-show-info button{
+    background-color: white;
+    padding: 8px 20px 5px 20px;
+    border-radius: 5px;
+    border: 2px solid #e78c15;
+    position: relative;
+    margin: 20px;
+    top: 30;
+
+    color: #e78c15;
+}
 </style>

@@ -4,7 +4,7 @@
 
 <template>
   <div class="catalogue_container">
-    <Header title="Catalogue" subtitle="Produits et services" />
+    <Header title="Catalogue" subtitle="Liste des produits et services" />
     <BackButton />
     <div v-if="role == 'admin'">
       <AddButton name="Ajouter Produit" @click="add" />

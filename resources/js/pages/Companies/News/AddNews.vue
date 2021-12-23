@@ -3,30 +3,29 @@
 -->
 
 <template>
-  <div>
+<div>
     <!-- make title responsive -->
     <Header title="les actualités" subtitle="Ajouter les actualités" />
     <BackButton />
-    <form method="POST" @submit.prevent="addNews">
-      <!-- Specific company choice -->
 
-
-      <label for="title">Titre de l'actualité</label>
-      <br />
-      <input type="text" id="title" name="title" v-model="title" />
-      <br />
-      <label for="text">Actualité</label>
-      <br />
-      <textarea
-        name="text"
-        id="text"
-        v-model="text"
-        cols="90"
-        rows="4"
-      ></textarea>
-      <SubmitButton name="Ajouter" />
-    </form>
-  </div>
+    <div class="container">
+        <form class="formContent" method="POST" @submit.prevent="addNews">
+            <!-- Specific company choice -->
+            <label for="title">Titre de l'actualité</label>
+            <input type="text" id="title" name="title" v-model="title" class="inputText marginBot"/>
+            <label for="text">Actualité</label>
+            <textarea
+                class="inputText marginBot"
+                name="text"
+                id="text"
+                v-model="text"
+                cols="90"
+                rows="4"
+            ></textarea>
+            <SubmitButton name="Ajouter" />
+        </form>
+    </div>
+</div>
 </template>
 
 
