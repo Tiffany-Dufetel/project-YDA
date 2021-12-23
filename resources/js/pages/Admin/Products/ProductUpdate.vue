@@ -12,20 +12,20 @@ BACK BUTTON
     <div class="alert alert-success" v-show="success">
       Votre item a bien été mis à jour
     </div>
-
-    <form>
-      <div class="form-group col-md-10">
+    <div class="container">
+    <form class="formContent" method="POST" @submit.prevent>
         <label for="name">Nom</label>
+
         <input
-          v-model="name"
+          v-model="productInfo.name"
           id="name"
           type="text"
           name="name"
           required
           autocomplete="name"
+          class="inputText marginBot"
           autofocus
         />
-      </div>
 
       <div v-show="errors && errors.name">
         <p
@@ -37,17 +37,16 @@ BACK BUTTON
         </p>
       </div>
 
-      <div class="form-group col-md-10">
         <label for="description">Description</label>
         <input
-          v-model="description"
+          v-model="productInfo.description"
           id="description"
           type="text"
           name="description"
+          class="inputText marginBot"
           required
           autocomplete="on"
         />
-      </div>
 
       <div v-show="errors && errors.description">
         <p
@@ -59,20 +58,18 @@ BACK BUTTON
         </p>
       </div>
 
-      <div class="form-group col-md-10">
         <label for="type">Type</label>
         <select
-          v-model="type"
+          v-model="productInfo.type"
           name="type"
           id="type"
-          class="form-control"
+          class="inputText marginBot"
           required="true"
         >
           <option selected>choisir le type...</option>
           <option value="service">service</option>
           <option value="produit">produit</option>
         </select>
-      </div>
 
       <div v-show="errors && errors.type">
         <p
@@ -84,13 +81,12 @@ BACK BUTTON
         </p>
       </div>
 
-      <div class="form-group col-md-10">
         <label for="category">Categorie</label>
         <select
-          v-model="category"
+          v-model="productInfo.category"
           name="category"
           id="category"
-          class="form-control"
+          class="inputText marginBot"
           required="true"
         >
           <option selected>choisir la catégorie...</option>
@@ -101,7 +97,6 @@ BACK BUTTON
           <option value="quotidien">quotidien</option>
           <option value="coffret">coffret</option>
         </select>
-      </div>
 
       <div v-show="errors && errors.category">
         <p
@@ -112,18 +107,18 @@ BACK BUTTON
           {{ error }}
         </p>
       </div>
-
+<!--
       <div class="form-group col-md-10">
-        <label>Image</label>
+        <label>Image</label> -->
         <!-- MOST IMPORTANT - SEE "ref" AND "@change" PROPERTIES -->
-        <input
+        <!-- <input
           type="file"
           class="custom-file-input"
           id="customFile"
           ref="file"
           @change="handleFileObject()"
         />
-      </div>
+      </div> -->
 
       <div v-show="errors && errors.image">
         <p
@@ -137,60 +132,48 @@ BACK BUTTON
 
       <SubmitButton @click="productUpdate" name="Ajouter" />
     </form>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "../../../components/ui/Header.vue";
 import SubmitButton from "../../../components/ui/buttons/SubmitButton.vue";
+import BackButton from "../../../components/ui/buttons/BackButton.vue"
+
 export default {
   name: "itemUpdate",
   components: {
     Header,
     SubmitButton,
+    BackButton,
   },
 
   data() {
     return {
       productInfo: {},
-    //   formData: {},
-      name: "",
-      type: "",
-      description: "",
-      category: "",
-      image: null,
+    //   image: null,
       success: false,
       errors: {},
     };
   },
 
   methods: {
-    productUpdate(event) {
-      event.preventDefault();
-      let formData = new FormData();
-      formData.append("image", this.image);
+    productUpdate() {
+    //   event.preventDefault();
+    //   let formData = new FormData();
+    //   formData.append("image", this.image);
 
-      _.each(this.formData, (value, key) => {
-        formData.append(key, value);
-      });
+    //   _.each(this.formData, (value, key) => {
+    //     formData.append(key, value);
+    //   });
 
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
-          .put("/api/product/" + this.$route.params.id,{
-            name: this.name,
-            type: this.type,
-            description: this.description,
-            category: this.category,
-            // image: this.image,
-            _method: "put",
+          .put("/api/product/" + this.$route.params.id, this.productInfo,{
           })
           .then((res) => {
-            (this.name = ""),
-              (this.type = ""),
-              (this.description = ""),
-              (this.category = ""),
-              (this.image = ""),
-              (this.success = true);
+            this.success = true;
           })
           .catch((error) => {
             if (error.response.status == 422) {
@@ -209,7 +192,7 @@ export default {
   async mounted() {
     const response = await axios.get("/api/product/" + this.$route.params.id);
     this.productInfo = response.data;
-    console.log("abc", this.productInfo);
+    console.log('chiroahroa', this.productInfo)
   },
 };
 </script>

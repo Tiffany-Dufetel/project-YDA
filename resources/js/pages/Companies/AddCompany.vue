@@ -9,18 +9,22 @@
       subtitle="Tapez le SIRET afin de pré remplir"
     />
     <BackButton />
+<div class="container">
 
-    <form method="PUT" @submit.prevent>
+    <form class="contentForm" method="PUT" @submit.prevent>
+        <div class="formContent">
       <!-- Siret number to use government data -->
-      <label for="siret">Siret</label><br />
+      <label for="siret">Siret</label>
       <input
         type="text"
         id="siret"
         name="siret"
         v-model="siret"
+        placeholder="Saisissez un siret et pressez 'Entrer'"
+        class="inputText marginBot"
         v-on:keypress.enter="siretSearch"
         @keydown.enter.prevent="siretSearch"
-      /><br />
+      />
 
       <div v-show="errors && errors.siret">
         <p
@@ -32,8 +36,8 @@
         </p>
       </div>
 
-      <label for="name">Dénomination social</label><br />
-      <input type="text" id="name" name="name" v-model="name" /><br />
+      <label for="name">Dénomination social</label>
+      <input class="inputText marginBot" type="text" id="name" name="name" v-model="name" />
 
       <div v-show="errors && errors.name">
         <p
@@ -45,8 +49,8 @@
         </p>
       </div>
 
-      <label for="adress">Adresse</label><br />
-      <input type="text" id="adress" name="adress" v-model="adress" /><br />
+      <label for="adress">Adresse</label>
+      <input class="inputText marginBot" type="text" id="adress" name="adress" v-model="adress" />
 
       <div v-show="errors && errors.adress">
         <p
@@ -58,13 +62,14 @@
         </p>
       </div>
 
-      <label for="postCode">Code postal</label><br />
+      <label for="postCode">Code postal</label>
       <input
         type="text"
         id="postCode"
         name="postCode"
+        class="inputText marginBot"
         v-model="postcode"
-      /><br />
+      />
 
       <div v-show="errors && errors.postcode">
         <p
@@ -76,8 +81,8 @@
         </p>
       </div>
 
-      <label for="city">Ville</label><br />
-      <input type="text" id="city" name="city" v-model="city" /><br />
+      <label for="city">Ville</label>
+      <input class="inputText marginBot" type="text" id="city" name="city" v-model="city" />
 
       <div v-show="errors && errors.city">
         <p
@@ -88,23 +93,26 @@
           {{ error }}
         </p>
       </div>
+      </div>
+      <div class="formContent">
 
-      <label for="number">Numéro de contact</label><br />
-      <input type="number" id="number" name="number" v-model="number" /><br />
+      <label for="number">Numéro de contact</label>
+      <input class="inputText marginBot" type="number" id="number" name="number" v-model="number" />
 
-      <label for="member_count">Nombre d'employés</label><br />
+      <label for="member_count">Nombre d'employés</label>
       <input
         type="number"
         id="member_count"
         name="member_count"
+        class="inputText marginBot"
         v-model="member_count"
-      /><br />
+      />
 
       <!-- Preferable day and time ONE -->
       <label for="day">Jour et creneau horaire préféré 1</label>
-      <div class="form-group row">
+      <div >
         <div class="col-xs-3">
-          <select v-model="day" name="day" id="day" class="form-control">
+          <select class="inputText marginBot" v-model="day" name="day" id="day">
             <option selected>choisir le jour...</option>
             <option value="monday">Lundi</option>
             <option value="tuesday">Mardi</option>
@@ -115,7 +123,7 @@
         </div>
         <div class="col-xs-2">
           <label for="time">Créneau de passage</label>
-          <select v-model="time" name="time" id="time" class="form-control">
+          <select class="inputText marginBot" v-model="time" name="time" id="time">
             <option selected>Creneau...</option>
             <option value="09:00 - 11:00">9h - 11h</option>
             <option value="11:00 - 13:00">11h - 13h</option>
@@ -127,13 +135,14 @@
 
       <!-- Preferable day and time TWO -->
       <label for="dayTwo">Jour et creneau horaire préféré 2 </label>
-      <div class="form-group row">
+      <div >
         <div class="col-xs-3">
           <select
             v-model="dayTwo"
             name="dayTwo"
             id="dayTwo"
-            class="form-control"
+            class="inputText marginBot"
+
           >
             <option selected>choisir le jour...</option>
             <option value="monday">Lundi</option>
@@ -149,7 +158,8 @@
             v-model="timeTwo"
             name="timeTwo"
             id="timeTwo"
-            class="form-control"
+            class="inputText marginBot"
+
           >
             <option selected>Creneau...</option>
             <option value="09:00 - 11:00">9h - 11h</option>
@@ -162,7 +172,9 @@
 
       <!--<button type="submit">Ajouter</button>-->
       <SubmitButton name="Ajouter" @click="addCompany" />
+      </div>
     </form>
+    </div>
   </div>
 </template>
 
@@ -261,5 +273,65 @@ export default {
 <style scoped>
 select {
   width: 150px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.formContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    letter-spacing: 4px;
+    font-size:20px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    width: 550px;
+    box-shadow: 0.3em 0.3em 1em #acacac, -0.3em -0.3em 1em #dbdbdb;
+    padding: 30px;
+    margin-right: 70px;
+}
+
+.marginTop{
+    margin-top: 15px;
+}
+
+.marginBot{
+    margin-bottom: 15px;
+}
+
+.inputText{
+    border-radius: 10px;
+    height: 2.5rem;
+    outline: none;
+    border: 1px solid black;
+    width: 450px;
+    color: #333333;
+
+}
+
+.inputText:focus{
+    border: 2px solid #e78c15;
+    background-color: #fafafa;
+}
+.contentForm{
+    display: flex;
+
+}
+
+@media only screen and (max-width: 1400px){
+    .contentForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formContent{
+    margin-bottom: 30px;
+}
 }
 </style>

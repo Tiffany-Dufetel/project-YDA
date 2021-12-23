@@ -72,7 +72,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return Order::where('id', $id)->get();
+        return Order::where('id', $id)->first();
     }
 
     /**
@@ -96,12 +96,34 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $date = date('Y-m-d');
+        $user_id = Auth::user()->id;
+
         $order = Order::find($id);
-        $order->update($request->all());
+
+        $request->validate([]);
+
+        $order->status = $request->status;
+        $order->date_order = $date;
+        $order->date_delivery = $request->date_delivery;
+        $order->products_id = $request->products_id;
+        $order->user_id = $user_id;
+
         $order->save();
 
-        return redirect()->back()
-            ->with('success', 'Your order has been modified');;
+        if ($order) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+
+        return response()->json($data);
     }
 
     /**

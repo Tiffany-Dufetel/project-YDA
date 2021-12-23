@@ -7,16 +7,16 @@
     <!-- rendre le nom reactive -->
     <Header title="Commandez ici " subtitle="Nous vous contacterons en suite" />
     <BackButton />
-    <div class="d-flex justify-content-center">
-      <form method="POST" @submit.prevent="addOrder">
+    <div class="container">
+      <form class="formContent" method="POST" @submit.prevent="addOrder">
         <!-- product/service choice -->
-        <div class="form-group col-md-4">
-          <label for="products_id">Choisir votre service ou </label>
+        <div >
+          <label for="products_id">Choisissez votre service/produit </label>
           <select
             v-model="products_id"
             name="products_id"
             id="products_id"
-            class="form-control"
+            class="inputText marginBot"
             required="true"
           >
             <option v-for="product in productArray" :key="product.id">
@@ -27,25 +27,25 @@
         </div>
 
         <!-- comment - preferred delivery dates -->
-        <div class="form-group col-md-4">
+        <div >
           <label for="comment"
-            >Veuillez nous définir le jour que vous préferez</label
+            >Veuillez choisir le jour de livraison</label
           >
-          <p>A priori, nous passons à votre entreprise le jeudi ou vendredi.</p>
 
           <input
             type="date"
             id="date_delivery"
             name="date_delivery"
             v-model="date_delivery"
+            class="inputText marginBot"
             min="2022-01-01"
             max="2022-12-31"
           />
         </div>
 
-        <div class="form-group col-md-4">
+        <div >
             <label for="comment">Commentaires</label>
-            <input v-model="comment" type="text" name="comment" id="comment">
+            <input class="inputText marginBot" v-model="comment" type="text" name="comment" id="comment">
         </div>
         <SubmitButton name="Envoyer demande" />
       </form>
@@ -104,5 +104,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.formContent{
+    width: 550px;
+}
+
+.inputText{
+    width: 450px;
+}
 </style>

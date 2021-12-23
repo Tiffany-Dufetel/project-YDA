@@ -14,10 +14,10 @@ BACK BUTTON
     </div>
 
     <form method="POST" @submit.prevent >
-
       <!-- Siret number to use government data -->
       <label for="siret">Siret</label><br />
       <input type="text" id="siret" name="siret" v-model="companyInfo.siret" /><br />
+{{companyInfo.siret}}
 
       <div v-show="errors && errors.siret">
         <p
@@ -119,6 +119,30 @@ BACK BUTTON
         </div>
       </div>
 
+    <label for="day">Jour et creneau horaire préféré 2</label>
+      <div class="form-group row">
+        <div class="col-xs-3">
+          <select v-model="companyInfo.dayTwo" name="day" id="day" class="form-control">
+            <option selected>choisir le jour...</option>
+            <option value="monday">Lundi</option>
+            <option value="tuesday">Mardi</option>
+            <option value="wednesday">Mercredi</option>
+            <option value="thursday">Jeudi</option>
+            <option value="friday">Vendredi</option>
+          </select>
+        </div>
+        <div class="col-xs-2">
+          <label for="time">Créneau de passage</label>
+          <select v-model="companyInfo.timeTwo" name="time" id="time" class="form-control">
+            <option selected>Creneau...</option>
+            <option value="09:00 - 11:00">9h - 11h</option>
+            <option value="11:00 - 13:00">11h - 13h</option>
+            <option value="13:00 - 15:00">13h - 15h</option>
+            <option value="15:00 - 17:00">15h - 17h</option>
+          </select>
+        </div>
+      </div>
+
       <!--<button type="submit">Ajouter</button>-->
       <SubmitButton name="Ajouter" @click="updateCompany" />
 
@@ -139,15 +163,6 @@ export default {
   data() {
     return {
       companyInfo: {},
-      infos:[],
-      siret: "",
-      name: "",
-      adress: "",
-      postcode: "",
-      city: "",
-      member_count: "",
-      day: "",
-      time: "",
       success: false,
       errors: {},
     };
@@ -176,6 +191,7 @@ export default {
   async mounted() {
     const response = await axios.get("/api/company/" + this.$route.params.id);
     this.companyInfo = response.data;
+    console.log('frgrgrz',this.companyInfo)
   },
 };
 </script>

@@ -2,12 +2,7 @@
   <!-- member list filtered by company id-->
 
   <tr>
-    <td valign="middle">
-      <router-link
-        :to="{ name: 'individualMember', params: { id: this.id } }"
-        >{{ first_name }}</router-link
-      >
-    </td>
+    <td valign="middle">{{ first_name }}</td>
     <td valign="middle">{{ surname }}</td>
     <td valign="middle">{{ birthday }}</td>
     <td valign="middle">{{ email }}</td>
@@ -15,11 +10,16 @@
 
     <td>
       <div class="btn-group" role="group">
-        <button class="btn btn-danger" @click="deleteMember(this.id)">
-          Effacer
+        <router-link
+            :to="{ name: 'individualMember', params: { id: this.id } }"
+            class="btn-show"
+            >Voir
+        </router-link>
+        <button class="btn-show" @click="goToUpdate">Modifier</button>
+        <!-- <button class="btn btn-primary" @click="verify">Vérifie</button> -->
+        <button class="btn-delete" @click="deleteMember(this.id)">
+            <ion-icon name="trash"></ion-icon>
         </button>
-        <button class="btn btn-primary" @click="goToUpdate">Modifier</button>
-        <button class="btn btn-primary" @click="verify">Vérifie</button>
       </div>
     </td>
   </tr>
@@ -67,7 +67,7 @@ export default {
     /** Delete a specific member */
     deleteMember(id) {
       if (confirm("Etes-vous sur d'effacer ce membre ?")) {
-            
+
         axios
           .delete(`http://127.0.0.1:8000/api/user/${id}`)
           .then(function (response) {

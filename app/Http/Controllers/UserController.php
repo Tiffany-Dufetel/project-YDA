@@ -44,7 +44,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $currentURL = url()->previous();
-/*         $validator = Validator::make($request->all(), [
+        /*         $validator = Validator::make($request->all(), [
             // 'name' => 'required',
             // 'email' => 'required|email',
             // 'password' => 'required',
@@ -52,7 +52,7 @@ class UserController extends Controller
             // 'first_name' => 'required',
         ]);
  */
-/*         if ($validator->fails()) {
+        /*         if ($validator->fails()) {
             return $this->handleError($validator->errors());
         }
  */
@@ -71,7 +71,19 @@ class UserController extends Controller
         $success['token'] =  $user->createToken('LaravelSanctumAuth')->plainTextToken;
         $success['name'] =  $user->name;
         event(new Registered($user));
-        return $this->handleResponse($success, 'User successfully registered!');
+
+        if ($user) {
+            $data = [
+                'status' => '1',
+                'msg' => 'success'
+            ];
+        } else {
+            $data = [
+                'status' => '0',
+                'msg' => 'fail'
+            ];
+        }
+        return response()->json($data);
     }
 
     /**
@@ -175,11 +187,11 @@ class UserController extends Controller
         return response()->json($data);
     }
 
-    public function resetPassword(Request $request, $id){
+    public function resetPassword(Request $request, $id)
+    {
         //dd($request->input());
         $user = User::find($id);
         $user->password = Hash::make($request->password);
         $user->save();
-
     }
 }

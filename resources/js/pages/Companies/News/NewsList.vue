@@ -3,38 +3,33 @@
 -->
 
 <template>
-  <div>
+    <div>
     <!-- make title responsive -->
     <Header title="Les actualités" subtitle="Les actualités récentes" />
-    <br />
-    <div>
-      Pour la société n° {{ id }} qui s'appelle {{ company.name }} vous avez ces
-      YD'Actualités
     </div>
+    <br />
+
+
     <BackButton />
-    <p>______</p>
-    <button @click="newsAdd">Ajouter une actualité</button>
-    <br />
-    <p>______</p>
-    <br />
-    <br />
-    <div v-for="news in newsArray" :key="news.id">
-      <h2>
-        <strong> {{ news.title }} </strong>
-      </h2>
-      <p>{{ news.text }}</p>
-      <i> {{ new Date(news.created_at).toLocaleString() }} </i>
-      <br />
-      <button class="btn btn-danger" @click="deleteActuality(news.id)">
-        Effacer l'actualité
-      </button>
-      <br />
-      <br />
-      <br />
-      <br />
+<div class="info-news-container">
+    <div  class="info-new" v-for="news in newsArray" :key="news.id">
+            <h2>
+                <strong> {{ news.title }} </strong>
+            </h2>
+            <p>{{ news.text }}<br>
+                <i> {{ new Date(news.created_at).toLocaleString() }} </i>
+            </p>
+
+            <br />
+
+            <button class="btn btn-danger" @click="deleteActuality(news.id)">
+                Effacer l'actualité
+            </button>
     </div>
-  </div>
+</div>
+
 </template>
+
 
 <script>
 import Header from "../../../components/ui/Header.vue";
@@ -49,28 +44,38 @@ export default {
 
   data() {
     return {
-      id: 1,
-      company: {},
+
       newsArray: [],
+      companies: [],
+
     };
   },
+
+  async mounted() {
+    //We are loading the company display thanks to the ID;
+     const getCompany = await axios.get("/api/company");
+    this.companies = getCompany.data.data;
+
+
+  },
+
+
+
   methods: {
-    newsAdd() {
-      this.$router.push({ name: "adminNewsAdd" });
-    },
+
     async retrieveActuality() {
-      const response = await axios.get("/api/company/" + this.id, {
+      const response = await axios.get("/api/company/", {
         headers: {
           Authorization: "bearer " + localStorage.getItem("userToken"),
         },
       });
-
-      console.log(response.data);
+        console.log(this.companies);
+      //console.log(response.data);
       this.company = response.data;
 
       const responseNews = await axios.get("/api/news");
       this.newsArray = responseNews.data;
-      console.log(this.newsArray);
+      console.log("NEWS",this.newsArray);
     },
     async refreshList() {
       this.retrieveActuality();
@@ -94,9 +99,26 @@ export default {
   },
   mounted() {
     this.retrieveActuality();
+    console.log(this.companies);
   },
 };
 </script>
 
 <style>
+.info-news-container{
+    display: flex;
+}
+
+.info-new{
+    border: none;
+    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+    box-shadow: 1px 1px 15px 1px #dddddd;
+    margin: 10px;
+    padding: 33px;
+    border-radius: 15px;
+    background-color: white;
+    height: 277px;
+    width: 487px;
+}
+
 </style>
