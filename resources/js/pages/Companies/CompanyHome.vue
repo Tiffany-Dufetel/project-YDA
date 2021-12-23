@@ -65,7 +65,7 @@ export default {
     this.id = getUser.data.id;
     console.log("ID", this.id);
     // Loading of company information
-    const getCompany = await axios.get("/api/company" + this.id);
+    const getCompany = await axios.get("/api/company/" + this.id);
     this.company = getCompany.data.role;
     console.log("company:", this.company);
   },
