@@ -97,7 +97,7 @@
       <div class="formContent">
 
       <label for="number">Numéro de contact</label>
-      <input class="inputText marginBot" type="number" id="number" name="number" v-model="number" />
+      <input class="inputText marginBot" type="text" id="number" name="number" v-model="number" />
 
       <label for="member_count">Nombre d'employés</label>
       <input

@@ -23001,7 +23001,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this.companies = companyList.data.data; // check that we have the data
 
               /* if (companyList.day === "lundi") {
-                } */
+                  } */
 
             case 4:
             case "end":
@@ -27900,7 +27900,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors && $data.errors.city]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "inputText marginBot",
-    type: "number",
+    type: "text",
     id: "number",
     name: "number",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
@@ -35823,7 +35823,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-dcb0f044] {\n  width: 70%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-dcb0f044] {\r\n  width: 70%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35895,7 +35895,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.marginBotXL{\n    margin-bottom: 30px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.marginBotXL{\r\n    margin-bottom: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
