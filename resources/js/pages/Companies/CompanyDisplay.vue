@@ -37,7 +37,9 @@ REFRESH ON MEMBER ADD / DELETE
         </div>
       </div>
 
-      <button class="btn btn-warning" @click="goToUpdate">modifier</button>
+      <div class="adminModify" v-if="role == 'admin'">
+        <button class="btn btn-warning" @click="goToUpdate">modifier</button>
+      </div>
       <button class="btn btn-dark" @click="isHidden = !isHidden">
         {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
       </button>
@@ -46,35 +48,37 @@ REFRESH ON MEMBER ADD / DELETE
       <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
 
       <!-- Orders display -->
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Nom de la commande</th>
-            <th>Utilisateur</th>
+      <div class="adminModify" v-if="role == 'admin'">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nom de la commande</th>
+              <th>Utilisateur</th>
 
-            <th>Statut de la commande</th>
-            <th>Date de réservation de la commande</th>
-            <th>Date estimée</th>
-            <th>Commentaire</th>
-            <th>PDF</th>
-          </tr>
-        </thead>
-        <tbody>
-          <OrderDisplay
-            v-for="(order, index) in filterOrders"
-            :key="index"
-            :id="order.id"
-            :name="order.product.name"
-            :user_surname="order.user.surname"
-            :user_firstname="order.user.first_name"
-            :status="order.status"
-            :date_order="order.date_order"
-            :date_delivery="order.date_delivery"
-            :comment="order.comment"
-            :pdf="order.pdf"
-          />
-        </tbody>
-      </table>
+              <th>Statut de la commande</th>
+              <th>Date de réservation de la commande</th>
+              <th>Date estimée</th>
+              <th>Commentaire</th>
+              <th>PDF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <OrderDisplay
+              v-for="(order, index) in filterOrders"
+              :key="index"
+              :id="order.id"
+              :name="order.product.name"
+              :user_surname="order.user.surname"
+              :user_firstname="order.user.first_name"
+              :status="order.status"
+              :date_order="order.date_order"
+              :date_delivery="order.date_delivery"
+              :comment="order.comment"
+              :pdf="order.pdf"
+            />
+          </tbody>
+        </table>
+      </div>
 
       <!-- Member list display -->
       <table class="table table-bordered">
@@ -138,6 +142,7 @@ export default {
       filterOrders: [],
       orders: [],
       adressGPS: "",
+      role: "",
     };
   },
 

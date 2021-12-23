@@ -24379,7 +24379,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       filterUsers: [],
       filterOrders: [],
       orders: [],
-      adressGPS: ""
+      adressGPS: "",
+      role: ""
     };
   },
   methods: {
@@ -28179,18 +28180,26 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_7 = {
-  "class": "table table-bordered"
+  key: 0,
+  "class": "adminModify"
 };
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Nom de la commande"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Utilisateur"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Statut de la commande"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date de réservation de la commande"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date estimée"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Commentaire"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "PDF")])], -1
-/* HOISTED */
-);
-
+var _hoisted_8 = {
+  key: 2,
+  "class": "adminModify"
+};
 var _hoisted_9 = {
   "class": "table table-bordered"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Nom"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Prénom"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date de naissance"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Email")])], -1
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Nom de la commande"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Utilisateur"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Statut de la commande"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date de réservation de la commande"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date estimée"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Commentaire"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "PDF")])], -1
+/* HOISTED */
+);
+
+var _hoisted_11 = {
+  "class": "table table-bordered"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Nom"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Prénom"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date de naissance"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Email")])], -1
 /* HOISTED */
 );
 
@@ -28230,12 +28239,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     src: $data.adressGPS
   }, null, 8
   /* PROPS */
-  , _hoisted_5), _hoisted_6])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , _hoisted_5), _hoisted_6])]), $data.role == 'admin' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-warning",
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.goToUpdate && $options.goToUpdate.apply($options, arguments);
     })
-  }, "modifier"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "modifier")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-dark",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $data.isHidden = !$data.isHidden;
@@ -28243,10 +28252,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.isHidden ? "Ajouter un membre" : "Masquer le formulaire"), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  Add members "), !$data.isHidden ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AddMember, {
-    key: 0,
+    key: 1,
     title: "Ajouter un membre",
     subtitle: ""
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Orders display "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filterOrders, function (order, index) {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Orders display "), $data.role == 'admin' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filterOrders, function (order, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_OrderDisplay, {
       key: index,
       id: order.id,
@@ -28263,7 +28272,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["id", "name", "user_surname", "user_firstname", "status", "date_order", "date_delivery", "comment", "pdf"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Member list display "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filterUsers, function (user, index) {
+  ))])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Member list display "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.filterUsers, function (user, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_MembersList, {
       key: index,
       id: user.id,
@@ -28339,7 +28348,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  Profile card\n    <div class=\"card\" style=\"width: 18rem\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">Profil</h5>\n        <p class=\"card-text\">Voir et modifier vos détails.</p>\n        <a @click=\"profile\" class=\"card-link\">Voir</a>\n      </div>\n    </div>\n\n     Orders card\n    <div class=\"card\" style=\"width: 18rem\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">Commandes</h5>\n        <p class=\"card-text\">Les commandes en cours, en attente et terminés.</p>\n        <a @click=\"orderList\" class=\"card-link\">Voir</a>\n      </div>\n    </div>\n\n     News card\n    <div class=\"card\" style=\"width: 18rem\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">Actualités</h5>\n        <p class=\"card-text\">Vos actualités personalisées.</p>\n        <a @click=\"news\" class=\"card-link\">Voir</a>\n      </div>\n    </div> ")]);
+  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  Profile card\r\n    <div class=\"card\" style=\"width: 18rem\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Profil</h5>\r\n        <p class=\"card-text\">Voir et modifier vos détails.</p>\r\n        <a @click=\"profile\" class=\"card-link\">Voir</a>\r\n      </div>\r\n    </div>\r\n\r\n     Orders card\r\n    <div class=\"card\" style=\"width: 18rem\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Commandes</h5>\r\n        <p class=\"card-text\">Les commandes en cours, en attente et terminés.</p>\r\n        <a @click=\"orderList\" class=\"card-link\">Voir</a>\r\n      </div>\r\n    </div>\r\n\r\n     News card\r\n    <div class=\"card\" style=\"width: 18rem\">\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">Actualités</h5>\r\n        <p class=\"card-text\">Vos actualités personalisées.</p>\r\n        <a @click=\"news\" class=\"card-link\">Voir</a>\r\n      </div>\r\n    </div> ")]);
 }
 
 /***/ }),
@@ -35438,7 +35447,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nnav {\n  display: block;\n}\nnav a.router-link-exact-active {\n  border-left: 4px solid #db9024;\n}\n.btn-log {\n  text-align: center;\n  margin-top: 40px;\n}\n.btn-log button {\n  font-size: 20px;\n  text-transform: uppercase;\n  background-color: #e78c15;\n  border-radius: 5px;\n  padding: 5px 20px;\n  border: 1px solid #e78c15;\n  color: white;\n}\n.btn-log button:hover {\n  background-color: white;\n  color: #e78c15;\n  border: 1px solid #e78c15;\n}\n.dashboard {\n  display: flex;\n  min-height: 100vh;\n  font-size: 18px;\n}\n.dashboard-app {\n  display: flex;\n  flex-direction: column;\n  flex-grow: 2;\n  margin-top: 84px;\n}\n.dashboard-content {\n  flex-grow: 2;\n  padding: 25px;\n}\n.dashboard-nav {\n  min-width: 238px;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  overflow: auto;\n  background-color: #373193;\n}\n.dashboard-compact .dashboard-nav {\n  display: none;\n}\n.dashboard-nav header {\n  min-height: 84px;\n  padding: 8px 27px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.dashboard-nav {\n  background-color: #000000;\n}\n.dashboard-nav a {\n  color: rgb(255, 255, 255);\n}\n.dashboard-nav-list {\n  margin: 7vh 0;\n}\nheader {\n  background-color: #db9024;\n}\n.brand-logo {\n  font-family: \"Nunito\", sans-serif;\n  font-weight: bold;\n  font-size: 20px;\n  display: flex;\n  color: #515151;\n  align-items: center;\n}\n.brand-logo img {\n  width: 15vh;\n  padding: 20px 0;\n}\n.dashboard-nav-item {\n  min-height: 56px;\n  padding: 8px 20px 8px 70px;\n  display: flex;\n  align-items: center;\n  letter-spacing: 0.02em;\n  transition: ease-out 0.5s;\n}\n.dashboard-nav-item i {\n  width: 36px;\n  font-size: 19px;\n  margin-left: -40px;\n}\n.dashboard-nav-item:hover {\n  background: rgba(100, 100, 100, 0.25);\n  color: #e78c15;\n}\n.nav-item-divider {\n  height: 1px;\n  margin: 1rem 0;\n  overflow: hidden;\n  background-color: rgba(236, 238, 239, 0.3);\n}\nion-icon {\n  cursor: pointer;\n  padding: 5px;\n}\n.container-icons {\n  text-align: center;\n}\n.contact-info {\n  text-align: center;\n  line-height: 17px;\n  margin: 20px 10px;\n  color: #dddddd;\n}\n\n/* @media (min-width: 992px) {\n    .dashboard-app {\n        margin-left: 238px;\n    }\n\n  .dashboard-compact .dashboard-app {\n    margin-left: 0;\n  }\n}\n\n@media (max-width: 768px) {\n  .dashboard-content {\n    padding: 15px 0px;\n  }\n}\n\n@media (max-width: 992px) {\n  .dashboard-nav {\n    display: none;\n    position: fixed;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    z-index: 1070;\n  }\n\n  .dashboard-nav.mobile-show {\n    display: block;\n  }\n}\n\n@media (max-width: 992px) {\n  .dashboard-nav header .menu-toggle {\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n  }\n}\n\n@media (min-width: 992px) {\n  .dashboard-toolbar {\n    left: 238px;\n  }\n\n    .dashboard-compact .dashboard-toolbar {\n        left: 0;\n    }\n} */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nnav {\r\n  display: block;\n}\nnav a.router-link-exact-active {\r\n  border-left: 4px solid #db9024;\n}\n.btn-log {\r\n  text-align: center;\r\n  margin-top: 40px;\n}\n.btn-log button {\r\n  font-size: 20px;\r\n  text-transform: uppercase;\r\n  background-color: #e78c15;\r\n  border-radius: 5px;\r\n  padding: 5px 20px;\r\n  border: 1px solid #e78c15;\r\n  color: white;\n}\n.btn-log button:hover {\r\n  background-color: white;\r\n  color: #e78c15;\r\n  border: 1px solid #e78c15;\n}\n.dashboard {\r\n  display: flex;\r\n  min-height: 100vh;\r\n  font-size: 18px;\n}\n.dashboard-app {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-grow: 2;\r\n  margin-top: 84px;\n}\n.dashboard-content {\r\n  flex-grow: 2;\r\n  padding: 25px;\n}\n.dashboard-nav {\r\n  min-width: 238px;\r\n  position: fixed;\r\n  left: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n  overflow: auto;\r\n  background-color: #373193;\n}\n.dashboard-compact .dashboard-nav {\r\n  display: none;\n}\n.dashboard-nav header {\r\n  min-height: 84px;\r\n  padding: 8px 27px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.dashboard-nav {\r\n  background-color: #000000;\n}\n.dashboard-nav a {\r\n  color: rgb(255, 255, 255);\n}\n.dashboard-nav-list {\r\n  margin: 7vh 0;\n}\nheader {\r\n  background-color: #db9024;\n}\n.brand-logo {\r\n  font-family: \"Nunito\", sans-serif;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  display: flex;\r\n  color: #515151;\r\n  align-items: center;\n}\n.brand-logo img {\r\n  width: 15vh;\r\n  padding: 20px 0;\n}\n.dashboard-nav-item {\r\n  min-height: 56px;\r\n  padding: 8px 20px 8px 70px;\r\n  display: flex;\r\n  align-items: center;\r\n  letter-spacing: 0.02em;\r\n  transition: ease-out 0.5s;\n}\n.dashboard-nav-item i {\r\n  width: 36px;\r\n  font-size: 19px;\r\n  margin-left: -40px;\n}\n.dashboard-nav-item:hover {\r\n  background: rgba(100, 100, 100, 0.25);\r\n  color: #e78c15;\n}\n.nav-item-divider {\r\n  height: 1px;\r\n  margin: 1rem 0;\r\n  overflow: hidden;\r\n  background-color: rgba(236, 238, 239, 0.3);\n}\nion-icon {\r\n  cursor: pointer;\r\n  padding: 5px;\n}\n.container-icons {\r\n  text-align: center;\n}\n.contact-info {\r\n  text-align: center;\r\n  line-height: 17px;\r\n  margin: 20px 10px;\r\n  color: #dddddd;\n}\r\n\r\n/* @media (min-width: 992px) {\r\n    .dashboard-app {\r\n        margin-left: 238px;\r\n    }\r\n\r\n  .dashboard-compact .dashboard-app {\r\n    margin-left: 0;\r\n  }\r\n}\r\n\r\n@media (max-width: 768px) {\r\n  .dashboard-content {\r\n    padding: 15px 0px;\r\n  }\r\n}\r\n\r\n@media (max-width: 992px) {\r\n  .dashboard-nav {\r\n    display: none;\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    z-index: 1070;\r\n  }\r\n\r\n  .dashboard-nav.mobile-show {\r\n    display: block;\r\n  }\r\n}\r\n\r\n@media (max-width: 992px) {\r\n  .dashboard-nav header .menu-toggle {\r\n    display: -webkit-box;\r\n    display: -webkit-flex;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n  }\r\n}\r\n\r\n@media (min-width: 992px) {\r\n  .dashboard-toolbar {\r\n    left: 238px;\r\n  }\r\n\r\n    .dashboard-compact .dashboard-toolbar {\r\n        left: 0;\r\n    }\r\n} */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35462,7 +35471,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\n  padding: 4vh;\n  width: 80vw;\n  margin: 20px auto 0 auto;\n  text-align: center;\n  background-color: white;\n  box-shadow: 1px 1px 15px 1px #f3f3f3;\n}\n.header h2 {\n  text-transform: uppercase;\n  color: #e78c15;\n  letter-spacing: 3px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\r\n  padding: 4vh;\r\n  width: 80vw;\r\n  margin: 20px auto 0 auto;\r\n  text-align: center;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 15px 1px #f3f3f3;\n}\n.header h2 {\r\n  text-transform: uppercase;\r\n  color: #e78c15;\r\n  letter-spacing: 3px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
