@@ -205,7 +205,7 @@ const routes = [
                         console.log("response role", getUser.data.role)
                         const role = getUser.data.role
 
-                        if (role == "member" || role == "manager") {
+                        if (role == "member") {
                                 router.push('/YDA')
                         }
                 }
@@ -310,22 +310,22 @@ const routes = [
         },
 
         {
-            path: "/commandes/:id/modifier",
-            name: "individualorder",
-            component: OrderUpdate,
-            meta: { requiresAuth: true },
-            async beforeEnter() {
-                    const getUser = await axios.get("/api/login");
-                    console.log("response role", getUser.data.role)
-                    const role = getUser.data.role
+                path: "/commandes/:id/modifier",
+                name: "individualorder",
+                component: OrderUpdate,
+                meta: { requiresAuth: true },
+                async beforeEnter() {
+                        const getUser = await axios.get("/api/login");
+                        console.log("response role", getUser.data.role)
+                        const role = getUser.data.role
 
-                    if (role == "member" || role == "manager") {
-                            router.push('/YDA')
-                    }
-            }
+                        if (role == "member" || role == "manager") {
+                                router.push('/YDA')
+                        }
+                }
 
 
-    },
+        },
 
 
 

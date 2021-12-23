@@ -118,12 +118,24 @@ REFRESH ON MEMBER ADD / DELETE
       <p>{{ news.text }}</p>
       <i> {{ new Date(news.created_at).toLocaleString() }} </i>
       <br />
-      <button class="btn-delete" @click="deleteActuality(news.id)">
-        <ion-icon name="trash"></ion-icon>
-      </button>
+      <br />
 
+      <h1><u>Les actualités récentes:</u></h1>
+      <br />
+      <div v-for="news in newsArray" :key="news.id">
+        <h3>
+          <strong> {{ news.title }} </strong>
+        </h3>
+        <p>{{ news.text }}</p>
+        <i> {{ new Date(news.created_at).toLocaleString() }} </i>
+        <br />
+        <button class="btn-delete" @click="deleteActuality(news.id)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </div>
+    </div>
   </div>
-</div>
+
 
 
 </template>
@@ -138,7 +150,7 @@ import axios from "axios";
 
 export default {
   name: "CompanyDisplay",
-name: "adminNews",
+  name: "adminNews",
   components: {
     Header,
     AddMember,
@@ -168,13 +180,10 @@ name: "adminNews",
       filterOrders: [],
       orders: [],
       adressGPS: "",
-
+      role: "",
     };
   },
   async mounted() {
-
-
-
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
     console.log("response", response.data);
@@ -183,21 +192,22 @@ name: "adminNews",
     const userResponse = await axios.get("/api/user");
     const users = userResponse.data;
 
+    // all order
     const orderResponse = await axios.get("/api/order");
     this.orders = orderResponse.data;
     const orders = this.orders;
     console.log("order", this.orders);
 
+    // get company ID
     const getUser = await axios.get("/api/login");
     this.companyId = getUser.data.company_id;
-
+    this.role = getUser.data.role;
+    console.log("user", users);
+    // filter the users according to company ID
     this.filterUsers = users.filter((user) => user.company_id == this.id);
     this.filterOrders = orders.filter(
       (order) => order.user.company_id == this.id
     );
-
-    this.role = getUser.data.role;
-    console.log("user", users);
 
     this.company = response.data;
     const companyAdress = this.company.adress.toLowerCase().replace(/ /g, "+");
@@ -208,18 +218,12 @@ name: "adminNews",
       companyAdress.concat("+", companyPostcode, "+", companyCity) +
       "&output=embed";
 
-
-
     const getCompany = await axios.get("/api/company");
     this.companies = getCompany.data.data;
 
-
     this.retrieveActuality();
     console.log(this.companies);
-
-
   },
-
 
   methods: {
     toggleModale() {
@@ -237,7 +241,7 @@ name: "adminNews",
           Authorization: "bearer " + localStorage.getItem("userToken"),
         },
       });
-        console.log(this.companies);
+      console.log(this.companies);
       //console.log(response.data);
       this.company = response.data;
 
