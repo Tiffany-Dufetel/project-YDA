@@ -4,8 +4,9 @@
 
 <template>
   <div class="container marginBotXL">
-    <div class ="alert alert-success" v-show="success">Le membre a bien été ajouté</div>
     <form class="formContent" method="POST" @submit.prevent="addUser">
+            <div class ="alert alert-success" v-show="success">Le membre a bien été ajouté</div>
+
       <div><label for="surname">Nom</label>
       <input type="text" class="inputText marginBot" id="surname" name="surname" v-model="surname" /></div>
         <div v-show="errors && errors.surname">

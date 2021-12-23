@@ -278,6 +278,7 @@ select {
 .container{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .formContent{
@@ -293,7 +294,6 @@ select {
     box-shadow: 0.3em 0.3em 1em #acacac, -0.3em -0.3em 1em #dbdbdb;
     padding: 30px;
     margin-right: 70px;
-
 }
 
 .marginTop{
