@@ -11,107 +11,110 @@ REFRESH ON MEMBER ADD / DELETE
   </div>
 
   <div class="container">
-
     <div class="info-company-container">
-        <div class="info-company">
-            <p>
-                <b><u>Siret :</u></b> {{ company.siret }}<br>
-                <b><u>Adresse :</u></b> {{ company.adress }} - {{ company.postcode }} {{ company.city }}<br>
-                <b><u>Numéro de téléphone :</u></b> {{ company.number }}
-            </p>
+      <div class="info-company">
+        <p>
+          <b><u>Siret :</u></b> {{ company.siret }}<br />
+          <b><u>Adresse :</u></b> {{ company.adress }} - {{ company.postcode }}
+          {{ company.city }}<br />
+          <b><u>Numéro de téléphone :</u></b> {{ company.number }}
+        </p>
 
-            <button class="btn-show" @click="goToUpdate">Modifier</button>
-        </div>
-        <div class="map">
-          <iframe
-            class="border border-warning shadow p-3 mb-5 bg-white rounded"
-            width="600"
-            height="250"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-            v-bind:src="adressGPS"
-          ></iframe
-          ><br />
-        </div>
+        <button class="btn-show" @click="goToUpdate">Modifier</button>
+      </div>
+      <div class="map">
+        <iframe
+          class="border border-warning shadow p-3 mb-5 bg-white rounded"
+          width="600"
+          height="250"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+          v-bind:src="adressGPS"
+        ></iframe
+        ><br />
+      </div>
     </div>
-</div>
+  </div>
 
-    <div class="buttons-show-info">
-      <button @click="isHidden = !isHidden">
-        {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
-      </button>
+  <div class="adminModify" v-if="role == 'admin'">
+    <button class="btn btn-warning" @click="goToUpdate">modifier</button>
+  </div>
+  <div class="buttons-show-info">
+    <button @click="isHidden = !isHidden">
+      {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
+    </button>
 
     <button @click="newsAdd">Ajouter une actualité</button>
+  </div>
 
-    </div>
+  <!--  Add members -->
+  <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
 
-      <!--  Add members -->
-      <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
-
-      <!-- Orders display -->
+  <!-- Orders display -->
+  <div class="adminModify" v-if="role == 'admin'">
     <table class="center-table">
-        <thead>
-          <tr>
-            <th>Nom de la commande</th>
-            <th>Utilisateur</th>
+      <thead>
+        <tr>
+          <th>Nom de la commande</th>
+          <th>Utilisateur</th>
 
-            <th>Statut</th>
-            <th>Date de commande</th>
-            <th>Date estimée</th>
-            <th>Commentaire</th>
-            <!-- <th>PDF</th> -->
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <OrderDisplay
-            v-for="(order, index) in filterOrders"
-            :key="index"
-            :id="order.id"
-            :name="order.product.name"
-            :user_surname="order.user.surname"
-            :user_firstname="order.user.first_name"
-            :status="order.status"
-            :date_order="order.date_order"
-            :date_delivery="order.date_delivery"
-            :comment="order.comment"
-            :company_id="order.id"
-          />
-        </tbody>
+          <th>Statut</th>
+          <th>Date de commande</th>
+          <th>Date estimée</th>
+          <th>Commentaire</th>
+          <!-- <th>PDF</th> -->
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <OrderDisplay
+          v-for="(order, index) in filterOrders"
+          :key="index"
+          :id="order.id"
+          :name="order.product.name"
+          :user_surname="order.user.surname"
+          :user_firstname="order.user.first_name"
+          :status="order.status"
+          :date_order="order.date_order"
+          :date_delivery="order.date_delivery"
+          :comment="order.comment"
+          :company_id="order.id"
+        />
+      </tbody>
+    </table>
+  </div>
+  <!-- Member list display -->
+  <table class="center-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de naissance</th>
+        <th>Email</th>
+        <th>Rôle</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <MembersList
+        v-for="(user, index) in filterUsers"
+        :key="index"
+        :id="user.id"
+        :first_name="user.first_name"
+        :surname="user.surname"
+        :birthday="user.birthday"
+        :email="user.email"
+        :role="user.role"
+      />
+    </tbody>
+  </table>
+  <br />
 
-      </table>
-      <!-- Member list display -->
-      <table class="center-table">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Date de naissance</th>
-            <th>Email</th>
-            <th>Rôle</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <MembersList
-            v-for="(user, index) in filterUsers"
-            :key="index"
-            :id="user.id"
-            :first_name="user.first_name"
-            :surname="user.surname"
-            :birthday="user.birthday"
-            :email="user.email"
-            :role="user.role"
-          />
-        </tbody>
-      </table>
-<br />
-
-<div>
+  <div>
     <h1><u>Les actualités récentes:</u></h1>
-    <br/>
+    <br />
     <div v-for="news in newsArray" :key="news.id">
       <h3>
         <strong> {{ news.title }} </strong>
@@ -136,9 +139,6 @@ REFRESH ON MEMBER ADD / DELETE
       </div>
     </div>
   </div>
-
-
-
 </template>
 
 <script>
@@ -210,7 +210,7 @@ export default {
       (order) => order.user.company_id == this.id
     );
 
-    console.log('ihorhgiorhgorz', this.filterOrders)
+    console.log("ihorhgiorhgorz", this.filterOrders);
 
     this.company = response.data;
     const companyAdress = this.company.adress.toLowerCase().replace(/ /g, "+");
@@ -276,45 +276,45 @@ export default {
 </script>
 
 <style>
-.info-company-container{
-    display: flex;
-    justify-content: center;
-    border: none;
-    -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
-    box-shadow: 1px 1px 15px 1px #dddddd;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: white;
-    height: 347px;
+.info-company-container {
+  display: flex;
+  justify-content: center;
+  border: none;
+  -webkit-box-shadow: 1px 1px 15px 1px #dddddd;
+  box-shadow: 1px 1px 15px 1px #dddddd;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: white;
+  height: 347px;
 }
 
-.info-company{
-    flex-direction: column;
-    height: 328px;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.info-company {
+  flex-direction: column;
+  height: 328px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.map{
-    padding: 30px;
+.map {
+  padding: 30px;
 }
 
-.buttons-show-info{
-    text-align: center;
+.buttons-show-info {
+  text-align: center;
 }
 
-.buttons-show-info button{
-    background-color: white;
-    padding: 8px 20px 5px 20px;
-    border-radius: 5px;
-    border: 2px solid #e78c15;
-    position: relative;
-    margin: 20px;
-    top: 30;
+.buttons-show-info button {
+  background-color: white;
+  padding: 8px 20px 5px 20px;
+  border-radius: 5px;
+  border: 2px solid #e78c15;
+  position: relative;
+  margin: 20px;
+  top: 30;
 
-    color: #e78c15;
+  color: #e78c15;
 }
 </style>

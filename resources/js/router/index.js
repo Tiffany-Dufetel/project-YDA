@@ -186,6 +186,25 @@ const routes = [
             }
         },
     },
+
+    // View a specific company -
+    {
+        path: "/entreprise/:id",
+        name: "individualCompany",
+        component: CompanyDisplay,
+        props: true,
+        meta: { requiresAuth: true },
+        async beforeEnter() {
+            const getUser = await axios.get("/api/login");
+            console.log("response role", getUser.data.role);
+            const role = getUser.data.role;
+
+            if (role == "member") {
+                router.push("/YDA");
+            }
+        },
+    },
+
     // View a specific company -
     {
         path: "/entreprise/:id",
