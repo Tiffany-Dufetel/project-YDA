@@ -26183,15 +26183,15 @@ var _hoisted_12 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_SubmitButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SubmitButton");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, "Le membre a bien été ajouté", 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.success]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "formContent",
     method: "POST",
     onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addUser && $options.addUser.apply($options, arguments);
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, "Le membre a bien été ajouté", 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.success]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "inputText marginBot",
     id: "surname",
@@ -35916,7 +35916,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.marginBotXL{\r\n    margin-bottom: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.marginBotXL{\n    margin-bottom: 30px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36060,7 +36060,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-3c4baa79] {\r\n  width: 150px;\n}\n.container[data-v-3c4baa79]{\r\n    display: flex;\r\n    justify-content: center;\n}\n.formContent[data-v-3c4baa79]{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    align-items: flex-start;\r\n    letter-spacing: 4px;\r\n    font-size:20px;\r\n    border: 1px solid transparent;\r\n    border-radius: 10px;\r\n    width: 550px;\r\n    box-shadow: 0.3em 0.3em 1em #acacac, -0.3em -0.3em 1em #dbdbdb;\r\n    padding: 30px;\r\n    margin-right: 70px;\n}\n.marginTop[data-v-3c4baa79]{\r\n    margin-top: 15px;\n}\n.marginBot[data-v-3c4baa79]{\r\n    margin-bottom: 15px;\n}\n.inputText[data-v-3c4baa79]{\r\n    border-radius: 10px;\r\n    height: 2.5rem;\r\n    outline: none;\r\n    border: 1px solid black;\r\n    width: 450px;\r\n    color: #333333;\n}\n.inputText[data-v-3c4baa79]:focus{\r\n    border: 2px solid #e78c15;\r\n    background-color: #fafafa;\n}\n.contentForm[data-v-3c4baa79]{\r\n    display: flex;\n}\n@media only screen and (max-width: 1400px){\n.contentForm[data-v-3c4baa79]{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\n}\n.formContent[data-v-3c4baa79]{\r\n    margin-bottom: 30px;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nselect[data-v-3c4baa79] {\n  width: 150px;\n}\n.container[data-v-3c4baa79]{\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n}\n.formContent[data-v-3c4baa79]{\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: flex-start;\n    letter-spacing: 4px;\n    font-size:20px;\n    border: 1px solid transparent;\n    border-radius: 10px;\n    width: 550px;\n    box-shadow: 0.3em 0.3em 1em #acacac, -0.3em -0.3em 1em #dbdbdb;\n    padding: 30px;\n    margin-right: 70px;\n}\n.marginTop[data-v-3c4baa79]{\n    margin-top: 15px;\n}\n.marginBot[data-v-3c4baa79]{\n    margin-bottom: 15px;\n}\n.inputText[data-v-3c4baa79]{\n    border-radius: 10px;\n    height: 2.5rem;\n    outline: none;\n    border: 1px solid black;\n    width: 450px;\n    color: #333333;\n}\n.inputText[data-v-3c4baa79]:focus{\n    border: 2px solid #e78c15;\n    background-color: #fafafa;\n}\n.contentForm[data-v-3c4baa79]{\n    display: flex;\n}\n@media only screen and (max-width: 1400px){\n.contentForm[data-v-3c4baa79]{\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.formContent[data-v-3c4baa79]{\n    margin-bottom: 30px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36108,7 +36108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.info-company-container{\n    display: flex;\n    justify-content: center;\n    border: none;\n    box-shadow: 1px 1px 15px 1px #dddddd;\n    margin: 10px;\n    padding: 10px;\n    border-radius: 15px;\n    background-color: white;\n    height: 347px;\n}\n.info-company{\n    flex-direction: column;\n    height: 328px;\n    padding: 30px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.map{\n    padding: 30px;\n}\n.buttons-show-info{\n    text-align: center;\n}\n.buttons-show-info button{\n    background-color: white;\n    padding: 8px 20px 5px 20px;\n    border-radius: 5px;\n    border: 2px solid #e78c15;\n    position: relative;\n    margin: 20px;\n    top: 30;\n\n    color: #e78c15;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.info-company-container{\r\n    display: flex;\r\n    justify-content: center;\r\n    border: none;\r\n    box-shadow: 1px 1px 15px 1px #dddddd;\r\n    margin: 10px;\r\n    padding: 10px;\r\n    border-radius: 15px;\r\n    background-color: white;\r\n    height: 347px;\n}\n.info-company{\r\n    flex-direction: column;\r\n    height: 328px;\r\n    padding: 30px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.map{\r\n    padding: 30px;\n}\n.buttons-show-info{\r\n    text-align: center;\n}\n.buttons-show-info button{\r\n    background-color: white;\r\n    padding: 8px 20px 5px 20px;\r\n    border-radius: 5px;\r\n    border: 2px solid #e78c15;\r\n    position: relative;\r\n    margin: 20px;\r\n    top: 30;\r\n\r\n    color: #e78c15;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
