@@ -63,7 +63,7 @@ SHOW ORDERS FOR ONE ID OR ONE MEMBER IF THAT ROLE
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualorder', params: { id: order.id } }"
-                ><button class="btn-show">Edit</button>
+                ><button class="btn-show">Modifier</button>
               </router-link>
               <!-- v-if="status" -->
               <button class="btn-delete" @click="deleteOrder(order.id)">

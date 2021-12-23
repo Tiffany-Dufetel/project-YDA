@@ -77,6 +77,7 @@ REFRESH ON MEMBER ADD / DELETE
             :date_order="order.date_order"
             :date_delivery="order.date_delivery"
             :comment="order.comment"
+            :company_id="order.id"
           />
         </tbody>
 
@@ -208,6 +209,8 @@ export default {
     this.filterOrders = orders.filter(
       (order) => order.user.company_id == this.id
     );
+
+    console.log('ihorhgiorhgorz', this.filterOrders)
 
     this.company = response.data;
     const companyAdress = this.company.adress.toLowerCase().replace(/ /g, "+");

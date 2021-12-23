@@ -11,7 +11,10 @@
 
     <td>
       <div class="btn-group" role="group">
-        <button class="btn-show">Edit</button>
+            <router-link
+                :to="{ name: 'individualorder', params: { id: company_id } }"
+            ><button class="btn-show">Modifier</button>
+              </router-link>
         <button class="btn-delete">
             <ion-icon name="trash"></ion-icon>
         </button>
@@ -23,6 +26,7 @@
 <script>
 export default {
   props: {
+    company_id: String,
     name: String,
     user_surname: String,
     user_firstname: String,
