@@ -115,27 +115,6 @@ REFRESH ON MEMBER ADD / DELETE
       <br />
       <p>______</p>
 
-<<<<<<< HEAD
-    <h1><u>Les actualités récentes:</u></h1>
-    <br/>
-    <div v-for="news in newsArray" :key="news.id">
-      <h3>
-        <strong> {{ news.title }} </strong>
-      </h3>
-      <h4>
-      <p>{{ news.text }}</p>
-      </h4>
-      <i> {{ new Date(news.created_at).toLocaleString() }} </i>
-      <br />
-      <br />
-      <button class="btn btn-danger" @click="deleteActuality(news.id)">
-        Effacer l'actualité
-      </button>
-
-<br />
-<br />
-<p>_________</p>
-=======
       <br />
       <br />
 
@@ -153,7 +132,6 @@ REFRESH ON MEMBER ADD / DELETE
         </button>
       </div>
     </div>
->>>>>>> origin/master
   </div>
 </template>
 
@@ -268,10 +246,10 @@ export default {
     },
 
     /** Delete a specific actuality */
-    deleteActuality(actuality_id) {
+    deleteActuality(id) {
       if (confirm("Etes-vous sur d'effacer cette actualité ?")) {
         axios
-          .delete(`api/news/${actuality_id}`)
+          .delete(`http://127.0.0.1:8000/api/news/${id}`)
           .then(function (response) {
             console.log(response);
           })
