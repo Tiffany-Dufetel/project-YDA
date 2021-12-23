@@ -1,49 +1,19 @@
 <template>
-  <div class="container">
-    <Header title="Modifier votre Mot de Passe" />
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <!-- <div class="alert alert-danger" role="alert" v-if="error !== null">
-          {{ error }}
-        </div> -->
+  <div class="container flex-column">
+    <Header class="headerModPass" title="Modifier votre Mot de Passe" />
 
-        <div class="card card-default mt-5">
-          <div class="card-header">Login</div>
-          <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <form @submit.prevent="resetPassword">
+        <div class="container marginBotXL">
+            <div class ="alert alert-success" v-show="success">Le membre a bien été ajouté</div>
+            <form class="formContent" method="POST" @submit.prevent="addUser">
 
-                <div class="form-group row">
-                  <label
-                    for="password"
-                    class="col-md-4 col-form-label text-md-right"
-                    >Votre de mot de passe</label
-                  >
-                  <div class="col-md-6">
-                    <input
-                      id="password"
-                      type="password"
-                      class="form-control"
-                      v-model="password"
-                      required
-                      autocomplete="off"
-                    />
-                  </div>
-                </div>
+                <label for="password">Nouveau mot de passe</label>
+                <input type="text" id="password" class="inputText marginBot" name="password" v-model="password" />
 
-                <div class="form-group row mb-0 mt-2">
-                  <SubmitButton name="Submit" />
-                </div>
-              </form>
-              <!-- Password Reset Request -->
-              <div>
-                <button @click="password">Mot de passe oublié</button>
-              </div>
-            </div>
-          </div>
+
+                <SubmitButton name="Ajouter" />
+                <!-- Password Reset Request -->
+            </form>
         </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -92,3 +62,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.headerModPass{
+    margin-bottom: 40px;
+}
+</style>

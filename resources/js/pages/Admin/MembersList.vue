@@ -3,7 +3,7 @@
 -->
 <template>
   <div class="catalogue_container">
-    <Header title="name of company" subtitle="Tous les membres" />
+    <Header title="Tous les membres" subtitle="Vous pouvez les gérer ici" />
     <br />
 
     <BackButton />

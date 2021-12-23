@@ -5,7 +5,7 @@
 <template>
   <div>
     <!-- Submit button -->
-    <button class="btn text-dark bg-light btn-block border border-dark">
+    <button class="btn-show">
       {{ name }}
     </button>
   </div>
@@ -19,4 +19,6 @@ export default {
 </script>
 
 <style>
+
+
 </style>

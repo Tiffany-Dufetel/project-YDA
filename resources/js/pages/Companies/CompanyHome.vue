@@ -9,10 +9,9 @@
       <div class="card-body">
         <h5 class="card-title">Membres</h5>
         <p class="card-text">
-          Gérer les membres qui peuvent accéder à des services et produits.
+          Voir les membres qui peuvent accéder à des services et produits.
         </p>
         <a @click="showMembers" class="card-link">Voir</a>
-        <a @click="memberAdd" class="card-link">Ajouter</a>
       </div>
     </div>
 
@@ -20,17 +19,10 @@
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Profil</h5>
-        <p class="card-text">Voir et modifier vos détails.</p>
+        <p class="card-text">
+          Voir et modifier vos détails et ajouter les membres.
+        </p>
         <a @click="profile" class="card-link">Voir</a>
-      </div>
-    </div>
-
-    <!-- Orders card -->
-    <div class="card" style="width: 18rem">
-      <div class="card-body">
-        <h5 class="card-title">Commandes</h5>
-        <p class="card-text">Les commandes en cours, en attente et terminés.</p>
-        <a @click="orderList" class="card-link">Voir</a>
       </div>
     </div>
 
@@ -55,9 +47,6 @@ export default {
   methods: {
     profile() {
       this.$router.push("/entreprise/" + this.company_id);
-    },
-    orderList() {
-      this.$router.push({ name: "orders" });
     },
     memberAdd() {
       this.$router.push({ name: "companiesAddMembers" });

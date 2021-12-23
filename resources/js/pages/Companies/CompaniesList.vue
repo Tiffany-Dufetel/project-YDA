@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div>
+  <div class="catalogue_container">
     <Header title="Les entreprises" subtitle="" />
     <BackButton />
     <AddButton name="Ajouter Entreprise" @click="add" />
@@ -11,58 +11,61 @@
 
     <!-- Search box -->
 
-     <input
+    <input
+      id="input-search"
       v-model="searchKey"
       class="form-control mr-sm-2"
-      type="search"
+      type="text"
       placeholder="Rechercher...."
       aria-label="Search"
       autocomplete="off"
     />
     <br />
-    <div>
+    <div class="search-result">
       <span v-if="searchKey && filteredList.length == 1">
         {{ filteredList.length }} résultat(s)</span
       >
       <span v-if="filteredList.length >= 2"></span>
     </div>
-    <div v-if="filteredList.length == 0">
+
+    <div class="search-result" v-if="filteredList.length == []">
       <h3>Désolé</h3>
       <p>Aucun résultat trouvé</p>
     </div>
     <!-- Companies list -->
-    <table class="table table-bordered">
+    <table class="center-table">
       <thead>
         <tr>
           <th>Name</th>
           <th>Siret</th>
           <th>Adresse</th>
           <th>Téléphone</th>
-          <th>Total de membres</th>
+          <th>Nb membres</th>
           <th>Creneau de livraison 1</th>
           <th>Creneau de livraison 2</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="company in filteredList" :key="company.id">
-          <td>{{ company.name }}</td>
-          <td>{{ company.siret }}</td>
-          <td>
+          <td valign="middle">{{ company.name }}</td>
+          <td valign="middle">{{ company.siret }}</td>
+          <td valign="middle">
             {{ company.adress }}, {{ company.postcode }}, {{ company.city }}
           </td>
-          <td>{{ company.number }}</td>
-          <td>{{ company.member_count }}</td>
-          <td>{{ company.day }} - {{ company.time }}</td>
-          <td>{{ company.dayTwo }} - {{ company.timeTwo }}</td>
-          <td>
+          <td valign="middle">{{ company.number }}</td>
+          <td valign="middle">{{ company.member_count }}</td>
+          <td valign="middle">{{ company.day }} - {{ company.time }}</td>
+          <td valign="middle">{{ company.dayTwo }} - {{ company.timeTwo }}</td>
+          <td valign="middle">
             <div class="btn-group" role="group">
               <router-link
                 :to="{ name: 'individualCompany', params: { id: company.id } }"
-                class="btn btn-primary"
+                class="btn-show"
                 >Voir
               </router-link>
-              <button class="btn btn-danger" @click="deleteCompany(company.id)">
-                Effacer
+              <button class="btn-delete" @click="deleteCompany(company.id)">
+                <ion-icon name="trash"></ion-icon>
               </button>
             </div>
           </td>

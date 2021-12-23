@@ -12,8 +12,10 @@
 
     <td>
       <div class="btn-group" role="group">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn-show">Edit</button>
+        <button class="btn-delete">
+            <ion-icon name="trash"></ion-icon>
+        </button>
       </div>
     </td>
   </tr>

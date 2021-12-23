@@ -30,6 +30,7 @@ import MemberUpdate from "../pages/Members/MemberUpdate.vue";
 
 // Orders - members
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
+import OrderUpdate from "../pages/Orders/OrderUpdate.vue";
 import OrdersList from "../pages/Orders/OrdersList.vue";
 
 /** News */
@@ -204,7 +205,7 @@ const routes = [
                         console.log("response role", getUser.data.role)
                         const role = getUser.data.role
 
-                        if (role == "member" || role == "manager") {
+                        if (role == "member") {
                                 router.push('/YDA')
                         }
                 }
@@ -304,6 +305,26 @@ const routes = [
                                 router.push('/YDA')
                         }
                 }
+
+
+        },
+
+        {
+                path: "/commandes/:id/modifier",
+                name: "individualorder",
+                component: OrderUpdate,
+                meta: { requiresAuth: true },
+                async beforeEnter() {
+                        const getUser = await axios.get("/api/login");
+                        console.log("response role", getUser.data.role)
+                        const role = getUser.data.role
+
+                        if (role == "member" || role == "manager") {
+                                router.push('/YDA')
+                        }
+                }
+
+
         },
 
 
