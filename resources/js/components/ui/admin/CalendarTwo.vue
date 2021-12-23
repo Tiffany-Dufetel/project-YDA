@@ -18,14 +18,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="(appointment, index) in companiesPlanning[day]"
+                :key="index">
               <td
-                v-for="(appointment, index) in companiesPlanning[day]"
-                :key="index"
+
               >
-                {{ appointment.name }}<br />{{ appointment.time }}
+                {{ appointment.name }}<br />{{ appointment.time }}<br>
               </td>
-              <td v-if="!companiesPlanning[day]">Aucun rendez-vous ce jour</td>
+            </tr>
+            <tr>
+                <td v-if="!companiesPlanning[day]">Aucun rendez-vous ce jour</td>
             </tr>
           </tbody>
         </table>

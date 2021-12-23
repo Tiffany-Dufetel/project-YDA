@@ -1,65 +1,48 @@
 <template>
-  <div class="container">
+  <div class="containerLogin">
     <Header title="Connexion" />
-    <div class="row justify-content-center">
-      <div class="col-md-12">
-        <!-- <div class="alert alert-danger" role="alert" v-if="error !== null">
+
+    <!-- <div class="alert alert-danger" role="alert" v-if="error !== null">
           {{ error }}
         </div> -->
+    <form class="formContent" @submit.prevent="login">
+      <div>
+        <label for="email">Adresse E-Mail</label>
 
-        <div class="card card-default mt-5">
-          <div class="card-header">Login</div>
-          <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <form @submit.prevent="login">
-                <div class="form-group row">
-                  <label
-                    for="email"
-                    >E-Mail Address</label
-                  >
-                  <div class="col-md-6">
-                    <input
-                      id="email"
-                      type="email"
-                      class="form-control"
-                      v-model="email"
-                      required
-                      autofocus
-                      autocomplete="off"
-                    />
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label
-                    for="password"
-                    >Password</label
-                  >
-                  <div class="col-md-6">
-                    <input
-                      id="password"
-                      type="password"
-                      class="form-control"
-                      v-model="password"
-                      required
-                      autocomplete="off"
-                    />
-                  </div>
-                </div>
-
-                <div class="form-group row mb-0 mt-2">
-                  <SubmitButton name="Submit" />
-                </div>
-              </form>
-              <!-- Password Reset Request -->
-              <div>
-                <button @click="password">Mot de passe oublié</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <input
+          id="email"
+          type="email"
+          v-model="email"
+          class="inputText marginBot"
+          required
+          autofocus
+          autocomplete="off"
+        />
       </div>
-    </div>
+
+      <div>
+        <label for="password">Mot de Passe</label>
+        <input
+          id="password"
+          type="password"
+          class="inputText marginBot"
+          v-model="password"
+          required
+          autocomplete="off"
+        />
+      </div>
+
+      <SubmitButton name="Submit" />
+      <div>
+        <button
+          @click="password"
+          class="text-danger border-0 bg-transparent fs-6"
+        >
+          Mot de passe oublié
+        </button>
+      </div>
+    </form>
+    <!-- Password Reset Request -->
   </div>
 </template>
 
@@ -109,3 +92,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.containerLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.formContent {
+  margin-top: 30px;
+}
+</style>

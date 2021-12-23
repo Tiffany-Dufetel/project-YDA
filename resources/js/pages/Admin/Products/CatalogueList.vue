@@ -4,7 +4,7 @@
 
 <template>
   <div class="catalogue_container">
-    <Header title="Catalogue" subtitle="Produits et services" />
+    <Header title="Catalogue" subtitle="Liste des produits et services" />
     <BackButton />
     <div v-if="role == 'admin'">
       <AddButton name="Ajouter Produit" @click="add" />
@@ -13,6 +13,7 @@
 
     <!-- Search box -->
     <input
+      id="input-search"
       v-model="searchKeyCatalogue"
       class="form-control mr-sm-2"
       type="text"
@@ -48,11 +49,11 @@
 
       <tbody>
         <tr v-for="product in filteredListCatalogue" :key="product.id">
-                    <td @click="link" valign="middle">{{ product.name }}</td>
-                    <td @click="displayCompany" valign="middle">{{ product.description }}</td>
-                    <td @click="displayCompany" valign="middle">{{ product.type }}</td>
-                    <td @click="displayCompany" valign="middle">{{ product.category }}</td>
-                    <td @click="displayCompany" valign="middle"><img :src="product.image" class="image_product" /></td>
+                    <td valign="middle">{{ product.name }}</td>
+                    <td valign="middle">{{ product.description }}</td>
+                    <td valign="middle">{{ product.type }}</td>
+                    <td valign="middle">{{ product.category }}</td>
+                    <td valign="middle"><img :src="product.image" class="image_product" /></td>
                     <td>
             <div class="btn-group" role="group">
               <router-link
@@ -186,20 +187,21 @@ async mounted() {
 .center-table{
   margin-left: auto;
   margin-right: auto;
+  margin-right: 30px;
 }
 
 table{
     background-color: white;
-      border-collapse: collapse;
-  border-radius: 1em;
-  overflow: hidden;
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
     width: auto;
     margin-bottom: 30px;
 }
 
 th, td {
   padding: 10px 25px;
-  width: 200px;
+  width: 230px;
 }
 
 /* td{
@@ -242,7 +244,7 @@ thead{
         padding: 8px 4px 5px 4px;
 
 }
-.catalogue_container input{
+#input-search{
     background-image: url('https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-8.png');
     background-size: 40px;
     background-repeat: no-repeat;

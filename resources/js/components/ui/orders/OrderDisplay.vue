@@ -8,12 +8,16 @@
     <td valign="middle">{{ date_order }}</td>
     <td valign="middle">{{ date_delivery }}</td>
     <td valign="middle">{{ comment }}</td>
-    <td valign="middle">{{ pdf }}</td>
 
     <td>
       <div class="btn-group" role="group">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+            <router-link
+                :to="{ name: 'individualorder', params: { id: company_id } }"
+            ><button class="btn-show">Modifier</button>
+              </router-link>
+        <button class="btn-delete">
+            <ion-icon name="trash"></ion-icon>
+        </button>
       </div>
     </td>
   </tr>
@@ -22,6 +26,7 @@
 <script>
 export default {
   props: {
+    company_id: String,
     name: String,
     user_surname: String,
     user_firstname: String,

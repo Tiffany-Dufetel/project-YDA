@@ -30,6 +30,7 @@ import MemberUpdate from "../pages/Members/MemberUpdate.vue";
 
 // Orders - members
 import ProductOrder from "../pages/Orders/OrderProduct.vue";
+import OrderUpdate from "../pages/Orders/OrderUpdate.vue";
 import OrdersList from "../pages/Orders/OrdersList.vue";
 
 /** News */
@@ -185,6 +186,25 @@ const routes = [
             }
         },
     },
+
+    // View a specific company -
+    {
+        path: "/entreprise/:id",
+        name: "individualCompany",
+        component: CompanyDisplay,
+        props: true,
+        meta: { requiresAuth: true },
+        async beforeEnter() {
+            const getUser = await axios.get("/api/login");
+            console.log("response role", getUser.data.role);
+            const role = getUser.data.role;
+
+            if (role == "member") {
+                router.push("/YDA");
+            }
+        },
+    },
+
     // View a specific company -
     {
         path: "/entreprise/:id",
@@ -320,7 +340,7 @@ const routes = [
     },
     // Add a news -
     {
-        path: "/ajout-actualité",
+        path: "/entreprise/:id/ajout-actualité",
         name: "adminNewsAdd",
         component: AddNews,
         meta: { requiresAuth: true },
@@ -333,6 +353,7 @@ const routes = [
                 router.push("/YDA");
             }
         },
+        props: true,
     },
 ];
 

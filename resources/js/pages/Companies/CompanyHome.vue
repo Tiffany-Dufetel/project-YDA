@@ -9,7 +9,7 @@
       <div class="card-body">
         <h5 class="card-title">Membres</h5>
         <p class="card-text">
-          Gérer les membres qui peuvent accéder à des services et produits.
+          Voir les membres qui peuvent accéder à des services et produits.
         </p>
         <router-link :to="'/entreprise/' + companyId" class="dashboard-nav-item"
           >Gérer les membres
@@ -21,7 +21,9 @@
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Profil</h5>
-        <p class="card-text">Voir et modifier vos détails.</p>
+        <p class="card-text">
+          Voir et modifier vos détails et ajouter les membres.
+        </p>
         <a @click="profile" class="card-link">Voir</a>
       </div>
     </div>
@@ -61,9 +63,6 @@ export default {
   methods: {
     profile() {
       this.$router.push("/entreprise/" + this.company_id);
-    },
-    orderList() {
-      this.$router.push({ name: "orders" });
     },
     memberAdd() {
       this.$router.push({ name: "companiesAddMembers" });

@@ -3,41 +3,29 @@
 -->
 
 <template>
-  <div>
+<div>
     <!-- make title responsive -->
     <Header title="les actualités" subtitle="Ajouter les actualités" />
     <BackButton />
-    <form method="POST" @submit.prevent="addNews">
-      <!-- Specific company choice -->
-      <label for="company">Choisir l'entreprise</label>
-      <select
-        v-model="company"
-        name="company"
-        id="company"
-        class="form-control"
-        required="true"
-      >
-        <option v-for="company in companies" :key="company.id">
-          {{ company.id }} - {{ company.name }}
-        </option>
-      </select>
 
-      <label for="title">Titre de l'actualité</label>
-      <br />
-      <input type="text" id="title" name="title" v-model="title" />
-      <br />
-      <label for="text">Actualité</label>
-      <br />
-      <textarea
-        name="text"
-        id="text"
-        v-model="text"
-        cols="90"
-        rows="4"
-      ></textarea>
-      <SubmitButton name="Ajouter" />
-    </form>
-  </div>
+    <div class="container">
+        <form class="formContent" method="POST" @submit.prevent="addNews">
+            <!-- Specific company choice -->
+            <label for="title">Titre de l'actualité</label>
+            <input type="text" id="title" name="title" v-model="title" class="inputText marginBot"/>
+            <label for="text">Actualité</label>
+            <textarea
+                class="inputText marginBot"
+                name="text"
+                id="text"
+                v-model="text"
+                cols="90"
+                rows="4"
+            ></textarea>
+            <SubmitButton name="Ajouter" />
+        </form>
+    </div>
+</div>
 </template>
 
 
@@ -50,11 +38,18 @@ import axios from "axios";
 export default {
   name: "adminNewsAdd",
 
+  props: {
+      id: String
+  },
+
+  mounted() {
+      console.log(this.id);
+  },
+
   data() {
     return {
       title: "",
       text: "",
-      company_id: "",
       companies: [],
     };
   },
@@ -75,6 +70,7 @@ export default {
           .post("/api/news", {
             title: this.title,
             text: this.text,
+            company_id: Number(this.id)
           })
           .then((response) => {
             console.log(response);

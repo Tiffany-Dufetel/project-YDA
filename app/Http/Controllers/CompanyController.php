@@ -147,8 +147,8 @@ class CompanyController extends Controller
         $company->member_count = $request->member_count;
         $company->day = $request->day;
         $company->time = $request->time;
-        // $company->dayTwo = $request->dayTwo;
-        // $company->timeTwo = $request->timeTwo;
+        $company->dayTwo = $request->dayTwo;
+        $company->timeTwo = $request->timeTwo;
 
         $company->save();
 
