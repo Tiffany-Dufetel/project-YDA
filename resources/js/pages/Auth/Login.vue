@@ -2,50 +2,48 @@
   <div class="containerLogin">
     <Header title="Connexion" />
 
-        <!-- <div class="alert alert-danger" role="alert" v-if="error !== null">
+    <!-- <div class="alert alert-danger" role="alert" v-if="error !== null">
           {{ error }}
         </div> -->
     <form class="formContent" @submit.prevent="login">
-        <div>
-                  <label
-                    for="email"
-                    >Adresse E-Mail</label
-                  >
+      <div>
+        <label for="email">Adresse E-Mail</label>
 
-                    <input
-                      id="email"
-                      type="email"
-                      v-model="email"
-                      class="inputText marginBot"
-                      required
-                      autofocus
-                      autocomplete="off"
-                    />
-                    </div>
+        <input
+          id="email"
+          type="email"
+          v-model="email"
+          class="inputText marginBot"
+          required
+          autofocus
+          autocomplete="off"
+        />
+      </div>
 
+      <div>
+        <label for="password">Mot de Passe</label>
+        <input
+          id="password"
+          type="password"
+          class="inputText marginBot"
+          v-model="password"
+          required
+          autocomplete="off"
+        />
+      </div>
 
-                <div>
-                  <label
-                    for="password"
-                    >Mot de Passe</label
-                  >
-                    <input
-                      id="password"
-                      type="password"
-                      class="inputText marginBot"
-                      v-model="password"
-                      required
-                      autocomplete="off"
-                    />
-                </div>
-
-
-                  <SubmitButton name="Submit" />
-
+      <SubmitButton name="Submit" />
+      <div>
+        <button
+          @click="password"
+          class="text-danger border-0 bg-transparent fs-6"
+        >
+          Mot de passe oublié
+        </button>
+      </div>
     </form>
-              <!-- Password Reset Request -->
-</div>
-
+    <!-- Password Reset Request -->
+  </div>
 </template>
 
 <script>
@@ -96,15 +94,14 @@ export default {
 </script>
 
 <style scoped>
-.containerLogin{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+.containerLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.formContent{
-    margin-top: 30px;
+.formContent {
+  margin-top: 30px;
 }
-
 </style>

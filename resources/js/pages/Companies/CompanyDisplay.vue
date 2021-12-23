@@ -36,101 +36,103 @@ REFRESH ON MEMBER ADD / DELETE
           ><br />
         </div>
       </div>
-      </div>
-</div>
-      <button class="btn btn-warning" @click="goToUpdate">modifier</button>
-      <button class="btn btn-dark" @click="isHidden = !isHidden">
-        {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
-      </button>
-
-      <!--  Add members -->
-      <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
-
-      <!-- Orders display -->
-      <table class="center-table">
-        <thead>
-          <tr>
-            <th>Nom de la commande</th>
-            <th>Utilisateur</th>
-
-            <th>Statut</th>
-            <th>Date de commande</th>
-            <th>Date estimée</th>
-            <th>Commentaire</th>
-            <th>PDF</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <OrderDisplay
-            v-for="(order, index) in filterOrders"
-            :key="index"
-            :id="order.id"
-            :name="order.product.name"
-            :user_surname="order.user.surname"
-            :user_firstname="order.user.first_name"
-            :status="order.status"
-            :date_order="order.date_order"
-            :date_delivery="order.date_delivery"
-            :comment="order.comment"
-            :pdf="order.pdf"
-          />
-        </tbody>
-      </table>
-
-      <!-- Member list display -->
-      <table class="center-table">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Date de naissance</th>
-            <th>Email</th>
-            <th>Rôle</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <MembersList
-            v-for="(user, index) in filterUsers"
-            :key="index"
-            :id="user.id"
-            :first_name="user.first_name"
-            :surname="user.surname"
-            :birthday="user.birthday"
-            :email="user.email"
-            :role="user.role"
-          />
-        </tbody>
-      </table>
-
-<br />
-
-<div>
-
-<p>______</p>
-    <button @click="newsAdd">Ajouter une actualité</button>
-    <br />
-    <p>______</p>
-    <br />
-    <br />
-
-
-    <h1><u>Les actualités récentes:</u></h1>
-    <br/>
-    <div v-for="news in newsArray" :key="news.id">
-      <h3>
-        <strong> {{ news.title }} </strong>
-      </h3>
-      <p>{{ news.text }}</p>
-      <i> {{ new Date(news.created_at).toLocaleString() }} </i>
-      <br />
-      <button class="btn-delete" @click="deleteActuality(news.id)">
-        <ion-icon name="trash"></ion-icon>
-      </button>
-
+    </div>
   </div>
-</div>
+  <button class="btn btn-warning" @click="goToUpdate">modifier</button>
+  <button class="btn btn-dark" @click="isHidden = !isHidden">
+    {{ isHidden ? "Ajouter un membre" : "Masquer le formulaire" }}
+  </button>
+
+  <!--  Add members -->
+  <AddMember v-if="!isHidden" title="Ajouter un membre" subtitle="" />
+  <div v-if="role == 'admin'">
+    <!-- Orders display -->
+    <table class="center-table">
+      <thead>
+        <tr>
+          <th>Nom de la commande</th>
+          <th>Utilisateur</th>
+
+          <th>Statut</th>
+          <th>Date de commande</th>
+          <th>Date estimée</th>
+          <th>Commentaire</th>
+          <th>PDF</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <OrderDisplay
+          v-for="(order, index) in filterOrders"
+          :key="index"
+          :id="order.id"
+          :name="order.product.name"
+          :user_surname="order.user.surname"
+          :user_firstname="order.user.first_name"
+          :status="order.status"
+          :date_order="order.date_order"
+          :date_delivery="order.date_delivery"
+          :comment="order.comment"
+          :pdf="order.pdf"
+        />
+      </tbody>
+    </table>
+  </div>
+  <!-- Member list display -->
+  <table class="center-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de naissance</th>
+        <th>Email</th>
+        <th>Rôle</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <MembersList
+        v-for="(user, index) in filterUsers"
+        :key="index"
+        :id="user.id"
+        :first_name="user.first_name"
+        :surname="user.surname"
+        :birthday="user.birthday"
+        :email="user.email"
+        :role="user.role"
+      />
+    </tbody>
+  </table>
+
+  <br />
+
+  <div>
+    <div v-if="role == 'admin'">
+      <p>______</p>
+
+      <button @click="newsAdd">Ajouter une actualité</button>
+
+      <br />
+      <p>______</p>
+
+      <br />
+      <br />
+
+      <h1><u>Les actualités récentes:</u></h1>
+      <br />
+      <div v-for="news in newsArray" :key="news.id">
+        <h3>
+          <strong> {{ news.title }} </strong>
+        </h3>
+        <p>{{ news.text }}</p>
+        <i> {{ new Date(news.created_at).toLocaleString() }} </i>
+        <br />
+        <button class="btn-delete" @click="deleteActuality(news.id)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -142,7 +144,7 @@ import OrderDisplay from "../../components/ui/orders/OrderDisplay.vue";
 import axios from "axios";
 export default {
   name: "CompanyDisplay",
-name: "adminNews",
+  name: "adminNews",
   components: {
     Header,
     AddMember,
@@ -161,7 +163,7 @@ name: "adminNews",
 
   data() {
     return {
-        company: {},
+      company: {},
       newsArray: [],
       companies: [],
       isHidden: true,
@@ -172,13 +174,10 @@ name: "adminNews",
       filterOrders: [],
       orders: [],
       adressGPS: "",
-
+      role: "",
     };
   },
   async mounted() {
-
-
-
     //We are loading the company display thanks to the ID;
     const response = await axios.get("/api/company/" + this.id);
     console.log("response", response.data);
@@ -187,21 +186,22 @@ name: "adminNews",
     const userResponse = await axios.get("/api/user");
     const users = userResponse.data;
 
+    // all order
     const orderResponse = await axios.get("/api/order");
     this.orders = orderResponse.data;
     const orders = this.orders;
     console.log("order", this.orders);
 
+    // get company ID
     const getUser = await axios.get("/api/login");
     this.companyId = getUser.data.company_id;
-
+    this.role = getUser.data.role;
+    console.log("user", users);
+    // filter the users according to company ID
     this.filterUsers = users.filter((user) => user.company_id == this.id);
     this.filterOrders = orders.filter(
       (order) => order.user.company_id == this.id
     );
-
-    this.role = getUser.data.role;
-    console.log("user", users);
 
     this.company = response.data;
     const companyAdress = this.company.adress.toLowerCase().replace(/ /g, "+");
@@ -212,18 +212,12 @@ name: "adminNews",
       companyAdress.concat("+", companyPostcode, "+", companyCity) +
       "&output=embed";
 
-
-
     const getCompany = await axios.get("/api/company");
     this.companies = getCompany.data.data;
 
-
     this.retrieveActuality();
     console.log(this.companies);
-
-
   },
-
 
   methods: {
     goToUpdate() {
@@ -238,7 +232,7 @@ name: "adminNews",
           Authorization: "bearer " + localStorage.getItem("userToken"),
         },
       });
-        console.log(this.companies);
+      console.log(this.companies);
       //console.log(response.data);
       this.company = response.data;
 
