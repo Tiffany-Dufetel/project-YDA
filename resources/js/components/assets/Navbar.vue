@@ -16,8 +16,16 @@
           <router-link
             to="/yda"
             class="dashboard-nav-item"
-            v-if="isLoggedIn.value"
+            v-if="(isLoggedIn.value && role == 'admin') || role == 'manager'"
             >Accueil</router-link
+          >
+
+          <!-- link to home logged for a member -->
+          <router-link
+            to="/yda"
+            class="dashboard-nav-item"
+            v-if="isLoggedIn.value && role == 'member'"
+            >Mon Profil</router-link
           >
 
           <!-- link to home not logged -->
@@ -34,7 +42,10 @@
           >
 
           <!-- link to company's members -->
-          <router-link :to="'/entreprise/' + id" class="dashboard-nav-item"
+          <router-link
+            :to="'/entreprise/' + id"
+            class="dashboard-nav-item"
+            v-if="isLoggedIn.value && role == 'manager'"
             >Membres de l'entreprise
           </router-link>
 
@@ -50,7 +61,7 @@
           <router-link
             to="/commandes"
             class="dashboard-nav-item"
-            v-if="isLoggedIn.value && role == 'member'"
+            v-if="isLoggedIn.value && role == 'admin'"
             >Commandes</router-link
           >
 
@@ -58,7 +69,7 @@
           <router-link
             to="/actualités"
             class="dashboard-nav-item"
-            v-if="isLoggedIn.value && role == 'member'"
+            v-if="isLoggedIn.value && role == 'admin'"
             >Actualités</router-link
           >
         </div>
