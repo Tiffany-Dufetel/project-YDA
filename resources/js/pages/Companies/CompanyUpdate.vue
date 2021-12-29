@@ -5,7 +5,7 @@ BACK BUTTON
 
 <template>
   <div>
-    <Header title="modifier entreprise" subtitle="update " />
+    <Header title="modifier entreprise" subtitle=" " />
     <BackButton />
 
 

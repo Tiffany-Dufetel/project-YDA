@@ -24,8 +24,8 @@
       <p>{{ news.text }}</p>
       <i> {{ new Date(news.created_at).toLocaleString() }} </i>
       <br />
-      <button class="btn btn-danger" @click="deleteActuality(news.id)">
-        Effacer l'actualité
+      <button class="btn-delete" @click="deleteActuality(news.id)">
+        <ion-icon name="trash"></ion-icon>
       </button>
       <br />
       <br />
@@ -33,7 +33,7 @@
       <br />
       <br />
     </div>
-</div>
+
 
 </template>
 

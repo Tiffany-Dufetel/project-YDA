@@ -109,20 +109,10 @@ REFRESH ON MEMBER ADD / DELETE
 <br />
 
 <div>
-    <h1><u>Les actualités récentes:</u></h1>
-    <br/>
-    <div v-for="news in newsArray" :key="news.id">
-      <h3>
-        <strong> {{ news.title }} </strong>
-      </h3>
-      <p>{{ news.text }}</p>
-      <i> {{ new Date(news.created_at).toLocaleString() }} </i>
+    <div>
+      <h1 class="titleYDA">Les YD'Actualités</h1>
       <br />
-      <br />
-
-      <h1><u>Les actualités récentes:</u></h1>
-      <br />
-      <div v-for="news in newsArray" :key="news.id">
+      <div class="formContent marginBot" v-for="news in newsArray" :key="news.id">
         <h3>
           <strong> {{ news.title }} </strong>
         </h3>
@@ -134,7 +124,7 @@ REFRESH ON MEMBER ADD / DELETE
         </button>
       </div>
     </div>
-  </div>
+</div>
 
 
 
@@ -272,7 +262,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .info-company-container{
     display: flex;
     justify-content: center;
@@ -311,7 +301,15 @@ export default {
     position: relative;
     margin: 20px;
     top: 30;
-
     color: #e78c15;
+}
+
+.formContent{
+    width: 100%;
+}
+
+.titleYDA {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 10px;
 }
 </style>

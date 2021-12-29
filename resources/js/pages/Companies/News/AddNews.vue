@@ -74,7 +74,7 @@ export default {
           })
           .then((response) => {
             console.log(response);
-            this.$router.push({ name: "adminNews" });
+            this.$router.push({ name: "individualCompany" });
           })
           .catch(function (error) {
             console.error(error);
